@@ -1243,6 +1243,7 @@
 </script>
 @endif
 
+<script>
   // Ensure all video tags inside humas-phone-screen autoplay immediately
   document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.humas-phone-screen video').forEach(function(vid) {
