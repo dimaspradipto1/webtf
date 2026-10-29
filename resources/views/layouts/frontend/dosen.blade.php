@@ -4,30 +4,12 @@
 @section('meta_description', 'Direktori staf pengajar dan dosen tetap program studi Teknik Informatika (UIS) Teknik Informatika.')
 
 @section('content')
-@php
-  $hDosen = \App\Models\PageHeader::get('dosen');
-@endphp
-<!-- ═══════════════════════════════════════════════
-     HERO HEADER & BREADCRUMB
-═══════════════════════════════════════════════ -->
-<section class="akademik-hero">
-  <div class="container position-relative" data-aos="fade-up">
-    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange, #f9dc4b); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
-      {{ $hDosen->badge_text ?: 'PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI' }}
-    </div>
-    <h1 class="display-6 fw-bold text-white mb-2">{{ $hDosen->judul }}</h1>
-    @if(!empty($hDosen->subjudul))
-      <p class="lead text-white-50 mb-0" style="max-width: 760px; font-size: 16px;">
-        {{ $hDosen->subjudul }}
-      </p>
-    @endif
-    <div class="breadcrumb-custom mt-3">
-      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
-      <span>/</span>
-      <span class="active">{{ $hDosen->breadcrumb_label ?: 'Dosen' }}</span>
-    </div>
-  </div>
-</section>
+@include('layouts.frontend.partials.hero-header', [
+    'pageKey' => 'dosen',
+    'defaultJudul' => 'Daftar Dosen Pengajar',
+    'defaultSubjudul' => 'Tenaga pendidik berkualifikasi magister, doktor, dan profesor berdedikasi tinggi dalam membimbing mahasiswa Program Studi Teknik Informatika.',
+    'defaultBreadcrumb' => 'Daftar Dosen Pengajar'
+])
 
 <section class="section-bg-sand py-5">
   <div class="container py-3">

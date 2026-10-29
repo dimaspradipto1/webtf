@@ -5,32 +5,13 @@
 @section('meta_keywords', 'e-dokumen, pedoman akademik, panduan skripsi, panduan kp, teknik informatika')
 
 @section('content')
-@php
-  $hEdokumen = \App\Models\PageHeader::get('edokumen');
-@endphp
-<!-- ═══════════════════════════════════════════════
-     HERO HEADER
-═══════════════════════════════════════════════ -->
-<section class="akademik-hero">
-  <div class="container position-relative" data-aos="fade-up">
-    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange, #f9dc4b); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
-      {{ $hEdokumen->badge_text ?: 'PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI' }}
-    </div>
-    <h1 class="display-6 fw-bold text-white mb-2">{{ $hEdokumen->judul }}</h1>
-    @if(!empty($hEdokumen->subjudul))
-      <p class="lead text-white-50 mb-0" style="max-width: 760px; font-size: 16px;">
-        {{ $hEdokumen->subjudul }}
-      </p>
-    @endif
-    <div class="breadcrumb-custom mt-3">
-      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
-      <span>/</span>
-      <span>Portal Layanan</span>
-      <span>/</span>
-      <span class="active">{{ $hEdokumen->breadcrumb_label ?: 'E-Dokumen' }}</span>
-    </div>
-  </div>
-</section>
+@include('layouts.frontend.partials.hero-header', [
+    'pageKey' => 'edokumen',
+    'parentLabel' => 'Portal Layanan',
+    'defaultJudul' => 'E-Dokumen & Berkas Resmi',
+    'defaultSubjudul' => 'Pusat berkas dokumen resmi, buku pedoman perkuliahan, dan panduan akademik Program Studi Teknik Informatika.',
+    'defaultBreadcrumb' => 'E-Dokumen'
+])
 
 <!-- ═══════════════════════════════════════════════
      MAIN CONTENT

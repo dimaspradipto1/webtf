@@ -412,9 +412,8 @@ h6 {
 
     overflow: hidden;
 
-    padding-top: 26px !important;
-
-    padding-bottom: 20px !important;
+    padding-top: 18px !important;
+    padding-bottom: 14px !important;
 }
 
 .prestasi-hero h1,
@@ -465,6 +464,9 @@ h6 {
 .kurikulum-hero h1,
 .hero-subpage h1,
 .page-hero-banner h1,
+.akademik-hero h1,
+.akademik-hero .display-6,
+.akademik-hero .hero-page-title,
 .text-white h1,
 .text-white h2,
 .text-white h3,
@@ -481,9 +483,8 @@ h6 {
 
     text-shadow: none;
 
-    font-size: 26px !important;
-
-    margin-bottom: 6px !important;
+    font-size: 22px !important;
+    margin-bottom: 4px !important;
 
     line-height: 1.25 !important;
 }
@@ -510,11 +511,9 @@ h6 {
 
     opacity: 1 !important;
 
-    font-size: 13px !important;
-
-    line-height: 1.45 !important;
-
-    margin-bottom: 6px !important;
+    font-size: 12.5px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 4px !important;
 }
 
 .prestasi-hero .text-white-50,
@@ -527,11 +526,9 @@ h6 {
 
     opacity: 1 !important;
 
-    font-size: 13px !important;
-
-    line-height: 1.45 !important;
-
-    margin-bottom: 6px !important;
+    font-size: 12.5px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 4px !important;
 }
 
 .prestasi-hero .badge,
@@ -556,11 +553,9 @@ h6 {
 
     opacity: 1 !important;
 
-    font-size: 10.5px !important;
-
-    padding: 3px 10px !important;
-
-    margin-bottom: 6px !important;
+    font-size: 10px !important;
+    padding: 2.5px 9px !important;
+    margin-bottom: 4px !important;
 }
 
 /* ═══════════════════════════════════════════════
@@ -5494,7 +5489,7 @@ section {
 .akademik-hero {
     background: #000000;
 
-    padding: 70px 0 60px;
+    padding: 18px 0 14px !important;
 
     color: #ffffff;
 
@@ -5504,6 +5499,7 @@ section {
 }
 
 .akademik-hero::after {
+    display: none !important;
     content: "";
 
     position: absolute;
@@ -9065,4 +9061,123 @@ a.btn,
     .dropdown-submenu.show .submenu-arrow {
         transform: rotate(270deg);
     }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   COMPACT & STANDARDIZED HEADER HERO & BREADCRUMB
+═══════════════════════════════════════════════════════════ */
+.akademik-hero,
+.sejarah-hero,
+.about-hero,
+.dosen-hero,
+.news-hero,
+.galeri-hero,
+.fasilitas-hero,
+.kontak-hero,
+.faq-hero,
+.kurikulum-hero,
+.ormawa-hero,
+.prestasi-hero,
+.layanan-hero {
+    background: #000000 !important;
+    border-bottom: 3px solid #f9dc4b !important;
+    padding-top: 18px !important;
+    padding-bottom: 14px !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.akademik-hero::after {
+    display: none !important;
+}
+
+.akademik-hero .badge {
+    background: #f9dc4b !important;
+    color: #000000 !important;
+    border: 1px solid #f9dc4b !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.5px !important;
+    padding: 2.5px 9px !important;
+    margin-bottom: 4px !important;
+    border-radius: 50rem !important;
+    display: inline-block !important;
+}
+
+.akademik-hero h1,
+.akademik-hero .display-6,
+.akademik-hero .hero-page-title {
+    color: #ffffff !important;
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    margin-bottom: 4px !important;
+    text-shadow: none !important;
+}
+
+@media (max-width: 576px) {
+    .akademik-hero h1,
+    .akademik-hero .display-6,
+    .akademik-hero .hero-page-title {
+        font-size: 18px !important;
+    }
+}
+
+.akademik-hero p,
+.akademik-hero .lead,
+.akademik-hero .hero-page-desc,
+.akademik-hero .text-white-50 {
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-size: 12.5px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 4px !important;
+    max-width: 780px !important;
+}
+
+.akademik-hero .breadcrumb-custom {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    margin-top: 4px !important;
+}
+
+.akademik-hero .breadcrumb-custom a {
+    color: #ffffff !important;
+    opacity: 0.85 !important;
+    text-decoration: none !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+}
+
+.akademik-hero .breadcrumb-custom a:hover {
+    color: #f9dc4b !important;
+    opacity: 1 !important;
+}
+
+.akademik-hero .breadcrumb-custom a i,
+.akademik-hero .breadcrumb-custom i {
+    font-size: 9.5px !important;
+    line-height: 1 !important;
+}
+
+.akademik-hero .breadcrumb-custom span {
+    color: rgba(255, 255, 255, 0.55) !important;
+    font-size: 9px !important;
+    line-height: 1 !important;
+}
+
+.akademik-hero .breadcrumb-custom .active,
+.akademik-hero .breadcrumb-custom span.active {
+    color: #f9dc4b !important;
+    opacity: 1 !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
 }

@@ -6,32 +6,14 @@
 
 @section('content')
 
-@php
-  $hSejarah = \App\Models\PageHeader::get('sejarah');
-@endphp
-<!-- ═══════════════════════════════════════════════
-     HERO HEADER & BREADCRUMB
-═══════════════════════════════════════════════ -->
-<section class="akademik-hero">
-  <div class="container position-relative" data-aos="fade-up">
-    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange, #f9dc4b); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
-      {{ $hSejarah->badge_text ?: 'PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI' }}
-    </div>
-    <h1 class="display-6 fw-bold text-white mb-2">{{ $hSejarah->judul }}</h1>
-    @if(!empty($hSejarah->subjudul))
-      <p class="lead text-white-50 mb-0" style="max-width: 760px; font-size: 16px;">
-        {{ $hSejarah->subjudul }}
-      </p>
-    @endif
-    <div class="breadcrumb-custom mt-3">
-      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
-      <span>/</span>
-      <a href="{{ route('homepage.tentang') }}">Profil</a>
-      <span>/</span>
-      <span class="active">{{ $hSejarah->breadcrumb_label ?: 'Sejarah YAPISTA' }}</span>
-    </div>
-  </div>
-</section>
+@include('layouts.frontend.partials.hero-header', [
+    'pageKey' => 'sejarah',
+    'parentUrl' => route('homepage.tentang'),
+    'parentLabel' => 'Profil',
+    'defaultJudul' => 'Sejarah YAPISTA & Milestone Program Studi',
+    'defaultSubjudul' => 'Perjalanan panjang Yayasan Pendidikan Ibnu Sina Batam (YAPISTA) dan sejarah pendirian Program Studi Teknik Informatika.',
+    'defaultBreadcrumb' => 'Sejarah YAPISTA'
+])
 
 <!-- ═══════════════════════════════════════════════
      SEJARAH NARASI SECTION

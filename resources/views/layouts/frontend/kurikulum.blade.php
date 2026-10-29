@@ -4,32 +4,13 @@
 @section('meta_description', 'Struktur kurikulum lengkap per semester dan unduhan silabus RPS program studi Teknik Informatika (UIS) Teknik Informatika.')
 
 @section('content')
-@php
-  $hKurikulum = \App\Models\PageHeader::get('kurikulum');
-@endphp
-<!-- ═══════════════════════════════════════════════
-     HERO HEADER & BREADCRUMB
-═══════════════════════════════════════════════ -->
-<section class="akademik-hero">
-  <div class="container position-relative" data-aos="fade-up">
-    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange, #f9dc4b); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
-      {{ $hKurikulum->badge_text ?: 'PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI' }}
-    </div>
-    <h1 class="display-6 fw-bold text-white mb-2">{{ $hKurikulum->judul }}</h1>
-    @if(!empty($hKurikulum->subjudul))
-      <p class="lead text-white-50 mb-0" style="max-width: 760px; font-size: 16px;">
-        {{ $hKurikulum->subjudul }}
-      </p>
-    @endif
-    <div class="breadcrumb-custom mt-3">
-      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
-      <span>/</span>
-      <span>Akademik</span>
-      <span>/</span>
-      <span class="active">{{ $hKurikulum->breadcrumb_label ?: 'Kurikulum' }}</span>
-    </div>
-  </div>
-</section>
+@include('layouts.frontend.partials.hero-header', [
+    'pageKey' => 'kurikulum',
+    'parentLabel' => 'Akademik',
+    'defaultJudul' => 'Kurikulum & Capaian Pembelajaran',
+    'defaultSubjudul' => 'Struktur kurikulum berbasis kompetensi dan Outcome-Based Education (OBE) Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi.',
+    'defaultBreadcrumb' => 'Kurikulum'
+])
 
 <section class="section-bg-sand py-5">
   <div class="container py-3">

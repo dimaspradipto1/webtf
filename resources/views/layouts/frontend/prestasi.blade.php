@@ -4,32 +4,13 @@
 @section('meta_description', 'Daftar capaian prestasi, kejuaraan, dan penghargaan mahasiswa Teknik Informatika (UIS) UIS di tingkat regional, nasional, dan internasional.')
 
 @section('content')
-@php
-  $hPrestasi = \App\Models\PageHeader::get('prestasi');
-@endphp
-<!-- ═══════════════════════════════════════════════
-     HERO HEADER & BREADCRUMB
-═══════════════════════════════════════════════ -->
-<section class="akademik-hero">
-  <div class="container position-relative" data-aos="fade-up">
-    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange, #f9dc4b); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
-      {{ $hPrestasi->badge_text ?: 'PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI' }}
-    </div>
-    <h1 class="display-6 fw-bold text-white mb-2">{{ $hPrestasi->judul }}</h1>
-    @if(!empty($hPrestasi->subjudul))
-      <p class="lead text-white-50 mb-0" style="max-width: 760px; font-size: 16px;">
-        {{ $hPrestasi->subjudul }}
-      </p>
-    @endif
-    <div class="breadcrumb-custom mt-3">
-      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
-      <span>/</span>
-      <span>Portal Layanan</span>
-      <span>/</span>
-      <span class="active">{{ $hPrestasi->breadcrumb_label ?: 'Prestasi Mahasiswa' }}</span>
-    </div>
-  </div>
-</section>
+@include('layouts.frontend.partials.hero-header', [
+    'pageKey' => 'prestasi',
+    'parentLabel' => 'Portal Layanan',
+    'defaultJudul' => 'Prestasi Mahasiswa Teknik Informatika',
+    'defaultSubjudul' => 'Koleksi prestasi gemilang, medali kejuaraan, dan capaian membanggakan sivitas akademika Teknik Informatika di tingkat regional, nasional, dan internasional.',
+    'defaultBreadcrumb' => 'Prestasi Mahasiswa'
+])
 
 <!-- Main Content -->
 <section class="section-bg-sand py-5">

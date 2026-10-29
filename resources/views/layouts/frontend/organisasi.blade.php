@@ -4,32 +4,13 @@
 @section('meta_description', 'Daftar Lembaga, Organisasi Mahasiswa (BEM, HIMA, UKM, Komunitas), serta wadah kreativitas dan kegiatan mahasiswa UIS Teknik Informatika.')
 
 @section('content')
-@php
-  $hOrganisasi = \App\Models\PageHeader::get('organisasi');
-@endphp
-<!-- ═══════════════════════════════════════════════
-     HERO HEADER & BREADCRUMB
-═══════════════════════════════════════════════ -->
-<section class="akademik-hero">
-  <div class="container position-relative" data-aos="fade-up">
-    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange, #f9dc4b); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
-      {{ $hOrganisasi->badge_text ?: 'PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI' }}
-    </div>
-    <h1 class="display-6 fw-bold text-white mb-2">{{ $hOrganisasi->judul }}</h1>
-    @if(!empty($hOrganisasi->subjudul))
-      <p class="lead text-white-50 mb-0" style="max-width: 760px; font-size: 16px;">
-        {{ $hOrganisasi->subjudul }}
-      </p>
-    @endif
-    <div class="breadcrumb-custom mt-3">
-      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
-      <span>/</span>
-      <span>Portal Layanan</span>
-      <span>/</span>
-      <span class="active">{{ $hOrganisasi->breadcrumb_label ?: 'Organisasi Mahasiswa' }}</span>
-    </div>
-  </div>
-</section>
+@include('layouts.frontend.partials.hero-header', [
+    'pageKey' => 'organisasi',
+    'parentLabel' => 'Portal Layanan',
+    'defaultJudul' => 'Organisasi & Kegiatan Mahasiswa',
+    'defaultSubjudul' => 'Wadah pengembangan potensi, kepemimpinan, riset keilmuan, kreativitas, serta kepedulian sosial mahasiswa Teknik Informatika.',
+    'defaultBreadcrumb' => 'Organisasi Mahasiswa'
+])
 
 <!-- MAIN CONTENT SECTION -->
 <section class="py-5" style="background-color: #fbf9fc; min-height: 500px;">
