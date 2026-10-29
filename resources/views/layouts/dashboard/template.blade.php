@@ -45,16 +45,25 @@
             --uis-orange: #f9dc4b;
             --uis-orange-dark: #f9dc4b;
         }
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            outline: none !important;
+        }
         /* Header — Solid Primary Kuning #f9dc4b & Secondary Hitam #000000 (100% Opacity) */
-        .header {
+        #header, .header {
             background-color: #f9dc4b !important;
             opacity: 1 !important;
-            height: 76px !important;
-            padding: 12px 20px !important;
+            height: 78px !important;
+            padding: 14px 20px 12px 20px !important;
+            top: -2px !important;
+            margin-top: -2px !important;
             border: none !important;
             border-top: none !important;
             border-bottom: none !important;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+            outline: none !important;
+            box-shadow: 0 -8px 0 0 #f9dc4b, 0 2px 12px rgba(0, 0, 0, 0.08) !important;
         }
         .header .logo span {
             color: #ffffff !important;

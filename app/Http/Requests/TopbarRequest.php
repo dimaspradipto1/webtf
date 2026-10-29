@@ -15,6 +15,7 @@ class TopbarRequest extends FormRequest
     {
         return [
             'badge_text' => ['required', 'string', 'max:100'],
+            'marquee_text' => ['nullable', 'string', 'max:1000'],
             'badge_icon' => ['nullable', 'string', 'max:50'],
             'alamat' => ['nullable', 'string', 'max:255'],
             'jam_operasional' => ['nullable', 'string', 'max:100'],

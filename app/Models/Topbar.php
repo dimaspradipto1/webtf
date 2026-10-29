@@ -10,6 +10,7 @@ class Topbar extends Model
 
     protected $fillable = [
         'badge_text',
+        'marquee_text',
         'badge_icon',
         'alamat',
         'jam_operasional',

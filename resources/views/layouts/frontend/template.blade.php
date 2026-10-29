@@ -67,6 +67,25 @@
   <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}?v={{ file_exists(public_path('frontend/css/style.css')) ? filemtime(public_path('frontend/css/style.css')) : time() }}">
 
   @stack('styles')
+
+  <style>
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      outline: none !important;
+    }
+    .navbar-main {
+      border: none !important;
+      border-top: none !important;
+      border-bottom: none !important;
+      outline: none !important;
+      top: -2px !important;
+      margin-top: -2px !important;
+      padding-top: 22px !important;
+      box-shadow: 0 -8px 0 0 #f9dc4b, 0 4px 18px rgba(0, 0, 0, 0.12) !important;
+    }
+  </style>
 </head>
 
 <body>
