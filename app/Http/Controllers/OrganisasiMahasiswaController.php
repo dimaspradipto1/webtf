@@ -22,7 +22,7 @@ class OrganisasiMahasiswaController extends Controller
                 'badge_teks' => 'LEMBAGA KEMAHASISWAAN · UIS',
                 'judul' => 'Kiprah & Kepemimpinan Mahasiswa UIS',
                 'judul_highlight' => 'Kepemimpinan',
-                'deskripsi' => 'Eksplorasi ragam organisasi kemahasiswaan, himpunan program studi, dan unit kegiatan minat bakat di Universitas Ibnu Sina Batam. Ruang kolaborasi untuk mengasah karakter, kepemimpinan, dan inovasi civitas kampus.',
+                'deskripsi' => 'Eksplorasi ragam organisasi kemahasiswaan, himpunan program studi, dan unit kegiatan minat bakat di Teknik Informatika Batam. Ruang kolaborasi untuk mengasah karakter, kepemimpinan, dan inovasi civitas kampus.',
                 'tombol_teks' => 'Jelajahi Semua Organisasi',
                 'tombol_url' => null,
                 'hint_teks' => 'Scroll mouse atau geser kartu untuk menggulir ormawa',

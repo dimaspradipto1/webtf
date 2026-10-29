@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('permintaan_rilis_settings', function (Blueprint $table) {
             $table->id();
             $table->string('judul_hero')->default('Permintaan Rilis');
-            $table->string('subjudul_hero')->default('Layanan Publikasi Berita & Siaran Pers Resmi Universitas Ibnu Sina');
+            $table->string('subjudul_hero')->default('Layanan Publikasi Berita & Siaran Pers Resmi Teknik Informatika');
             $table->string('badge_label')->default('LAYANAN PUBLIKASI & SIARAN PERS');
             $table->string('judul_seksi')->default('Ketentuan Permintaan Rilis Berita');
             $table->text('deskripsi_seksi')->nullable();

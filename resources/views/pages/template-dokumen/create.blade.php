@@ -16,9 +16,9 @@
 <div class="row">
     <div class="col-lg-8 col-md-12">
         <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
-            <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+            <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
                 <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
-                    <i class="bi bi-plus-circle-fill me-2" style="color: #046B26;"></i>Formulir Tambah Template Dokumen
+                    <i class="bi bi-plus-circle-fill me-2" style="color: #000000;"></i>Formulir Tambah Template Dokumen
                 </h5>
                 <a href="{{ route('template-dokumen.index') }}" class="btn btn-outline-secondary btn-sm">
                     <i class="bi bi-arrow-left me-1"></i> Kembali
@@ -229,7 +229,7 @@
                     {{-- Submit Button --}}
                     <div class="d-flex justify-content-end gap-2 pt-2 border-top">
                         <a href="{{ route('template-dokumen.index') }}" class="btn btn-secondary px-3">Batal</a>
-                        <button type="submit" class="btn fw-semibold px-4" style="background-color: #046B26; color: #ffffff;">
+                        <button type="submit" class="btn fw-semibold px-4" style="background-color: #000000; color: #ffffff;">
                             <i class="bi bi-save me-1"></i> Simpan Template Dokumen
                         </button>
                     </div>

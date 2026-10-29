@@ -42,15 +42,15 @@
             @csrf
 
             <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
-                <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+                <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
                     <h5 class="mb-0 fw-bold text-dark" style="font-size: 16px;">
-                        <i class="bi bi-link-45deg me-2" style="color: #046B26;"></i>Daftar Link Menu Program Studi
+                        <i class="bi bi-link-45deg me-2" style="color: #000000;"></i>Daftar Link Menu Program Studi
                     </h5>
                     <div class="d-flex gap-2">
                         <a href="{{ route('homepage') }}" target="_blank" class="btn btn-sm btn-outline-secondary">
                             <i class="bi bi-box-arrow-up-right me-1"></i> Lihat di Navbar
                         </a>
-                        <button type="button" class="btn btn-sm fw-semibold shadow-sm text-white" id="btn-add-prodi" style="background: #046B26; border-color: #046B26;">
+                        <button type="button" class="btn btn-sm fw-semibold shadow-sm text-white" id="btn-add-prodi" style="background: #000000; border-color: #000000;">
                             <i class="bi bi-plus-circle-fill me-1"></i> Tambah Menu Prodi
                         </button>
                     </div>
@@ -62,7 +62,7 @@
                             <div class="card border prodi-item shadow-none rounded-3" style="background: #fdfdfd;" data-item-index="{{ $index }}">
                                 <div class="card-header bg-white d-flex align-items-center justify-content-between py-2 border-bottom">
                                     <div class="d-flex align-items-center gap-2">
-                                        <span class="badge rounded-pill prodi-index-badge px-2 py-1 text-white" style="background: #046B26 !important; font-size: 11px;">
+                                        <span class="badge rounded-pill prodi-index-badge px-2 py-1 text-white" style="background: #000000 !important; font-size: 11px;">
                                             Menu #{{ $loop->iteration }}
                                         </span>
                                         <span class="fw-bold text-dark prodi-title-preview" style="font-size: 14px;">
@@ -150,7 +150,7 @@
                     <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary px-3 rounded-2">
                         <i class="bi bi-arrow-left me-1"></i> Dashboard
                     </a>
-                    <button type="submit" class="btn fw-semibold px-4 py-2 text-white shadow-sm" style="background: #046B26; border: none; border-radius: 8px;">
+                    <button type="submit" class="btn fw-semibold px-4 py-2 text-white shadow-sm" style="background: #000000; border: none; border-radius: 8px;">
                         <i class="bi bi-save me-1"></i> Simpan & Sinkronkan ke Navbar
                     </button>
                 </div>
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="card border prodi-item shadow-none rounded-3" style="background: #fdfdfc;" data-item-index="${newIndex}">
                 <div class="card-header bg-white d-flex align-items-center justify-content-between py-2 border-bottom">
                     <div class="d-flex align-items-center gap-2">
-                        <span class="badge rounded-pill prodi-index-badge px-2 py-1 text-white" style="background: #046B26 !important; font-size: 11px;">
+                        <span class="badge rounded-pill prodi-index-badge px-2 py-1 text-white" style="background: #000000 !important; font-size: 11px;">
                             Menu #${nextNumber}
                         </span>
                         <span class="fw-bold text-dark prodi-title-preview" style="font-size: 14px;">

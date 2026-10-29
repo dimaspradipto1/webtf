@@ -32,7 +32,7 @@
 
                 <div class="col-md-6">
                     <label for="badge_text" class="form-label fw-semibold text-dark">Teks Badge <span class="text-danger">*</span></label>
-                    <input type="text" name="badge_text" id="badge_text" class="form-control @error('badge_text') is-invalid @enderror" placeholder="Contoh: Universitas Ibnu Sina" value="{{ old('badge_text', 'Universitas Ibnu Sina') }}" required>
+                    <input type="text" name="badge_text" id="badge_text" class="form-control @error('badge_text') is-invalid @enderror" placeholder="Contoh: Teknik Informatika" value="{{ old('badge_text', 'Teknik Informatika') }}" required>
                     @error('badge_text')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

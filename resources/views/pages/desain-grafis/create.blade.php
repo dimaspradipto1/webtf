@@ -98,8 +98,8 @@
                     <div class="mb-3">
                         <label for="warna_gradient" class="form-label fw-semibold">Warna / Tema Card Preview</label>
                         <select id="warna_gradient" name="warna_gradient" class="form-select @error('warna_gradient') is-invalid @enderror">
-                            <option value="linear-gradient(135deg, #0b6828 0%, #15803d 100%)" {{ old('warna_gradient') == 'linear-gradient(135deg, #0b6828 0%, #15803d 100%)' ? 'selected' : '' }}>🟢 Hijau & Emas UIS</option>
-                            <option value="linear-gradient(135deg, #044b1c 0%, #066d2a 100%)" {{ old('warna_gradient') == 'linear-gradient(135deg, #044b1c 0%, #066d2a 100%)' ? 'selected' : '' }}>🌲 Hijau Gelap Modern</option>
+                            <option value="linear-gradient(135deg, #000000 0%, #000000 100%)" {{ old('warna_gradient') == 'linear-gradient(135deg, #000000 0%, #000000 100%)' ? 'selected' : '' }}>🟢 Hijau & Emas UIS</option>
+                            <option value="linear-gradient(135deg, #000000 0%, #066d2a 100%)" {{ old('warna_gradient') == 'linear-gradient(135deg, #000000 0%, #066d2a 100%)' ? 'selected' : '' }}>🌲 Hijau Gelap Modern</option>
                             <option value="linear-gradient(135deg, #166534 0%, #22c55e 100%)" {{ old('warna_gradient') == 'linear-gradient(135deg, #166534 0%, #22c55e 100%)' ? 'selected' : '' }}>🍃 Hijau Fresh Seminar</option>
                             <option value="linear-gradient(135deg, #ca8a04 0%, #eab308 100%)" {{ old('warna_gradient') == 'linear-gradient(135deg, #ca8a04 0%, #eab308 100%)' ? 'selected' : '' }}>🟡 Kuning Emas Elegan</option>
                             <option value="linear-gradient(135deg, #065f46 0%, #059669 100%)" {{ old('warna_gradient') == 'linear-gradient(135deg, #065f46 0%, #059669 100%)' ? 'selected' : '' }}>❇️ Emerald Modern</option>

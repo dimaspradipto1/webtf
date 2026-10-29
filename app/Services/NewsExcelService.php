@@ -77,8 +77,8 @@ class NewsExcelService
                 'Berita Universitas',
                 'published',
                 'Ya',
-                'Prestasi membanggakan kembali ditorehkan mahasiswa Universitas Ibnu Sina dalam kompetisi inovasi tingkat nasional.',
-                '<p>Universitas Ibnu Sina kembali menorehkan prestasi gemilang di tingkat nasional. Tim mahasiswa berhasil meraih juara pertama setelah menyisihkan puluhan kampus lainnya dalam ajang inovasi teknologi terapan...</p>',
+                'Prestasi membanggakan kembali ditorehkan mahasiswa Teknik Informatika dalam kompetisi inovasi tingkat nasional.',
+                '<p>Teknik Informatika kembali menorehkan prestasi gemilang di tingkat nasional. Tim mahasiswa berhasil meraih juara pertama setelah menyisihkan puluhan kampus lainnya dalam ajang inovasi teknologi terapan...</p>',
                 '',
             ],
             [

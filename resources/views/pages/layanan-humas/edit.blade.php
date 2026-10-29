@@ -15,13 +15,13 @@
 
 @if($item->kode === 'permintaan-rilis')
     {{-- Banner Khusus Permintaan Rilis --}}
-    <div class="alert alert-success border-0 shadow-sm d-flex align-items-center justify-content-between p-3 mb-4" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 12px;">
+    <div class="alert alert-success border-0 shadow-sm d-flex align-items-center justify-content-between p-3 mb-4" style="background: linear-gradient(135deg, #f9dc4b 0%, #f9dc4b 100%); border-radius: 12px;">
         <div class="d-flex align-items-center gap-3">
             <div class="rounded-circle p-2 bg-white text-success fs-4 d-flex align-items-center justify-content-center shadow-sm" style="width: 48px; height: 48px;">
-                <i class="bi bi-journal-richtext" style="color: #0b6828;"></i>
+                <i class="bi bi-journal-richtext" style="color: #000000;"></i>
             </div>
             <div>
-                <h6 class="fw-bold mb-1" style="color: #064e3b;">Halaman Publik Permintaan Rilis Aktif</h6>
+                <h6 class="fw-bold mb-1" style="color: #000000;">Halaman Publik Permintaan Rilis Aktif</h6>
                 <p class="mb-0 text-muted small">
                     Pengunjung dapat membaca ketentuan penulisan 5W+1H, format foto, alur pengajuan, dan mengisi formulir daring di:
                     <a href="{{ route('homepage.permintaan-rilis') }}" target="_blank" class="fw-bold text-success text-decoration-underline ms-1">
@@ -30,7 +30,7 @@
                 </p>
             </div>
         </div>
-        <a href="{{ route('homepage.permintaan-rilis') }}" target="_blank" class="btn btn-sm btn-success fw-bold shadow-sm d-none d-md-inline-flex align-items-center gap-1" style="background-color: #0b6828; border-color: #0b6828; border-radius: 8px;">
+        <a href="{{ route('homepage.permintaan-rilis') }}" target="_blank" class="btn btn-sm btn-success fw-bold shadow-sm d-none d-md-inline-flex align-items-center gap-1" style="background-color: #000000; border-color: #000000; border-radius: 8px;">
             <i class="bi bi-eye-fill"></i> Buka Halaman
         </a>
 @endif
@@ -38,9 +38,9 @@
 <div class="row">
     <div class="{{ $item->kode === 'pendampingan-acara' ? 'col-12' : 'col-lg-8 col-md-12' }}">
         <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
-            <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+            <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
                 <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
-                    <i class="bi bi-sliders me-2" style="color: #046B26;"></i>Pengaturan Layanan: {{ $item->nama }}
+                    <i class="bi bi-sliders me-2" style="color: #000000;"></i>Pengaturan Layanan: {{ $item->nama }}
                 </h5>
                 <div class="d-flex align-items-center gap-2">
                     @if($item->kode === 'pendampingan-acara')
@@ -236,7 +236,7 @@
                                     <label for="sapaan" class="form-label fw-bold text-dark small">Kalimat Sapaan Utama (Heading)</label>
                                     <input type="text" id="sapaan" name="sapaan" class="form-control"
                                            value="{{ old('sapaan', $pendampinganAcaraSetting->sapaan) }}"
-                                           placeholder="Halo, Civitas Akademika Universitas Ibnu Sina dan Mitra Eksternal!">
+                                           placeholder="Halo, Civitas Akademika Teknik Informatika dan Mitra Eksternal!">
                                 </div>
                             </div>
 
@@ -470,7 +470,7 @@
                     {{-- Action Buttons --}}
                     <div class="d-flex justify-content-end gap-2 pt-2 border-top">
                         <a href="{{ route('layanan-humas.index') }}" class="btn btn-secondary px-3">Batal</a>
-                        <button type="submit" class="btn fw-semibold px-4" style="background-color: #046B26; color: #ffffff;">
+                        <button type="submit" class="btn fw-semibold px-4" style="background-color: #000000; color: #ffffff;">
                             <i class="bi bi-floppy-fill me-1"></i> Simpan Pengaturan Layanan
                         </button>
                     </div>
@@ -483,7 +483,7 @@
     {{-- Live Card Preview Side Box --}}
     <div class="col-lg-4 col-md-12">
         <div class="card shadow-sm border-0 sticky-top" style="top: 90px; border-radius: 12px;">
-            <div class="card-header bg-white py-3" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+            <div class="card-header bg-white py-3" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
                 <h6 class="mb-0 fw-bold text-dark">
                     <i class="bi bi-eye-fill me-1 text-success"></i> Simulasi Icon di Frontend
                 </h6>
@@ -494,7 +494,7 @@
                 <div class="p-3 bg-white rounded-3 shadow-sm mx-auto d-inline-flex flex-column align-items-center justify-content-center"
                      style="width: 140px; border: 1px solid #e2e8f0;">
                     <div class="rounded-circle d-flex align-items-center justify-content-center mb-2"
-                         style="width: 52px; height: 52px; background-color: #e8f5e9; color: #046B26; font-size: 24px;">
+                         style="width: 52px; height: 52px; background-color: #f9dc4b; color: #000000; font-size: 24px;">
                         <i id="preview-icon-live" class="bi {{ $item->icon ?: 'bi-grid' }}"></i>
                     </div>
                     <span id="preview-nama-live" class="fw-bold text-dark text-center small" style="line-height: 1.3;">

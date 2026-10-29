@@ -15,7 +15,7 @@
 {{-- Banner Info Penjelasan --}}
 <div class="alert alert-primary border-0 shadow-sm d-flex align-items-start gap-3 p-3 mb-4" style="background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); border-radius: 12px;">
     <div class="rounded-circle p-2 bg-white shadow-sm text-primary fs-4 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; flex-shrink: 0;">
-        <i class="bi bi-book-half" style="color: #046B26;"></i>
+        <i class="bi bi-book-half" style="color: #000000;"></i>
     </div>
     <div>
         <h6 class="fw-bold mb-1" style="color: #14532d;">Pengelolaan Seksi E-Magazine & Buku Saku Universitas</h6>
@@ -32,9 +32,9 @@
 
     {{-- 1. Pengaturan Utama Seksi --}}
     <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
-        <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+        <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
             <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
-                <i class="bi bi-gear-fill me-2" style="color: #046B26;"></i>Pengaturan Umum Seksi
+                <i class="bi bi-gear-fill me-2" style="color: #000000;"></i>Pengaturan Umum Seksi
             </h5>
             <a href="{{ route('homepage.humas') }}#emagazine-section" target="_blank" class="btn btn-sm btn-outline-success">
                 <i class="bi bi-box-arrow-up-right me-1"></i> Lihat di /humas
@@ -72,7 +72,7 @@
 
     {{-- 2. Tab Navigasi Pengaturan: Tab 1 & Tab 2 --}}
     <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
-        <div class="card-header bg-white py-3" style="border-top: 3px solid #fab005; border-radius: 12px 12px 0 0;">
+        <div class="card-header bg-white py-3" style="border-top: 3px solid #f9dc4b; border-radius: 12px 12px 0 0;">
             <ul class="nav nav-pills card-header-pills" id="emagzTabs" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active fw-bold px-4" id="tab1-tab" data-bs-toggle="pill" data-bs-target="#tab1-content" type="button" role="tab" aria-selected="true">
@@ -311,7 +311,7 @@
         </div>
 
         <div class="card-footer bg-light py-3 d-flex align-items-center justify-content-end gap-2" style="border-radius: 0 0 12px 12px;">
-            <button type="submit" class="btn btn-success fw-bold px-4 shadow-sm" style="background: #046B26; border-color: #046B26;">
+            <button type="submit" class="btn btn-success fw-bold px-4 shadow-sm" style="background: #000000; border-color: #000000;">
                 <i class="bi bi-save2-fill me-1"></i> Simpan Perubahan
             </button>
         </div>

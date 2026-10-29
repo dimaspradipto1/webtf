@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Template Dokumen — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Pusat template dokumen resmi Universitas Ibnu Sina (UIS) Batam. Download templat PowerPoint (.pptx), Word (.docx), Desain (.psd) via Google Drive.')
+@section('title', 'Template Dokumen — Teknik Informatika (UIS)')
+@section('meta_description', 'Pusat template dokumen resmi Teknik Informatika (UIS) Batam. Download templat PowerPoint (.pptx), Word (.docx), Desain (.psd) via Google Drive.')
 @section('meta_keywords', 'template dokumen uis, templat pptx uis, templat docx uis, standar komunikasi merek uis')
 
 @section('content')
@@ -21,8 +21,8 @@
   }
 
   .template-icon-card {
-    background-color: #ebf3ee;
-    border: 1px solid #d8ebd9;
+    background-color: #f9dc4b;
+    border: 1px solid #f9dc4b;
     border-radius: 12px;
     height: 240px;
     display: flex;
@@ -66,7 +66,7 @@
 
   .template-card-title {
     font-weight: 700;
-    color: #236838;
+    color: #000000;
     font-size: 17px;
     margin-top: 15px;
     text-align: center;
@@ -87,7 +87,7 @@
   .divider-line-gold {
     width: 60px;
     height: 4px;
-    background: #fab005;
+    background: #f9dc4b;
     border-radius: 4px;
     margin: 14px auto 22px auto;
   }
@@ -125,14 +125,14 @@
         PUSAT BANTUAN & INFORMASI
       </div>
       
-      <h2 class="fw-bold mb-0" style="color: #1e3a29; font-size: 32px; letter-spacing: 0.5px; font-family: 'Plus Jakarta Sans', sans-serif;">
+      <h2 class="fw-bold mb-0" style="color: #000000; font-size: 32px; letter-spacing: 0.5px; font-family: 'Plus Jakarta Sans', sans-serif;">
         {{ $setting->judul_seksi ?? 'TEMPLATE DOKUMEN' }}
       </h2>
       
       <div class="divider-line-gold"></div>
 
       <p class="text-muted mx-auto mb-0" style="max-width: 860px; font-size: 15px; line-height: 1.75;">
-        {!! nl2br(e($setting->deskripsi_seksi ?? 'Kami menyediakan Templat untuk Desain, Ms. Power Point, Ms. Word dan berbagai format lainnya. Guna menyeragamkan tampilan desain di lingkungan Universitas Ibnu Sina. Berdasarkan Peraturan Rektor tentang STANDAR KOMUNIKASI MEREK UNIVERSITAS IBNU SINA')) !!}
+        {!! nl2br(e($setting->deskripsi_seksi ?? 'Kami menyediakan Templat untuk Desain, Ms. Power Point, Ms. Word dan berbagai format lainnya. Guna menyeragamkan tampilan desain di lingkungan Teknik Informatika. Berdasarkan Peraturan Rektor tentang STANDAR KOMUNIKASI MEREK TEKNIK INFORMATIKA')) !!}
       </p>
     </div>
 

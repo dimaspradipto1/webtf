@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Templat & Layanan Desain Grafis — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Pusat templat desain grafis resmi Universitas Ibnu Sina (UIS) Batam. Templat LED Auditorium, Ruang Sidang, Rapat Dekanat, Banner & Spanduk siap pakai di Canva.')
+@section('title', 'Templat & Layanan Desain Grafis — Teknik Informatika (UIS)')
+@section('meta_description', 'Pusat templat desain grafis resmi Teknik Informatika (UIS) Batam. Templat LED Auditorium, Ruang Sidang, Rapat Dekanat, Banner & Spanduk siap pakai di Canva.')
 @section('meta_keywords', 'desain grafis uis, templat canva uis, template led auditorium uis, spanduk uis, humas uis desain')
 
 @section('content')
@@ -50,9 +50,9 @@
 
 <style>
   :root {
-    --uis-dg-darkgreen: #044b1c;
-    --uis-dg-deepgreen: #022b0f;
-    --uis-dg-gold: #c8960c;
+    --uis-dg-darkgreen: #000000;
+    --uis-dg-deepgreen: #000000;
+    --uis-dg-gold: #f9dc4b;
     --uis-dg-yellow: #f59e0b;
     --uis-dg-lime: #84cc16;
   }
@@ -67,7 +67,7 @@
      1. HERO SECTION WITH 3D FLOATING PARTICLES & WAVES
   ══════════════════════════════════════════════════════ */
   .dg-hero-section {
-    background: linear-gradient(180deg, #055420 0%, #033c16 60%, #022b0f 100%);
+    background: linear-gradient(180deg, #000000 0%, #000000 60%, #000000 100%);
     position: relative;
     padding: 70px 0 150px 0;
     color: #ffffff;
@@ -86,7 +86,7 @@
     top: 10%;
     left: 4%;
     font-size: 80px;
-    color: #facc15;
+    color: #f9dc4b;
     animation-duration: 9s;
     filter: drop-shadow(0 15px 25px rgba(250, 204, 21, 0.4));
   }
@@ -159,8 +159,8 @@
     text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
   }
   .dg-hero-title span.highlight-yellow {
-    color: #facc15;
-    background: linear-gradient(135deg, #fef08a 0%, #facc15 100%);
+    color: #f9dc4b;
+    background: linear-gradient(135deg, #fef08a 0%, #f9dc4b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 2px 8px rgba(250, 204, 21, 0.4));
@@ -191,7 +191,7 @@
     box-shadow: 0 32px 64px rgba(0, 0, 0, 0.45);
   }
   .dg-order-card-header {
-    background: linear-gradient(90deg, #b8860b 0%, #d4a017 100%);
+    background: linear-gradient(90deg, #f9dc4b 0%, #f9dc4b 100%);
     color: #ffffff;
     padding: 14px 22px;
     font-weight: 800;
@@ -212,7 +212,7 @@
     margin-bottom: 22px;
   }
   .dg-btn-gold {
-    background: linear-gradient(135deg, #facc15 0%, #d4a017 100%);
+    background: linear-gradient(135deg, #f9dc4b 0%, #f9dc4b 100%);
     color: #1e293b;
     font-weight: 800;
     font-size: 14px;
@@ -227,7 +227,7 @@
     box-shadow: 0 6px 16px rgba(212, 160, 23, 0.35);
   }
   .dg-btn-gold:hover {
-    background: linear-gradient(135deg, #fde047 0%, #eab308 100%);
+    background: linear-gradient(135deg, #f9dc4b 0%, #eab308 100%);
     color: #000000;
     transform: translateY(-3px) scale(1.03);
     box-shadow: 0 10px 24px rgba(212, 160, 23, 0.5);
@@ -245,7 +245,7 @@
 
   /* Rounded Olive-Green Tracking Bar */
   .dg-track-bar {
-    background: linear-gradient(135deg, #465c27 0%, #35471c 100%);
+    background: linear-gradient(135deg, #000000 0%, #000000 100%);
     border-radius: 50px;
     padding: 12px 18px 12px 24px;
     display: flex;
@@ -293,7 +293,7 @@
     50% { transform: translateX(5px); }
   }
   .dg-btn-track {
-    background: linear-gradient(135deg, #facc15 0%, #d4a017 100%);
+    background: linear-gradient(135deg, #f9dc4b 0%, #f9dc4b 100%);
     color: #1e293b;
     font-size: 13.5px;
     font-weight: 800;
@@ -305,7 +305,7 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
   .dg-btn-track:hover {
-    background: #fde047;
+    background: #f9dc4b;
     color: #000;
     transform: scale(1.06);
   }
@@ -332,7 +332,7 @@
     transform: translateY(-6px) scale(1.02);
     box-shadow: 0 18px 36px rgba(15, 23, 42, 0.14);
   }
-  .dg-stat-card.stat-selesai { border-left-color: #16a34a; }
+  .dg-stat-card.stat-selesai { border-left-color: #000000; }
   .dg-stat-card.stat-proses   { border-left-color: #f59e0b; }
   .dg-stat-card.stat-tunggu   { border-left-color: #0284c7; }
 
@@ -498,7 +498,7 @@
     margin-bottom: 14px;
   }
   .dg-btn-edit {
-    background: linear-gradient(135deg, #facc15 0%, #d4a017 100%);
+    background: linear-gradient(135deg, #f9dc4b 0%, #f9dc4b 100%);
     color: #1e293b;
     font-weight: 800;
     font-size: 13px;
@@ -512,7 +512,7 @@
     box-shadow: 0 4px 10px rgba(212, 160, 23, 0.3);
   }
   .dg-btn-edit:hover {
-    background: linear-gradient(135deg, #fde047 0%, #ca8a04 100%);
+    background: linear-gradient(135deg, #f9dc4b 0%, #ca8a04 100%);
     color: #000000;
     transform: translateY(-2px) scale(1.05);
     box-shadow: 0 6px 16px rgba(212, 160, 23, 0.5);
@@ -621,7 +621,7 @@
             <span class="highlight-yellow">{{ $setting->hero_highlight ?? 'Siap Digunakan !' }}</span>
           </h1>
           <p class="dg-hero-subtitle">
-            {{ $setting->hero_subtitle ?? 'Kami menyediakan template desain resmi untuk keperluan presentasi LED, ruang sidang, agenda rapat, dan spanduk acara di lingkungan Universitas Ibnu Sina.' }}
+            {{ $setting->hero_subtitle ?? 'Kami menyediakan template desain resmi untuk keperluan presentasi LED, ruang sidang, agenda rapat, dan spanduk acara di lingkungan Teknik Informatika.' }}
           </p>
         </div>
 
@@ -825,7 +825,7 @@
         input: 'text',
         inputPlaceholder: 'Contoh: 08123456789 atau #DESAIN-102',
         showCancelButton: true,
-        confirmButtonColor: '#0b6828',
+        confirmButtonColor: '#000000',
         cancelButtonColor: '#64748b',
         confirmButtonText: '<i class="bi bi-search me-1"></i> Lacak Sekarang',
         cancelButtonText: 'Batal',
@@ -838,7 +838,7 @@
             icon: 'info',
             title: 'Status Pesanan: ' + result.value,
             html: '<div class="text-start mt-2"><strong>Status:</strong> <span class="badge bg-success">Selesai / Sedang Dikerjakan</span><br><small class="text-muted">Untuk konfirmasi revisi atau pengiriman file resolusi tinggi, silakan hubungi WhatsApp Humas UIS.</small></div>',
-            confirmButtonColor: '#0b6828',
+            confirmButtonColor: '#000000',
             customClass: {
               popup: 'rounded-4 shadow-lg border-0'
             }

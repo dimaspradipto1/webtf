@@ -4,12 +4,12 @@
   $isHumas = ($gallery->kategori ?? '') === 'humas';
 @endphp
 
-@section('title', ($gallery->judul ?? 'Dokumentasi Visual') . ($isHumas ? ' — Galeri Humas UIS' : ' — Galeri Universitas Ibnu Sina'))
+@section('title', ($gallery->judul ?? 'Dokumentasi Visual') . ($isHumas ? ' — Galeri Humas UIS' : ' — Galeri Teknik Informatika'))
 @section('meta_description', Str::limit(strip_tags($gallery->deskripsi ?? $gallery->judul), 160))
 
 @section('content')
 <!-- Header Hero -->
-<div class="detail-hero text-white" style="{{ $isHumas ? 'background: linear-gradient(135deg, #022e11 0%, #034b1c 55%, #046B26 100%); border-bottom: 2px solid #FED802;' : '' }}">
+<div class="detail-hero text-white" style="{{ $isHumas ? 'background: linear-gradient(135deg, #022e11 0%, #034b1c 55%, #000000 100%); border-bottom: 2px solid #f9dc4b;' : '' }}">
   <div class="container">
     <div class="breadcrumb-custom mb-3">
       <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
@@ -26,7 +26,7 @@
     </div>
     <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
       @if($isHumas)
-        <span class="badge px-3 py-2 rounded-pill font-weight-bold" style="background: rgba(254, 216, 2, 0.2); border: 1.5px solid #FED802; color: #FED802; font-size: 12.5px;">
+        <span class="badge px-3 py-2 rounded-pill font-weight-bold" style="background: rgba(249, 220, 75, 0.2); border: 1.5px solid #f9dc4b; color: #f9dc4b; font-size: 12.5px;">
           <i class="bi bi-megaphone-fill me-1"></i> Dokumentasi Humas
         </span>
       @else
@@ -39,7 +39,7 @@
       </span>
     </div>
     <h1 class="fw-bold mb-0 text-white" style="font-size: 32px; line-height: 1.35; letter-spacing: -0.5px;">
-      {{ $gallery->judul ?? ($isHumas ? 'Dokumentasi Kegiatan Humas UIS' : 'Dokumentasi Kegiatan Universitas Ibnu Sina') }}
+      {{ $gallery->judul ?? ($isHumas ? 'Dokumentasi Kegiatan Humas UIS' : 'Dokumentasi Kegiatan Teknik Informatika') }}
     </h1>
   </div>
 </div>
@@ -60,21 +60,21 @@
             </a>
           </div>
         @else
-          <div class="p-5 rounded-4 text-center text-white mb-4 shadow-sm" style="background: #046B26;">
-            <i class="bi bi-camera-fill" style="font-size: 64px; color: #FED802;"></i>
-            <h4 class="fw-bold mt-2 mb-0">{{ $isHumas ? 'Dokumentasi Humas UIS' : 'Dokumentasi Universitas Ibnu Sina' }}</h4>
+          <div class="p-5 rounded-4 text-center text-white mb-4 shadow-sm" style="background: #000000;">
+            <i class="bi bi-camera-fill" style="font-size: 64px; color: #f9dc4b;"></i>
+            <h4 class="fw-bold mt-2 mb-0">{{ $isHumas ? 'Dokumentasi Humas UIS' : 'Dokumentasi Teknik Informatika' }}</h4>
           </div>
         @endif
 
         <!-- Card Deskripsi Lengkap -->
         <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm border mb-4">
           <div class="d-flex align-items-center gap-2 mb-3">
-            <div style="width: 38px; height: 38px; border-radius: 10px; background: {{ $isHumas ? '#eaf7ee' : '#f3e8ff' }}; color: {{ $isHumas ? '#046B26' : 'var(--uis-purple)' }}; display: flex; align-items: center; justify-content: center; font-size: 18px;">
+            <div style="width: 38px; height: 38px; border-radius: 10px; background: {{ $isHumas ? '#eaf7ee' : '#f3e8ff' }}; color: {{ $isHumas ? '#000000' : 'var(--uis-purple)' }}; display: flex; align-items: center; justify-content: center; font-size: 18px;">
               <i class="bi bi-info-circle-fill"></i>
             </div>
             <h3 class="fw-bold mb-0 text-dark" style="font-size: 21px;">Keterangan & Informasi Kegiatan</h3>
           </div>
-          <div class="divider-line mb-4" style="{{ $isHumas ? 'background: #046B26;' : '' }}"></div>
+          <div class="divider-line mb-4" style="{{ $isHumas ? 'background: #000000;' : '' }}"></div>
 
           @if(!empty($gallery->deskripsi))
             <div class="article-content" style="line-height: 1.85; font-size: 15.5px; color: #334155;">
@@ -82,7 +82,7 @@
             </div>
           @else
             <p class="text-muted mb-0">
-              Dokumentasi visual kegiatan dan publikasi resmi {{ $isHumas ? 'kehumasan' : 'sivitas akademika' }} Universitas Ibnu Sina (UIS).
+              Dokumentasi visual kegiatan dan publikasi resmi {{ $isHumas ? 'kehumasan' : 'sivitas akademika' }} Teknik Informatika (UIS).
             </p>
           @endif
 
@@ -125,7 +125,7 @@
         <!-- Card Informasi Metadata -->
         <div class="info-badge-card mb-4">
           <div class="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom">
-            <div style="width: 34px; height: 34px; border-radius: 10px; background: {{ $isHumas ? '#eaf7ee' : '#f3e8ff' }}; color: {{ $isHumas ? '#046B26' : 'var(--uis-purple)' }}; display: flex; align-items: center; justify-content: center; font-size: 16px;">
+            <div style="width: 34px; height: 34px; border-radius: 10px; background: {{ $isHumas ? '#eaf7ee' : '#f3e8ff' }}; color: {{ $isHumas ? '#000000' : 'var(--uis-purple)' }}; display: flex; align-items: center; justify-content: center; font-size: 16px;">
               <i class="bi bi-camera-reels-fill"></i>
             </div>
             <h5 class="fw-bold mb-0 text-dark" style="font-size: 16.5px;">Informasi Dokumentasi</h5>
@@ -135,7 +135,7 @@
             <span class="info-meta-label">Kategori</span>
             <span class="info-meta-val">
               @if($isHumas)
-                <span class="badge rounded-pill px-3 py-1" style="background: #eaf7ee; color: #046B26; border: 1px solid #b7e4c7; font-size: 12px;">
+                <span class="badge rounded-pill px-3 py-1" style="background: #eaf7ee; color: #000000; border: 1px solid #b7e4c7; font-size: 12px;">
                   <i class="bi bi-megaphone-fill me-1"></i>Humas
                 </span>
               @else
@@ -148,7 +148,7 @@
 
           <div class="info-meta-row">
             <span class="info-meta-label">Unit Penerbit</span>
-            <span class="info-meta-val text-dark">{{ $isHumas ? 'Biro Humas & Promosi' : 'Universitas Ibnu Sina' }}</span>
+            <span class="info-meta-val text-dark">{{ $isHumas ? 'Biro Humas & Promosi' : 'Teknik Informatika' }}</span>
           </div>
 
           <div class="info-meta-row">
@@ -162,12 +162,12 @@
           <div class="info-badge-card">
             <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
               <div class="d-flex align-items-center gap-2">
-                <div style="width: 34px; height: 34px; border-radius: 10px; background: {{ $isHumas ? '#eaf7ee' : '#f3e8ff' }}; color: {{ $isHumas ? '#046B26' : 'var(--uis-purple)' }}; display: flex; align-items: center; justify-content: center; font-size: 16px;">
+                <div style="width: 34px; height: 34px; border-radius: 10px; background: {{ $isHumas ? '#eaf7ee' : '#f3e8ff' }}; color: {{ $isHumas ? '#000000' : 'var(--uis-purple)' }}; display: flex; align-items: center; justify-content: center; font-size: 16px;">
                   <i class="bi bi-images"></i>
                 </div>
                 <h5 class="fw-bold mb-0 text-dark" style="font-size: 16.5px;">{{ $isHumas ? 'Dokumentasi Humas Lain' : 'Dokumentasi Lainnya' }}</h5>
               </div>
-              <a href="{{ $isHumas ? route('homepage.galeri.humas') : route('homepage.galeri') }}" class="small fw-semibold text-decoration-none" style="font-size: 12.5px; color: {{ $isHumas ? '#046B26' : 'var(--uis-purple)' }};">Lihat Semua</a>
+              <a href="{{ $isHumas ? route('homepage.galeri.humas') : route('homepage.galeri') }}" class="small fw-semibold text-decoration-none" style="font-size: 12.5px; color: {{ $isHumas ? '#000000' : 'var(--uis-purple)' }};">Lihat Semua</a>
             </div>
 
             <div>
@@ -176,7 +176,7 @@
                   @if(!empty($other->url))
                     <img src="{{ asset('storage/' . $other->url) }}" alt="{{ $other->judul }}" class="other-galeri-img">
                   @else
-                    <div class="other-galeri-img d-flex align-items-center justify-content-center text-white" style="background: #046B26;">
+                    <div class="other-galeri-img d-flex align-items-center justify-content-center text-white" style="background: #000000;">
                       <i class="bi bi-camera-fill small"></i>
                     </div>
                   @endif

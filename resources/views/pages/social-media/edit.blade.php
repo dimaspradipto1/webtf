@@ -15,9 +15,9 @@
 <div class="row">
     <div class="col-lg-8 col-md-10">
         <div class="card shadow-sm border-0" style="border-radius: 12px;">
-            <div class="card-header bg-white py-3" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+            <div class="card-header bg-white py-3" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
                 <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
-                    <i class="bi bi-pencil-square me-2" style="color: #046B26;"></i>Edit Data Media Sosial
+                    <i class="bi bi-pencil-square me-2" style="color: #000000;"></i>Edit Data Media Sosial
                 </h5>
             </div>
             <div class="card-body pt-4">
@@ -178,7 +178,7 @@
                     </div>
 
                     {{-- SEKSI VIDEO TERBARU DARI LINK MEDIA SOSIAL --}}
-                    <div class="p-3 mb-4 rounded-3 border" style="background: #fbfcfe; border-left: 4px solid #FED802 !important;">
+                    <div class="p-3 mb-4 rounded-3 border" style="background: #fbfcfe; border-left: 4px solid #f9dc4b !important;">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <h6 class="fw-bold text-dark mb-0">
                                 <i class="bi bi-camera-reels text-warning me-2"></i>Link Video Sosial Media
@@ -345,7 +345,7 @@
                         <a href="{{ route('social-media.index', ['kategori' => old('kategori', $socialMedia->kategori ?? 'universitas')]) }}" class="btn btn-outline-secondary px-4">
                             <i class="bi bi-arrow-left me-1"></i> Kembali
                         </a>
-                        <button type="submit" class="btn fw-semibold shadow-sm px-4" style="background-color: #046B26; color: #ffffff; border: none;">
+                        <button type="submit" class="btn fw-semibold shadow-sm px-4" style="background-color: #000000; color: #ffffff; border: none;">
                             <i class="bi bi-save me-1"></i> Perbarui Media Sosial
                         </button>
                     </div>

@@ -33,7 +33,7 @@
                         {{-- Header Icon & Status --}}
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <div class="rounded-circle d-flex align-items-center justify-content-center" 
-                                 style="width: 46px; height: 46px; background-color: #e8f5e9; color: #046B26; font-size: 22px;">
+                                 style="width: 46px; height: 46px; background-color: #f9dc4b; color: #000000; font-size: 22px;">
                                 <i class="bi {{ $item->icon ?: 'bi-grid' }}"></i>
                             </div>
                             <div class="d-flex align-items-center gap-1">
@@ -92,7 +92,7 @@
 
                         <a href="{{ route('layanan-humas.edit-item', $item->kode) }}" 
                            class="btn btn-sm fw-semibold w-100" 
-                           style="background-color: #046B26; color: #fff; font-size: 12px; border-radius: 6px;">
+                           style="background-color: #000000; color: #fff; font-size: 12px; border-radius: 6px;">
                             <i class="bi bi-gear-fill me-1"></i> Kelola
                         </a>
                     </div>

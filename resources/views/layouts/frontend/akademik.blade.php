@@ -1,6 +1,6 @@
 @extends('layouts.frontend.template')
 
-@section('title', $item->judul . ' — Universitas Ibnu Sina')
+@section('title', $item->judul . ' — Teknik Informatika')
 @section('meta_description', Str::limit(strip_tags($item->subjudul ?? $item->deskripsi), 160))
 
 @section('content')
@@ -9,8 +9,8 @@
 ═══════════════════════════════════════════════ -->
 <section class="akademik-hero">
   <div class="container position-relative" data-aos="fade-up">
-    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange); color: #032e12; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
-      LAYANAN AKADEMIK Universitas Ibnu Sina
+    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
+      LAYANAN AKADEMIK Teknik Informatika
     </div>
     <h1 class="display-6 fw-bold text-white mb-2">{{ $item->judul }}</h1>
     @if($item->subjudul)
@@ -64,10 +64,10 @@
 
           {{-- Portal Link Eksternal (SIAKAD dll) --}}
           @if(!empty($item->link_url))
-            <div class="p-4 rounded-4 mb-4 text-white d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3" style="background: #032e12; border: 1px solid #046B26;">
+            <div class="p-4 rounded-4 mb-4 text-white d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3" style="background: #000000; border: 1px solid #000000;">
               <div>
-                <h5 class="fw-bold text-white mb-1"><i class="bi bi-laptop me-2" style="color: #FED802;"></i>Akses Langsung Sistem Online</h5>
-                <p class="text-white-50 small mb-0">Klik tombol untuk masuk ke portal sistem resmi Universitas Ibnu Sina.</p>
+                <h5 class="fw-bold text-white mb-1"><i class="bi bi-laptop me-2" style="color: #f9dc4b;"></i>Akses Langsung Sistem Online</h5>
+                <p class="text-white-50 small mb-0">Klik tombol untuk masuk ke portal sistem resmi Teknik Informatika.</p>
               </div>
               <a href="{{ $item->link_url }}" target="_blank" class="btn-primary-hero" style="font-size: 13.5px; padding: 10px 24px; white-space: nowrap;">
                 Buka Portal <i class="bi bi-box-arrow-up-right ms-1"></i>
@@ -108,13 +108,13 @@
         </div>
 
         {{-- Widget Kontak / PMB --}}
-        <div class="p-4 rounded-4 text-white" style="background: #032e12; border: 1px solid #046B26;">
-          <div class="badge px-3 py-1 rounded-pill mb-2" style="background: #FED802; color: #046B26; font-weight: 800; font-size: 11px;">
+        <div class="p-4 rounded-4 text-white" style="background: #000000; border: 1px solid #000000;">
+          <div class="badge px-3 py-1 rounded-pill mb-2" style="background: #f9dc4b; color: #000000; font-weight: 800; font-size: 11px;">
             INFORMASI PMB
           </div>
           <h5 class="fw-bold text-white mb-2">Butuh Bantuan Akademik?</h5>
           <p class="text-white-50 small mb-3">
-            Hubungi Bagian Tata Usaha & Layanan Akademik Universitas Ibnu Sina untuk informasi lebih lanjut.
+            Hubungi Bagian Tata Usaha & Layanan Akademik Teknik Informatika untuk informasi lebih lanjut.
           </p>
           <a href="{{ route('homepage.kontak') }}" class="btn btn-outline-light w-100 rounded-3 fw-bold py-2" style="font-size: 13.5px;">
             <i class="bi bi-telephone me-1"></i> Hubungi Kami

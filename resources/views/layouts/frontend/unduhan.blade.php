@@ -1,6 +1,6 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Downloads & Unduhan Berkas Media — Universitas Ibnu Sina (UIS)')
+@section('title', 'Downloads & Unduhan Berkas Media — Teknik Informatika (UIS)')
 @section('meta_description', 'Pusat unduhan berkas resmi, logo universitas, aset grafis, video promosi, jingle mars, dan dokumen template resmi UIS.')
 @section('meta_keywords', 'unduhan uis, logo uis, template uis, mars uis, audio uis, aset media universitas')
 
@@ -18,8 +18,8 @@
 <style>
   /* Hero Banner & Breadcrumb (Matches standard site header banner) */
   .download-hero {
-    background: #046b26 !important;
-    border-bottom: 3px solid #fed802 !important;
+    background: #000000 !important;
+    border-bottom: 3px solid #f9dc4b !important;
     position: relative;
     overflow: hidden;
     padding-top: 26px !important;
@@ -37,7 +37,7 @@
   }
 
   .download-hero-title em {
-    color: #fed802 !important;
+    color: #f9dc4b !important;
     font-style: normal;
   }
 
@@ -60,7 +60,7 @@
 
   .downloads-top-accent {
     height: 6px;
-    background: linear-gradient(90deg, #15803d 0%, #d97706 50%, #15803d 100%);
+    background: linear-gradient(90deg, #000000 0%, #d97706 50%, #000000 100%);
     width: 100%;
   }
 
@@ -103,14 +103,14 @@
   }
 
   .downloads-tab-btn:hover {
-    color: #16a34a;
+    color: #000000;
     background: #f1f5f9;
   }
 
   .downloads-tab-btn.active {
-    background: #34a853;
+    background: #000000;
     color: #ffffff;
-    box-shadow: 0 6px 16px rgba(52, 168, 83, 0.35);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
   }
 
   /* Table Style */

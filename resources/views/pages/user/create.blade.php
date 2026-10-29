@@ -153,7 +153,7 @@
                                         Pengelola Organisasi
                                     </label>
                                 </div>
-                                <span class="badge text-white" style="background:#046B26;">Kelola Organisasi Mahasiswa</span>
+                                <span class="badge text-white" style="background:#000000;">Kelola Organisasi Mahasiswa</span>
                             </div>
                         </div>
 

@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Universitas Ibnu Sina (UIS) — Unggul, Profesional & Berintegritas')
-@section('meta_description', 'Portal Resmi Universitas Ibnu Sina (UIS) Batam — Mewujudkan Perguruan Tinggi Terkemuka Berdaya Saing Global, Inovatif, dan Berakhlak Mulia.')
+@section('title', 'Teknik Informatika (UIS) — Unggul, Profesional & Berintegritas')
+@section('meta_description', 'Portal Resmi Teknik Informatika (UIS) Batam — Mewujudkan Perguruan Tinggi Terkemuka Berdaya Saing Global, Inovatif, dan Berakhlak Mulia.')
 
 @section('content')
 @php
@@ -37,17 +37,17 @@
         @foreach($activeBanners as $index => $banner)
           @php $imgPath = $banner->url ?? $banner->gambar; @endphp
           <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-            <img src="{{ asset('storage/' . $imgPath) }}" alt="{{ $banner->judul ?? 'Banner Promosi Universitas Ibnu Sina' }}" class="hero-banner-img">
+            <img src="{{ asset('storage/' . $imgPath) }}" alt="{{ $banner->judul ?? 'Banner Promosi Teknik Informatika' }}" class="hero-banner-img">
           </div>
         @endforeach
       @else
         <div class="carousel-item active">
-          <div class="hero-banner-img d-flex align-items-center justify-content-center" style="background: #032e12; min-height: 360px; color: #ffffff;">
+          <div class="hero-banner-img d-flex align-items-center justify-content-center" style="background: #000000; min-height: 360px; color: #ffffff;">
             <div class="text-center p-4">
               <div class="mb-3">
                 <i class="bi bi-megaphone fs-1" style="color: var(--uis-orange);"></i>
               </div>
-              <h2 class="fw-bold mb-2" style="color: #ffffff; letter-spacing: -0.5px;">UNIVERSITAS IBNU SINA (UIS)</h2>
+              <h2 class="fw-bold mb-2" style="color: #ffffff; letter-spacing: -0.5px;">TEKNIK INFORMATIKA (UIS)</h2>
               <p class="text-white-50 small mb-0" style="max-width: 540px; margin: 0 auto;">
                 Banner Promosi & Iklan Fakultas dapat diunggah melalui menu Admin (<strong>Profil & Konten UIS ➔ Banner Hero</strong>).
               </p>
@@ -72,7 +72,7 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     3. PROFIL SINGKAT Universitas Ibnu Sina & SAMBUTAN REKTOR
+     3. PROFIL SINGKAT Teknik Informatika & SAMBUTAN REKTOR
 ═══════════════════════════════════════════════ -->
 <section class="section-bg-white py-5" id="profil-singkat">
   <div class="container py-2">
@@ -81,7 +81,7 @@
       <div class="col-12">
         <div class="section-label mx-auto">Profil Universitas</div>
         <h2 class="section-title">
-          {{ $about->judul_profil ?? 'Universitas Ibnu Sina' }}
+          {{ $about->judul_profil ?? 'Teknik Informatika' }}
         </h2>
         <div class="divider-line centered"></div>
       </div>
@@ -102,7 +102,7 @@
               <div class="ratio ratio-16x9">
                 <iframe 
                   src="{{ $about->youtube_embed_url }}" 
-                  title="Video Profil Universitas Ibnu Sina" 
+                  title="Video Profil Teknik Informatika" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                   referrerpolicy="strict-origin-when-cross-origin" 
                   allowfullscreen>
@@ -113,7 +113,7 @@
           @if($about->youtube_watch_url)
             <div class="d-flex justify-content-between align-items-center gap-2 mt-2 px-1">
               <span class="text-muted small" style="font-size: 12px;">Video bermasalah saat diputar?</span>
-              <a href="{{ $about->youtube_watch_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm text-white fw-semibold d-inline-flex align-items-center gap-1" style="background-color: #046B26; font-size: 12px; border-radius: 6px; padding: 4px 12px;">
+              <a href="{{ $about->youtube_watch_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm text-white fw-semibold d-inline-flex align-items-center gap-1" style="background-color: #000000; font-size: 12px; border-radius: 6px; padding: 4px 12px;">
                 <i class="bi bi-youtube text-warning"></i> Buka Langsung di YouTube <i class="bi bi-box-arrow-up-right ms-1" style="font-size: 10px;"></i>
               </a>
             </div>
@@ -122,9 +122,9 @@
 
         {{-- Content / Deskripsi Kanan --}}
         <div class="col-lg-6">
-          <div class="h-100 p-4 p-md-4 rounded-4 shadow-sm" style="font-size: 15.5px; line-height: 1.85; color: #2d3748; background: #f8faf9; border-left: 5px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
+          <div class="h-100 p-4 p-md-4 rounded-4 shadow-sm" style="font-size: 15.5px; line-height: 1.85; color: #2d3748; background: #f8faf9; border-left: 5px solid var(--uis-green, #000000); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
             <div class="about-desc-content" style="text-align: justify;">
-              {!! $about->deskripsi_profil_1 ?? 'Universitas Ibnu Sina (UIS) Batam merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
+              {!! $about->deskripsi_profil_1 ?? 'Teknik Informatika (UIS) Batam merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
             </div>
           </div>
         </div>
@@ -133,9 +133,9 @@
       {{-- Fallback jika belum ada video --}}
       <div class="row mb-5" data-aos="fade-up" data-aos-delay="150">
         <div class="col-12">
-          <div class="w-100 p-4 p-md-5 rounded-4 shadow-sm" style="text-align: justify; font-size: 16.5px; line-height: 1.9; color: #2d3748; background: #f8faf9; border-left: 6px solid var(--uis-green, #046B26); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
+          <div class="w-100 p-4 p-md-5 rounded-4 shadow-sm" style="text-align: justify; font-size: 16.5px; line-height: 1.9; color: #2d3748; background: #f8faf9; border-left: 6px solid var(--uis-green, #000000); border-top: 1px solid #edf2f7; border-right: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
             <div class="about-desc-content">
-              {!! $about->deskripsi_profil_1 ?? 'Universitas Ibnu Sina (UIS) Batam merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
+              {!! $about->deskripsi_profil_1 ?? 'Teknik Informatika (UIS) Batam merupakan perguruan tinggi swasta terkemuka di Provinsi Kepulauan Riau yang lahir dari perpaduan keunggulan akademik Sekolah Tinggi Teknik (STT), Sekolah Tinggi Ilmu Ekonomi (STIE), dan Sekolah Tinggi Ilmu Kesehatan (STIKES) di bawah naungan Yayasan Pendidikan Ibnu Sina Batam (YAPISNA). Berlokasi strategis di kawasan industri dan perdagangan internasional Kota Batam, UIS mengelola tiga fakultas unggulan: Fakultas Teknik (Sains & Teknologi), Fakultas Ekonomi dan Bisnis (FEB), serta Fakultas Ilmu Kesehatan (FIKES), beserta Program Pascasarjana (Magister). UIS bertekad mencetak lulusan profesional muda yang inovatif, berdaya saing global, berjiwa entrepreneur, dan berakhlak mulia berlandaskan Iman dan Taqwa (Imtaq).' !!}
             </div>
           </div>
         </div>
@@ -163,9 +163,9 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="p-3 rounded-3 h-100 shadow-sm" style="background: #f0fdf4; border: 1px solid #bbf7d0; transition: transform 0.25s ease;">
-          <div class="d-flex align-items-center gap-2 mb-2 fw-bold" style="color: #046B26;">
-            <i class="bi bi-people-fill fs-5" style="color: #046B26;"></i>
+        <div class="p-3 rounded-3 h-100 shadow-sm" style="background: #f9dc4b; border: 1px solid #f9dc4b; transition: transform 0.25s ease;">
+          <div class="d-flex align-items-center gap-2 mb-2 fw-bold" style="color: #000000;">
+            <i class="bi bi-people-fill fs-5" style="color: #000000;"></i>
             <span>Dosen Doktor & Praktisi</span>
           </div>
           <p class="small mb-0" style="color: #334155; line-height: 1.6;">Dibimbing pakar berkualifikasi S3 serta praktisi industri multinasional kawasan Batam.</p>
@@ -174,7 +174,7 @@
       <div class="col-12 text-center mt-3">
         <a href="{{ route('homepage.tentang') }}" class="btn-primary-hero">
           <i class="bi bi-info-circle"></i>
-          Profil Lengkap Universitas Ibnu Sina
+          Profil Lengkap Teknik Informatika
         </a>
       </div>
     </div>
@@ -257,9 +257,9 @@
     transform: translateY(-2px);
   }
   .uis-stat-tab-btn.active {
-    background: #00875a;
+    background: #000000;
     color: #ffffff;
-    box-shadow: 0 6px 16px rgba(0, 135, 90, 0.55);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
     transform: translateY(-1px);
   }
   .uis-stat-number {
@@ -292,7 +292,7 @@
     {{-- Heading --}}
     <div class="text-center mb-4" data-aos="fade-up">
       <h2 class="uis-stat-heading">
-        {{ $facultyStat->title ?? 'Universitas Ibnu Sina' }}
+        {{ $facultyStat->title ?? 'Teknik Informatika' }}
       </h2>
     </div>
 
@@ -576,13 +576,13 @@
 
 
 <!-- ═══════════════════════════════════════════════
-     5. MENGAPA MEMILIH Universitas Ibnu Sina
+     5. MENGAPA MEMILIH Teknik Informatika
 ═══════════════════════════════════════════════ -->
 <section class="section-bg-white" id="keunggulan">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label mx-auto">Keunggulan Kami</div>
-      <h2 class="section-title">Mengapa Memilih <em>Universitas Ibnu Sina</em>?</h2>
+      <h2 class="section-title">Mengapa Memilih <em>Teknik Informatika</em>?</h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
         Kami memberikan ekosistem belajar yang menyeluruh antara pemahaman teoritis berstandar mutakhir dan pelatihan praktikal di lapangan.
@@ -650,11 +650,11 @@
     <div class="pmb-cta-box">
       <div class="row align-items-center g-4">
         <div class="col-lg-8">
-          <div class="badge pmb-badge-wrap px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange); color: #032e12; font-weight: 800; font-size: 12px; letter-spacing: 1px;">
+          <div class="badge pmb-badge-wrap px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange); color: #000000; font-weight: 800; font-size: 12px; letter-spacing: 1px;">
             {{ $pmbSetting->badge_text ?? 'PENERIMAAN MAHASISWA BARU (PMB) T.A. 2026/2027' }}
           </div>
           <h2 class="text-white fw-bold mb-3" style="font-size: clamp(1.5rem, 3.5vw, 2.1rem); line-height: 1.3;">
-            {{ $pmbSetting->judul ?? 'Daftar Sekarang & Raih Masa Depan Cerah Bersama Universitas Ibnu Sina!' }}
+            {{ $pmbSetting->judul ?? 'Daftar Sekarang & Raih Masa Depan Cerah Bersama Teknik Informatika!' }}
           </h2>
           <div class="text-white mb-4 pmb-desc-content" style="line-height: 1.7; max-width: 620px; opacity: 0.92; font-size: 14.5px;">
             {!! $pmbSetting->deskripsi ?? 'Tersedia berbagai jalur seleksi: Jalur Bebas Tes / Prestasi, Jalur Reguler, Jalur KIP-Kuliah, dan Jalur Alih Jenjang Karyawan.' !!}
@@ -673,7 +673,7 @@
             @php
               $link2 = $pmbSetting->tombol_link_2 ?? '';
               if (empty($link2) && !empty($cleanWa)) {
-                  $link2 = "https://wa.me/{$cleanWa}?text=" . urlencode("Halo Admin PMB Universitas Ibnu Sina, saya ingin konsultasi pendaftaran mahasiswa baru");
+                  $link2 = "https://wa.me/{$cleanWa}?text=" . urlencode("Halo Admin PMB Teknik Informatika, saya ingin konsultasi pendaftaran mahasiswa baru");
               }
             @endphp
             @if(!empty($link2))
@@ -748,7 +748,7 @@
       <h2 class="section-title">Prestasi Gemilang <em>Mahasiswa UIS</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Bukti dedikasi, keunggulan riset, dan daya saing mahasiswa Universitas Ibnu Sina di berbagai kompetisi ilmiah dan kejuaraan.
+        Bukti dedikasi, keunggulan riset, dan daya saing mahasiswa Teknik Informatika di berbagai kompetisi ilmiah dan kejuaraan.
       </p>
     </div>
 
@@ -769,9 +769,9 @@
                 @if(!empty($prestasi->foto))
                   <img src="{{ asset('storage/' . $prestasi->foto) }}" alt="{{ $prestasi->judul_prestasi }}" class="prestasi-img">
                 @else
-                  <div class="d-flex align-items-center justify-content-center h-100 text-white flex-column gap-2" style="background: #046B26;">
-                    <i class="bi bi-trophy-fill" style="font-size: 44px; color: #FED802;"></i>
-                    <span class="small fw-semibold text-white-50">Universitas Ibnu Sina Achievement</span>
+                  <div class="d-flex align-items-center justify-content-center h-100 text-white flex-column gap-2" style="background: #000000;">
+                    <i class="bi bi-trophy-fill" style="font-size: 44px; color: #f9dc4b;"></i>
+                    <span class="small fw-semibold text-white-50">Teknik Informatika Achievement</span>
                   </div>
                 @endif
                 <span class="prestasi-tingkat-badge badge {{ $tingkatBadge }}">
@@ -793,7 +793,7 @@
                   </h4>
 
                   <div class="d-flex align-items-center gap-2 mb-3 mt-3">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" style="width: 32px; height: 32px; background: #046B26; font-size: 13px;">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" style="width: 32px; height: 32px; background: #000000; font-size: 13px;">
                       <i class="bi bi-person-fill"></i>
                     </div>
                     <div>
@@ -878,7 +878,7 @@
           </h2>
 
           <p class="ormawa-deck-lead mb-4">
-            {{ strip_tags($organisasiSetting?->deskripsi ?: 'Eksplorasi ragam organisasi kemahasiswaan, himpunan program studi, dan unit kegiatan minat bakat di Universitas Ibnu Sina Batam. Ruang kolaborasi untuk mengasah karakter, kepemimpinan, dan inovasi civitas kampus.') }}
+            {{ strip_tags($organisasiSetting?->deskripsi ?: 'Eksplorasi ragam organisasi kemahasiswaan, himpunan program studi, dan unit kegiatan minat bakat di Teknik Informatika Batam. Ruang kolaborasi untuk mengasah karakter, kepemimpinan, dan inovasi civitas kampus.') }}
           </p>
 
           <div class="d-flex align-items-center gap-3 flex-wrap mb-4">
@@ -917,7 +917,7 @@
               @if(isset($organisasis) && $organisasis->count() > 0)
                 @php
                   $themes = [
-                    'radial-gradient(circle at 85% 15%, rgba(254, 216, 2, 0.32) 0%, transparent 45%), linear-gradient(155deg, #022c0f 0%, #046B26 48%, #011d0a 100%)', // Emerald Gold (UIS)
+                    'radial-gradient(circle at 85% 15%, rgba(249, 220, 75, 0.32) 0%, transparent 45%), linear-gradient(155deg, #000000 0%, #000000 48%, #000000 100%)', // Emerald Gold (UIS)
                     'radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.35) 0%, transparent 45%), linear-gradient(155deg, #0a192f 0%, #1e3a5f 48%, #050d1a 100%)', // Deep Navy / Blue
                     'radial-gradient(circle at 85% 15%, rgba(216, 180, 254, 0.35) 0%, transparent 45%), linear-gradient(155deg, #2e1065 0%, #6b21a8 48%, #170536 100%)', // Royal Purple
                     'radial-gradient(circle at 85% 15%, rgba(251, 191, 36, 0.35) 0%, transparent 45%), linear-gradient(155deg, #451a03 0%, #b45309 48%, #1c0701 100%)', // Amber Gold
@@ -971,7 +971,7 @@
                         @endif
                       </div>
                       <p class="card-desc-snippet">
-                        {{ Str::limit(strip_tags($ormawa->deskripsi ?: ($ormawa->visi ?: 'Lembaga kemahasiswaan aktif di lingkungan Universitas Ibnu Sina.')), 105) }}
+                        {{ Str::limit(strip_tags($ormawa->deskripsi ?: ($ormawa->visi ?: 'Lembaga kemahasiswaan aktif di lingkungan Teknik Informatika.')), 105) }}
                       </p>
 
                       <div class="card-meta-row">
@@ -1028,7 +1028,7 @@
     <div class="d-flex align-items-end justify-content-between mb-5 flex-wrap gap-3" data-aos="fade-up">
       <div>
         <div class="section-label mb-2">Dokumentasi Visual</div>
-        <h2 class="section-title mb-0">Galeri & <em>Kegiatan Universitas Ibnu Sina</em></h2>
+        <h2 class="section-title mb-0">Galeri & <em>Kegiatan Teknik Informatika</em></h2>
       </div>
       <a href="{{ route('homepage.galeri.universitas') }}" class="btn-outline-hero" style="color: var(--uis-purple); border-color: var(--uis-purple); font-size: 13.5px; padding: 10px 22px;">
         <i class="bi bi-images me-1"></i> Lihat Semua Galeri
@@ -1076,10 +1076,10 @@
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label mx-auto">Kisah Sukses Alumni</div>
-      <h2 class="section-title">Jejak Karir <em>Alumni Universitas Ibnu Sina</em></h2>
+      <h2 class="section-title">Jejak Karir <em>Alumni Teknik Informatika</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Lulusan Universitas Ibnu Sina telah berkarier di berbagai perusahaan multinasional, industri manufaktur, sektor logistik maritim, perbankan, instansi BUMN, pemerintahan, serta sukses menjadi wirausahawan mandiri.
+        Lulusan Teknik Informatika telah berkarier di berbagai perusahaan multinasional, industri manufaktur, sektor logistik maritim, perbankan, instansi BUMN, pemerintahan, serta sukses menjadi wirausahawan mandiri.
       </p>
     </div>
 
@@ -1101,22 +1101,22 @@
                 <div class="testi-card h-100 shadow-sm" style="background: #ffffff; border: 1.5px solid #f0e6f5; border-radius: 20px; padding: 28px 24px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s ease;">
                   <div>
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                      <div class="testi-stars m-0" style="color: #FED802; font-size: 15px; display: flex; gap: 3px;">
+                      <div class="testi-stars m-0" style="color: #f9dc4b; font-size: 15px; display: flex; gap: 3px;">
                         @for($s = 1; $s <= 5; $s++)
                           <i class="bi bi-star{{ $s <= $testi->bintang ? '-fill' : '' }}"></i>
                         @endfor
                       </div>
-                      <span class="badge" style="background: #f5edf8; color: #046B26; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 8px;">
+                      <span class="badge" style="background: #f9dc4b; color: #000000; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 8px;">
                         {{ $testi->kategori ?? 'Alumni' }}
                       </span>
                     </div>
                     <p class="testi-text mb-4" style="font-size: 14px; line-height: 1.6; color: #333333; font-style: italic;">"{{ $testi->pesan }}"</p>
                   </div>
                   <div class="testi-author pt-3 border-top d-flex align-items-center gap-3" style="border-color: #f7effa !important;">
-                    <div class="testi-avatar flex-shrink-0" style="width: 44px; height: 44px; border-radius: 50%; background: #046B26; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">{{ $initials ?: 'AL' }}</div>
+                    <div class="testi-avatar flex-shrink-0" style="width: 44px; height: 44px; border-radius: 50%; background: #000000; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">{{ $initials ?: 'AL' }}</div>
                     <div>
                       <div class="testi-name text-dark fw-bold" style="font-size: 14px; line-height: 1.3;">{{ $testi->nama }}</div>
-                      <div class="testi-role text-muted small" style="font-size: 12px;">{{ $testi->pekerjaan ?? 'Alumni Universitas Ibnu Sina' }}</div>
+                      <div class="testi-role text-muted small" style="font-size: 12px;">{{ $testi->pekerjaan ?? 'Alumni Teknik Informatika' }}</div>
                     </div>
                   </div>
                 </div>
@@ -1130,8 +1130,8 @@
       </div>
 
       <!-- Navigation Arrows -->
-      <div class="swiper-button-prev alumni-prev" style="color: #046B26;"></div>
-      <div class="swiper-button-next alumni-next" style="color: #046B26;"></div>
+      <div class="swiper-button-prev alumni-prev" style="color: #000000;"></div>
+      <div class="swiper-button-next alumni-next" style="color: #000000;"></div>
     </div>
 
     <div class="text-center mt-3" data-aos="fade-up">
@@ -1238,14 +1238,14 @@
     transition: color 0.3s ease;
   }
   .uis-cylinder-card.is-active .uis-card-label {
-    color: #fed802;
-    text-shadow: 0 0 10px rgba(254, 216, 2, 0.6);
+    color: #f9dc4b;
+    text-shadow: 0 0 10px rgba(249, 220, 75, 0.6);
   }
   .uis-card-body {
     width: 100%;
     height: 270px;
-    background: linear-gradient(165deg, rgba(6, 94, 33, 0.95) 0%, rgba(3, 56, 20, 0.96) 60%, rgba(2, 32, 11, 0.98) 100%);
-    border: 1.5px solid rgba(254, 216, 2, 0.35);
+    background: linear-gradient(165deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.96) 60%, rgba(0, 0, 0, 0.98) 100%);
+    border: 1.5px solid rgba(249, 220, 75, 0.35);
     border-radius: 16px;
     padding: 10px;
     display: flex;
@@ -1265,8 +1265,8 @@
   }
   .uis-cylinder-card.is-active .uis-card-body,
   .uis-cylinder-card:hover .uis-card-body {
-    border-color: rgba(254, 216, 2, 0.9);
-    box-shadow: 0 0 32px rgba(254, 216, 2, 0.5), 0 18px 40px rgba(0, 0, 0, 0.75);
+    border-color: rgba(249, 220, 75, 0.9);
+    box-shadow: 0 0 32px rgba(249, 220, 75, 0.5), 0 18px 40px rgba(0, 0, 0, 0.75);
   }
   .uis-card-media {
     width: 100%;
@@ -1320,7 +1320,7 @@
       @for($r = 0; $r < $repeats; $r++)
         @foreach($layananTerkaits as $idx => $item)
           @php
-            $itemDesc = trim(strip_tags($item->deskripsi ?? 'Akses layanan digital terpadu Universitas Ibnu Sina'));
+            $itemDesc = trim(strip_tags($item->deskripsi ?? 'Akses layanan digital terpadu Teknik Informatika'));
             $itemNum = $idx + 1;
           @endphp
           <div class="uis-cylinder-card"
@@ -1364,7 +1364,7 @@
         {{ $layananTerkaits->first()->nama ?? 'Layanan Digital' }}
       </h3>
       <p class="mirror-active-desc" id="mirrorActiveDesc">
-        {{ trim(strip_tags($layananTerkaits->first()->deskripsi ?? 'Akses layanan digital terpadu Universitas Ibnu Sina')) }}
+        {{ trim(strip_tags($layananTerkaits->first()->deskripsi ?? 'Akses layanan digital terpadu Teknik Informatika')) }}
       </p>
       <a href="{{ $layananTerkaits->first()->url ?? '#' }}" target="_blank" rel="noopener noreferrer" class="mirror-active-cta" id="mirrorActiveBtn">
         <span>Kunjungi Layanan</span>
@@ -1433,7 +1433,7 @@
         {{-- Header Berita + Search Bar --}}
         <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-3">
           <div class="d-flex align-items-center gap-2">
-            <i class="bi bi-newspaper fs-2" style="color: var(--uis-purple, #046B26);"></i>
+            <i class="bi bi-newspaper fs-2" style="color: var(--uis-purple, #000000);"></i>
             <h2 class="section-heading-uis mb-0">Berita</h2>
           </div>
           <form action="{{ route('homepage') }}#berita" method="GET" class="news-search-pill" id="homepageNewsSearchForm">
@@ -1476,7 +1476,7 @@
         {{-- SECTION PENGUMUMAN --}}
         <div class="mb-4">
           <div class="d-flex align-items-center gap-2 mb-3">
-            <i class="bi bi-megaphone-fill fs-3" style="color: var(--uis-purple, #046B26);"></i>
+            <i class="bi bi-megaphone-fill fs-3" style="color: var(--uis-purple, #000000);"></i>
             <h3 class="section-heading-uis mb-0" style="font-size: 24px;">Pengumuman</h3>
           </div>
 
@@ -1505,7 +1505,7 @@
         {{-- SECTION AGENDA --}}
         <div class="mt-4 pt-3 border-top">
           <div class="d-flex align-items-center gap-2 mb-3">
-            <i class="bi bi-calendar4-week fs-3" style="color: var(--uis-purple, #046B26);"></i>
+            <i class="bi bi-calendar4-week fs-3" style="color: var(--uis-purple, #000000);"></i>
             <h3 class="section-heading-uis mb-0" style="font-size: 24px;">Agenda</h3>
           </div>
 
@@ -1556,7 +1556,7 @@
       <h2 class="section-title">Mitra Kerjasama <em>Industri & Rumah Sakit</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Universitas Ibnu Sina bermitra dengan berbagai sektor industri terkemuka dalam penempatan magang klinis, riset, dan rekrutmen lulusan.
+        Teknik Informatika bermitra dengan berbagai sektor industri terkemuka dalam penempatan magang klinis, riset, dan rekrutmen lulusan.
       </p>
     </div>
   </div>
@@ -1646,7 +1646,7 @@
       <h2 class="section-title">Pertanyaan yang Sering <em>Diajukan</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Jawaban seputar program studi, biaya perkuliahan, fasilitas laboratorium, dan prospek karir di Universitas Ibnu Sina.
+        Jawaban seputar program studi, biaya perkuliahan, fasilitas laboratorium, dan prospek karir di Teknik Informatika.
       </p>
     </div>
 

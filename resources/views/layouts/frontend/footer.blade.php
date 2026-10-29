@@ -1,5 +1,5 @@
 <!-- ═══════════════════════════════════════════════
-     FOOTER — UNIVERSITAS IBNU SINA (UIS)
+     FOOTER — TEKNIK INFORMATIKA
 ═══════════════════════════════════════════════ -->
 <footer class="footer-main">
   <div class="container">
@@ -7,11 +7,11 @@
       <!-- Brand -->
       <div class="col-lg-4">
         <a href="{{ route('homepage') }}" class="footer-logo mb-3 d-inline-flex align-items-center gap-2 text-decoration-none">
-          <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo Universitas Ibnu Sina" style="height: 48px; width: auto; object-fit: contain;">
-          <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: #ffffff; letter-spacing: 0.5px;">UNIVERSITAS IBNU SINA</span>
+          <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo Teknik Informatika" style="height: 48px; width: auto; object-fit: contain;">
+          <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: #f9dc4b; letter-spacing: 0.5px;">TEKNIK INFORMATIKA</span>
         </a>
         <p class="footer-desc">
-          Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda. Berkomitmen menyelenggarakan pendidikan tinggi unggul, bermartabat, bereputasi nasional dan internasional serta berjiwa entrepreneur berbasis Imtaq.
+          Teknik Informatika (UIS) Batam — Kampusnya Profesional Muda. Berkomitmen menyelenggarakan pendidikan tinggi unggul, bermartabat, bereputasi nasional dan internasional serta berjiwa entrepreneur berbasis Imtaq.
         </p>
         <div class="footer-social">
           <a href="https://www.instagram.com/universitasibnusina/" target="_blank" rel="noopener"><i class="bi bi-instagram"></i></a>
@@ -84,7 +84,7 @@
     <div class="footer-divider"></div>
 
     <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 footer-bottom">
-      <span>© {{ date('Y') }} Universitas Ibnu Sina (UIS). All rights reserved.</span>
+      <span>© {{ date('Y') }} Teknik Informatika (UIS). All rights reserved.</span>
       <div class="d-flex gap-3">
         <a href="#">Kebijakan Privasi</a>
         <a href="#">Syarat & Ketentuan</a>

@@ -112,7 +112,7 @@
                                     <option value="S1 Kesehatan dan Keselamatan Kerja" {{ old('prodi', $prestasi->prodi) === 'S1 Kesehatan dan Keselamatan Kerja' ? 'selected' : '' }}>S1 Kesehatan dan Keselamatan Kerja (K3)</option>
                                     <option value="S1 Kesehatan Lingkungan" {{ old('prodi', $prestasi->prodi) === 'S1 Kesehatan Lingkungan' ? 'selected' : '' }}>S1 Kesehatan Lingkungan</option>
                                 </optgroup>
-                                <option value="Universitas Ibnu Sina" {{ old('prodi', $prestasi->prodi) === 'Universitas Ibnu Sina' ? 'selected' : '' }}>Universitas Ibnu Sina (Umum)</option>
+                                <option value="Teknik Informatika" {{ old('prodi', $prestasi->prodi) === 'Teknik Informatika' ? 'selected' : '' }}>Teknik Informatika (Umum)</option>
                             </select>
                             @error('prodi')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -255,7 +255,7 @@
                             <a href="{{ route('prestasi.index') }}" class="btn btn-outline-secondary px-4">
                                 <i class="bi bi-arrow-left me-1"></i> Kembali
                             </a>
-                            <button type="submit" class="btn btn-primary px-4 fw-bold" style="background: #046B26; border-color: #046B26;">
+                            <button type="submit" class="btn btn-primary px-4 fw-bold" style="background: #000000; border-color: #000000;">
                                 <i class="bi bi-check2-circle me-1"></i> Perbarui Data Prestasi
                             </button>
                         </div>

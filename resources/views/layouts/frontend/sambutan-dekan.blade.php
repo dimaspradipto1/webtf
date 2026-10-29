@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Sambutan Rektor — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Sambutan resmi Rektor Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda.')
-@section('meta_keywords', 'sambutan rektor uis, rektor universitas ibnu sina, pimpinan universitas ibnu sina, uis batam')
+@section('title', 'Sambutan Rektor — Teknik Informatika (UIS)')
+@section('meta_description', 'Sambutan resmi Rektor Teknik Informatika (UIS) Batam — Kampusnya Profesional Muda.')
+@section('meta_keywords', 'sambutan rektor uis, rektor teknik informatika, pimpinan teknik informatika, uis batam')
 
 @section('content')
 
@@ -37,7 +37,7 @@
       <div class="col-lg-4" data-aos="fade-right">
         <div class="rektor-portrait-box">
           @if(!empty($sambutanDekan?->foto_dekan))
-            <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="{{ $sambutanDekan->nama_dekan ?? 'Rektor Universitas Ibnu Sina' }}" class="rektor-portrait-img">
+            <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="{{ $sambutanDekan->nama_dekan ?? 'Rektor Teknik Informatika' }}" class="rektor-portrait-img">
           @else
             <div class="rektor-avatar-fallback">
               <i class="bi bi-person-badge"></i>
@@ -47,12 +47,12 @@
 
           <h3 class="rektor-name-title">{{ $sambutanDekan->nama_dekan ?? 'Assoc. Prof. Dr. Ir. Larisang, S.T., M.T., IPU., ASEAN Eng.' }}</h3>
           <span class="rektor-role-badge">
-            <i class="bi bi-award-fill me-1"></i> {{ $sambutanDekan->jabatan_dekan ?? 'Rektor Universitas Ibnu Sina (UIS) Batam' }}
+            <i class="bi bi-award-fill me-1"></i> {{ $sambutanDekan->jabatan_dekan ?? 'Rektor Teknik Informatika (UIS) Batam' }}
           </span>
 
           <div class="pt-3 border-top mt-3 text-muted small text-start">
-            <div class="mb-2"><i class="bi bi-mortarboard me-2" style="color: #046B26;"></i> Universitas Ibnu Sina (UIS) Batam</div>
-            <div><i class="bi bi-geo-alt me-2 text-danger"></i> Kampus Utama Universitas Ibnu Sina</div>
+            <div class="mb-2"><i class="bi bi-mortarboard me-2" style="color: #000000;"></i> Teknik Informatika (UIS) Batam</div>
+            <div><i class="bi bi-geo-alt me-2 text-danger"></i> Kampus Utama Teknik Informatika</div>
           </div>
         </div>
       </div>
@@ -66,8 +66,8 @@
 
         {{-- Kutipan Singkat --}}
         <div class="rektor-quote-callout">
-          <i class="bi bi-quote fs-3 d-block mb-1" style="color: #046B26;"></i>
-          "{{ strip_tags($sambutanDekan->kutipan_singkat ?? ($sambutanDekan->sambutan_dekan ?? 'Selamat datang di Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, inovatif, berjiwa entrepreneur, dan berkarakter Imtaq yang siap memimpin industri di kancah nasional maupun global.')) }}"
+          <i class="bi bi-quote fs-3 d-block mb-1" style="color: #000000;"></i>
+          "{{ strip_tags($sambutanDekan->kutipan_singkat ?? ($sambutanDekan->sambutan_dekan ?? 'Selamat datang di Teknik Informatika (UIS) Batam — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, inovatif, berjiwa entrepreneur, dan berkarakter Imtaq yang siap memimpin industri di kancah nasional maupun global.')) }}"
         </div>
 
         {{-- Isi Lengkap Sambutan --}}
@@ -80,10 +80,10 @@
               Salam sejahtera untuk kita semua.
             </p>
             <p>
-              Puji dan syukur senantiasa kita panjatkan ke hadirat Allah SWT, Tuhan Yang Maha Esa, atas limpahan rahmat dan karunia-Nya sehingga <strong>Universitas Ibnu Sina (UIS) Batam</strong> terus tumbuh dan berkembang menjadi institusi pendidikan tinggi terkemuka di kawasan Kepulauan Riau dan Indonesia.
+              Puji dan syukur senantiasa kita panjatkan ke hadirat Allah SWT, Tuhan Yang Maha Esa, atas limpahan rahmat dan karunia-Nya sehingga <strong>Teknik Informatika (UIS) Batam</strong> terus tumbuh dan berkembang menjadi institusi pendidikan tinggi terkemuka di kawasan Kepulauan Riau dan Indonesia.
             </p>
             <p>
-              Sebagai kampus yang berakar di jantung industri Batam dengan slogan <em>"Kampusnya Profesional Muda"</em>, Universitas Ibnu Sina mengintegrasikan keunggulan akademik di bidang <strong>Fakultas Teknik (Sains & Teknologi)</strong>, <strong>Fakultas Ekonomi dan Bisnis (FEB)</strong>, <strong>Fakultas Ilmu Kesehatan (FIKES)</strong>, dan <strong>Program Pascasarjana</strong> dengan kebutuhan nyata dunia usaha dan industri global.
+              Sebagai kampus yang berakar di jantung industri Batam dengan slogan <em>"Kampusnya Profesional Muda"</em>, Teknik Informatika mengintegrasikan keunggulan akademik di bidang <strong>Fakultas Teknik (Sains & Teknologi)</strong>, <strong>Fakultas Ekonomi dan Bisnis (FEB)</strong>, <strong>Fakultas Ilmu Kesehatan (FIKES)</strong>, dan <strong>Program Pascasarjana</strong> dengan kebutuhan nyata dunia usaha dan industri global.
             </p>
             <p>
               Kepada seluruh civitas akademika, mahasiswa, alumni, dan masyarakat luas, mari bersama-sama melangkah maju mewujudkan visi UIS 2029 sebagai universitas unggul, bermartabat, dan bereputasi internasional berbasis Imtaq.
@@ -93,7 +93,7 @@
             </p>
             <p class="text-muted">
               <strong>{{ $sambutanDekan->nama_dekan ?? 'Assoc. Prof. Dr. Ir. Larisang, S.T., M.T., IPU., ASEAN Eng.' }}</strong><br>
-              <small>{{ $sambutanDekan->jabatan_dekan ?? 'Rektor Universitas Ibnu Sina (UIS) Batam' }}</small>
+              <small>{{ $sambutanDekan->jabatan_dekan ?? 'Rektor Teknik Informatika (UIS) Batam' }}</small>
             </p>
           @endif
         </div>

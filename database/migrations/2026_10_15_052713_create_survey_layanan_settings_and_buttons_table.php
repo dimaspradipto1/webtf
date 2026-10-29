@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('survey_layanan_settings', function (Blueprint $table) {
             $table->id();
             $table->string('judul_hero')->default('Survey Layanan');
-            $table->string('subjudul_hero')->default('Kuesioner Evaluasi Kepuasan & Mutu Pelayanan Humas Universitas Ibnu Sina');
+            $table->string('subjudul_hero')->default('Kuesioner Evaluasi Kepuasan & Mutu Pelayanan Humas Teknik Informatika');
             $table->string('judul_seksi')->default('Survei Evaluasi');
             $table->text('deskripsi_seksi')->nullable();
             $table->boolean('is_active')->default(true);

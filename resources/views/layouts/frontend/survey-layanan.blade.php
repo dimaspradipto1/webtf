@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($setting->judul_hero ?? 'Survey Layanan') . ' — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Kuesioner evaluasi dan survei kepuasan layanan Biro Humas & Informasi Universitas Ibnu Sina (UIS) Batam.')
+@section('title', ($setting->judul_hero ?? 'Survey Layanan') . ' — Teknik Informatika (UIS)')
+@section('meta_description', 'Kuesioner evaluasi dan survei kepuasan layanan Biro Humas & Informasi Teknik Informatika (UIS) Batam.')
 @section('meta_keywords', 'survei layanan uis, survei kepuasan humas uis, kuesioner evaluasi uis batam')
 
 @section('content')
@@ -18,14 +18,14 @@
   .divider-line-gold {
     width: 48px;
     height: 3px;
-    background: #fab005;
+    background: #f9dc4b;
     border-radius: 4px;
     margin: 10px auto 16px auto;
   }
 
   /* ── Section Title ── */
   .survey-heading-main {
-    color: #1b5e20;
+    color: #000000;
     font-size: 32px;
     font-weight: 800;
     letter-spacing: -0.5px;
@@ -49,16 +49,16 @@
     overflow: hidden;
   }
 
-  /* Efek Hover: Berubah menjadi Kuning Emas (#FED802) seperti di Screenshot */
+  /* Efek Hover: Berubah menjadi Kuning Emas (#f9dc4b) seperti di Screenshot */
   .survey-card-box:hover {
-    background: #FED802 !important;
-    border-color: #FED802 !important;
+    background: #f9dc4b !important;
+    border-color: #f9dc4b !important;
     transform: translateY(-6px);
-    box-shadow: 0 16px 36px rgba(254, 216, 2, 0.42), 0 6px 14px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 16px 36px rgba(249, 220, 75, 0.42), 0 6px 14px rgba(0, 0, 0, 0.06);
   }
 
   .survey-card-title {
-    color: #1b5e20;
+    color: #000000;
     font-size: 18px;
     font-weight: 800;
     line-height: 1.4;
@@ -68,13 +68,13 @@
   }
 
   .survey-card-box:hover .survey-card-title {
-    color: #043615 !important;
+    color: #000000 !important;
     font-weight: 850;
   }
 
   /* ── Tombol Isi Survei ── */
   .btn-survey-action {
-    background-color: #046B26;
+    background-color: #000000;
     color: #ffffff !important;
     font-size: 14px;
     font-weight: 750;
@@ -85,24 +85,24 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    border: 1.5px solid #046B26;
+    border: 1.5px solid #000000;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     width: fit-content;
-    box-shadow: 0 4px 10px rgba(4, 107, 38, 0.25);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   }
 
   /* Saat Card di-hover: Tombol lebih kontras & elegan */
   .survey-card-box:hover .btn-survey-action {
-    background-color: #034217 !important;
-    border-color: #034217 !important;
-    color: #FED802 !important;
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+    color: #f9dc4b !important;
     transform: scale(1.04);
     box-shadow: 0 6px 16px rgba(3, 66, 23, 0.35);
   }
 
   .btn-survey-action:hover {
-    background-color: #022e10 !important;
-    border-color: #022e10 !important;
+    background-color: #000000 !important;
+    border-color: #000000 !important;
     color: #ffffff !important;
   }
 
@@ -119,7 +119,7 @@
 <div class="survey-page pb-5">
 
   {{-- HERO BANNER (Konsisten dengan Layanan Humas Lainnya) --}}
-  <div style="background: linear-gradient(135deg, #032e12 0%, #044b1c 60%, #064e3b 100%); color: #ffffff; padding: 50px 0 42px 0; position: relative;">
+  <div style="background: linear-gradient(135deg, #000000 0%, #000000 60%, #000000 100%); color: #ffffff; padding: 50px 0 42px 0; position: relative;">
     <div class="container text-center position-relative" style="z-index: 1;">
       <nav aria-label="breadcrumb" class="mb-3">
         <ol class="breadcrumb justify-content-center mb-0" style="font-size: 13px;">
@@ -134,7 +134,7 @@
       </h1>
       <div class="divider-line-gold"></div>
       <p class="text-white-50 mx-auto mb-0" style="max-width: 680px; font-size: 14.5px; line-height: 1.6;">
-        {{ $setting->subjudul_hero ?? 'Kuesioner Evaluasi Kepuasan & Mutu Pelayanan Humas Universitas Ibnu Sina' }}
+        {{ $setting->subjudul_hero ?? 'Kuesioner Evaluasi Kepuasan & Mutu Pelayanan Humas Teknik Informatika' }}
       </p>
     </div>
   </div>

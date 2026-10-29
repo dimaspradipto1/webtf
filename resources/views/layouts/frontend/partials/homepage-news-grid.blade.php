@@ -3,7 +3,7 @@
   <div class="col-12 mb-3">
     <div class="d-flex align-items-center justify-content-between p-2 px-3 rounded-pill bg-light border">
       <span class="small text-muted">
-        <i class="bi bi-search me-1" style="color: var(--uis-purple, #046B26);"></i> Hasil pencarian: <strong>"{{ $search }}"</strong> ({{ $latestNews->total() }} berita ditemukan)
+        <i class="bi bi-search me-1" style="color: var(--uis-purple, #000000);"></i> Hasil pencarian: <strong>"{{ $search }}"</strong> ({{ $latestNews->total() }} berita ditemukan)
       </span>
       <button type="button" class="btn btn-sm btn-link text-danger text-decoration-none p-0 fw-semibold" id="btnResetNewsSearch" style="font-size: 12px;">
         <i class="bi bi-x-circle me-1"></i> Reset

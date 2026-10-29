@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($setting->judul_hero ?? 'Pendampingan Acara') . ' — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Layanan pendampingan acara, protokoler resmi, dan konsultasi kegiatan kampus Universitas Ibnu Sina (UIS) Batam. Panduan SOP, perizinan, dan suksesi event.')
+@section('title', ($setting->judul_hero ?? 'Pendampingan Acara') . ' — Teknik Informatika (UIS)')
+@section('meta_description', 'Layanan pendampingan acara, protokoler resmi, dan konsultasi kegiatan kampus Teknik Informatika (UIS) Batam. Panduan SOP, perizinan, dan suksesi event.')
 @section('meta_keywords', 'pendampingan acara uis, protokoler uis, sop acara uis batam, humas uis event, konsultasi protokol uis')
 
 @section('content')
@@ -18,7 +18,7 @@
   .divider-line-gold {
     width: 48px;
     height: 3px;
-    background: #fab005;
+    background: #f9dc4b;
     border-radius: 4px;
     margin: 10px auto 16px auto;
   }
@@ -40,16 +40,16 @@
     left: 0;
     width: 5px;
     height: 100%;
-    background: linear-gradient(180deg, #046B26 0%, #fab005 100%);
+    background: linear-gradient(180deg, #000000 0%, #f9dc4b 100%);
   }
 
   .event-salutation-badge {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    background: #e8f5e9;
-    color: #046B26;
-    border: 1px solid #c8e6c9;
+    background: #f9dc4b;
+    color: #000000;
+    border: 1px solid #f9dc4b;
     font-size: 12px;
     font-weight: 700;
     padding: 5px 14px;
@@ -66,7 +66,7 @@
     margin-bottom: 14px;
   }
   .event-salutation-title span {
-    color: #046B26;
+    color: #000000;
   }
 
   .event-desc-lead {
@@ -121,15 +121,15 @@
     left: 14px;
     top: 50%;
     transform: translateY(-50%);
-    color: #046B26;
+    color: #000000;
     font-size: 18px;
     font-weight: bold;
   }
   .event-rendered-content ul li:hover {
     background: #ffffff;
-    border-color: #046B26;
+    border-color: #000000;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(4, 107, 38, 0.08);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
   }
   .event-rendered-content ol {
     padding-left: 1.25rem;
@@ -155,15 +155,15 @@
   }
   .assistance-item:hover {
     background: #ffffff;
-    border-color: #046B26;
+    border-color: #000000;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(4, 107, 38, 0.08);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
   }
   .assistance-icon-wrap {
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background: #046B26;
+    background: #000000;
     color: #ffffff;
     display: flex;
     align-items: center;
@@ -180,11 +180,11 @@
 
   /* ── 3. High-Impact CTA Box (Right Column) ── */
   .cta-showcase-box {
-    background: linear-gradient(145deg, #064e3b 0%, #046B26 60%, #03521d 100%);
+    background: linear-gradient(145deg, #000000 0%, #000000 60%, #000000 100%);
     border-radius: 18px;
     padding: 28px 24px;
     color: #ffffff;
-    box-shadow: 0 16px 36px rgba(4, 107, 38, 0.22);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
     position: relative;
     overflow: hidden;
     height: auto;
@@ -196,7 +196,7 @@
     right: -50px;
     width: 140px;
     height: 140px;
-    background: radial-gradient(circle, rgba(254, 216, 2, 0.2) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(249, 220, 75, 0.2) 0%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
   }
@@ -208,7 +208,7 @@
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(8px);
-    color: #fed802;
+    color: #f9dc4b;
     font-size: 11px;
     font-weight: 800;
     text-transform: uppercase;
@@ -243,8 +243,8 @@
 
   /* Main Action Button (Ajukan Permohonan) */
   .btn-ajukan-utama {
-    background: #fed802;
-    color: #046B26;
+    background: #f9dc4b;
+    color: #000000;
     font-weight: 800;
     font-size: 14px;
     padding: 12px 18px;
@@ -255,13 +255,13 @@
     justify-content: center;
     gap: 8px;
     width: 100%;
-    border: 2px solid #fed802;
+    border: 2px solid #f9dc4b;
     transition: all 0.25s ease;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
   }
   .btn-ajukan-utama:hover {
     background: #ffffff;
-    color: #046B26;
+    color: #000000;
     border-color: #ffffff;
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -287,7 +287,7 @@
     margin-bottom: 0;
   }
   .cta-check-item i {
-    color: #fed802;
+    color: #f9dc4b;
     font-size: 15px;
   }
 
@@ -305,7 +305,7 @@
     transition: color 0.2s ease;
   }
   .cta-hotline-item a:hover {
-    color: #fed802;
+    color: #f9dc4b;
     text-decoration: underline;
   }
 </style>
@@ -349,7 +349,7 @@
       <div class="divider-line-gold"></div>
 
       <p class="text-muted mx-auto mb-0" style="max-width: 760px; font-size: 14.5px; line-height: 1.65;">
-        {!! !empty($item->deskripsi) ? strip_tags($item->deskripsi) : 'Layanan konsultasi protokoler, perancangan tata letak acara, penyusunan rundown, serta pendampingan langsung oleh Tim Humas & Protokoler Universitas Ibnu Sina (UIS).' !!}
+        {!! !empty($item->deskripsi) ? strip_tags($item->deskripsi) : 'Layanan konsultasi protokoler, perancangan tata letak acara, penyusunan rundown, serta pendampingan langsung oleh Tim Humas & Protokoler Teknik Informatika (UIS).' !!}
       </p>
     </div>
 
@@ -366,7 +366,7 @@
           </div>
 
           <h3 class="event-salutation-title">
-            {{ $setting->sapaan ?? 'Halo, Civitas Akademika Universitas Ibnu Sina dan Mitra Eksternal!' }}
+            {{ $setting->sapaan ?? 'Halo, Civitas Akademika Teknik Informatika dan Mitra Eksternal!' }}
           </h3>
 
           @if(!empty($setting->konten))
@@ -375,7 +375,7 @@
             </div>
           @else
             <p class="event-desc-lead">
-              {!! nl2br(e($setting->paragraf_1 ?? 'Kami hadir untuk mendukung kesuksesan acara dan kegiatan Anda melalui layanan konsultasi yang profesional, terstruktur, dan sesuai dengan Standar Operasional Prosedur (SOP) Universitas Ibnu Sina.')) !!}
+              {!! nl2br(e($setting->paragraf_1 ?? 'Kami hadir untuk mendukung kesuksesan acara dan kegiatan Anda melalui layanan konsultasi yang profesional, terstruktur, dan sesuai dengan Standar Operasional Prosedur (SOP) Teknik Informatika.')) !!}
             </p>
 
             <p class="fw-bold text-dark mb-3" style="font-size: 15px;">

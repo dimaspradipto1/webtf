@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('hero_humas', function (Blueprint $table) {
             $table->id();
             $table->string('judul')->nullable()->default('Selamat Datang');
-            $table->string('subjudul')->nullable()->default('di Biro Hubungan Masyarakat dan Protokoler Universitas Ibnu Sina');
+            $table->string('subjudul')->nullable()->default('di Biro Hubungan Masyarakat dan Protokoler Teknik Informatika');
             $table->string('badge_text')->nullable()->default('Layanan');
             $table->string('background_image')->nullable();
             $table->string('pill_text_1')->nullable()->default('Informasi Khusus PMB TA 2026/2027');

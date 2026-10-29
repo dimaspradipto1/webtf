@@ -22,7 +22,7 @@ class LayananTerkaitController extends Controller
             ['id' => 1],
             [
                 'judul_seksi' => 'LAYANAN TERKAIT',
-                'subjudul_seksi' => 'Akses cepat ke berbagai sistem dan layanan digital Fakultas Ilmu Kesehatan Universitas Ibnu Sina untuk mendukung kegiatan akademik, administrasi, dan kemahasiswaan.',
+                'subjudul_seksi' => 'Akses cepat ke berbagai sistem dan layanan digital Fakultas Ilmu Kesehatan Teknik Informatika untuk mendukung kegiatan akademik, administrasi, dan kemahasiswaan.',
             ]
         );
 

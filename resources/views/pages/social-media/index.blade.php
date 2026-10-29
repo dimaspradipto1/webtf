@@ -63,11 +63,11 @@
 @if($kategori !== 'humas')
     {{-- 1. Pengaturan Header Seksi Frontend (Judul, Garis Divider Share, & Teks Kutipan) --}}
     <div class="card shadow-sm border-0 mb-4" id="section-setting-card" style="border-radius: 12px;">
-        <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+        <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
             <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
-                <i class="bi bi-pencil-square me-2" style="color: #046B26;"></i>Pengaturan Judul & Teks Kutipan Seksi Media Sosial (Beranda Utama)
+                <i class="bi bi-pencil-square me-2" style="color: #000000;"></i>Pengaturan Judul & Teks Kutipan Seksi Media Sosial (Beranda Utama)
             </h5>
-            <span class="badge" style="background-color: #046B26; color: #ffffff; font-size: 11.5px; font-weight: 700; padding: 6px 12px; border-radius: 6px;">
+            <span class="badge" style="background-color: #000000; color: #ffffff; font-size: 11.5px; font-weight: 700; padding: 6px 12px; border-radius: 6px;">
                 <i class="bi bi-globe2 me-1"></i>Tampil di Beranda Utama
             </span>
         </div>
@@ -140,7 +140,7 @@
                 </div>
 
                 <div class="col-12 text-end pt-3">
-                    <button type="submit" class="btn fw-semibold shadow-sm px-4 py-2" style="background-color: #046B26; color: #ffffff; border: none; border-radius: 8px;">
+                    <button type="submit" class="btn fw-semibold shadow-sm px-4 py-2" style="background-color: #000000; color: #ffffff; border: none; border-radius: 8px;">
                         <i class="bi bi-floppy-fill me-1"></i> Simpan Perubahan Teks Seksi
                     </button>
                 </div>
@@ -164,9 +164,9 @@
 
 {{-- 2. Daftar Logo & Link Media Sosial --}}
 <div class="card shadow-sm border-0" style="border-radius: 12px;">
-    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-top: 3px solid {{ $kategori === 'humas' ? '#6366f1' : '#046B26' }}; border-radius: 12px 12px 0 0;">
+    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-top: 3px solid {{ $kategori === 'humas' ? '#6366f1' : '#000000' }}; border-radius: 12px 12px 0 0;">
         <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
-            <i class="bi bi-share-fill me-2" style="color: {{ $kategori === 'humas' ? '#6366f1' : '#046B26' }};"></i>
+            <i class="bi bi-share-fill me-2" style="color: {{ $kategori === 'humas' ? '#6366f1' : '#000000' }};"></i>
             Daftar Link & Logo {{ $kategori === 'humas' ? 'Media Sosial Humas' : ($kategori === 'universitas' ? 'Media Sosial Universitas' : 'Media Sosial') }}
         </h5>
         <div class="d-flex align-items-center gap-2">
@@ -177,7 +177,7 @@
             @endif
             <a href="{{ route('social-media.create', ['kategori' => $kategori ?? 'universitas']) }}" 
                class="btn fw-semibold shadow-sm btn-sm" 
-               style="background-color: {{ $kategori === 'humas' ? '#6366f1' : '#046B26' }}; color: #ffffff; border: none; padding: 7px 18px; border-radius: 8px;">
+               style="background-color: {{ $kategori === 'humas' ? '#6366f1' : '#000000' }}; color: #ffffff; border: none; padding: 7px 18px; border-radius: 8px;">
                 <i class="bi bi-plus-lg me-1"></i> Tambah {{ $kategori === 'humas' ? 'Medsos Humas' : ($kategori === 'universitas' ? 'Medsos Universitas' : 'Media Sosial') }}
             </a>
         </div>

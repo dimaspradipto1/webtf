@@ -18,28 +18,28 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <title>@yield('title', 'Universitas Ibnu Sina (UIS) | Unggul, Profesional & Berintegritas')</title>
-  <meta name="description" content="@yield('meta_description', 'Portal Resmi Universitas Ibnu Sina (UIS) — Menyelenggarakan Pendidikan Tinggi Berkualitas, Riset Terapan, dan Pengabdian Masyarakat Berdaya Saing Global.')">
-  <meta name="keywords" content="@yield('meta_keywords', 'universitas ibnu sina, uis, pmb uis, pendaftaran uis, kampus batam, perguruan tinggi batam, pendidikan tinggi, riset terpadu')">
-  <meta name="author" content="@yield('meta_author', 'Universitas Ibnu Sina')">
+  <title>@yield('title', 'Teknik Informatika (UIS) | Unggul, Profesional & Berintegritas')</title>
+  <meta name="description" content="@yield('meta_description', 'Portal Resmi Teknik Informatika (UIS) — Menyelenggarakan Pendidikan Tinggi Berkualitas, Riset Terapan, dan Pengabdian Masyarakat Berdaya Saing Global.')">
+  <meta name="keywords" content="@yield('meta_keywords', 'teknik informatika, uis, pmb uis, pendaftaran uis, kampus batam, perguruan tinggi batam, pendidikan tinggi, riset terpadu')">
+  <meta name="author" content="@yield('meta_author', 'Teknik Informatika')">
 
   <!-- Open Graph / Facebook / WhatsApp / Telegram Preview -->
   <meta property="og:type" content="@yield('og_type', 'website')">
   <meta property="og:url" content="{{ url()->current() }}">
-  <meta property="og:title" content="@yield('og_title', View::yieldContent('title', 'Universitas Ibnu Sina (UIS) | Unggul, Profesional & Berintegritas'))">
-  <meta property="og:description" content="@yield('og_description', View::yieldContent('meta_description', 'Portal Resmi Universitas Ibnu Sina (UIS) — Menyelenggarakan Pendidikan Tinggi Berkualitas, Riset Terapan, dan Pengabdian Masyarakat Berdaya Saing Global.'))">
+  <meta property="og:title" content="@yield('og_title', View::yieldContent('title', 'Teknik Informatika (UIS) | Unggul, Profesional & Berintegritas'))">
+  <meta property="og:description" content="@yield('og_description', View::yieldContent('meta_description', 'Portal Resmi Teknik Informatika (UIS) — Menyelenggarakan Pendidikan Tinggi Berkualitas, Riset Terapan, dan Pengabdian Masyarakat Berdaya Saing Global.'))">
   <meta property="og:image" content="@yield('og_image', asset('assets/img/logouis.png'))">
   <meta property="og:image:secure_url" content="@yield('og_image', asset('assets/img/logouis.png'))">
   <meta property="og:image:width" content="@yield('og_image_width', '1200')">
   <meta property="og:image:height" content="@yield('og_image_height', '630')">
   <meta property="og:image:type" content="@yield('og_image_type', 'image/jpeg')">
-  <meta property="og:site_name" content="Universitas Ibnu Sina">
+  <meta property="og:site_name" content="Teknik Informatika">
 
   <!-- Twitter / X Cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="{{ url()->current() }}">
-  <meta name="twitter:title" content="@yield('og_title', View::yieldContent('title', 'Universitas Ibnu Sina (UIS) | Unggul, Profesional & Berintegritas'))">
-  <meta name="twitter:description" content="@yield('og_description', View::yieldContent('meta_description', 'Portal Resmi Universitas Ibnu Sina (UIS) — Menyelenggarakan Pendidikan Tinggi Berkualitas, Riset Terapan, dan Pengabdian Masyarakat Berdaya Saing Global.'))">
+  <meta name="twitter:title" content="@yield('og_title', View::yieldContent('title', 'Teknik Informatika (UIS) | Unggul, Profesional & Berintegritas'))">
+  <meta name="twitter:description" content="@yield('og_description', View::yieldContent('meta_description', 'Portal Resmi Teknik Informatika (UIS) — Menyelenggarakan Pendidikan Tinggi Berkualitas, Riset Terapan, dan Pengabdian Masyarakat Berdaya Saing Global.'))">
   <meta name="twitter:image" content="@yield('og_image', asset('assets/img/logouis.png'))">
 
   <!-- Favicon -->

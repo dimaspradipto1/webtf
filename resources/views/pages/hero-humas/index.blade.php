@@ -66,7 +66,7 @@
 
                             <div class="row g-3 align-items-center">
                                 <div class="col-md-5 text-center">
-                                    <div class="position-relative overflow-hidden rounded-4 border shadow-sm" style="height: 180px; background: #032e12;">
+                                    <div class="position-relative overflow-hidden rounded-4 border shadow-sm" style="height: 180px; background: #000000;">
                                         @php
                                             $bgUrl = $hero->background_image_url ?? asset('frontend/img/gedung-uis.jpg');
                                         @endphp
@@ -154,7 +154,7 @@
                                        name="subjudul" 
                                        class="form-control @error('subjudul') is-invalid @enderror" 
                                        value="{{ old('subjudul', $hero->subjudul) }}" 
-                                       placeholder="di Biro Hubungan Masyarakat dan Protokoler Universitas Ibnu Sina">
+                                       placeholder="di Biro Hubungan Masyarakat dan Protokoler Teknik Informatika">
                                 @error('subjudul')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

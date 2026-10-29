@@ -30,11 +30,11 @@
 
 {{-- 1. Pengaturan Header & Editorial Seksi Organisasi Mahasiswa --}}
 <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
-    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
         <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
-            <i class="bi bi-pencil-square me-2" style="color: #046B26;"></i>Pengaturan Judul & Deskripsi Seksi Homepage (Organisasi Mahasiswa)
+            <i class="bi bi-pencil-square me-2" style="color: #000000;"></i>Pengaturan Judul & Deskripsi Seksi Homepage (Organisasi Mahasiswa)
         </h5>
-        <span class="badge" style="background-color: #046B26; color: #ffffff; font-size: 11.5px; font-weight: 700; padding: 6px 12px; border-radius: 6px;">Frontend Section Header</span>
+        <span class="badge" style="background-color: #000000; color: #ffffff; font-size: 11.5px; font-weight: 700; padding: 6px 12px; border-radius: 6px;">Frontend Section Header</span>
     </div>
     <div class="card-body pt-3 pb-4">
         <form action="{{ route('organisasi-mahasiswa.update-setting') }}" method="POST">
@@ -153,7 +153,7 @@
                 </div>
 
                 <div class="col-12 text-end pt-2">
-                    <button type="submit" class="btn fw-semibold shadow-sm text-white" style="background-color: #046B26; border: none; padding: 8px 22px; border-radius: 8px;">
+                    <button type="submit" class="btn fw-semibold shadow-sm text-white" style="background-color: #000000; border: none; padding: 8px 22px; border-radius: 8px;">
                         <i class="bi bi-save me-1"></i> Simpan Pengaturan
                     </button>
                 </div>

@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($setting->judul_hero ?? 'Permintaan Rilis') . ' — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Panduan dan layanan pengajuan rilis berita resmi Universitas Ibnu Sina (UIS) Batam. Ketentuan 5W+1H, minimal 250 kata, foto resolusi tinggi, dan alur publikasi.')
+@section('title', ($setting->judul_hero ?? 'Permintaan Rilis') . ' — Teknik Informatika (UIS)')
+@section('meta_description', 'Panduan dan layanan pengajuan rilis berita resmi Teknik Informatika (UIS) Batam. Ketentuan 5W+1H, minimal 250 kata, foto resolusi tinggi, dan alur publikasi.')
 @section('meta_keywords', 'permintaan rilis uis, siaran pers uis, berita humas uis, panduan rilis uis batam')
 
 @section('content')
@@ -17,7 +17,7 @@
   .divider-line-gold {
     width: 60px;
     height: 4px;
-    background: #fab005;
+    background: #f9dc4b;
     border-radius: 4px;
     margin: 14px auto 24px auto;
   }
@@ -37,8 +37,8 @@
   }
   .cta-action-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 16px 32px rgba(4, 107, 38, 0.1);
-    border-color: #0b6828;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+    border-color: #000000;
   }
   .cta-icon-badge {
     width: 58px;
@@ -62,16 +62,16 @@
     box-shadow: 0 2px 10px rgba(0,0,0,0.02);
   }
   .rule-card:hover {
-    border-color: #0b6828;
+    border-color: #000000;
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(11, 104, 40, 0.08);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
   }
   .rule-number-badge {
     width: 36px;
     height: 36px;
     border-radius: 10px;
-    background: #e8f5e9;
-    color: #0b6828;
+    background: #f9dc4b;
+    color: #000000;
     font-weight: 800;
     font-size: 16px;
     display: flex;
@@ -107,14 +107,14 @@
   }
   .step-flow-card:hover {
     transform: translateY(-4px);
-    border-color: #0b6828;
-    box-shadow: 0 10px 24px rgba(11, 104, 40, 0.08);
+    border-color: #000000;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
   }
   .step-num-circle {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: #0b6828;
+    background: #000000;
     color: #ffffff;
     font-weight: 800;
     font-size: 18px;
@@ -122,13 +122,13 @@
     align-items: center;
     justify-content: center;
     margin: 0 auto 16px auto;
-    box-shadow: 0 6px 14px rgba(11, 104, 40, 0.25);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
   }
 
   /* Info Note Box */
   .note-alert-box {
-    background: #f0fdf4;
-    border-left: 5px solid #0b6828;
+    background: #f9dc4b;
+    border-left: 5px solid #000000;
     border-radius: 0 12px 12px 0;
     padding: 20px 24px;
   }
@@ -166,14 +166,14 @@
         {{ $setting->badge_label ?? 'LAYANAN PUBLIKASI & SIARAN PERS' }}
       </div>
       
-      <h2 class="fw-bold mb-0" style="color: #1e3a29; font-size: 32px; letter-spacing: -0.5px; font-family: 'Plus Jakarta Sans', sans-serif;">
+      <h2 class="fw-bold mb-0" style="color: #000000; font-size: 32px; letter-spacing: -0.5px; font-family: 'Plus Jakarta Sans', sans-serif;">
         {{ $setting->judul_seksi ?? 'Ketentuan Permintaan Rilis Berita' }}
       </h2>
       
       <div class="divider-line-gold"></div>
 
       <div class="text-muted mx-auto mb-0" style="max-width: 860px; font-size: 15px; line-height: 1.8;">
-        {!! $setting->deskripsi_seksi ?? 'Layanan ini disediakan oleh Biro Humas Universitas Ibnu Sina (UIS) guna memfasilitasi sivitas akademika dalam mengajukan rilis berita kegiatan atau siaran pers untuk dipublikasikan pada portal berita resmi uis.ac.id dan media massa mitra universitas.' !!}
+        {!! $setting->deskripsi_seksi ?? 'Layanan ini disediakan oleh Biro Humas Teknik Informatika (UIS) guna memfasilitasi sivitas akademika dalam mengajukan rilis berita kegiatan atau siaran pers untuk dipublikasikan pada portal berita resmi uis.ac.id dan media massa mitra universitas.' !!}
       </div>
     </div>
 
@@ -198,11 +198,11 @@
               $waRilisApplyText = rawurlencode('Halo Tim Humas UIS, saya ingin mengajukan permohonan penerbitan rilis berita / siaran pers.');
             @endphp
             @if(!$isInvalidRilisForm)
-              <a href="{{ $rilisForm }}" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100 fw-bold py-2 shadow-sm" style="background-color: #0b6828; border-color: #0b6828; border-radius: 8px;">
+              <a href="{{ $rilisForm }}" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100 fw-bold py-2 shadow-sm" style="background-color: #000000; border-color: #000000; border-radius: 8px;">
                 <i class="bi bi-box-arrow-up-right me-1"></i> Isi Formulir Rilis
               </a>
             @else
-              <a href="https://wa.me/{{ $cleanWa }}?text={{ $waRilisApplyText }}" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100 fw-bold py-2 shadow-sm" style="background-color: #0b6828; border-color: #0b6828; border-radius: 8px;">
+              <a href="https://wa.me/{{ $cleanWa }}?text={{ $waRilisApplyText }}" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100 fw-bold py-2 shadow-sm" style="background-color: #000000; border-color: #000000; border-radius: 8px;">
                 <i class="bi bi-whatsapp me-1"></i> Ajukan via WhatsApp
               </a>
             @endif
@@ -227,7 +227,7 @@
               $waTarget = !empty($cleanWa) ? $cleanWa : '6281234567890';
               $waMessage = rawurlencode('Halo Tim Humas UIS, saya ingin mengajukan draf berita/siaran pers acara untuk dipublikasikan.');
             @endphp
-            <a href="https://wa.me/{{ $waTarget }}?text={{ $waMessage }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-success w-100 fw-bold py-2" style="border-radius: 8px; color: #0b6828; border-color: #0b6828;">
+            <a href="https://wa.me/{{ $waTarget }}?text={{ $waMessage }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-success w-100 fw-bold py-2" style="border-radius: 8px; color: #000000; border-color: #000000;">
               <i class="bi bi-chat-dots-fill me-1"></i> Chat WhatsApp Humas
             </a>
           </div>
@@ -270,7 +270,7 @@
     ═══════════════════════════════════════════════ --}}
     <div id="ketentuan-naskah" class="mb-5" data-aos="fade-up">
       <div class="d-flex align-items-center gap-3 mb-4">
-        <div class="p-2 rounded-3 bg-success text-white d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background-color: #0b6828 !important;">
+        <div class="p-2 rounded-3 bg-success text-white d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background-color: #000000 !important;">
           <i class="bi bi-pencil-square fs-5"></i>
         </div>
         <div>
@@ -330,7 +330,7 @@
             <div class="rule-number-badge">5</div>
             <div class="rule-title">Judul SPO & Penjelasan Singkatan</div>
             <p class="rule-desc">
-              Judul berita harus memuat unsur Subjek, Predikat, dan Objek (SPO). Setiap singkatan wajib dijelaskan kepanjangannya pada penyebutan pertama (contoh: <em>UIS dijabarkan Universitas Ibnu Sina</em>).
+              Judul berita harus memuat unsur Subjek, Predikat, dan Objek (SPO). Setiap singkatan wajib dijelaskan kepanjangannya pada penyebutan pertama (contoh: <em>UIS dijabarkan Teknik Informatika</em>).
             </p>
           </div>
         </div>
@@ -353,7 +353,7 @@
     ═══════════════════════════════════════════════ --}}
     <div class="mb-5" data-aos="fade-up">
       <div class="d-flex align-items-center gap-3 mb-4">
-        <div class="p-2 rounded-3 bg-success text-white d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background-color: #0b6828 !important;">
+        <div class="p-2 rounded-3 bg-success text-white d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background-color: #000000 !important;">
           <i class="bi bi-camera-fill fs-5"></i>
         </div>
         <div>
@@ -412,7 +412,7 @@
     ═══════════════════════════════════════════════ --}}
     <div class="mb-5" data-aos="fade-up">
       <div class="d-flex align-items-center gap-3 mb-4">
-        <div class="p-2 rounded-3 bg-success text-white d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background-color: #0b6828 !important;">
+        <div class="p-2 rounded-3 bg-success text-white d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background-color: #000000 !important;">
           <i class="bi bi-diagram-3-fill fs-5"></i>
         </div>
         <div>
@@ -483,7 +483,7 @@
         <div class="col-lg-8 col-12">
           <h6 class="fw-bold text-dark mb-1">Butuh bantuan atau koordinasi peliputan langsung?</h6>
           <p class="text-muted small mb-0">
-            Hubungi Biro Humas & Protokoler Universitas Ibnu Sina:
+            Hubungi Biro Humas & Protokoler Teknik Informatika:
             <strong class="text-dark ms-1"><i class="bi bi-envelope me-1"></i>{{ $setting->email_tujuan ?? 'info@uis.ac.id' }}</strong>
             <span class="mx-2">•</span>
             <strong class="text-dark"><i class="bi bi-telephone me-1"></i>{{ $setting->no_wa ?? '07784083113' }}</strong>

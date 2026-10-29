@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Organisasi & Kegiatan Mahasiswa — Universitas Ibnu Sina')
-@section('meta_description', 'Daftar Lembaga, Organisasi Mahasiswa (BEM, HIMA, UKM, Komunitas), serta wadah kreativitas dan kegiatan mahasiswa UIS Universitas Ibnu Sina.')
+@section('title', 'Organisasi & Kegiatan Mahasiswa — Teknik Informatika')
+@section('meta_description', 'Daftar Lembaga, Organisasi Mahasiswa (BEM, HIMA, UKM, Komunitas), serta wadah kreativitas dan kegiatan mahasiswa UIS Teknik Informatika.')
 
 @section('content')
 <!-- HERO SECTION -->
@@ -11,13 +11,13 @@
       <div class="col-lg-8" data-aos="fade-up">
         <div class="ormawa-hero-badge">
           <i class="bi bi-people-fill"></i>
-          <span>Kemahasiswaan Universitas Ibnu Sina</span>
+          <span>Kemahasiswaan Teknik Informatika</span>
         </div>
         <h1 class="fw-bold mb-3 text-white" style="font-size: clamp(26px, 3.5vw, 42px); line-height: 1.2;">
           Organisasi & Kegiatan Mahasiswa
         </h1>
         <p class="text-white-50 mb-0" style="font-size: 16px; max-width: 650px;">
-          Wadah pengembangan potensi, kepemimpinan, riset keilmuan, kreativitas, serta kepedulian sosial mahasiswa Universitas Ibnu Sina.
+          Wadah pengembangan potensi, kepemimpinan, riset keilmuan, kreativitas, serta kepedulian sosial mahasiswa Teknik Informatika.
         </p>
       </div>
       <div class="col-lg-4 text-lg-end mt-4 mt-lg-0" data-aos="fade-left">
@@ -101,7 +101,7 @@
                 @elseif(!empty($item->logo))
                   <img src="{{ asset('storage/' . $item->logo) }}" alt="{{ $item->nama_organisasi }}" class="ormawa-img-top">
                 @else
-                  <div class="w-100 h-100 d-flex align-items-center justify-content-center text-white fw-bold" style="background: #032e12; font-size: 28px;">
+                  <div class="w-100 h-100 d-flex align-items-center justify-content-center text-white fw-bold" style="background: #000000; font-size: 28px;">
                     {{ strtoupper(substr($item->singkatan ?: $item->nama_organisasi, 0, 2)) }}
                   </div>
                 @endif
@@ -132,7 +132,7 @@
                 </div>
 
                 <div class="ormawa-desc">
-                  {{ strip_tags($item->deskripsi ?: ($item->visi ?: 'Lembaga kemahasiswaan Universitas Ibnu Sina.')) }}
+                  {{ strip_tags($item->deskripsi ?: ($item->visi ?: 'Lembaga kemahasiswaan Teknik Informatika.')) }}
                 </div>
               </div>
 

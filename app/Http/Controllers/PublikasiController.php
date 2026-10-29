@@ -19,7 +19,7 @@ class PublikasiController extends Controller
                     'icon' => 'bi-file-earmark-medical',
                     'judul' => 'Penelitian Dosen',
                     'link' => 'https://lppm.uis.ac.id/',
-                    'deskripsi' => 'Portal LPPM Universitas Ibnu Sina',
+                    'deskripsi' => 'Portal LPPM Teknik Informatika',
                     'urutan' => 1,
                     'aktif' => true,
                 ],

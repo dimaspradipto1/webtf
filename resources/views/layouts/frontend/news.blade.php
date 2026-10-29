@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Berita & Informasi Terkini — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Ikuti berita kampus, pengumuman akademik, riset teknologi & bisnis, dan publikasi terbaru dari Universitas Ibnu Sina (UIS) Batam.')
-@section('meta_keywords', 'berita uis, pengumuman akademik uis, riset kampus batam, kegiatan mahasiswa uis, universitas ibnu sina batam')
+@section('title', 'Berita & Informasi Terkini — Teknik Informatika (UIS)')
+@section('meta_description', 'Ikuti berita kampus, pengumuman akademik, riset teknologi & bisnis, dan publikasi terbaru dari Teknik Informatika (UIS) Batam.')
+@section('meta_keywords', 'berita uis, pengumuman akademik uis, riset kampus batam, kegiatan mahasiswa uis, teknik informatika batam')
 
 @section('content')
 
@@ -12,12 +12,12 @@
 <div class="news-hero">
   <div class="container">
     <div data-aos="fade-up">
-      <div class="badge px-2.5 py-1 rounded-pill mb-2" style="background: rgba(4, 107, 38, 0.45); color: var(--uis-orange); border: 1px solid rgba(254, 216, 2, 0.4); font-size: 11px;">
-        <i class="bi bi-newspaper me-1"></i> Warta & Informasi Universitas Ibnu Sina
+      <div class="badge px-2.5 py-1 rounded-pill mb-2" style="background: rgba(0, 0, 0, 0.45); color: var(--uis-orange); border: 1px solid rgba(249, 220, 75, 0.4); font-size: 11px;">
+        <i class="bi bi-newspaper me-1"></i> Warta & Informasi Teknik Informatika
       </div>
       <h1 class="news-hero-title">Berita & <em>Warta Kampus</em> UIS</h1>
       <p class="text-white-50 mb-2" style="max-width: 650px; font-size: 13px; line-height: 1.45;">
-        Kumpulan warta kegiatan universitas, pengumuman akademik, prestasi mahasiswa, riset terapan, dan inovasi civitas akademika Universitas Ibnu Sina Batam.
+        Kumpulan warta kegiatan universitas, pengumuman akademik, prestasi mahasiswa, riset terapan, dan inovasi civitas akademika Teknik Informatika Batam.
       </p>
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
@@ -47,7 +47,7 @@
                   <i class="bi bi-image fs-1"></i>
                 </div>
               @endif
-              <span class="badge position-absolute top-0 start-0 m-3 px-3 py-2" style="background: #FED802; color: #046B26; font-weight: 800; font-size: 11px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.18);">
+              <span class="badge position-absolute top-0 start-0 m-3 px-3 py-2" style="background: #f9dc4b; color: #000000; font-weight: 800; font-size: 11px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.18);">
                 <i class="bi bi-star-fill me-1"></i> BERITA UTAMA
               </span>
               @if(!empty($featured->gallery) && count($featured->gallery) > 0)
@@ -202,7 +202,7 @@
         <div class="p-5 text-center bg-white rounded-4 shadow-sm">
           <i class="bi bi-newspaper fs-1 text-muted mb-3 d-block"></i>
           <h4 class="fw-bold text-dark">Belum Ada Berita</h4>
-          <p class="text-muted small">Berita dan artikel terbaru Universitas Ibnu Sina akan segera dipublikasikan di sini.</p>
+          <p class="text-muted small">Berita dan artikel terbaru Teknik Informatika akan segera dipublikasikan di sini.</p>
         </div>
       @endif
     @endif

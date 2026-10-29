@@ -17,7 +17,7 @@ class OrganisasiMahasiswaSeeder extends Seeder
                 'singkatan' => 'BEM FIKES',
                 'slug' => 'bem-fikes',
                 'kategori' => 'BEM / DPM',
-                'deskripsi' => '<p>Badan Eksekutif Mahasiswa Fakultas Ilmu Kesehatan (BEM FIKES) Universitas Ibnu Sina merupakan lembaga eksekutif tertinggi di tingkat fakultas yang mewadahi, mengadvokasi, dan menyalurkan aspirasi mahasiswa serta menyelenggarakan program kerja di bidang akademik, sosial, dan pengembangan karakter kepemimpinan.</p>',
+                'deskripsi' => '<p>Badan Eksekutif Mahasiswa Fakultas Ilmu Kesehatan (BEM FIKES) Teknik Informatika merupakan lembaga eksekutif tertinggi di tingkat fakultas yang mewadahi, mengadvokasi, dan menyalurkan aspirasi mahasiswa serta menyelenggarakan program kerja di bidang akademik, sosial, dan pengembangan karakter kepemimpinan.</p>',
                 'visi' => 'Mewujudkan BEM FIKES UIS yang berintegritas, adaptif, solutif, dan aktif berkontribusi dalam memajukan derajat kesehatan masyarakat.',
                 'misi' => '1. Mempererat soliditas antar lembaga mahasiswa di lingkungan FIKES.\n2. Mewadahi pengembangan minat, bakat, serta riset kemahasiswaan.\n3. Mengabdi secara nyata kepada masyarakat melalui edukasi kesehatan berkelanjutan.',
                 'nama_ketua' => 'Muhammad Rizky Pratama',

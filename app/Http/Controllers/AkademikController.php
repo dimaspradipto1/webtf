@@ -35,7 +35,7 @@ class AkademikController extends Controller
         'sistem' => [
             'judul' => 'Portal Sistem Informasi Akademik (SIAKAD & E-Learning)',
             'subjudul' => 'Layanan portal digital terpadu untuk pengisian KRS, presensi, nilai, dan pembelajaran online.',
-            'deskripsi' => '<p>Sistem Informasi Akademik (SIAKAD) FIKES Universitas Ibnu Sina memfasilitasi mahasiswa dan dosen dalam proses administrasi perkuliahan secara daring, cepat, dan transparan.</p>',
+            'deskripsi' => '<p>Sistem Informasi Akademik (SIAKAD) FIKES Teknik Informatika memfasilitasi mahasiswa dan dosen dalam proses administrasi perkuliahan secara daring, cepat, dan transparan.</p>',
             'link_url' => 'https://siakad.uis.ac.id',
         ],
     ];

@@ -44,9 +44,9 @@ class LayananHumasController extends Controller
                 ['id' => 1],
                 [
                     'judul_hero' => 'Survey Layanan',
-                    'subjudul_hero' => 'Kuesioner Evaluasi Kepuasan & Mutu Pelayanan Humas Universitas Ibnu Sina',
+                    'subjudul_hero' => 'Kuesioner Evaluasi Kepuasan & Mutu Pelayanan Humas Teknik Informatika',
                     'judul_seksi' => 'Survei Evaluasi',
-                    'deskripsi_seksi' => 'Silakan isi formulir evaluasi kepuasan layanan berikut untuk membantu kami meningkatkan kualitas mutu pelayanan Humas Universitas Ibnu Sina.',
+                    'deskripsi_seksi' => 'Silakan isi formulir evaluasi kepuasan layanan berikut untuk membantu kami meningkatkan kualitas mutu pelayanan Humas Teknik Informatika.',
                     'is_active' => true,
                 ]
             );

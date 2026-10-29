@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Biro Humas & Protokoler — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Portal Resmi Biro Hubungan Masyarakat dan Protokoler Universitas Ibnu Sina (UIS) Batam — Informasi publik, rilis pers, majalah profil, media sosial, dan layanan aduan.')
-@section('meta_keywords', 'humas uis, biro humas universitas ibnu sina, ppid uis, siaran pers uis, berita kampus uis')
+@section('title', 'Biro Humas & Protokoler — Teknik Informatika (UIS)')
+@section('meta_description', 'Portal Resmi Biro Hubungan Masyarakat dan Protokoler Teknik Informatika (UIS) Batam — Informasi publik, rilis pers, majalah profil, media sosial, dan layanan aduan.')
+@section('meta_keywords', 'humas uis, biro humas teknik informatika, ppid uis, siaran pers uis, berita kampus uis')
 
 @section('content')
 @php
@@ -26,7 +26,7 @@
   ══════════════════════════════════════════════════════ */
   :root {
     --uis-humas-dark: #02260e;
-    --uis-humas-green: #044b1c;
+    --uis-humas-green: #000000;
     --uis-humas-emerald: #066d2a;
     --uis-humas-gold: #e5a900;
     --uis-humas-yellow: #ffc107;
@@ -101,15 +101,15 @@
   }
   .humas-quick-item:hover {
     transform: translateY(-4px);
-    background: #f0fdf4;
+    background: #f9dc4b;
     color: var(--uis-humas-green);
   }
   .humas-quick-icon-wrap {
     width: 46px;
     height: 46px;
     border-radius: 14px;
-    background: #e8f5e9;
-    color: #0b6828;
+    background: #f9dc4b;
+    color: #000000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -119,9 +119,9 @@
     transition: all 0.25s ease;
   }
   .humas-quick-item:hover .humas-quick-icon-wrap {
-    background: #0b6828;
+    background: #000000;
     color: #ffffff;
-    box-shadow: 0 6px 14px rgba(11, 104, 40, 0.3);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
   }
   .humas-quick-label {
     font-size: 11.5px;
@@ -206,7 +206,7 @@
     border: 1px solid rgba(255, 255, 255, 0.15);
   }
   .humas-info-pill.pill-emerald .humas-pill-btn {
-    background: #fab005;
+    background: #f9dc4b;
     color: #ffffff;
     font-weight: 700;
     font-size: 12.5px;
@@ -226,7 +226,7 @@
     text-align: center;
   }
   .humas-rank-title {
-    color: #0b6828;
+    color: #000000;
     font-size: 40px;
     font-weight: 800;
     margin-bottom: 4px;
@@ -239,7 +239,7 @@
     margin-bottom: 30px;
   }
   .humas-award-banner-card {
-    background: radial-gradient(circle at center, #0a5c24 0%, #043815 65%, #02260e 100%);
+    background: radial-gradient(circle at center, #0a5c24 0%, #000000 65%, #02260e 100%);
     border-radius: 28px;
     position: relative;
     overflow: hidden;
@@ -297,8 +297,8 @@
   }
   .humas-phone-card:hover {
     transform: translateY(-8px);
-    border-color: #FED802;
-    box-shadow: 0 24px 44px rgba(254, 216, 2, 0.25), 0 16px 32px rgba(15, 23, 42, 0.12);
+    border-color: #f9dc4b;
+    box-shadow: 0 24px 44px rgba(249, 220, 75, 0.25), 0 16px 32px rgba(15, 23, 42, 0.12);
   }
   .humas-phone-speaker {
     width: 54px;
@@ -355,7 +355,7 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: #FED802;
+    background: #f9dc4b;
     color: #111111;
     display: flex;
     align-items: center;
@@ -369,7 +369,7 @@
   .humas-phone-screen:hover .humas-phone-play-btn {
     transform: translate(-50%, -50%) scale(1.15);
     background: #ffe338;
-    box-shadow: 0 0 25px rgba(254, 216, 2, 0.85);
+    box-shadow: 0 0 25px rgba(249, 220, 75, 0.85);
   }
   .humas-sound-btn {
     position: absolute;
@@ -391,9 +391,9 @@
     transition: all 0.25s ease;
   }
   .humas-sound-btn:hover {
-    background: #FED802;
+    background: #f9dc4b;
     color: #111111;
-    border-color: #FED802;
+    border-color: #f9dc4b;
     transform: scale(1.1);
   }
   .humas-phone-video-overlay {
@@ -438,7 +438,7 @@
   }
   .humas-phone-btn {
     width: 100%;
-    background: #FED802;
+    background: #f9dc4b;
     color: #111;
     font-weight: 700;
     font-size: 13.5px;
@@ -447,18 +447,18 @@
     text-decoration: none;
     transition: all 0.2s ease;
     display: block;
-    box-shadow: 0 4px 10px rgba(254, 216, 2, 0.35);
+    box-shadow: 0 4px 10px rgba(249, 220, 75, 0.35);
   }
   .humas-phone-btn:hover {
     background: #ffd600;
     color: #000;
     transform: scale(1.02);
-    box-shadow: 0 6px 14px rgba(254, 216, 2, 0.5);
+    box-shadow: 0 6px 14px rgba(249, 220, 75, 0.5);
   }
 
   /* PMB Horizontal Banner */
   .humas-pmb-strip {
-    background: linear-gradient(135deg, #044b1c 0%, #066d2a 100%);
+    background: linear-gradient(135deg, #000000 0%, #066d2a 100%);
     border-radius: 20px;
     padding: 24px 32px;
     color: #ffffff;
@@ -505,7 +505,7 @@
   .humas-media-box:hover {
     transform: translateY(-8px);
     box-shadow: 0 18px 36px rgba(0, 0, 0, 0.15);
-    border-color: #0b6828;
+    border-color: #000000;
   }
   .humas-media-box.has-bg:hover::before {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.75) 100%);
@@ -536,7 +536,7 @@
 
   /* Helpdesk Strip */
   .humas-helpdesk-strip {
-    background: linear-gradient(135deg, #044b1c 0%, #066d2a 100%);
+    background: linear-gradient(135deg, #000000 0%, #066d2a 100%);
     border-radius: 20px;
     padding: 24px 32px;
     color: #ffffff;
@@ -566,7 +566,7 @@
   .humas-news-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-    color: #044b1c;
+    color: #000000;
   }
   .humas-news-img {
     height: 200px;
@@ -615,7 +615,7 @@
     transition: all 0.2s ease;
   }
   .humas-emagz-btn-tab.active {
-    background: #044b1c;
+    background: #000000;
     color: #ffffff;
   }
   .humas-emagz-btn-tab:not(.active) {
@@ -808,7 +808,7 @@
                 $btnText      = 'Kunjungi';
                 $btnIcon      = 'bi-facebook';
                 $defaultLabel = 'Facebook & YouTube Humas';
-                $defaultHandle= 'Universitas Ibnu Sina';
+                $defaultHandle= 'Teknik Informatika';
             } elseif (str_contains($lowerName, 'youtube')) {
                 $brandIcon    = 'bi-youtube';
                 $brandColor   = '#ff0000';
@@ -818,12 +818,12 @@
                 $btnText      = 'Kunjungi';
                 $btnIcon      = 'bi-youtube';
                 $defaultLabel = 'YouTube Resmi UIS';
-                $defaultHandle= 'Universitas Ibnu Sina Channel';
+                $defaultHandle= 'Teknik Informatika Channel';
             } elseif (str_contains($lowerName, 'whatsapp') || str_contains($lowerName, 'wa')) {
                 $brandIcon    = 'bi-whatsapp';
                 $brandColor   = '#25D366';
                 $logoBg       = 'transparent';
-                $previewBg    = 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)';
+                $previewBg    = 'linear-gradient(135deg, #f9dc4b 0%, #dcfce7 100%)';
                 $previewIcon  = 'bi-chat-dots-fill text-success';
                 $btnText      = 'Chat WhatsApp';
                 $btnIcon      = 'bi-whatsapp';
@@ -838,10 +838,10 @@
                 $btnText      = 'Terhubung';
                 $btnIcon      = 'bi-linkedin';
                 $defaultLabel = 'Jejaring Profesional UIS';
-                $defaultHandle= 'Universitas Ibnu Sina';
+                $defaultHandle= 'Teknik Informatika';
             } else {
                 $brandIcon    = !empty($sm->icon) ? $sm->icon : 'bi-globe2';
-                $brandColor   = '#046B26';
+                $brandColor   = '#000000';
                 $logoBg       = 'transparent';
                 $previewBg    = 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)';
                 $previewIcon  = $brandIcon . ' text-success';
@@ -1024,7 +1024,7 @@
         <p class="text-white-50 mb-0 small">Pendaftaran Mahasiswa Baru Tahun Akademik 2026/2027 Telah Dibuka Secara Online.</p>
       </div>
       <div class="col-md-auto text-md-end">
-        <a href="{{ $pmbNavUrl }}" target="{{ $pmbNavTarget }}" class="btn btn-warning fw-bold px-4 py-2 rounded-pill shadow-sm" style="color: #032e12;">
+        <a href="{{ $pmbNavUrl }}" target="{{ $pmbNavTarget }}" class="btn btn-warning fw-bold px-4 py-2 rounded-pill shadow-sm" style="color: #000000;">
           <i class="bi bi-pencil-square me-1"></i> Daftar Sekarang
         </a>
       </div>
@@ -1079,11 +1079,11 @@
       </div>
       <div class="col-md-auto text-md-end">
         @if(!empty($cleanWa))
-          <a href="https://wa.me/{{ $cleanWa }}" target="_blank" class="btn btn-warning fw-bold px-4 py-2 rounded-pill shadow-sm" style="color: #032e12;">
+          <a href="https://wa.me/{{ $cleanWa }}" target="_blank" class="btn btn-warning fw-bold px-4 py-2 rounded-pill shadow-sm" style="color: #000000;">
             <i class="bi bi-whatsapp me-1"></i> Hubungi WhatsApp
           </a>
         @else
-          <a href="{{ route('homepage.kontak') }}" class="btn btn-warning fw-bold px-4 py-2 rounded-pill shadow-sm" style="color: #032e12;">
+          <a href="{{ route('homepage.kontak') }}" class="btn btn-warning fw-bold px-4 py-2 rounded-pill shadow-sm" style="color: #000000;">
             <i class="bi bi-telephone me-1"></i> Kontak Humas
           </a>
         @endif
@@ -1097,20 +1097,20 @@
 <!-- ══════════════════════════════════════════════════════
      8. E-MAGAZINE PROFIL UNIVERSITAS
 ══════════════════════════════════════════════════════ -->
-@if(!isset($emagazine) || $emagazine->is_active)
+@if(!isset($emagazine) || $emagazine?->is_active)
 <section class="humas-emagz-section" id="emagazine-section">
   <div class="container">
     <div class="humas-emagz-container" data-aos="fade-up">
       <h2 class="fw-bold mb-3" style="color: #0f172a; font-size: 28px;">
-        {{ $emagazine->judul_seksi ?? 'E-Magazine Profil Universitas' }}
+        {{ $emagazine?->judul_seksi ?: 'E-Magazine Profil Universitas' }}
       </h2>
       
       <div class="d-flex align-items-center justify-content-center gap-2 mb-4">
         <button class="humas-emagz-btn-tab active" id="tabEmagzBtn" onclick="switchMagTab('emagz')">
-          <i class="bi bi-book-half me-1"></i> {{ $emagazine->tab_1_label ?? 'E-Magazine' }}
+          <i class="bi bi-book-half me-1"></i> {{ $emagazine?->tab_1_label ?: 'E-Magazine' }}
         </button>
         <button class="humas-emagz-btn-tab" id="tabBukuSakuBtn" onclick="switchMagTab('buku-saku')">
-          <i class="bi bi-journal-bookmark me-1"></i> {{ $emagazine->tab_2_label ?? 'Buku Saku' }}
+          <i class="bi bi-journal-bookmark me-1"></i> {{ $emagazine?->tab_2_label ?: 'Buku Saku' }}
         </button>
       </div>
 
@@ -1121,13 +1121,13 @@
           {{-- Miniatur Sampul --}}
           <div class="mb-4">
             <div id="emagzCoverWrapper" class="d-inline-flex align-items-center justify-content-center shadow-lg" 
-                 style="width: 140px; height: 180px; background: linear-gradient(135deg, #044b1c 0%, #032e12 100%); border-radius: 12px; color: #ffd600; border: 4px solid #fff; overflow: hidden; position: relative;">
+                 style="width: 140px; height: 180px; background: linear-gradient(135deg, #000000 0%, #000000 100%); border-radius: 12px; color: #ffd600; border: 4px solid #fff; overflow: hidden; position: relative;">
               
               {{-- Cover default styling --}}
               <div id="emagzCoverDefault" class="text-center p-2 {{ !empty($emagazine?->tab_1_cover_image) ? 'd-none' : '' }}">
                 <i class="bi bi-journal-richtext fs-1 d-block mb-1"></i>
                 <span id="emagzBadgeText" style="font-size: 11px; font-weight: 800; color: #fff; line-height: 1.2; display: block;">
-                  {{ $emagazine->tab_1_badge_text ?? 'PROFIL 2026' }}
+                  {{ $emagazine?->tab_1_badge_text ?: 'PROFIL 2026' }}
                 </span>
               </div>
 
@@ -1141,20 +1141,20 @@
 
           {{-- Judul & Deskripsi --}}
           <h4 class="fw-bold mb-2 text-dark" id="emagzTitle">
-            {{ $emagazine->tab_1_judul ?? 'E-Magazine Edisi Eksklusif Profil Kampus' }}
+            {{ $emagazine?->tab_1_judul ?: 'E-Magazine Edisi Eksklusif Profil Kampus' }}
           </h4>
           <p class="text-muted small mx-auto mb-4" id="emagzDesc" style="max-width: 500px;">
-            {{ $emagazine->tab_1_deskripsi ?? 'Jelajahi informasi lengkap mengenai fasilitas laboratorium, profil fakultas, program beasiswa, dan prestasi mahasiswa.' }}
+            {{ $emagazine?->tab_1_deskripsi ?: 'Jelajahi informasi lengkap mengenai fasilitas laboratorium, profil fakultas, program beasiswa, dan prestasi mahasiswa.' }}
           </p>
 
           {{-- Action Buttons --}}
           <div class="d-flex align-items-center justify-content-center gap-2 flex-wrap">
             <a id="emagzPreviewBtn" 
-               href="{{ $emagazine->tab_1_btn_preview_url ?: asset('frontend/img/gedung-uis.jpg') }}" 
+               href="{{ $emagazine?->tab_1_btn_preview_url ?: asset('frontend/img/gedung-uis.jpg') }}" 
                target="_blank" 
                rel="noopener noreferrer" 
                class="btn btn-outline-success rounded-pill px-4 fw-semibold">
-              <i class="bi bi-eye me-1"></i> <span id="emagzPreviewText">{{ $emagazine->tab_1_btn_preview_text ?? 'Pratinjau Interaktif' }}</span>
+              <i class="bi bi-eye me-1"></i> <span id="emagzPreviewText">{{ $emagazine?->tab_1_btn_preview_text ?: 'Pratinjau Interaktif' }}</span>
             </a>
             
             <a id="emagzDownloadBtn" 
@@ -1162,8 +1162,8 @@
                target="_blank" 
                rel="noopener noreferrer" 
                class="btn btn-success rounded-pill px-4 fw-semibold" 
-               style="background: #044b1c; border-color: #044b1c;">
-              <i class="bi bi-download me-1"></i> <span id="emagzDownloadText">{{ $emagazine->tab_1_btn_download_text ?? 'Unduh Dokumen' }}</span>
+               style="background: #000000; border-color: #000000;">
+              <i class="bi bi-download me-1"></i> <span id="emagzDownloadText">{{ $emagazine?->tab_1_btn_download_text ?: 'Unduh Dokumen' }}</span>
             </a>
           </div>
 
@@ -1176,24 +1176,24 @@
 <script>
   const emagzData = {
     'emagz': {
-      'title': {!! json_encode($emagazine->tab_1_judul ?? 'E-Magazine Edisi Eksklusif Profil Kampus') !!},
-      'desc': {!! json_encode($emagazine->tab_1_deskripsi ?? 'Jelajahi informasi lengkap mengenai fasilitas laboratorium, profil fakultas, program beasiswa, dan prestasi mahasiswa.') !!},
-      'badge': {!! json_encode($emagazine->tab_1_badge_text ?? 'PROFIL 2026') !!},
+      'title': {!! json_encode($emagazine?->tab_1_judul ?: 'E-Magazine Edisi Eksklusif Profil Kampus') !!},
+      'desc': {!! json_encode($emagazine?->tab_1_deskripsi ?: 'Jelajahi informasi lengkap mengenai fasilitas laboratorium, profil fakultas, program beasiswa, dan prestasi mahasiswa.') !!},
+      'badge': {!! json_encode($emagazine?->tab_1_badge_text ?: 'PROFIL 2026') !!},
       'cover': {!! json_encode(!empty($emagazine?->tab_1_cover_image) ? asset('storage/' . $emagazine->tab_1_cover_image) : '') !!},
-      'previewUrl': {!! json_encode($emagazine->tab_1_btn_preview_url ?: asset('frontend/img/gedung-uis.jpg')) !!},
-      'previewText': {!! json_encode($emagazine->tab_1_btn_preview_text ?? 'Pratinjau Interaktif') !!},
+      'previewUrl': {!! json_encode($emagazine?->tab_1_btn_preview_url ?: asset('frontend/img/gedung-uis.jpg')) !!},
+      'previewText': {!! json_encode($emagazine?->tab_1_btn_preview_text ?: 'Pratinjau Interaktif') !!},
       'downloadUrl': {!! json_encode($emagazine?->tab_1_download_link ?: route('homepage.tentang')) !!},
-      'downloadText': {!! json_encode($emagazine->tab_1_btn_download_text ?? 'Unduh Dokumen') !!}
+      'downloadText': {!! json_encode($emagazine?->tab_1_btn_download_text ?: 'Unduh Dokumen') !!}
     },
     'buku-saku': {
-      'title': {!! json_encode($emagazine->tab_2_judul ?? 'Buku Saku Panduan Mahasiswa & Akademik') !!},
-      'desc': {!! json_encode($emagazine->tab_2_deskripsi ?? 'Panduan ringkas dan praktis mengenai kehidupan kampus, tata tertib, hak & kewajiban, serta informasi penting perkuliahan di UIS.') !!},
-      'badge': {!! json_encode($emagazine->tab_2_badge_text ?? 'BUKU SAKU') !!},
+      'title': {!! json_encode($emagazine?->tab_2_judul ?: 'Buku Saku Panduan Mahasiswa & Akademik') !!},
+      'desc': {!! json_encode($emagazine?->tab_2_deskripsi ?: 'Panduan ringkas dan praktis mengenai kehidupan kampus, tata tertib, hak & kewajiban, serta informasi penting perkuliahan di UIS.') !!},
+      'badge': {!! json_encode($emagazine?->tab_2_badge_text ?: 'BUKU SAKU') !!},
       'cover': {!! json_encode(!empty($emagazine?->tab_2_cover_image) ? asset('storage/' . $emagazine->tab_2_cover_image) : '') !!},
-      'previewUrl': {!! json_encode($emagazine->tab_2_btn_preview_url ?: asset('frontend/img/gedung-uis.jpg')) !!},
-      'previewText': {!! json_encode($emagazine->tab_2_btn_preview_text ?? 'Pratinjau Interaktif') !!},
+      'previewUrl': {!! json_encode($emagazine?->tab_2_btn_preview_url ?: asset('frontend/img/gedung-uis.jpg')) !!},
+      'previewText': {!! json_encode($emagazine?->tab_2_btn_preview_text ?: 'Pratinjau Interaktif') !!},
       'downloadUrl': {!! json_encode($emagazine?->tab_2_download_link ?: route('homepage.tentang')) !!},
-      'downloadText': {!! json_encode($emagazine->tab_2_btn_download_text ?? 'Unduh Dokumen') !!}
+      'downloadText': {!! json_encode($emagazine?->tab_2_btn_download_text ?: 'Unduh Dokumen') !!}
     }
   };
 

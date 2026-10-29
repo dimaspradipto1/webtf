@@ -54,8 +54,8 @@
                                id="title"
                                name="title"
                                class="form-control @error('title') is-invalid @enderror"
-                               value="{{ old('title', 'Universitas Ibnu Sina') }}"
-                               placeholder="Contoh: Universitas Ibnu Sina">
+                               value="{{ old('title', 'Teknik Informatika') }}"
+                               placeholder="Contoh: Teknik Informatika">
                         <div class="form-text">Teks judul putih di tengah banner statistik.</div>
                         @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -249,7 +249,7 @@
                         <a href="{{ route('faculty-stat.index') }}" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-1"></i> Batal
                         </a>
-                        <button type="submit" class="btn btn-success fw-bold px-4" style="background:#046B26;border-color:#046B26;">
+                        <button type="submit" class="btn btn-success fw-bold px-4" style="background:#000000;border-color:#000000;">
                             <i class="bi bi-save me-1"></i> Simpan Data
                         </button>
                     </div>

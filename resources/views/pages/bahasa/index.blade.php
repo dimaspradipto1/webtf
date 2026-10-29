@@ -60,14 +60,14 @@
         {{-- Quick Stats Cards --}}
         <div class="row g-3 mb-4">
             <div class="col-sm-6 col-md-3">
-                <div class="card shadow-sm border-0 h-100" style="border-radius: 10px; border-left: 4px solid #046B26 !important;">
+                <div class="card shadow-sm border-0 h-100" style="border-radius: 10px; border-left: 4px solid #000000 !important;">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
                                 <span class="text-muted small fw-semibold">Total Bahasa</span>
                                 <h4 class="mb-0 fw-bold mt-1 text-dark">{{ $bahasas->count() }}</h4>
                             </div>
-                            <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background: #eaf6ee; color: #046B26;">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background: #f9dc4b; color: #000000;">
                                 <i class="bi bi-globe2 fs-5"></i>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
             </div>
 
             <div class="col-sm-6 col-md-3">
-                <div class="card shadow-sm border-0 h-100" style="border-radius: 10px; border-left: 4px solid #FED802 !important;">
+                <div class="card shadow-sm border-0 h-100" style="border-radius: 10px; border-left: 4px solid #f9dc4b !important;">
                     <div class="card-body p-3">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
@@ -139,15 +139,15 @@
             @csrf
 
             <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
-                <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+                <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
                     <h5 class="mb-0 fw-bold text-dark" style="font-size: 16px;">
-                        <i class="bi bi-list-check me-2" style="color: #046B26;"></i>Daftar Bahasa Website
+                        <i class="bi bi-list-check me-2" style="color: #000000;"></i>Daftar Bahasa Website
                     </h5>
                     <div class="d-flex gap-2">
                         <a href="{{ route('homepage') }}" target="_blank" class="btn btn-sm btn-outline-secondary">
                             <i class="bi bi-box-arrow-up-right me-1"></i> Preview di Navbar
                         </a>
-                        <button type="button" class="btn btn-sm fw-semibold shadow-sm text-white" data-bs-toggle="modal" data-bs-target="#modalAddBahasa" style="background: #046B26; border-color: #046B26;">
+                        <button type="button" class="btn btn-sm fw-semibold shadow-sm text-white" data-bs-toggle="modal" data-bs-target="#modalAddBahasa" style="background: #000000; border-color: #000000;">
                             <i class="bi bi-plus-circle-fill me-1"></i> Tambah Bahasa Baru
                         </button>
                     </div>
@@ -299,7 +299,7 @@
                     <div class="small text-muted">
                         <i class="bi bi-info-circle me-1"></i> Ubah urutan angka atau aktifkan switch, kemudian klik tombol <strong>Simpan Perubahan</strong>.
                     </div>
-                    <button type="submit" class="btn fw-semibold text-white px-4 shadow-sm" style="background: #046B26; border-color: #046B26;">
+                    <button type="submit" class="btn fw-semibold text-white px-4 shadow-sm" style="background: #000000; border-color: #000000;">
                         <i class="bi bi-save me-1"></i> Simpan Perubahan Urutan & Status
                     </button>
                 </div>
@@ -315,7 +315,7 @@
         <form action="{{ route('bahasa.store') }}" method="POST">
             @csrf
             <div class="modal-content border-0 shadow" style="border-radius: 12px;">
-                <div class="modal-header text-white" style="background: #046B26; border-radius: 12px 12px 0 0;">
+                <div class="modal-header text-white" style="background: #000000; border-radius: 12px 12px 0 0;">
                     <h5 class="modal-title fw-bold" id="modalAddBahasaLabel">
                         <i class="bi bi-plus-circle me-2"></i>Tambah Bahasa Baru
                     </h5>
@@ -365,7 +365,7 @@
                 </div>
                 <div class="modal-footer bg-light" style="border-radius: 0 0 12px 12px;">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-sm text-white fw-semibold" style="background: #046B26;">
+                    <button type="submit" class="btn btn-sm text-white fw-semibold" style="background: #000000;">
                         <i class="bi bi-save me-1"></i> Simpan Bahasa
                     </button>
                 </div>

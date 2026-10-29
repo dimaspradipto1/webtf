@@ -18,7 +18,7 @@ class DesainGrafisController extends Controller
         $setting = DesainGrafisSetting::firstOrCreate([], [
             'hero_title' => 'Desain Mudah,',
             'hero_highlight' => 'Siap Digunakan !',
-            'hero_subtitle' => 'Kami menyediakan template desain resmi untuk keperluan presentasi LED, ruang sidang, agenda rapat, dan spanduk acara di lingkungan Universitas Ibnu Sina.',
+            'hero_subtitle' => 'Kami menyediakan template desain resmi untuk keperluan presentasi LED, ruang sidang, agenda rapat, dan spanduk acara di lingkungan Teknik Informatika.',
             'order_box_title' => 'Pesan desain disini',
             'order_box_text' => 'Butuh desain yang belum tersedia dalam template? Sampaikan kebutuhan acara Anda, dan tim Humas & Promosi UIS siap membantu mewujudkannya.',
             'order_box_btn_text' => 'Pesan Sekarang',

@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login — Portal Universitas Ibnu Sina (UIS)</title>
-  <meta name="description" content="Portal Login Resmi Universitas Ibnu Sina (UIS) Batam — Sistem Informasi Terpadu Mahasiswa, Dosen, dan Tenaga Kependidikan.">
+  <title>Login — Portal Teknik Informatika (UIS)</title>
+  <meta name="description" content="Portal Login Resmi Teknik Informatika (UIS) Batam — Sistem Informasi Terpadu Mahasiswa, Dosen, dan Tenaga Kependidikan.">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{{ asset('frontend/img/logouis.png') }}">
@@ -27,13 +27,13 @@
     }
 
     :root {
-      --uis-green:          #046B26;
-      --uis-green-dark:     #03521d;
-      --uis-green-deep:     #023814;
-      --uis-green-light:    #eaf6ee;
+      --uis-green:          #000000;
+      --uis-green-dark:     #000000;
+      --uis-green-deep:     #000000;
+      --uis-green-light:    #f9dc4b;
       --uis-green-subtle:   #d4edd9;
-      --uis-yellow:         #FED802;
-      --uis-yellow-hover:   #e5c302;
+      --uis-yellow:         #f9dc4b;
+      --uis-yellow-hover:   #f9dc4b;
       
       --brand-primary:      var(--uis-green);
       --brand-primary-dark: var(--uis-green-dark);
@@ -49,8 +49,8 @@
       --card-bg:            #FFFFFF;
       --border-color:       #d0e7d7;
 
-      --shadow-card:        0 14px 34px -5px rgba(4, 107, 38, 0.12), 0 4px 12px rgba(4, 107, 38, 0.05);
-      --shadow-primary:     0 8px 18px -3px rgba(4, 107, 38, 0.4);
+      --shadow-card:        0 14px 34px -5px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.05);
+      --shadow-primary:     0 8px 18px -3px rgba(0, 0, 0, 0.4);
       --transition-smooth:  all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -108,8 +108,8 @@
       inset: 0;
       background: linear-gradient(
         180deg,
-        rgba(2, 46, 18, 0.45) 0%,
-        rgba(2, 46, 18, 0) 25%
+        rgba(0, 0, 0, 0.45) 0%,
+        rgba(0, 0, 0, 0) 25%
       );
       z-index: 2;
     }
@@ -130,9 +130,9 @@
       gap: 12px;
       text-decoration: none;
       align-self: flex-start;
-      background: rgba(2, 46, 18, 0.82);
+      background: rgba(0, 0, 0, 0.82);
       backdrop-filter: blur(12px);
-      border: 1.5px solid rgba(254, 216, 2, 0.45);
+      border: 1.5px solid rgba(249, 220, 75, 0.45);
       padding: 8px 18px;
       border-radius: 100px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
@@ -167,7 +167,7 @@
     /* ── RIGHT AUTH PANEL (WARNA RESMI UIS: HIJAU LEMBUT & ELEGAN) ── */
     .auth-panel {
       flex: 0.95;
-      background: linear-gradient(155deg, #eaf6ee 0%, #edf6f0 50%, #e2efe6 100%);
+      background: linear-gradient(155deg, #f9dc4b 0%, #edf6f0 50%, #e2efe6 100%);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -198,9 +198,9 @@
       text-decoration: none;
       padding: 6px 14px;
       border-radius: 8px;
-      border: 1.5px solid rgba(4, 107, 38, 0.25);
+      border: 1.5px solid rgba(0, 0, 0, 0.25);
       background: #FFFFFF;
-      box-shadow: 0 2px 6px rgba(4, 107, 38, 0.05);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
       transition: var(--transition-smooth);
     }
     .btn-back-home:hover {
@@ -208,7 +208,7 @@
       border-color: var(--brand-primary);
       background: var(--brand-primary);
       transform: translateX(-2px);
-      box-shadow: 0 4px 12px rgba(4, 107, 38, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     .auth-badge-status {
       display: inline-flex;
@@ -220,10 +220,10 @@
       background: #FFFFFF;
       padding: 5px 12px;
       border-radius: 20px;
-      border: 1.5px solid rgba(4, 107, 38, 0.25);
+      border: 1.5px solid rgba(0, 0, 0, 0.25);
       white-space: nowrap;
       flex-shrink: 0;
-      box-shadow: 0 2px 6px rgba(4, 107, 38, 0.05);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     }
     .auth-badge-status span:first-child {
       width: 6px;
@@ -244,7 +244,7 @@
       background: var(--card-bg);
       border-radius: 20px;
       padding: 26px 28px;
-      border: 1.5px solid rgba(4, 107, 38, 0.16);
+      border: 1.5px solid rgba(0, 0, 0, 0.16);
       border-top: 4px solid var(--brand-primary);
       box-shadow: var(--shadow-card);
       position: relative;
@@ -265,7 +265,7 @@
       padding: 3px 8px;
       border-radius: 6px;
       margin-bottom: 8px;
-      border: 1px solid rgba(4, 107, 38, 0.15);
+      border: 1px solid rgba(0, 0, 0, 0.15);
     }
     .auth-header h2 {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -359,7 +359,7 @@
     .custom-input:focus {
       background: #FFFFFF;
       border-color: var(--brand-primary);
-      box-shadow: 0 0 0 3px rgba(4, 107, 38, 0.16);
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.16);
     }
     .input-box:focus-within .input-icon-lead {
       color: var(--brand-primary);
@@ -429,7 +429,7 @@
     .btn-submit-login {
       width: 100%;
       height: 44px;
-      background: linear-gradient(180deg, #057a2c 0%, #046B26 100%);
+      background: linear-gradient(180deg, #057a2c 0%, #000000 100%);
       color: #FFFFFF;
       border: none;
       border-radius: 10px;
@@ -445,9 +445,9 @@
       transition: var(--transition-smooth);
     }
     .btn-submit-login:hover {
-      background: linear-gradient(180deg, #046B26 0%, #024a19 100%);
+      background: linear-gradient(180deg, #000000 0%, #024a19 100%);
       transform: translateY(-1px);
-      box-shadow: 0 10px 20px -3px rgba(4, 107, 38, 0.4);
+      box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.4);
     }
     .btn-submit-login:active {
       transform: translateY(0);
@@ -459,7 +459,7 @@
       padding: 10px 14px;
       border-radius: 12px;
       background: #F4FAF6;
-      border: 1.5px solid rgba(4, 107, 38, 0.18);
+      border: 1.5px solid rgba(0, 0, 0, 0.18);
       display: flex;
       align-items: center;
       gap: 12px;
@@ -468,7 +468,7 @@
     }
     .alumni-card:hover {
       background: #F0FDF4;
-      border-color: rgba(4, 107, 38, 0.35);
+      border-color: rgba(0, 0, 0, 0.35);
       transform: translateY(-1px);
     }
     .alumni-card-icon {
@@ -559,7 +559,7 @@
           <img src="{{ asset('frontend/img/logouis.png') }}" alt="Lambang Resmi UIS">
         </div>
         <div class="showcase-brand-text">
-          <h2>Universitas Ibnu Sina</h2>
+          <h2>Teknik Informatika</h2>
           <span>Portal Akademik & Administrasi Terpadu</span>
         </div>
       </a>
@@ -711,7 +711,7 @@
           <span>Koneksi aman SSL 256-bit • Portal Resmi UIS</span>
         </div>
         <div class="auth-copyright">
-          &copy; {{ date('Y') }} Universitas Ibnu Sina (UIS). Hak cipta dilindungi.
+          &copy; {{ date('Y') }} Teknik Informatika (UIS). Hak cipta dilindungi.
         </div>
       </div>
     </div>

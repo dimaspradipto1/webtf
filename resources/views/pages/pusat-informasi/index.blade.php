@@ -28,11 +28,11 @@
 
 {{-- 1. Pengaturan Judul Seksi Frontend --}}
 <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
-    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
         <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
-            <i class="bi bi-pencil-square me-2" style="color: #046B26;"></i>Pengaturan Judul Seksi (Frontend Humas)
+            <i class="bi bi-pencil-square me-2" style="color: #000000;"></i>Pengaturan Judul Seksi (Frontend Humas)
         </h5>
-        <span class="badge" style="background-color: #046B26; color: #ffffff; font-size: 11.5px; font-weight: 700; padding: 6px 12px; border-radius: 6px;">
+        <span class="badge" style="background-color: #000000; color: #ffffff; font-size: 11.5px; font-weight: 700; padding: 6px 12px; border-radius: 6px;">
             <i class="bi bi-globe2 me-1"></i>Tampil di /humas
         </span>
     </div>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-3 col-12">
                         <button type="submit" class="btn fw-semibold shadow-sm w-100 d-flex align-items-center justify-content-center gap-2" 
-                                style="background-color: #046B26; color: #ffffff; border: none; height: 42px; border-radius: 8px; transition: all 0.2s ease;">
+                                style="background-color: #000000; color: #ffffff; border: none; height: 42px; border-radius: 8px; transition: all 0.2s ease;">
                             <i class="bi bi-floppy-fill"></i>
                             <span>Simpan Judul</span>
                         </button>
@@ -77,14 +77,14 @@
 
 {{-- 2. Daftar Kartu Hubungi Kami & Pusat Informasi --}}
 <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
-    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
         <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
-            <i class="bi bi-collection-fill me-2" style="color: #046B26;"></i>
+            <i class="bi bi-collection-fill me-2" style="color: #000000;"></i>
             Daftar Kartu Informasi (Total: {{ $cards->count() }})
         </h5>
         <a href="{{ route('pusat-informasi.create') }}" 
            class="btn fw-semibold shadow-sm btn-sm" 
-           style="background-color: #046B26; color: #ffffff; border: none; padding: 7px 18px; border-radius: 8px;">
+           style="background-color: #000000; color: #ffffff; border: none; padding: 7px 18px; border-radius: 8px;">
             <i class="bi bi-plus-lg me-1"></i> Tambah Kartu Baru
         </a>
     </div>

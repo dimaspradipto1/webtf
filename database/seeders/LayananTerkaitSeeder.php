@@ -18,7 +18,7 @@ class LayananTerkaitSeeder extends Seeder
             ['id' => 1],
             [
                 'judul_seksi' => 'LAYANAN TERKAIT',
-                'subjudul_seksi' => 'Akses cepat ke berbagai sistem dan layanan digital Fakultas Ilmu Kesehatan Universitas Ibnu Sina untuk mendukung kegiatan akademik, administrasi, dan kemahasiswaan.',
+                'subjudul_seksi' => 'Akses cepat ke berbagai sistem dan layanan digital Fakultas Ilmu Kesehatan Teknik Informatika untuk mendukung kegiatan akademik, administrasi, dan kemahasiswaan.',
             ]
         );
 
@@ -35,7 +35,7 @@ class LayananTerkaitSeeder extends Seeder
             ],
             [
                 'nama' => 'SIAKAD UIS',
-                'deskripsi' => 'Sistem Informasi Akademik Terpadu Mahasiswa dan Dosen Universitas Ibnu Sina',
+                'deskripsi' => 'Sistem Informasi Akademik Terpadu Mahasiswa dan Dosen Teknik Informatika',
                 'url' => 'https://siakad.uis.ac.id/',
                 'logo' => 'assets/img/layanan-terkait/siakad.svg',
                 'icon' => 'bi-mortarboard-fill',

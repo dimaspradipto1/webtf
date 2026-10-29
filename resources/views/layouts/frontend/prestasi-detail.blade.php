@@ -1,6 +1,6 @@
 @extends('layouts.frontend.template')
 
-@section('title', $prestasi->judul_prestasi . ' — Universitas Ibnu Sina')
+@section('title', $prestasi->judul_prestasi . ' — Teknik Informatika')
 @section('meta_description', Str::limit(strip_tags($prestasi->deskripsi ?? $prestasi->judul_prestasi), 160))
 
 @section('content')
@@ -56,9 +56,9 @@
             <img src="{{ asset('storage/' . $prestasi->foto) }}" alt="{{ $prestasi->judul_prestasi }}" class="prestasi-img-main img-fluid">
           </div>
         @else
-          <div class="p-5 rounded-4 text-center text-white mb-4" style="background: #046B26;">
-            <i class="bi bi-trophy-fill" style="font-size: 64px; color: #FED802;"></i>
-            <h4 class="fw-bold mt-2 mb-0">Prestasi Sivitas Universitas Ibnu Sina</h4>
+          <div class="p-5 rounded-4 text-center text-white mb-4" style="background: #000000;">
+            <i class="bi bi-trophy-fill" style="font-size: 64px; color: #f9dc4b;"></i>
+            <h4 class="fw-bold mt-2 mb-0">Prestasi Sivitas Teknik Informatika</h4>
           </div>
         @endif
 
@@ -75,7 +75,7 @@
             </div>
           @else
             <p class="text-muted">
-              Selamat dan sukses atas keberhasilan mahasiswa Universitas Ibnu Sina dalam meraih <strong>{{ $prestasi->peringkat ?? 'Prestasi Membanggakan' }}</strong> pada ajang <strong>{{ $prestasi->judul_prestasi }}</strong>.
+              Selamat dan sukses atas keberhasilan mahasiswa Teknik Informatika dalam meraih <strong>{{ $prestasi->peringkat ?? 'Prestasi Membanggakan' }}</strong> pada ajang <strong>{{ $prestasi->judul_prestasi }}</strong>.
             </p>
           @endif
 
@@ -86,7 +86,7 @@
 
             @php
               $shareUrl  = urlencode(url()->current());
-              $shareText = urlencode("Prestasi Mahasiswa Universitas Ibnu Sina: " . $prestasi->judul_prestasi);
+              $shareText = urlencode("Prestasi Mahasiswa Teknik Informatika: " . $prestasi->judul_prestasi);
             @endphp
             <div class="d-flex align-items-center gap-2">
               <span class="text-muted small fw-semibold">Bagikan:</span>
@@ -167,7 +167,7 @@
                   @if(!empty($other->foto))
                     <img src="{{ asset('storage/' . $other->foto) }}" alt="{{ $other->judul_prestasi }}" class="other-prestasi-img">
                   @else
-                    <div class="other-prestasi-img d-flex align-items-center justify-content-center text-white" style="background: #046B26;">
+                    <div class="other-prestasi-img d-flex align-items-center justify-content-center text-white" style="background: #000000;">
                       <i class="bi bi-trophy-fill text-warning"></i>
                     </div>
                   @endif
@@ -184,7 +184,7 @@
             </div>
 
             <div class="mt-3 text-center pt-2 border-top">
-              <a href="{{ route('homepage.prestasi') }}" class="btn btn-sm btn-outline-primary w-100 rounded-pill" style="color: #046B26; border-color: #046B26;">
+              <a href="{{ route('homepage.prestasi') }}" class="btn btn-sm btn-outline-primary w-100 rounded-pill" style="color: #000000; border-color: #000000;">
                 Lihat Semua Prestasi
               </a>
             </div>

@@ -16,7 +16,7 @@
     <div class="col-lg-10">
         <div class="card shadow-sm border-0 rounded-4">
             <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
-                <h5 class="mb-0 fw-bold" style="color: var(--uis-green, #046B26);">
+                <h5 class="mb-0 fw-bold" style="color: var(--uis-green, #000000);">
                     <i class="bi bi-person-badge-fill me-2"></i>Kelola Sambutan & Foto Rektor
                 </h5>
                 <span class="badge bg-light text-dark border">Halaman Khusus Sambutan Rektor</span>
@@ -58,7 +58,7 @@
                             <label for="jabatan_dekan" class="form-label fw-semibold text-dark">
                                 Jabatan Resmi
                             </label>
-                            <input type="text" id="jabatan_dekan" name="jabatan_dekan" class="form-control @error('jabatan_dekan') is-invalid @enderror" value="{{ old('jabatan_dekan', $sambutanDekan->jabatan_dekan ?? 'Rektor Universitas Ibnu Sina (UIS) Batam') }}" placeholder="Rektor Universitas Ibnu Sina (UIS) Batam">
+                            <input type="text" id="jabatan_dekan" name="jabatan_dekan" class="form-control @error('jabatan_dekan') is-invalid @enderror" value="{{ old('jabatan_dekan', $sambutanDekan->jabatan_dekan ?? 'Rektor Teknik Informatika (UIS) Batam') }}" placeholder="Rektor Teknik Informatika (UIS) Batam">
                             @error('jabatan_dekan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -66,14 +66,14 @@
                     </div>
 
                     {{-- Upload Foto Rektor --}}
-                    <div class="mb-4 p-3 rounded-3" style="background: #f8faf9; border: 1px dashed #046B26;">
+                    <div class="mb-4 p-3 rounded-3" style="background: #f8faf9; border: 1px dashed #000000;">
                         <label for="foto_dekan" class="form-label fw-bold text-dark d-block">
-                            <i class="bi bi-camera-fill me-1" style="color: #046B26;"></i> Foto Resmi Rektor
+                            <i class="bi bi-camera-fill me-1" style="color: #000000;"></i> Foto Resmi Rektor
                         </label>
                         
                         @if($sambutanDekan->foto_dekan)
                             <div class="d-flex align-items-center gap-3 mb-3 p-2 bg-white rounded-3 border shadow-sm" style="max-width: 420px;">
-                                <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="Foto Rektor" class="rounded-3" style="width: 80px; height: 100px; object-fit: contain; background: #f8faf9; border: 2px solid #046B26;">
+                                <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="Foto Rektor" class="rounded-3" style="width: 80px; height: 100px; object-fit: contain; background: #f8faf9; border: 2px solid #000000;">
                                 <div>
                                     <div class="fw-bold small text-dark">Foto Saat Ini Aktif</div>
                                     <div class="text-muted" style="font-size: 12px;">Pilih file baru di bawah jika ingin mengganti. Foto lama akan otomatis terhapus dari server.</div>
@@ -95,7 +95,7 @@
                         <label for="kutipan_singkat" class="form-label fw-semibold text-dark">
                             Kutipan Singkat Sambutan <span class="badge bg-warning text-dark ms-1">Tampil di Halaman Depan (Homepage)</span>
                         </label>
-                        <textarea id="kutipan_singkat" name="kutipan_singkat" rows="3" class="form-control @error('kutipan_singkat') is-invalid @enderror" placeholder="Contoh: Selamat datang di Universitas Ibnu Sina (UIS) Batam — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, berjiwa entrepreneur, dan berkarakter Imtaq...">{{ old('kutipan_singkat', $sambutanDekan->kutipan_singkat) }}</textarea>
+                        <textarea id="kutipan_singkat" name="kutipan_singkat" rows="3" class="form-control @error('kutipan_singkat') is-invalid @enderror" placeholder="Contoh: Selamat datang di Teknik Informatika (UIS) Batam — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, berjiwa entrepreneur, dan berkarakter Imtaq...">{{ old('kutipan_singkat', $sambutanDekan->kutipan_singkat) }}</textarea>
                         <div class="form-text small text-muted">Kutipan ringkas yang menarik perhatian pengunjung di section 3 halaman depan.</div>
                         @error('kutipan_singkat')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="d-flex align-items-center gap-2 pt-3 border-top">
-                        <button type="submit" class="btn text-white px-4 py-2 fw-semibold" style="background-color: #046B26;">
+                        <button type="submit" class="btn text-white px-4 py-2 fw-semibold" style="background-color: #000000;">
                             <i class="bi bi-save me-1"></i> Simpan Perubahan Sambutan Rektor
                         </button>
                         <a href="{{ route('homepage.sambutan-rektor') }}" target="_blank" class="btn btn-outline-secondary px-3 py-2">

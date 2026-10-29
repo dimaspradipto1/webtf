@@ -220,7 +220,7 @@ class FrontendController extends Controller
         $item = Akademik::firstOrCreate(['tipe' => 'sistem'], [
             'judul' => 'Portal Sistem Informasi Akademik (SIAKAD & E-Learning)',
             'subjudul' => 'Layanan portal digital terpadu untuk pengisian KRS, presensi, nilai, dan pembelajaran online.',
-            'deskripsi' => '<p>Sistem Informasi Akademik (SIAKAD) FIKES Universitas Ibnu Sina memfasilitasi mahasiswa dan dosen dalam proses administrasi perkuliahan secara daring, cepat, dan transparan.</p>',
+            'deskripsi' => '<p>Sistem Informasi Akademik (SIAKAD) FIKES Teknik Informatika memfasilitasi mahasiswa dan dosen dalam proses administrasi perkuliahan secara daring, cepat, dan transparan.</p>',
             'link_url' => 'https://siakad.uis.ac.id',
             'is_active' => true,
         ]);
@@ -522,7 +522,7 @@ class FrontendController extends Controller
         $setting = DesainGrafisSetting::firstOrCreate([], [
             'hero_title' => 'Desain Mudah,',
             'hero_highlight' => 'Siap Digunakan !',
-            'hero_subtitle' => 'Kami menyediakan template desain resmi untuk keperluan presentasi LED, ruang sidang, agenda rapat, dan spanduk acara di lingkungan Universitas Ibnu Sina.',
+            'hero_subtitle' => 'Kami menyediakan template desain resmi untuk keperluan presentasi LED, ruang sidang, agenda rapat, dan spanduk acara di lingkungan Teknik Informatika.',
             'order_box_title' => 'Pesan desain disini',
             'order_box_text' => 'Butuh desain yang belum tersedia dalam template? Sampaikan kebutuhan acara Anda, dan tim Humas & Promosi UIS siap membantu mewujudkannya.',
             'order_box_btn_text' => 'Pesan Sekarang',
@@ -553,7 +553,7 @@ class FrontendController extends Controller
             ['id' => 1],
             [
                 'judul_seksi' => 'TEMPLAT DOKUMEN',
-                'deskripsi_seksi' => 'Kami menyediakan Templat untuk Desain, Ms. Power Point, Ms. Word dan berbagai format lainnya. Guna menyeragamkan tampilan desain di lingkungan Universitas Ibnu Sina.',
+                'deskripsi_seksi' => 'Kami menyediakan Templat untuk Desain, Ms. Power Point, Ms. Word dan berbagai format lainnya. Guna menyeragamkan tampilan desain di lingkungan Teknik Informatika.',
             ]
         );
         $templates = TemplateDokumen::active()->get();
@@ -570,10 +570,10 @@ class FrontendController extends Controller
             ['id' => 1],
             [
                 'judul_hero' => 'Permintaan Rilis',
-                'subjudul_hero' => 'Panduan & Layanan Pengajuan Siaran Pers Resmi Universitas Ibnu Sina',
+                'subjudul_hero' => 'Panduan & Layanan Pengajuan Siaran Pers Resmi Teknik Informatika',
                 'badge_label' => 'LAYANAN PUBLIKASI & SIARAN PERS',
                 'judul_seksi' => 'Ketentuan Permintaan Rilis Berita',
-                'deskripsi_seksi' => 'Layanan ini disediakan oleh Biro Humas Universitas Ibnu Sina (UIS) guna memfasilitasi sivitas akademika dalam mengajukan rilis berita kegiatan atau siaran pers untuk dipublikasikan pada portal berita resmi uis.ac.id dan media massa mitra universitas.',
+                'deskripsi_seksi' => 'Layanan ini disediakan oleh Biro Humas Teknik Informatika (UIS) guna memfasilitasi sivitas akademika dalam mengajukan rilis berita kegiatan atau siaran pers untuk dipublikasikan pada portal berita resmi uis.ac.id dan media massa mitra universitas.',
                 'link_form' => null,
                 'email_tujuan' => 'info@uis.ac.id',
                 'no_wa' => $contact->no_wa ?? '081234567890',
@@ -602,10 +602,10 @@ class FrontendController extends Controller
             ['id' => 1],
             [
                 'judul_hero' => 'Pendampingan Acara',
-                'subjudul_hero' => 'Layanan Konsultasi Protokol & Pendampingan Acara Resmi Universitas Ibnu Sina',
+                'subjudul_hero' => 'Layanan Konsultasi Protokol & Pendampingan Acara Resmi Teknik Informatika',
                 'judul_seksi' => 'Pendampingan Acara',
-                'sapaan' => 'Halo, Civitas Akademika Universitas Ibnu Sina dan Mitra Eksternal!',
-                'paragraf_1' => 'Kami hadir untuk mendukung kesuksesan acara dan kegiatan Anda melalui layanan konsultasi yang profesional, terstruktur, dan sesuai dengan Standar Operasional Prosedur (SOP) Universitas Ibnu Sina.',
+                'sapaan' => 'Halo, Civitas Akademika Teknik Informatika dan Mitra Eksternal!',
+                'paragraf_1' => 'Kami hadir untuk mendukung kesuksesan acara dan kegiatan Anda melalui layanan konsultasi yang profesional, terstruktur, dan sesuai dengan Standar Operasional Prosedur (SOP) Teknik Informatika.',
                 'paragraf_2' => 'Apakah Anda sedang merencanakan seminar, workshop, kegiatan sosial, atau event lainnya? Tim kami siap membantu dalam hal:',
                 'poin_bantuan' => "Perencanaan dan konsep acara,\nStrategi promosi dan publikasi,\nPengelolaan logistik,\nPengurusan SOP dan perizinan, serta\nPendampingan selama pelaksanaan acara.",
                 'paragraf_3' => 'Untuk memulai, silakan isi formulir konsultasi melalui tombol “Ajukan Permohonan” berikut:',
@@ -636,9 +636,9 @@ class FrontendController extends Controller
             ['id' => 1],
             [
                 'judul_hero' => 'Survey Layanan',
-                'subjudul_hero' => 'Kuesioner Evaluasi Kepuasan & Mutu Pelayanan Humas Universitas Ibnu Sina',
+                'subjudul_hero' => 'Kuesioner Evaluasi Kepuasan & Mutu Pelayanan Humas Teknik Informatika',
                 'judul_seksi' => 'Survei Evaluasi',
-                'deskripsi_seksi' => 'Silakan isi formulir evaluasi kepuasan layanan berikut untuk membantu kami meningkatkan kualitas mutu pelayanan Humas Universitas Ibnu Sina.',
+                'deskripsi_seksi' => 'Silakan isi formulir evaluasi kepuasan layanan berikut untuk membantu kami meningkatkan kualitas mutu pelayanan Humas Teknik Informatika.',
                 'is_active' => true,
             ]
         );

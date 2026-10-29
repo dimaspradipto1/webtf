@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Kisah Sukses & Testimoni Alumni — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Baca ulasan, pengalaman, dan jejak karier alumni, mahasiswa, serta mitra industri Universitas Ibnu Sina (UIS) Batam.')
-@section('meta_keywords', 'testimoni alumni uis, review universitas ibnu sina, jejak karir alumni batam, ulasan lulusan uis, kampus profesional muda')
+@section('title', 'Kisah Sukses & Testimoni Alumni — Teknik Informatika (UIS)')
+@section('meta_description', 'Baca ulasan, pengalaman, dan jejak karier alumni, mahasiswa, serta mitra industri Teknik Informatika (UIS) Batam.')
+@section('meta_keywords', 'testimoni alumni uis, review teknik informatika, jejak karir alumni batam, ulasan lulusan uis, kampus profesional muda')
 
 @section('content')
 
@@ -12,7 +12,7 @@
 <div class="about-hero">
   <div class="container">
     <div class="about-hero-content" data-aos="fade-up" data-aos-duration="800">
-      <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3" style="background: rgba(254, 216, 2, 0.15); border: 1px solid rgba(254, 216, 2, 0.4);">
+      <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3" style="background: rgba(249, 220, 75, 0.15); border: 1px solid rgba(249, 220, 75, 0.4);">
         <i class="bi bi-mortarboard-fill text-warning"></i>
         <span class="text-warning small fw-bold">PORTAL ALUMNI & CIVITAS</span>
       </div>
@@ -38,13 +38,13 @@
       <div class="col-lg-4" data-aos="fade-right">
         <div class="rating-score-box">
           <div class="rating-big-num">{{ number_format($avgScore, 1) }}</div>
-          <div class="d-flex justify-content-center gap-1 fs-5 mb-2" style="color: #FED802;">
+          <div class="d-flex justify-content-center gap-1 fs-5 mb-2" style="color: #f9dc4b;">
             @for($i = 1; $i <= 5; $i++)
               <i class="bi bi-star{{ $i <= round($avgScore) ? '-fill' : '' }}"></i>
             @endfor
           </div>
           <h4 class="fw-bold text-white mb-1" style="font-size: 18px;">Penilaian Keseluruhan</h4>
-          <p class="text-white-50 small mb-0">Berdasarkan {{ $totalCount }} ulasan terverifikasi civitas & alumni Universitas Ibnu Sina</p>
+          <p class="text-white-50 small mb-0">Berdasarkan {{ $totalCount }} ulasan terverifikasi civitas & alumni Teknik Informatika</p>
         </div>
       </div>
 
@@ -52,7 +52,7 @@
       <div class="col-lg-8" data-aos="fade-left">
         <div class="rating-bar-wrap">
           <h3 class="fw-bold text-dark mb-3" style="font-size: 18px;">
-            <i class="bi bi-bar-chart-line-fill me-2" style="color:#046B26;"></i> Distribusi Penilaian Bintang
+            <i class="bi bi-bar-chart-line-fill me-2" style="color:#000000;"></i> Distribusi Penilaian Bintang
           </h3>
 
           @foreach([5, 4, 3, 2, 1] as $star)
@@ -70,7 +70,7 @@
 
           <div class="d-flex align-items-center justify-content-between pt-3 mt-3 border-top" style="border-color: #f2e9f7 !important;">
             <span class="text-muted small">Kategori terdaftar: <strong>{{ count($categories) }} Segmen Civitas</strong></span>
-            <span class="badge" style="background:#046B26; color:#fff;">100% Ulasan Terverifikasi</span>
+            <span class="badge" style="background:#000000; color:#fff;">100% Ulasan Terverifikasi</span>
           </div>
         </div>
       </div>
@@ -120,7 +120,7 @@
 
         <!-- Submit & Reset -->
         <div class="col-md-2 d-flex gap-2">
-          <button type="submit" class="btn btn-primary w-100 fw-bold" style="background:#046B26; border-color:#046B26;">
+          <button type="submit" class="btn btn-primary w-100 fw-bold" style="background:#000000; border-color:#000000;">
             Filter
           </button>
           @if(!empty($search) || !empty($selectedKategori) || !empty($selectedRating))
@@ -147,22 +147,22 @@
           <div class="testi-card h-100 shadow-sm" style="background: #ffffff; border: 1.5px solid #f0e6f5; border-radius: 20px; padding: 28px 24px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.3s ease;">
             <div>
               <div class="d-flex align-items-center justify-content-between mb-3">
-                <div class="testi-stars m-0" style="color: #FED802; font-size: 15px; display: flex; gap: 3px;">
+                <div class="testi-stars m-0" style="color: #f9dc4b; font-size: 15px; display: flex; gap: 3px;">
                   @for($i = 1; $i <= 5; $i++)
                     <i class="bi bi-star{{ $i <= $testi->bintang ? '-fill' : '' }}"></i>
                   @endfor
                 </div>
-                <span class="badge" style="background: #f5edf8; color: #046B26; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 8px;">
+                <span class="badge" style="background: #f9dc4b; color: #000000; font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 8px;">
                   {{ $testi->kategori ?? 'Alumni' }}
                 </span>
               </div>
               <p class="testi-text mb-4" style="font-size: 14px; line-height: 1.6; color: #333333; font-style: italic;">"{{ $testi->pesan }}"</p>
             </div>
             <div class="testi-author pt-3 border-top d-flex align-items-center gap-3" style="border-color: #f7effa !important;">
-              <div class="testi-avatar flex-shrink-0" style="width: 44px; height: 44px; border-radius: 50%; background: #046B26; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">{{ $initials ?: 'AL' }}</div>
+              <div class="testi-avatar flex-shrink-0" style="width: 44px; height: 44px; border-radius: 50%; background: #000000; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;">{{ $initials ?: 'AL' }}</div>
               <div>
                 <div class="testi-name text-dark fw-bold" style="font-size: 14px; line-height: 1.3;">{{ $testi->nama }}</div>
-                <div class="testi-role text-muted small" style="font-size: 12px;">{{ $testi->pekerjaan ?? 'Alumni Universitas Ibnu Sina' }}</div>
+                <div class="testi-role text-muted small" style="font-size: 12px;">{{ $testi->pekerjaan ?? 'Alumni Teknik Informatika' }}</div>
               </div>
             </div>
           </div>
@@ -173,7 +173,7 @@
             <i class="bi bi-chat-square-text text-muted" style="font-size: 48px;"></i>
             <h5 class="fw-bold mt-3 text-dark">Tidak Ada Testimoni yang Sesuai</h5>
             <p class="text-muted small">Coba ubah kata kunci pencarian atau reset filter untuk menampilkan semua ulasan.</p>
-            <a href="{{ route('homepage.testimoni') }}" class="btn btn-sm btn-outline-primary" style="color:#046B26; border-color:#046B26;">Reset Filter</a>
+            <a href="{{ route('homepage.testimoni') }}" class="btn btn-sm btn-outline-primary" style="color:#000000; border-color:#000000;">Reset Filter</a>
           </div>
         </div>
       @endforelse

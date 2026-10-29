@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('pendampingan_acara_settings', function (Blueprint $table) {
             $table->id();
             $table->string('judul_hero')->default('Pendampingan Acara');
-            $table->string('subjudul_hero')->default('Layanan Konsultasi Protokol & Pendampingan Kegiatan Resmi Universitas Ibnu Sina');
+            $table->string('subjudul_hero')->default('Layanan Konsultasi Protokol & Pendampingan Kegiatan Resmi Teknik Informatika');
             $table->string('judul_seksi')->default('Pendampingan Acara');
-            $table->string('sapaan')->default('Halo, Civitas Akademika Universitas Ibnu Sina dan Mitra Eksternal!');
+            $table->string('sapaan')->default('Halo, Civitas Akademika Teknik Informatika dan Mitra Eksternal!');
             $table->text('paragraf_1')->nullable();
             $table->text('paragraf_2')->nullable();
             $table->text('poin_bantuan')->nullable();

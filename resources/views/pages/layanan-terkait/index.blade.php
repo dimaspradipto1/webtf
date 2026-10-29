@@ -13,11 +13,11 @@
 
 {{-- 1. Pengaturan Header Seksi Frontend --}}
 <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
-    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #FED802; border-radius: 12px 12px 0 0;">
+    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #f9dc4b; border-radius: 12px 12px 0 0;">
         <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
-            <i class="bi bi-pencil-square me-2" style="color: #FED802;"></i>Pengaturan Judul & Deskripsi Seksi Layanan Terkait
+            <i class="bi bi-pencil-square me-2" style="color: #f9dc4b;"></i>Pengaturan Judul & Deskripsi Seksi Layanan Terkait
         </h5>
-        <span class="badge" style="background-color: #FED802; color: #ffffff; font-size: 11.5px; font-weight: 700; padding: 6px 12px; border-radius: 6px;">Frontend Header</span>
+        <span class="badge" style="background-color: #f9dc4b; color: #ffffff; font-size: 11.5px; font-weight: 700; padding: 6px 12px; border-radius: 6px;">Frontend Header</span>
     </div>
     <div class="card-body pt-3 pb-4">
         <form action="{{ route('layanan-terkait.update-setting') }}" method="POST">
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="col-12 text-end pt-2">
-                    <button type="submit" class="btn fw-semibold shadow-sm" style="background-color: #FED802; color: #ffffff; border: none; padding: 8px 20px; border-radius: 8px;">
+                    <button type="submit" class="btn fw-semibold shadow-sm" style="background-color: #f9dc4b; color: #ffffff; border: none; padding: 8px 20px; border-radius: 8px;">
                         <i class="bi bi-floppy me-1"></i> Simpan Perubahan Teks
                     </button>
                 </div>
@@ -68,11 +68,11 @@
 
 {{-- 2. Daftar Link & Kartu Layanan --}}
 <div class="card shadow-sm border-0" style="border-radius: 12px;">
-    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
         <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
-            <i class="bi bi-grid-fill me-2" style="color: #046B26;"></i>Daftar Link & Kartu Layanan
+            <i class="bi bi-grid-fill me-2" style="color: #000000;"></i>Daftar Link & Kartu Layanan
         </h5>
-        <a href="{{ route('layanan-terkait.create') }}" class="btn fw-semibold shadow-sm" style="background-color: #FED802; color: #ffffff; border: none; padding: 7px 18px; border-radius: 8px;">
+        <a href="{{ route('layanan-terkait.create') }}" class="btn fw-semibold shadow-sm" style="background-color: #f9dc4b; color: #ffffff; border: none; padding: 7px 18px; border-radius: 8px;">
             <i class="bi bi-plus-lg me-1"></i> Tambah Layanan
         </a>
     </div>

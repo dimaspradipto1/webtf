@@ -1,12 +1,12 @@
 <!-- ═══════════════════════════════════════════════
-     NAVBAR HEADER UTAMA — UNIVERSITAS IBNU SINA (UIS)
+     NAVBAR HEADER UTAMA — TEKNIK INFORMATIKA
 ═══════════════════════════════════════════════ -->
 <nav class="navbar navbar-expand-xl navbar-main sticky-top">
   <div class="container-fluid px-lg-4 px-xl-5">
     <!-- Logo UIS -->
     <a class="navbar-brand navbar-brand-custom me-2 me-xl-3" href="{{ route('homepage') }}">
-      <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo Universitas Ibnu Sina" class="brand-logo-img">
-      <span class="brand-title-main ms-2">UNIVERSITAS IBNU SINA</span>
+      <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo Teknik Informatika" class="brand-logo-img">
+      <span class="brand-title-main ms-2">TEKNIK INFORMATIKA</span>
     </a>
 
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,8 +76,8 @@
             Kemahasiswaan <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.prestasi*') ? 'active' : '' }}" href="{{ route('homepage.prestasi') }}"><i class="bi bi-trophy-fill text-warning"></i> Prestasi Mahasiswa</a></li>
-            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.organisasi*') ? 'active' : '' }}" href="{{ route('homepage.organisasi') }}"><i class="bi bi-people-fill text-success"></i> Organisasi & Ormawa</a></li>
+            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.prestasi*') ? 'active' : '' }}" href="{{ route('homepage.prestasi') }}"><i class="bi bi-trophy-fill"></i> Prestasi Mahasiswa</a></li>
+            <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.organisasi*') ? 'active' : '' }}" href="{{ route('homepage.organisasi') }}"><i class="bi bi-people-fill"></i> Organisasi & Ormawa</a></li>
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.galeri*') ? 'active' : '' }}" href="{{ route('homepage.galeri') }}"><i class="bi bi-camera"></i> Galeri Dokumentasi</a></li>
             <li><a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.testimoni*') ? 'active' : '' }}" href="{{ route('homepage.testimoni') }}"><i class="bi bi-mortarboard"></i> Alumni & Testimoni</a></li>
           </ul>

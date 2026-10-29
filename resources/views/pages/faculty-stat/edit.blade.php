@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Edit Data Statistik Universitas Ibnu Sina</h1>
+    <h1>Edit Data Statistik Teknik Informatika</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col-12">
         <div class="card shadow-sm border-0">
-            <div class="card-header bg-white py-3" style="border-top: 3px solid #046B26;">
+            <div class="card-header bg-white py-3" style="border-top: 3px solid #000000;">
                 <h5 class="mb-0 fw-bold text-dark">
                     <i class="bi bi-pencil-square me-2 text-success"></i>Form Edit Statistik & Background Banner UIS
                 </h5>
@@ -47,8 +47,8 @@
                                name="title"
                                class="form-control @error('title') is-invalid @enderror"
                                value="{{ old('title', $facultyStat->title) }}"
-                               placeholder="Contoh: Universitas Ibnu Sina">
-                        <div class="form-text">Teks judul putih di tengah banner statistik (Contoh di screenshot: <strong>Universitas Ibnu Sina</strong>).</div>
+                               placeholder="Contoh: Teknik Informatika">
+                        <div class="form-text">Teks judul putih di tengah banner statistik (Contoh di screenshot: <strong>Teknik Informatika</strong>).</div>
                         @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -264,7 +264,7 @@
                         <a href="{{ route('faculty-stat.index') }}" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-1"></i> Batal
                         </a>
-                        <button type="submit" class="btn btn-success fw-bold px-4 shadow-sm" style="background:#046B26;border-color:#046B26;">
+                        <button type="submit" class="btn btn-success fw-bold px-4 shadow-sm" style="background:#000000;border-color:#000000;">
                             <i class="bi bi-save me-1"></i> Perbarui Data Statistik
                         </button>
                     </div>

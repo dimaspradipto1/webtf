@@ -25,7 +25,7 @@
         <div class="alert alert-info alert-dismissible fade show mb-3" role="alert">
             <i class="bi bi-info-circle-fill me-2"></i>
             <strong>Info:</strong> Data ini ditampilkan pada seksi
-            <strong>"Dosen &amp; Pakar Akademik Universitas Ibnu Sina"</strong> di halaman beranda.
+            <strong>"Dosen &amp; Pakar Akademik Teknik Informatika"</strong> di halaman beranda.
             Setiap kartu dapat dihubungkan langsung ke Program Studi tertentu sehingga tombol pada kartu akan mengarahkan pengunjung ke daftar dosen prodi tersebut.
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>

@@ -235,7 +235,7 @@
                     {{-- Submit Button --}}
                     <div class="d-flex justify-content-end gap-2 pt-2 border-top">
                         <a href="{{ route('template-dokumen.index') }}" class="btn btn-secondary px-3">Batal</a>
-                        <button type="submit" class="btn fw-semibold px-4" style="background-color: #046B26; color: #ffffff;">
+                        <button type="submit" class="btn fw-semibold px-4" style="background-color: #000000; color: #ffffff;">
                             <i class="bi bi-save me-1"></i> Perbarui Template Dokumen
                         </button>
                     </div>

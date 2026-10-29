@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Visi & Misi — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Visi, Misi, dan Nilai-nilai Budaya Civitas Akademika Universitas Ibnu Sina.')
-@section('meta_keywords', 'visi misi uis, visi universitas ibnu sina, misi universitas ibnu sina batam')
+@section('title', 'Visi & Misi — Teknik Informatika (UIS)')
+@section('meta_description', 'Visi, Misi, dan Nilai-nilai Budaya Civitas Akademika Teknik Informatika.')
+@section('meta_keywords', 'visi misi uis, visi teknik informatika, misi teknik informatika batam')
 
 @section('content')
 
@@ -33,9 +33,9 @@
   <div class="container py-3">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label">Arah & Landasan Institusi</div>
-      <h2 class="section-title">Visi & Misi <em>Universitas Ibnu Sina</em></h2>
+      <h2 class="section-title">Visi & Misi <em>Teknik Informatika</em></h2>
       <p class="section-desc mx-auto" style="max-width: 650px;">
-        Komitmen fundamental yang mengarahkan setiap langkah Tri Dharma Perguruan Tinggi di Universitas Ibnu Sina.
+        Komitmen fundamental yang mengarahkan setiap langkah Tri Dharma Perguruan Tinggi di Teknik Informatika.
       </p>
     </div>
 

@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($organisasi->singkatan ? $organisasi->singkatan . ' — ' : '') . $organisasi->nama_organisasi . ' | Universitas Ibnu Sina')
-@section('meta_description', 'Profil lengkap ' . $organisasi->nama_organisasi . ' UIS Universitas Ibnu Sina: Visi, Misi, Susunan Pengurus, Program Kerja dan Kegiatan Kemahasiswaan.')
+@section('title', ($organisasi->singkatan ? $organisasi->singkatan . ' — ' : '') . $organisasi->nama_organisasi . ' | Teknik Informatika')
+@section('meta_description', 'Profil lengkap ' . $organisasi->nama_organisasi . ' UIS Teknik Informatika: Visi, Misi, Susunan Pengurus, Program Kerja dan Kegiatan Kemahasiswaan.')
 
 @section('content')
 <!-- HERO SECTION -->
@@ -16,7 +16,7 @@
           <span>/</span>
           <span class="active">{{ $organisasi->singkatan ?: $organisasi->nama_organisasi }}</span>
         </div>
-        <span class="badge mb-2" style="background:#FED802; color:#1a0528; font-size:12px; font-weight:700; padding:6px 14px;">
+        <span class="badge mb-2" style="background:#f9dc4b; color:#1a0528; font-size:12px; font-weight:700; padding:6px 14px;">
           {{ $organisasi->kategori }}
         </span>
         <h1 class="fw-bold text-white mb-2" style="font-size: clamp(24px, 3vw, 36px); line-height: 1.25;">
@@ -50,7 +50,7 @@
               @if(!empty($organisasi->logo))
                 <img src="{{ asset('storage/' . $organisasi->logo) }}" alt="{{ $organisasi->nama_organisasi }}" style="width: 85px; height: 85px; object-fit: contain; display: block;">
               @else
-                <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 80px; height: 80px; background: #032e12; font-size: 24px;">
+                <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style="width: 80px; height: 80px; background: #000000; font-size: 24px;">
                   {{ strtoupper(substr($organisasi->singkatan ?: $organisasi->nama_organisasi, 0, 2)) }}
                 </div>
               @endif
@@ -89,7 +89,7 @@
             @if(!empty($organisasi->nama_wakil))
               <div class="col-sm-6">
                 <div class="info-badge-box">
-                  <div class="info-badge-icon" style="background: #FED802;"><i class="bi bi-person-check"></i></div>
+                  <div class="info-badge-icon" style="background: #f9dc4b;"><i class="bi bi-person-check"></i></div>
                   <div>
                     <small class="text-muted d-block">Wakil Ketua</small>
                     <strong class="text-dark">{{ $organisasi->nama_wakil }}</strong>
@@ -101,7 +101,7 @@
             @if(!empty($organisasi->pembina))
               <div class="col-sm-6">
                 <div class="info-badge-box">
-                  <div class="info-badge-icon" style="background: #046B26; color: #ffffff;"><i class="bi bi-mortarboard-fill"></i></div>
+                  <div class="info-badge-icon" style="background: #000000; color: #ffffff;"><i class="bi bi-mortarboard-fill"></i></div>
                   <div>
                     <small class="text-muted d-block">Dosen Pembina</small>
                     <strong class="text-dark">{{ $organisasi->pembina }}</strong>
@@ -113,7 +113,7 @@
             @if(!empty($organisasi->periode))
               <div class="col-sm-6">
                 <div class="info-badge-box">
-                  <div class="info-badge-icon" style="background: #FED802; color: #046B26;"><i class="bi bi-calendar-check"></i></div>
+                  <div class="info-badge-icon" style="background: #f9dc4b; color: #000000;"><i class="bi bi-calendar-check"></i></div>
                   <div>
                     <small class="text-muted d-block">Masa Bakti</small>
                     <strong class="text-dark">Tahun {{ $organisasi->periode }}</strong>
@@ -207,7 +207,7 @@
 
           <div class="small text-muted p-2 rounded-3 bg-light border">
             <i class="bi bi-geo-alt-fill text-warning me-1"></i>
-            Sekretariat Bersama Gedung Universitas Ibnu Sina Batam
+            Sekretariat Bersama Gedung Teknik Informatika Batam
           </div>
         </div>
 

@@ -106,7 +106,7 @@
                             </div>
                             <div class="col-12">
                                 <label for="hero_subtitle" class="form-label fw-semibold">Subjudul / Deskripsi Hero</label>
-                                <textarea id="hero_subtitle" name="hero_subtitle" rows="2" class="form-control">{{ old('hero_subtitle', $setting->hero_subtitle ?? 'Kami menyediakan template desain resmi untuk keperluan presentasi LED, ruang sidang, agenda rapat, dan spanduk acara di lingkungan Universitas Ibnu Sina.') }}</textarea>
+                                <textarea id="hero_subtitle" name="hero_subtitle" rows="2" class="form-control">{{ old('hero_subtitle', $setting->hero_subtitle ?? 'Kami menyediakan template desain resmi untuk keperluan presentasi LED, ruang sidang, agenda rapat, dan spanduk acara di lingkungan Teknik Informatika.') }}</textarea>
                             </div>
                         </div>
                     </div>

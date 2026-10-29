@@ -1,18 +1,18 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Prestasi Mahasiswa — Universitas Ibnu Sina')
-@section('meta_description', 'Daftar capaian prestasi, kejuaraan, dan penghargaan mahasiswa Universitas Ibnu Sina (UIS) UIS di tingkat regional, nasional, dan internasional.')
+@section('title', 'Prestasi Mahasiswa — Teknik Informatika')
+@section('meta_description', 'Daftar capaian prestasi, kejuaraan, dan penghargaan mahasiswa Teknik Informatika (UIS) UIS di tingkat regional, nasional, dan internasional.')
 
 @section('content')
 <!-- Header Banner -->
 <div class="prestasi-hero text-white">
   <div class="container text-center">
-    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: rgba(254, 216, 2, 0.18); color: #FED802; border: 1px solid rgba(254, 216, 2, 0.45); font-weight: 700; font-size: 13px; letter-spacing: 0.5px;">
+    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: #f9dc4b; color: #000000; border: 1px solid #f9dc4b; font-weight: 700; font-size: 13px; letter-spacing: 0.5px;">
       <i class="bi bi-trophy-fill me-1"></i> Hall of Fame & Prestasi
     </div>
-    <h1 class="fw-bold mb-3 text-white" style="font-size: 38px; color: #ffffff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.35);">Prestasi Mahasiswa Universitas Ibnu Sina</h1>
+    <h1 class="fw-bold mb-3 text-white" style="font-size: 38px; color: #ffffff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.35);">Prestasi Mahasiswa Teknik Informatika</h1>
     <p class="mx-auto text-white mb-2" style="max-width: 680px; line-height: 1.7; color: rgba(255, 255, 255, 0.92) !important; font-size: 15.5px;">
-      Koleksi prestasi gemilang, medali kejuaraan, dan publikasi ilmiah sivitas akademika Universitas Ibnu Sina di tingkat regional, nasional, dan internasional.
+      Koleksi prestasi gemilang, medali kejuaraan, dan publikasi ilmiah sivitas akademika Teknik Informatika di tingkat regional, nasional, dan internasional.
     </p>
     <div class="breadcrumb-custom justify-content-center mt-3">
       <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
@@ -45,7 +45,7 @@
             <input type="hidden" name="tingkat" value="{{ $selectedTingkat }}">
           @endif
           <input type="text" name="q" value="{{ $search ?? '' }}" class="form-control form-control-sm rounded-pill px-3" placeholder="Cari nama / kejuaraan..." style="max-width: 240px;">
-          <button type="submit" class="btn btn-sm btn-primary rounded-pill px-3" style="background: #046B26; border-color: #046B26;">
+          <button type="submit" class="btn btn-sm btn-primary rounded-pill px-3" style="background: #000000; border-color: #000000;">
             <i class="bi bi-search"></i>
           </button>
         </form>
@@ -86,9 +86,9 @@
                 @if(!empty($prestasi->foto))
                   <img src="{{ asset('storage/' . $prestasi->foto) }}" alt="{{ $prestasi->judul_prestasi }}" class="prestasi-thumb">
                 @else
-                  <div class="d-flex align-items-center justify-content-center h-100 text-white flex-column gap-2" style="background: #046B26;">
-                    <i class="bi bi-trophy-fill" style="font-size: 44px; color: #FED802;"></i>
-                    <span class="small fw-semibold text-white-50">Universitas Ibnu Sina Achievement</span>
+                  <div class="d-flex align-items-center justify-content-center h-100 text-white flex-column gap-2" style="background: #000000;">
+                    <i class="bi bi-trophy-fill" style="font-size: 44px; color: #f9dc4b;"></i>
+                    <span class="small fw-semibold text-white-50">Teknik Informatika Achievement</span>
                   </div>
                 @endif
                 <span class="prestasi-tingkat-badge badge {{ $tingkatBadge }}">
@@ -110,7 +110,7 @@
                   </h4>
 
                   <div class="d-flex align-items-center gap-2 mb-3 mt-3">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" style="width: 32px; height: 32px; background: #046B26; font-size: 13px;">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center text-white flex-shrink-0" style="width: 32px; height: 32px; background: #000000; font-size: 13px;">
                       <i class="bi bi-person-fill"></i>
                     </div>
                     <div>
@@ -157,7 +157,7 @@
       <div class="p-5 text-center bg-white rounded-4 shadow-sm">
         <i class="bi bi-trophy fs-1 text-muted mb-3 d-block"></i>
         <h4 class="fw-bold text-dark">Belum Ada Data Prestasi</h4>
-        <p class="text-muted small">Data prestasi mahasiswa Universitas Ibnu Sina akan segera diperbarui di sini.</p>
+        <p class="text-muted small">Data prestasi mahasiswa Teknik Informatika akan segera diperbarui di sini.</p>
         <a href="{{ route('homepage.prestasi') }}" class="btn btn-sm btn-outline-secondary rounded-pill px-4 mt-2">
           Lihat Semua Prestasi
         </a>

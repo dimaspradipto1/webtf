@@ -5,25 +5,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  --bg:#f0ebf7; --purple:#046B26; --purple-dk:#5c2575;
-  --purple-lt:#c89de0; --purple-xs:#eaf6ee; --orange:#FED802;
+  --bg:#f0ebf7; --purple:#000000; --purple-dk:#5c2575;
+  --purple-lt:#c89de0; --purple-xs:#f9dc4b; --orange:#f9dc4b;
   --orange-dk:#d98000; --white:#ffffff; --border:#e4d8f0;
-  --txt:#1a0a2e; --txt2:#6b6580; --card-sh:0 4px 24px rgba(4,107,38,.10);
+  --txt:#1a0a2e; --txt2:#6b6580; --card-sh:0 4px 24px rgba(0, 0, 0, .10);
 }
 body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans-serif!important; }
 .pagetitle h1{ color:var(--txt); font-weight:800; font-size:1.4rem; }
 
 /* HERO */
-.dh-hero{ border-radius:24px; overflow:hidden; margin-bottom:24px; box-shadow:0 12px 36px rgba(4,107,38,.18); position:relative; }
+.dh-hero{ border-radius:24px; overflow:hidden; margin-bottom:24px; box-shadow:0 12px 36px rgba(0, 0, 0, .18); position:relative; }
 .dh-hero-inner{
-  background:#046B26;
-  border-bottom: 3px solid #FED802;
+  background:#000000;
+  border-bottom: 3px solid #f9dc4b;
   padding:36px 40px; position:relative; z-index:1;
 }
 .dh-hero-inner>*{ position:relative; z-index:1; }
 .dh-role-tag{
   display:inline-flex; align-items:center; gap:7px;
-  background:rgba(254,216,2,.2); border:1px solid #FED802; color:#FED802;
+  background:rgba(249, 220, 75, .2); border:1px solid #f9dc4b; color:#f9dc4b;
   font-size:11.5px; font-weight:700; padding:5px 15px; border-radius:99px; letter-spacing:.5px; margin-bottom:14px;
 }
 .dh-role-tag.blue  { background:rgba(67,97,238,.2);  border-color:rgba(100,140,255,.4); color:#a8bcff; }
@@ -43,13 +43,13 @@ body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans
   transition:transform .22s,box-shadow .22s; white-space:nowrap; width:fit-content;
 }
 .dh-btn:hover{ transform:translateY(-3px); }
-.dh-btn-orange{ background:#FED802; color:#046B26; font-weight:800; box-shadow:0 4px 16px rgba(0,0,0,.15); }
-.dh-btn-orange:hover{ box-shadow:0 8px 24px rgba(0,0,0,.25); color:#03521d; }
+.dh-btn-orange{ background:#f9dc4b; color:#000000; font-weight:800; box-shadow:0 4px 16px rgba(0,0,0,.15); }
+.dh-btn-orange:hover{ box-shadow:0 8px 24px rgba(0,0,0,.25); color:#000000; }
 .dh-btn-ghost{ background:rgba(255,255,255,.14); border:1.5px solid rgba(255,255,255,.25); color:#fff; }
 .dh-btn-ghost:hover{ background:rgba(255,255,255,.22); color:#fff; }
 .dh-hero-strip{
-  display:flex; align-items:center; background:#023814;
-  padding:12px 40px; gap:28px; border-top:1px solid rgba(254,216,2,.2); flex-wrap:wrap;
+  display:flex; align-items:center; background:#000000;
+  padding:12px 40px; gap:28px; border-top:1px solid rgba(249, 220, 75, .2); flex-wrap:wrap;
 }
 .dh-strip-item{ display:flex; align-items:center; gap:8px; color:rgba(255,255,255,.85); font-size:13px; font-weight:600; }
 .dh-strip-item i{ color:var(--orange); font-size:16px; }
@@ -66,12 +66,12 @@ body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans
 .kpi-label{ font-size:12.5px; font-weight:600; opacity:.92; margin-top:4px; position:relative; z-index:1; }
 .kpi-sub{ font-size:11px; opacity:.75; margin-top:2px; position:relative; z-index:1; }
 .kpi-indigo  { background:#1e3a8a; }
-.kpi-purple  { background:#046B26; }
+.kpi-purple  { background:#000000; }
 .kpi-orange  { background:#b45309; }
-.kpi-emerald { background:#03521d; }
+.kpi-emerald { background:#000000; }
 .kpi-teal    { background:#0e7490; }
 .kpi-rose    { background:#9f1239; }
-.kpi-amber   { background:#cfae00; color:#032e12; }
+.kpi-amber   { background:#f9dc4b; color:#000000; }
 .kpi-navy    { background:#0f172a; }
 
 /* PANEL */
@@ -118,8 +118,8 @@ body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans
 /* SHORTCUTS */
 .sc-wrap{ display:grid; grid-template-columns:repeat(auto-fill,minmax(118px,1fr)); gap:14px; padding:24px; }
 .sc{ display:flex; flex-direction:column; align-items:center; padding:20px 10px; border-radius:18px; gap:10px; background:var(--purple-xs); border:1.5px solid #e3d0f2; text-decoration:none; color:var(--txt); font-size:12.5px; font-weight:700; text-align:center; transition:all .22s; }
-.sc:hover{ background:#046B26; border-color:var(--purple-dk); color:#fff; transform:translateY(-5px); box-shadow:0 12px 32px rgba(4,107,38,.35); }
-.sc-ic{ width:50px; height:50px; border-radius:14px; background:rgba(4,107,38,.12); color:var(--purple); display:flex; align-items:center; justify-content:center; font-size:22px; transition:all .22s; }
+.sc:hover{ background:#000000; border-color:var(--purple-dk); color:#fff; transform:translateY(-5px); box-shadow:0 12px 32px rgba(0, 0, 0, .35); }
+.sc-ic{ width:50px; height:50px; border-radius:14px; background:rgba(0, 0, 0, .12); color:var(--purple); display:flex; align-items:center; justify-content:center; font-size:22px; transition:all .22s; }
 .sc:hover .sc-ic{ background:rgba(255,255,255,.2); color:#fff; }
 
 /* ACTION ITEMS */
@@ -130,10 +130,10 @@ body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans
 .ai.green:hover{ border-color:#06d6a0; background:#ecfdf5; color:var(--txt); }
 .ai:not(.blue):not(.green):hover{ border-color:var(--purple); background:#eedff7; color:var(--txt); }
 .ai-ic{ width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:19px; flex-shrink:0; }
-.aic-p{ background:rgba(4,107,38,.12); color:var(--purple); }
+.aic-p{ background:rgba(0, 0, 0, .12); color:var(--purple); }
 .aic-b{ background:rgba(67,97,238,.12);  color:#4361ee; }
 .aic-g{ background:rgba(6,214,160,.12);  color:#047a56; }
-.aic-o{ background:rgba(254,216,2,.12);  color:var(--orange-dk); }
+.aic-o{ background:rgba(249, 220, 75, .12);  color:var(--orange-dk); }
 
 /* STAT PILLS */
 .sp-row{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; }
@@ -170,7 +170,7 @@ body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans
 @endphp
 
 <div class="pagetitle mb-3">
-  <h1>Dashboard Portal Universitas Ibnu Sina</h1>
+  <h1>Dashboard Portal Teknik Informatika</h1>
   <nav><ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
     <li class="breadcrumb-item active">Dashboard</li>
@@ -184,16 +184,16 @@ body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans
       <div class="col-lg-8">
         <div class="dh-role-tag {{ $rClass }}"><i class="bi {{ $rIcon }}"></i> {{ $rLabel }}</div>
         <h2 class="dh-hero-title">Selamat datang, <span>{{ $user->name }}</span>!
-          @if($isAdmin)<i class="bi bi-patch-check-fill" style="color:#FED802;vertical-align:middle;"></i>
+          @if($isAdmin)<i class="bi bi-patch-check-fill" style="color:#f9dc4b;vertical-align:middle;"></i>
           @elseif($isOrganisasi)<i class="bi bi-building-fill" style="color:#06d6a0;vertical-align:middle;"></i>
           @elseif($isPenulis)<i class="bi bi-pencil-square" style="color:#a8bcff;vertical-align:middle;"></i>
           @else<i class="bi bi-person-fill" style="color:#fff;vertical-align:middle;"></i>@endif
         </h2>
         <p class="dh-hero-sub">
-          @if($isAdmin) Pantau dan kelola seluruh konten portal web Universitas Ibnu Sina &mdash; akademik, kemahasiswaan, publikasi, dan pengaturan sistem.
+          @if($isAdmin) Pantau dan kelola seluruh konten portal web Teknik Informatika &mdash; akademik, kemahasiswaan, publikasi, dan pengaturan sistem.
           @elseif($isOrganisasi) Kelola profil lembaga kemahasiswaan, kegiatan, susunan pengurus, dan link pendaftaran anggota baru.
-          @elseif($isPenulis) Tulis, edit, dan terbitkan berita, pengumuman resmi, dan liputan kegiatan akademik Universitas Ibnu Sina.
-          @else Selamat datang di sistem manajemen portal web Universitas Ibnu Sina. @endif
+          @elseif($isPenulis) Tulis, edit, dan terbitkan berita, pengumuman resmi, dan liputan kegiatan akademik Teknik Informatika.
+          @else Selamat datang di sistem manajemen portal web Teknik Informatika. @endif
         </p>
         <div class="d-flex flex-wrap gap-2">
           @if($isAdmin)
@@ -263,7 +263,7 @@ body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans
   <div class="col-lg-3">
     <div class="panel h-100">
       <div class="ch-wrap">
-        <div class="ch-title"><span class="ch-ic" style="background:rgba(4,107,38,.12);color:#046B26;"><i class="bi bi-pie-chart-fill"></i></span> Distribusi Ormawa</div>
+        <div class="ch-title"><span class="ch-ic" style="background:rgba(0, 0, 0, .12);color:#000000;"><i class="bi bi-pie-chart-fill"></i></span> Distribusi Ormawa</div>
         <div class="ch-sub">Berdasarkan kategori</div>
         <div id="adminOrmawaChart" style="min-height:260px;"></div>
       </div>
@@ -352,7 +352,7 @@ body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans
 
 <div class="panel">
   <div class="panel-head">
-    <h3><span class="panel-head-ic" style="background:rgba(4,107,38,.12);color:#046B26;"><i class="bi bi-grid-fill"></i></span> Pintasan Akses Cepat Administrator</h3>
+    <h3><span class="panel-head-ic" style="background:rgba(0, 0, 0, .12);color:#000000;"><i class="bi bi-grid-fill"></i></span> Pintasan Akses Cepat Administrator</h3>
     <span style="font-size:12px;color:var(--txt2);font-weight:600;">{{ now()->format('H:i') }} WIB</span>
   </div>
   <div class="sc-wrap">
@@ -400,7 +400,7 @@ body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans
           <a href="{{ route('organisasi-mahasiswa.create') }}" class="ai green"><div class="ai-ic aic-g"><i class="bi bi-plus-circle-fill"></i></div><div><div>Tambah Organisasi Baru</div><small class="text-muted fw-normal">Daftarkan lembaga baru</small></div><i class="bi bi-chevron-right ms-auto text-muted"></i></a>
           <a href="{{ route('organisasi-mahasiswa.index') }}" class="ai green"><div class="ai-ic aic-g"><i class="bi bi-list-task"></i></div><div><div>Kelola Semua Organisasi</div><small class="text-muted fw-normal">Edit, aktifkan, nonaktifkan</small></div><i class="bi bi-chevron-right ms-auto text-muted"></i></a>
           <a href="{{ route('homepage.organisasi') }}" target="_blank" class="ai green"><div class="ai-ic aic-g"><i class="bi bi-eye-fill"></i></div><div><div>Pratinjau di Website</div><small class="text-muted fw-normal">Lihat tampilan publik</small></div><i class="bi bi-box-arrow-up-right ms-auto text-muted"></i></a>
-          <a href="{{ url('/') }}" target="_blank" class="ai"><div class="ai-ic aic-o"><i class="bi bi-globe2"></i></div><div><div>Buka Portal Universitas Ibnu Sina</div><small class="text-muted fw-normal">Website utama fakultas</small></div><i class="bi bi-box-arrow-up-right ms-auto text-muted"></i></a>
+          <a href="{{ url('/') }}" target="_blank" class="ai"><div class="ai-ic aic-o"><i class="bi bi-globe2"></i></div><div><div>Buka Portal Teknik Informatika</div><small class="text-muted fw-normal">Website utama fakultas</small></div><i class="bi bi-box-arrow-up-right ms-auto text-muted"></i></a>
         </div>
       </div>
     </div>
@@ -508,7 +508,7 @@ body,.main{ background:var(--bg)!important; font-family:'Plus Jakarta Sans',sans
   <div style="font-size:60px;">ðŸ‘‹</div>
   <h3 class="fw-bold mt-3 mb-2" style="color:var(--txt);">Selamat Datang!</h3>
   <p class="text-muted mb-4">Akun Anda belum memiliki role. Hubungi administrator.</p>
-  <a href="{{ url('/') }}" target="_blank" class="dh-btn dh-btn-orange" style="display:inline-flex;"><i class="bi bi-globe2"></i> Buka Website Universitas Ibnu Sina</a>
+  <a href="{{ url('/') }}" target="_blank" class="dh-btn dh-btn-orange" style="display:inline-flex;"><i class="bi bi-globe2"></i> Buka Website Teknik Informatika</a>
 </div>
 @endif
 
@@ -525,7 +525,7 @@ function initDashboardCharts(){
   $cvals = array_values($ormawaCategories);
   $rvs   = [$testimonialRatings[1]??0,$testimonialRatings[2]??0,$testimonialRatings[3]??0,$testimonialRatings[4]??0,$testimonialRatings[5]??0];
 @endphp
-  const C={purple:'#046B26',orange:'#FED802',indigo:'#4361ee',teal:'#06b6d4',emerald:'#06d6a0',coral:'#ff6b6b',amber:'#f59e0b',rose:'#ec4899',navy:'#3b82f6'};
+  const C={purple:'#000000',orange:'#f9dc4b',indigo:'#4361ee',teal:'#06b6d4',emerald:'#06d6a0',coral:'#ff6b6b',amber:'#f59e0b',rose:'#ec4899',navy:'#3b82f6'};
   const bar=(data,months)=>({
     chart:{type:'bar',height:270,toolbar:{show:false},fontFamily:'Plus Jakarta Sans,sans-serif',dropShadow:{enabled:true,top:3,blur:6,opacity:.07}},
     series:[{name:'Publikasi',data}], colors:[C.purple],

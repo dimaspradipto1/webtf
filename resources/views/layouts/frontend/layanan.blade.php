@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Fakultas & Program Studi — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Jelajahi fakultas dan program studi unggulan serta fasilitas akademik terpadu di Universitas Ibnu Sina (UIS) Batam.')
-@section('meta_keywords', 'program studi uis, fakultas teknik, fakultas ekonomi bisnis, fakultas ilmu kesehatan, magister manajemen, universitas ibnu sina batam')
+@section('title', 'Fakultas & Program Studi — Teknik Informatika (UIS)')
+@section('meta_description', 'Jelajahi fakultas dan program studi unggulan serta fasilitas akademik terpadu di Teknik Informatika (UIS) Batam.')
+@section('meta_keywords', 'program studi uis, fakultas teknik, fakultas ekonomi bisnis, fakultas ilmu kesehatan, magister manajemen, teknik informatika batam')
 
 @section('content')
 

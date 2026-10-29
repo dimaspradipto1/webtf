@@ -45,7 +45,7 @@
                         
                         <div class="mb-3">
                             <label for="judul_profil" class="form-label fw-semibold">Judul Profil Universitas</label>
-                            <input type="text" id="judul_profil" name="judul_profil" class="form-control @error('judul_profil') is-invalid @enderror" value="{{ old('judul_profil', $about->judul_profil) }}" placeholder="Contoh: Kampusnya Profesional Muda — Universitas Ibnu Sina">
+                            <input type="text" id="judul_profil" name="judul_profil" class="form-control @error('judul_profil') is-invalid @enderror" value="{{ old('judul_profil', $about->judul_profil) }}" placeholder="Contoh: Kampusnya Profesional Muda — Teknik Informatika">
                             @error('judul_profil')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -53,7 +53,7 @@
 
                         <div class="mb-4">
                             <label for="deskripsi_profil_1" class="form-label fw-semibold">Deskripsi Profil Universitas</label>
-                            <textarea id="deskripsi_profil_1" name="deskripsi_profil_1" rows="6" class="form-control tinymce-editor @error('deskripsi_profil_1') is-invalid @enderror" placeholder="Tuliskan deskripsi profil resmi Universitas Ibnu Sina">{{ old('deskripsi_profil_1', $about->deskripsi_profil_1) }}</textarea>
+                            <textarea id="deskripsi_profil_1" name="deskripsi_profil_1" rows="6" class="form-control tinymce-editor @error('deskripsi_profil_1') is-invalid @enderror" placeholder="Tuliskan deskripsi profil resmi Teknik Informatika">{{ old('deskripsi_profil_1', $about->deskripsi_profil_1) }}</textarea>
                             @error('deskripsi_profil_1')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

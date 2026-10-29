@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', $layanan->judul . ' — Universitas Ibnu Sina (UIS)')
+@section('title', $layanan->judul . ' — Teknik Informatika (UIS)')
 @section('meta_description', Str::limit(strip_tags($layanan->deskripsi), 160))
-@section('meta_keywords', 'uis, ' . strtolower($layanan->judul) . ', universitas ibnu sina')
+@section('meta_keywords', 'uis, ' . strtolower($layanan->judul) . ', teknik informatika')
 
 @section('content')
 @php
@@ -95,7 +95,7 @@
             <p class="text-white-50 small mb-3">Dapatkan informasi pendaftaran, kurikulum, dan jadwal seleksi dengan menghubungi tim layanan UIS.</p>
             <div class="d-flex flex-wrap gap-2">
               @if($layanan->link)
-                <a href="{{ $layanan->link }}" target="_blank" rel="noopener noreferrer" class="btn-primary-hero" style="font-size: 13.5px; padding: 10px 20px; background: #046B26; color: #ffffff; border:none;">
+                <a href="{{ $layanan->link }}" target="_blank" rel="noopener noreferrer" class="btn-primary-hero" style="font-size: 13.5px; padding: 10px 20px; background: #000000; color: #ffffff; border:none;">
                   <i class="bi bi-box-arrow-up-right"></i> Website Resmi Prodi
                 </a>
               @endif

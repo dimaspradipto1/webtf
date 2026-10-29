@@ -16,7 +16,7 @@ class HeroHumasController extends Controller
         if (! $hero) {
             $hero = HeroHumas::create([
                 'judul' => 'Selamat Datang',
-                'subjudul' => 'di Biro Hubungan Masyarakat dan Protokoler Universitas Ibnu Sina',
+                'subjudul' => 'di Biro Hubungan Masyarakat dan Protokoler Teknik Informatika',
                 'badge_text' => 'Layanan',
                 'pill_text_1' => 'Informasi Khusus PMB TA 2026/2027',
                 'pill_url_1' => null,

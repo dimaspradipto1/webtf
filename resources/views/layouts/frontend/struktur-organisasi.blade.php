@@ -1,7 +1,7 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Struktur Organisasi — Universitas Ibnu Sina (UIS)')
-@section('meta_description', 'Susunan pimpinan pimpinan, ketua program studi, dan tata kelola organisasi Universitas Ibnu Sina (UIS).')
+@section('title', 'Struktur Organisasi — Teknik Informatika (UIS)')
+@section('meta_description', 'Susunan pimpinan pimpinan, ketua program studi, dan tata kelola organisasi Teknik Informatika (UIS).')
 @section('meta_keywords', 'struktur organisasi uis, pimpinan uis, ketua program studi, manajemen uis')
 
 @section('content')
@@ -36,7 +36,7 @@
       <h2 class="section-title">Bagan <em>Kepemimpinan & Organisasi</em> UIS</h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Tata kelola yang profesional, transparan, dan akuntabel di bawah pimpinan Pimpinan serta Ketua Program Studi Universitas Ibnu Sina.
+        Tata kelola yang profesional, transparan, dan akuntabel di bawah pimpinan Pimpinan serta Ketua Program Studi Teknik Informatika.
       </p>
     </div>
 

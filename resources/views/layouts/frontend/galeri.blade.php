@@ -4,9 +4,9 @@
   $isHumas = ($kategori ?? '') === 'humas';
 @endphp
 
-@section('title', ($isHumas ? 'Galeri & Kegiatan Humas' : 'Galeri & Dokumentasi') . ' — Universitas Ibnu Sina (UIS)')
-@section('meta_description', $isHumas ? 'Galeri foto liputan, publikasi, dan dokumentasi kegiatan Humas Universitas Ibnu Sina (UIS).' : 'Galeri foto kegiatan akademik, praktikum laboratorium, pengabdian masyarakat, dan wisuda Universitas Ibnu Sina (UIS).')
-@section('meta_keywords', 'galeri uis, dokumentasi uis, foto kampus uis, humas uis, universitas ibnu sina batam')
+@section('title', ($isHumas ? 'Galeri & Kegiatan Humas' : 'Galeri & Dokumentasi') . ' — Teknik Informatika (UIS)')
+@section('meta_description', $isHumas ? 'Galeri foto liputan, publikasi, dan dokumentasi kegiatan Humas Teknik Informatika (UIS).' : 'Galeri foto kegiatan akademik, praktikum laboratorium, pengabdian masyarakat, dan wisuda Teknik Informatika (UIS).')
+@section('meta_keywords', 'galeri uis, dokumentasi uis, foto kampus uis, humas uis, teknik informatika batam')
 
 @section('content')
 
@@ -49,7 +49,7 @@
         <h2 class="section-title">Galeri & <em>Kegiatan Humas</em></h2>
         <div class="divider-line centered"></div>
         <p class="section-desc mx-auto">
-          Kumpulan dokumentasi publikasi, liputan media, siaran pers, dan seluruh kegiatan kehumasan Universitas Ibnu Sina.
+          Kumpulan dokumentasi publikasi, liputan media, siaran pers, dan seluruh kegiatan kehumasan Teknik Informatika.
         </p>
       @else
         <div class="section-label mx-auto">Dokumentasi Kampus</div>
@@ -65,7 +65,7 @@
       {{-- Dedicated Humas Action Bar (Tanpa Univ) --}}
       <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 p-3 rounded-4" style="background: #eaf7ee; border: 1.5px solid #b7e4c7;" data-aos="fade-up">
         <div class="d-flex align-items-center gap-2">
-          <span class="badge rounded-pill px-3 py-2" style="background: #046B26; color: #ffffff; font-size: 13.5px;">
+          <span class="badge rounded-pill px-3 py-2" style="background: #000000; color: #ffffff; font-size: 13.5px;">
             <i class="bi bi-megaphone-fill me-1"></i> Dokumentasi Humas
           </span>
           <span class="text-muted small fw-semibold">Menampilkan seluruh foto kegiatan Humas ({{ $galleries->total() ?? $galleries->count() }} foto)</span>
@@ -93,7 +93,7 @@
                 @if(!empty($item->url))
                   <img src="{{ asset('storage/' . $item->url) }}" alt="{{ $item->judul ?? 'Dokumentasi UIS' }}" class="galeri-img-wrap">
                 @else
-                  <div class="d-flex align-items-center justify-content-center text-white" style="height: 220px; background: #032e12;">
+                  <div class="d-flex align-items-center justify-content-center text-white" style="height: 220px; background: #000000;">
                     <i class="bi bi-camera-fill fs-1 text-white-50"></i>
                   </div>
                 @endif

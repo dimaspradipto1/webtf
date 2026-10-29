@@ -18,7 +18,7 @@
         <i class="bi bi-file-earmark-text-fill" style="color: #047857;"></i>
     </div>
     <div>
-        <h6 class="fw-bold mb-1" style="color: #064e3b;">Pengelolaan Template Dokumen Resmi</h6>
+        <h6 class="fw-bold mb-1" style="color: #000000;">Pengelolaan Template Dokumen Resmi</h6>
         <p class="mb-0 text-muted small" style="line-height: 1.5;">
             Di halaman ini Anda dapat menambahkan dan mengelola template dokumen resmi (seperti <strong>Presentasi .pptx</strong>, <strong>Sampul Laporan .docx</strong>, <strong>Kartu Nama .psd</strong>, dsb) dengan menautkan <strong>Link Google Drive</strong>. Tampilan publik otomatis tersusun rapi pada halaman <a href="{{ route('homepage.template-dokumen') }}" target="_blank" class="fw-bold text-success text-decoration-underline">/template-dokumen</a>.
         </p>
@@ -27,11 +27,11 @@
 
 {{-- 1. Pengaturan Teks Header Seksi --}}
 <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
-    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
         <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
-            <i class="bi bi-pencil-square me-2" style="color: #046B26;"></i>Pengaturan Judul & Deskripsi Seksi Frontend
+            <i class="bi bi-pencil-square me-2" style="color: #000000;"></i>Pengaturan Judul & Deskripsi Seksi Frontend
         </h5>
-        <span class="badge" style="background-color: #046B26; color: #ffffff; font-size: 11.5px; font-weight: 700; padding: 6px 12px; border-radius: 6px;">
+        <span class="badge" style="background-color: #000000; color: #ffffff; font-size: 11.5px; font-weight: 700; padding: 6px 12px; border-radius: 6px;">
             <i class="bi bi-globe2 me-1"></i>Halaman Publik
         </span>
     </div>
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="col-12 text-end pt-2">
-                    <button type="submit" class="btn fw-semibold shadow-sm px-4" style="background-color: #046B26; color: #ffffff; border: none; border-radius: 8px;">
+                    <button type="submit" class="btn fw-semibold shadow-sm px-4" style="background-color: #000000; color: #ffffff; border: none; border-radius: 8px;">
                         <i class="bi bi-floppy-fill me-1"></i> Simpan Teks Seksi
                     </button>
                 </div>
@@ -85,14 +85,14 @@
 
 {{-- 2. Daftar Template Dokumen --}}
 <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
-    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-top: 3px solid #046B26; border-radius: 12px 12px 0 0;">
+    <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">
         <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
-            <i class="bi bi-collection-fill me-2" style="color: #046B26;"></i>
+            <i class="bi bi-collection-fill me-2" style="color: #000000;"></i>
             Daftar Template Dokumen (Total: {{ $templates->count() }})
         </h5>
         <a href="{{ route('template-dokumen.create') }}" 
            class="btn fw-semibold shadow-sm btn-sm" 
-           style="background-color: #046B26; color: #ffffff; border: none; padding: 7px 18px; border-radius: 8px;">
+           style="background-color: #000000; color: #ffffff; border: none; padding: 7px 18px; border-radius: 8px;">
             <i class="bi bi-plus-lg me-1"></i> Tambah Template Baru
         </a>
     </div>
@@ -143,7 +143,7 @@
 
                                 {{-- Format --}}
                                 <td class="text-center">
-                                    <span class="badge" style="background-color: #046B26; color: #fff; font-size: 11px; padding: 5px 10px;">
+                                    <span class="badge" style="background-color: #000000; color: #fff; font-size: 11px; padding: 5px 10px;">
                                         .{{ strtolower($item->tipe_file ?: 'file') }}
                                     </span>
                                 </td>
@@ -214,7 +214,7 @@
     <div class="card-body pt-5 pb-5 text-center" style="background-color: #ffffff; border-radius: 0 0 12px 12px;">
         <div class="container" style="max-width: 900px;">
             {{-- Heading --}}
-            <h2 class="fw-bold text-uppercase mb-3" style="color: #236838; font-size: 26px; letter-spacing: 0.8px;">
+            <h2 class="fw-bold text-uppercase mb-3" style="color: #000000; font-size: 26px; letter-spacing: 0.8px;">
                 {{ $setting->judul_seksi ?? 'TEMPLAT DOKUMEN' }}
             </h2>
 

@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', $news->title . ' — Universitas Ibnu Sina')
+@section('title', $news->title . ' — Teknik Informatika')
 @section('meta_description', Str::limit($news->description ?? strip_tags($news->content), 160))
-@section('meta_keywords', 'berita uis, universitas ibnu sina, ' . ($news->category ?? 'artikel kesehatan'))
+@section('meta_keywords', 'berita uis, teknik informatika, ' . ($news->category ?? 'artikel kesehatan'))
 @section('meta_author', $news->user?->name ?? 'Admin UIS')
 
 @php
@@ -48,7 +48,7 @@
       <div class="d-flex flex-wrap align-items-center gap-3 text-white-50 small mb-3">
         <span><i class="bi bi-calendar3 me-1" style="color:var(--uis-orange);"></i> {{ $news->created_at->translatedFormat('d F Y') }}</span>
         <span>•</span>
-        <span><i class="bi bi-person me-1" style="color:var(--uis-orange);"></i> {{ $news->user?->name ?? 'Redaksi Universitas Ibnu Sina' }}</span>
+        <span><i class="bi bi-person me-1" style="color:var(--uis-orange);"></i> {{ $news->user?->name ?? 'Redaksi Teknik Informatika' }}</span>
         <span>•</span>
         <span><i class="bi bi-clock me-1" style="color:var(--uis-orange);"></i> {{ ceil(str_word_count(strip_tags($news->content ?? '')) / 200) ?: 1 }} menit baca</span>
       </div>
@@ -95,7 +95,7 @@
                 <h5 class="fw-bold mb-0 text-dark">
                   <i class="bi bi-images me-2" style="color:var(--uis-purple);"></i>Dokumentasi Foto Kegiatan ({{ $photoCount }} Foto)
                 </h5>
-                <span class="badge" style="background: var(--uis-orange); color:#032e12;">Galeri Foto</span>
+                <span class="badge" style="background: var(--uis-orange); color:#000000;">Galeri Foto</span>
               </div>
               <p class="text-muted small mb-3">Klik gambar untuk melihat tampilan resolusi penuh.</p>
 
@@ -117,8 +117,8 @@
             <div class="author-avatar">{{ strtoupper(substr($news->user?->name ?? 'A', 0, 1)) }}</div>
             <div>
               <div class="small text-muted">Diterbitkan oleh:</div>
-              <div class="fw-bold text-dark">{{ $news->user?->name ?? 'Redaksi Universitas Ibnu Sina' }}</div>
-              <div class="small text-muted">Universitas Ibnu Sina — Universitas Ibnu Sina</div>
+              <div class="fw-bold text-dark">{{ $news->user?->name ?? 'Redaksi Teknik Informatika' }}</div>
+              <div class="small text-muted">Teknik Informatika — Teknik Informatika</div>
             </div>
           </div>
 
@@ -211,8 +211,8 @@
 
         {{-- Banner PMB Mini --}}
         <div class="sidebar-box text-white" style="background: var(--obsidian-dark); border: 2px solid var(--uis-green);">
-          <span class="badge mb-2" style="background: var(--uis-yellow); color:#032e12; font-weight:800;">PMB 2026/2027</span>
-          <h5 class="fw-bold mb-2">Ingin Kuliah di Universitas Ibnu Sina?</h5>
+          <span class="badge mb-2" style="background: var(--uis-yellow); color:#000000; font-weight:800;">PMB 2026/2027</span>
+          <h5 class="fw-bold mb-2">Ingin Kuliah di Teknik Informatika?</h5>
           <p class="text-white-50 small mb-3">Tersedia Fakultas Teknik, Fakultas Ekonomi & Bisnis, Fakultas Ilmu Kesehatan, dan Program Pascasarjana (S2).</p>
           <a href="{{ route('homepage.kontak') }}" class="btn-primary-hero w-100 justify-content-center" style="font-size:13px; padding:9px 14px;">
             Daftar Sekarang <i class="bi bi-arrow-right"></i>

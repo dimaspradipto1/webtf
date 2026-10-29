@@ -1,14 +1,14 @@
 @extends('layouts.frontend.template')
 
-@section('title', ($pageTitle ?? 'Dosen Pengajar') . ' — Universitas Ibnu Sina')
-@section('meta_description', 'Direktori staf pengajar dan dosen tetap program studi Universitas Ibnu Sina (UIS) Universitas Ibnu Sina.')
+@section('title', ($pageTitle ?? 'Dosen Pengajar') . ' — Teknik Informatika')
+@section('meta_description', 'Direktori staf pengajar dan dosen tetap program studi Teknik Informatika (UIS) Teknik Informatika.')
 
 @section('content')
 <!-- Header Hero -->
 <div class="dosen-hero text-white">
   <div class="container text-center">
-    <div class="badge px-3 py-2 rounded-pill mb-2" style="background: rgba(254, 216, 2, 0.18); color: #FED802; border: 1px solid rgba(254, 216, 2, 0.45); font-weight: 700; font-size: 13px;">
-      <i class="bi bi-person-workspace me-1"></i> Tenaga Pendidik & Dosen Universitas Ibnu Sina
+    <div class="badge px-3 py-2 rounded-pill mb-2" style="background: #f9dc4b; color: #000000; border: 1px solid #f9dc4b; font-weight: 700; font-size: 13px;">
+      <i class="bi bi-person-workspace me-1"></i> Tenaga Pendidik & Dosen Teknik Informatika
     </div>
     <h1 class="fw-bold mb-2 text-white" style="font-size: 34px; color: #ffffff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.35);">Daftar Dosen Pengajar</h1>
     <p class="mx-auto mb-0 text-white" style="max-width: 650px; font-size: 15px; color: rgba(255, 255, 255, 0.92) !important; line-height: 1.65;">
@@ -39,7 +39,7 @@
     <!-- Header Banner Kuning / Gold Sesuai Permintaan -->
     <div class="mb-4" data-aos="fade-up">
       <div class="prodi-header-pill">
-        Dosen {{ $currentProdi->judul ?? 'Program Studi Universitas Ibnu Sina' }}
+        Dosen {{ $currentProdi->judul ?? 'Program Studi Teknik Informatika' }}
       </div>
     </div>
 
@@ -49,7 +49,7 @@
         {{-- Info Total --}}
         <div class="col-lg-5 col-md-6">
           <div class="d-flex align-items-center gap-3">
-            <div class="rounded-circle p-2 d-flex align-items-center justify-content-center text-white" style="width: 44px; height: 44px; background: #046B26;">
+            <div class="rounded-circle p-2 d-flex align-items-center justify-content-center text-white" style="width: 44px; height: 44px; background: #000000;">
               <i class="bi bi-people-fill fs-5"></i>
             </div>
             <div>
@@ -70,7 +70,7 @@
                 <i class="bi bi-search"></i>
               </span>
               <input type="text" name="q" class="form-control border-start-0 ps-0" placeholder="Cari nama dosen, NIDN, NUPTK, jabatan..." value="{{ $search ?? '' }}">
-              <button class="btn text-white px-3 fw-semibold" type="submit" style="background: #046B26;">
+              <button class="btn text-white px-3 fw-semibold" type="submit" style="background: #000000;">
                 Cari
               </button>
             </div>
@@ -113,7 +113,7 @@
                       @if(!empty($dosen->foto))
                         <img src="{{ asset('storage/' . $dosen->foto) }}" alt="{{ $dosen->nama_dosen }}" class="rounded-circle shadow-sm" style="width: 42px; height: 42px; object-fit: cover; border: 2px solid var(--uis-purple-light);">
                       @else
-                        <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold shadow-sm" style="width: 42px; height: 42px; background: #032e12; font-size: 14px;">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold shadow-sm" style="width: 42px; height: 42px; background: #000000; font-size: 14px;">
                           {{ strtoupper(substr($dosen->nama_dosen, 0, 1)) }}
                         </div>
                       @endif
@@ -125,7 +125,7 @@
                   </td>
                   <td class="text-center">
                     @if(!empty($dosen->jabatan_fungsional))
-                      <span class="badge" style="background:#046B26; color:#fff; font-size:12px; font-weight:600; padding:6px 12px; border-radius:20px;">
+                      <span class="badge" style="background:#000000; color:#fff; font-size:12px; font-weight:600; padding:6px 12px; border-radius:20px;">
                         {{ $dosen->jabatan_fungsional }}
                       </span>
                     @else
@@ -177,12 +177,12 @@
     @endif
 
     <!-- Info Bantuan Box -->
-    <div class="mt-5 p-4 rounded-4 text-white d-flex flex-wrap align-items-center justify-content-between gap-3 shadow-sm" style="background: #032e12; border: 1px solid rgba(255,255,255,0.2);" data-aos="fade-up">
+    <div class="mt-5 p-4 rounded-4 text-white d-flex flex-wrap align-items-center justify-content-between gap-3 shadow-sm" style="background: #000000; border: 1px solid rgba(255,255,255,0.2);" data-aos="fade-up">
       <div>
-        <h5 class="fw-bold text-white mb-1"><i class="bi bi-mortarboard-fill me-2" style="color: #FED802;"></i>Tertarik Menjadi Mahasiswa Bimbingan Dosen Universitas Ibnu Sina?</h5>
-        <p class="text-white-50 small mb-0">Daftarkan diri Anda pada program sarjana & magister melalui jalur PMB Online Universitas Ibnu Sina Batam.</p>
+        <h5 class="fw-bold text-white mb-1"><i class="bi bi-mortarboard-fill me-2" style="color: #f9dc4b;"></i>Tertarik Menjadi Mahasiswa Bimbingan Dosen Teknik Informatika?</h5>
+        <p class="text-white-50 small mb-0">Daftarkan diri Anda pada program sarjana & magister melalui jalur PMB Online Teknik Informatika Batam.</p>
       </div>
-      <a href="{{ route('homepage.kontak') }}" class="btn btn-warning rounded-pill px-4 fw-bold" style="color: #032e12;">
+      <a href="{{ route('homepage.kontak') }}" class="btn btn-warning rounded-pill px-4 fw-bold" style="color: #000000;">
         <i class="bi bi-arrow-right-circle me-1"></i> Informasi PMB
       </a>
     </div>

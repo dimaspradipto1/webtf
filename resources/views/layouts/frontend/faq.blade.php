@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Tanya Jawab (FAQ) — Universitas Ibnu Sina (UIS)')
+@section('title', 'Tanya Jawab (FAQ) — Teknik Informatika (UIS)')
 @section('meta_description', 'Temukan jawaban cepat atas pertanyaan seputar fakultas, program studi, PMB, fasilitas kampus, dan akreditasi UIS Batam.')
-@section('meta_keywords', 'faq uis, tanya jawab universitas ibnu sina, pmb uis batam, pendaftaran mahasiswa baru, akreditasi uis batam')
+@section('meta_keywords', 'faq uis, tanya jawab teknik informatika, pmb uis batam, pendaftaran mahasiswa baru, akreditasi uis batam')
 
 @section('content')
 @php

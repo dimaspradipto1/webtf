@@ -30,7 +30,7 @@ class FacultyStatDataTable extends DataTable
             })
             ->addColumn('title', function ($stat) {
                 return '<div>
-                            <div class="fw-semibold">'.e($stat->title ?? 'Universitas Ibnu Sina').'</div>
+                            <div class="fw-semibold">'.e($stat->title ?? 'Teknik Informatika').'</div>
                         </div>';
             })
             ->addColumn('stats_summary', function ($stat) {

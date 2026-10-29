@@ -22,11 +22,11 @@
             <div class="card shadow-sm border-0 rounded-4">
                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center text-center">
                     <div class="rounded-circle d-flex align-items-center justify-content-center mb-3 shadow-sm"
-                         style="width: 100px; height: 100px; background: #046B26; color: #ffffff; font-size: 40px; font-weight: 700;">
+                         style="width: 100px; height: 100px; background: #000000; color: #ffffff; font-size: 40px; font-weight: 700;">
                         {{ strtoupper(substr($user->name, 0, 2)) }}
                     </div>
                     <h4 class="fw-bold mb-1 text-dark">{{ $user->name }}</h4>
-                    <span class="badge px-3 py-2 rounded-pill mb-3" style="background: rgba(4, 107, 38, 0.12); color: #046B26; font-weight: 700; font-size: 12.5px;">
+                    <span class="badge px-3 py-2 rounded-pill mb-3" style="background: rgba(0, 0, 0, 0.12); color: #000000; font-weight: 700; font-size: 12.5px;">
                         <i class="bi bi-shield-check me-1"></i> {{ strtoupper($user->roles) }}
                     </span>
                     <div class="text-muted small mb-2"><i class="bi bi-envelope me-1"></i> {{ $user->email }}</div>
@@ -125,7 +125,7 @@
                                 </div>
 
                                 <div class="text-end">
-                                    <button type="submit" class="btn text-white px-4 py-2 fw-semibold" style="background: #046B26;">
+                                    <button type="submit" class="btn text-white px-4 py-2 fw-semibold" style="background: #000000;">
                                         <i class="bi bi-save me-1"></i> Simpan Perubahan Profil
                                     </button>
                                 </div>
@@ -168,7 +168,7 @@
                                 </div>
 
                                 <div class="text-end">
-                                    <button type="submit" class="btn text-white px-4 py-2 fw-semibold" style="background: #046B26;">
+                                    <button type="submit" class="btn text-white px-4 py-2 fw-semibold" style="background: #000000;">
                                         <i class="bi bi-key me-1"></i> Perbarui Password
                                     </button>
                                 </div>

@@ -63,7 +63,7 @@
 <div class="modal fade" id="importExcelModal" tabindex="-1" aria-labelledby="importExcelModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg rounded-4">
-            <div class="modal-header text-white" style="background: #046B26;">
+            <div class="modal-header text-white" style="background: #000000;">
                 <h5 class="modal-title fw-bold" id="importExcelModalLabel">
                     <i class="bi bi-file-earmark-excel me-2 text-warning"></i>Import Data Berita dari Excel
                 </h5>
