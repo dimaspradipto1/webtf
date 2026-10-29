@@ -174,7 +174,10 @@ class FrontendController extends Controller
 
         $query = Kurikulum::where('is_active', true);
         if ($currentProdi) {
-            $query->where('layanan_id', $currentProdi->id);
+            $query->where(function ($q) use ($currentProdi) {
+                $q->where('layanan_id', $currentProdi->id)
+                  ->orWhereNull('layanan_id');
+            });
         }
 
         $courses = $query->orderBy('semester')->orderBy('urutan')->orderBy('id')->get();
@@ -184,8 +187,38 @@ class FrontendController extends Controller
         $totalMatakuliah = $courses->count();
 
         $pageTitle = 'Kurikulum '.($currentProdi?->judul ?? 'Program Studi Teknik Informatika');
+        $checksum = md5(($courses->max('updated_at') ?? '') . '_' . $totalMatakuliah);
 
-        return view('layouts.frontend.kurikulum', compact('prodis', 'currentProdi', 'coursesBySemester', 'totalSks', 'totalMatakuliah', 'pageTitle'));
+        return response()->view('layouts.frontend.kurikulum', compact('prodis', 'currentProdi', 'coursesBySemester', 'totalSks', 'totalMatakuliah', 'pageTitle', 'checksum'))
+            ->header('Cache-Control', 'no-cache, no-store, must-revalidate')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
+    }
+
+    public function kurikulumCheckUpdated(Request $request)
+    {
+        $prodis = Layanan::where('aktif', true)->orderBy('urutan')->get();
+        $selectedProdiId = $request->query('prodi');
+        $currentProdi = $selectedProdiId ? ($prodis->firstWhere('id', $selectedProdiId) ?? $prodis->first()) : $prodis->first();
+
+        $query = Kurikulum::where('is_active', true);
+        if ($currentProdi) {
+            $query->where(function ($q) use ($currentProdi) {
+                $q->where('layanan_id', $currentProdi->id)
+                  ->orWhereNull('layanan_id');
+            });
+        }
+
+        $courses = $query->get(['id', 'updated_at']);
+        $lastUpdated = $courses->max('updated_at') ?? '';
+        $count = $courses->count();
+        $checksum = md5($lastUpdated . '_' . $count);
+
+        return response()->json([
+            'checksum' => $checksum,
+            'count' => $count,
+            'last_updated' => (string) $lastUpdated,
+        ])->header('Cache-Control', 'no-cache, no-store, must-revalidate');
     }
 
     public function kalenderAkademik()
@@ -247,8 +280,18 @@ class FrontendController extends Controller
 
         $query = Dosen::where('is_active', true);
         if ($currentProdi) {
-            $query->where('layanan_id', $currentProdi->id);
+            $query->where(function ($q) use ($currentProdi) {
+                $q->where('layanan_id', $currentProdi->id)
+                  ->orWhereNull('layanan_id');
+            });
         }
+
+        // Hitung statistik Jabatan Fungsional Dosen
+        $allJabatan = (clone $query)->pluck('jabatan_fungsional')->map(fn($j) => strtolower(trim($j ?? '')));
+        $countTenagaPengajar = $allJabatan->filter(fn($j) => str_contains($j, 'pengajar'))->count();
+        $countAsistenAhli = $allJabatan->filter(fn($j) => str_contains($j, 'asisten ahli'))->count();
+        $countLektor = $allJabatan->filter(fn($j) => str_contains($j, 'lektor') && !str_contains($j, 'kepala'))->count();
+        $countLektorKepala = $allJabatan->filter(fn($j) => str_contains($j, 'lektor kepala'))->count();
 
         if (! empty($search)) {
             $query->where(function ($q) use ($search) {
@@ -264,7 +307,18 @@ class FrontendController extends Controller
 
         $pageTitle = 'Dosen '.($currentProdi?->judul ?? 'Program Studi Teknik Informatika');
 
-        return view('layouts.frontend.dosen', compact('prodis', 'currentProdi', 'dosens', 'totalDosen', 'search', 'pageTitle'));
+        return view('layouts.frontend.dosen', compact(
+            'prodis',
+            'currentProdi',
+            'dosens',
+            'totalDosen',
+            'search',
+            'pageTitle',
+            'countTenagaPengajar',
+            'countAsistenAhli',
+            'countLektor',
+            'countLektorKepala'
+        ));
     }
 
     public function layanan()

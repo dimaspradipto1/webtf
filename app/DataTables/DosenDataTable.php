@@ -64,15 +64,15 @@ class DosenDataTable extends DataTable
                          </a>';
 
                 $btn .= '<form action="'.route('dosen.destroy', $d->id).'"
-                              method="POST" class="m-0"
-                              onsubmit="return confirm(\'Yakin ingin menghapus data dosen ini?\')">'
-                        .csrf_field().method_field('DELETE')
-                        .'<button type="submit"
-                                   class="btn btn-sm btn-danger"
+                              method="POST" class="m-0 form-delete-dosen">
+                        '.csrf_field().method_field('DELETE').'
+                        <button type="button"
+                                   class="btn btn-sm btn-danger btn-delete-dosen-item"
                                    style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
-                                   title="Hapus">
+                                   title="Hapus"
+                                   data-nama="'.e($d->nama_dosen).'">
                             <i class="bi bi-trash-fill" style="font-size:12px"></i>
-                           </button>
+                        </button>
                          </form>';
 
                 $btn .= '</div>';

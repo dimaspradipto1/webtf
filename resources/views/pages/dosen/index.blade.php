@@ -221,6 +221,34 @@
                     }
                 });
             };
+
+            // Confirm Delete Single Item with SweetAlert2
+            $(document).on('click', '.btn-delete-dosen-item', function (e) {
+                e.preventDefault();
+                const form = $(this).closest('form');
+                const nama = $(this).data('nama') || 'data dosen ini';
+
+                Swal.fire({
+                    title: 'Konfirmasi Hapus Dosen',
+                    text: 'Apakah Anda yakin ingin menghapus data dosen "' + nama + '"?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: '<i class="bi bi-trash-fill me-1"></i> Ya, Hapus',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true,
+                    customClass: {
+                        popup: 'rounded-4 shadow-lg border-0',
+                        confirmButton: 'px-4 py-2 rounded-3 fw-semibold',
+                        cancelButton: 'px-4 py-2 rounded-3 fw-semibold'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
         });
     </script>
 @endpush

@@ -34,6 +34,14 @@ class KurikulumController extends Controller
         if ($request->filled('layanan_id')) {
             $prodi = Layanan::find($request->layanan_id);
             $data['prodi_nama'] = $prodi?->judul;
+        } elseif (empty($kurikulum->layanan_id)) {
+            $prodi = Layanan::where('aktif', true)->orderBy('urutan')->first();
+            $data['layanan_id'] = $prodi?->id;
+            $data['prodi_nama'] = $prodi?->judul;
+        } else {
+            $prodi = Layanan::where('aktif', true)->orderBy('urutan')->first();
+            $data['layanan_id'] = $prodi?->id;
+            $data['prodi_nama'] = $prodi?->judul;
         }
 
         if ($request->hasFile('file_rps')) {
@@ -61,6 +69,10 @@ class KurikulumController extends Controller
 
         if ($request->filled('layanan_id')) {
             $prodi = Layanan::find($request->layanan_id);
+            $data['prodi_nama'] = $prodi?->judul;
+        } elseif (empty($kurikulum->layanan_id)) {
+            $prodi = Layanan::where('aktif', true)->orderBy('urutan')->first();
+            $data['layanan_id'] = $prodi?->id;
             $data['prodi_nama'] = $prodi?->judul;
         }
 

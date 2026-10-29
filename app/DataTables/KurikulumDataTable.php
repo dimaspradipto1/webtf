@@ -28,13 +28,13 @@ class KurikulumDataTable extends DataTable
             })
             ->addColumn('rps_action', function ($k) {
                 if (! empty($k->file_rps)) {
-                    return '<a href="'.asset('storage/'.$k->file_rps).'" target="_blank" class="btn btn-sm btn-outline-danger py-0 px-2" style="font-size:11.5px;" title="Download File RPS">
-                                <i class="bi bi-file-earmark-pdf-fill me-1"></i> File RPS
+                    return '<a href="'.asset('storage/'.$k->file_rps).'" target="_blank" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size:11.5px; white-space:nowrap; display:inline-flex; align-items:center; justify-content:center; gap:4px; font-weight:600;" title="Download File RPS">
+                                <i class="bi bi-file-earmark-pdf-fill"></i> File RPS
                             </a>';
                 }
                 if (! empty($k->link_rps)) {
-                    return '<a href="'.e($k->link_rps).'" target="_blank" class="btn btn-sm btn-outline-primary py-0 px-2" style="font-size:11.5px;" title="Buka Link RPS">
-                                <i class="bi bi-box-arrow-up-right me-1"></i> Link RPS
+                    return '<a href="'.e($k->link_rps).'" target="_blank" class="btn btn-sm btn-warning py-1 px-2" style="font-size:11.5px; white-space:nowrap; display:inline-flex; align-items:center; justify-content:center; gap:4px; background:#f9dc4b; color:#000000; border:none; font-weight:700;" title="Buka Link RPS">
+                                <i class="bi bi-box-arrow-up-right"></i> Link RPS
                             </a>';
                 }
 
@@ -126,11 +126,11 @@ class KurikulumDataTable extends DataTable
             Column::make('semester_badge')->title('Semester')->addClass('text-center'),
             Column::make('kode_mk')->title('Kode MK'),
             Column::make('nama_mk')->title('Nama Matakuliah'),
-            Column::make('sks_badge')->title('SKS')->addClass('text-center'),
-            Column::make('kategori')->title('Kategori')->addClass('text-center'),
-            Column::make('rps_action')->title('RPS')->addClass('text-center'),
-            Column::make('status')->title('Status')->addClass('text-center'),
-            Column::computed('action')->title('Aksi')->exportable(false)->printable(false)->width('10%')->addClass('text-center'),
+            Column::make('sks_badge')->title('SKS')->addClass('text-center')->width('70px'),
+            Column::make('kategori')->title('Kategori')->addClass('text-center')->width('90px'),
+            Column::make('rps_action')->title('RPS')->addClass('text-center')->width('110px'),
+            Column::make('status')->title('Status')->addClass('text-center')->width('80px'),
+            Column::computed('action')->title('Aksi')->exportable(false)->printable(false)->width('90px')->addClass('text-center'),
         ];
     }
 

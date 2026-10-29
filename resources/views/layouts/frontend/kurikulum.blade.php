@@ -112,11 +112,15 @@
                     </td>
                     <td class="text-center">
                       @if(!empty($course->rps_url))
-                        <a href="{{ $course->rps_url }}" target="_blank" class="btn-rps-download">
-                          <i class="bi bi-download"></i> Download
+                        <a href="{{ $course->rps_url }}" target="_blank" class="btn-rps-download" style="white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; gap: 5px;">
+                          @if(!empty($course->link_rps) && empty($course->file_rps))
+                            <i class="bi bi-box-arrow-up-right"></i> Link RPS
+                          @else
+                            <i class="bi bi-download"></i> Download RPS
+                          @endif
                         </a>
                       @else
-                        <button class="btn btn-sm btn-light border text-muted rounded-pill px-3 py-1" style="font-size: 11px;" disabled>
+                        <button class="btn btn-sm btn-light border text-muted rounded-pill px-3 py-1" style="font-size: 11px; white-space: nowrap;" disabled>
                           <i class="bi bi-file-earmark-text me-1"></i> RPS
                         </button>
                       @endif
@@ -138,17 +142,43 @@
       </div>
     </div>
 
-    <!-- Info Bantuan Box -->
-    <div class="mt-5 p-4 rounded-4 text-white d-flex flex-wrap align-items-center justify-content-between gap-3 shadow-sm" style="background: #000000; border: 1px solid rgba(255,255,255,0.2);" data-aos="fade-up">
-      <div>
-        <h5 class="fw-bold text-white mb-1"><i class="bi bi-question-circle-fill me-2 text-warning"></i>Butuh Informasi Kurikulum & Konversi SKS?</h5>
-        <p class="text-white-50 small mb-0">Hubungi Bagian Akademik & Tata Usaha Teknik Informatika untuk panduan registrasi mata kuliah dan bimbingan akademik.</p>
-      </div>
-      <a href="{{ route('homepage.kontak') }}" class="btn btn-warning rounded-pill px-4 fw-bold" style="color: #000000;">
-        <i class="bi bi-telephone-fill me-1"></i> Hubungi Kami
-      </a>
-    </div>
-
   </div>
 </section>
+
+{{-- Real-Time Synchronization Listener: Frontend otomatis terupdate saat admin melakukan perubahan --}}
+<script>
+  (function() {
+    let currentChecksum = "{{ $checksum ?? '' }}";
+    const checkUrl = "{{ route('homepage.kurikulum.check-updated', ['prodi' => $currentProdi->id ?? '']) }}";
+
+    function checkKurikulumUpdate() {
+      fetch(checkUrl, { cache: 'no-store' })
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.checksum && data.checksum !== currentChecksum) {
+            currentChecksum = data.checksum;
+            // Reload halaman secara otomatis jika ada perubahan data dari admin
+            window.location.reload();
+          }
+        })
+        .catch(() => {});
+    }
+
+    // Periksa saat pengguna kembali aktif ke tab browser ini
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible') {
+        checkKurikulumUpdate();
+      }
+    });
+
+    window.addEventListener('focus', checkKurikulumUpdate);
+
+    // Polling berkala setiap 6 detik ketika halaman aktif
+    setInterval(function() {
+      if (document.visibilityState === 'visible') {
+        checkKurikulumUpdate();
+      }
+    }, 6000);
+  })();
+</script>
 @endsection

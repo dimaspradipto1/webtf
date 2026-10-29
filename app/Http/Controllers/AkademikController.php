@@ -23,7 +23,7 @@ class AkademikController extends Controller
             'link_url' => '',
         ],
         'kalender' => [
-            'judul' => 'Kalender Akademik Tahun Akademik 2026/2027',
+            'judul' => 'Kalender Akademik',
             'subjudul' => 'Jadwal perkuliahan, registrasi KRS, UTS, UAS, kerja praktik, dan kegiatan akademik Program Studi Teknik Informatika.',
             'deskripsi' => '<p>Kalender Akademik memuat seluruh linimasa kegiatan perkuliahan Semester Ganjil dan Genap pada Program Studi Teknik Informatika Fakultas Sains dan Teknologi, termasuk masa registrasi ulang, pengisian KRS, bimbingan akademik, seminar proposal, sidang skripsi, hingga yudisium dan wisuda.</p>',
             'link_url' => '',

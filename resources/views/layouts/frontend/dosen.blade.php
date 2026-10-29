@@ -109,19 +109,20 @@
                 <tr>
                   <td class="text-center fw-semibold text-muted">{{ ($dosens->currentPage() - 1) * $dosens->perPage() + $idx + 1 }}</td>
                   <td>
-                    <div class="d-flex align-items-center gap-3">
-                      @if(!empty($dosen->foto))
-                        <img src="{{ asset('storage/' . $dosen->foto) }}" alt="{{ $dosen->nama_dosen }}" class="rounded-circle shadow-sm" style="width: 42px; height: 42px; object-fit: cover; border: 2px solid var(--uis-purple-light);">
-                      @else
-                        <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold shadow-sm" style="width: 42px; height: 42px; background: #000000; font-size: 14px;">
-                          {{ strtoupper(substr($dosen->nama_dosen, 0, 1)) }}
+                    @if(!empty($dosen->foto))
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="{{ asset('storage/' . $dosen->foto) }}" alt="{{ $dosen->nama_dosen }}" class="rounded-circle shadow-sm" style="width: 40px; height: 40px; object-fit: cover;">
+                        <div>
+                          <span class="fw-bold text-dark d-block">{{ $dosen->nama_dosen }}</span>
+                          <small class="text-muted">{{ $dosen->prodi?->judul ?? $dosen->prodi_nama }}</small>
                         </div>
-                      @endif
+                      </div>
+                    @else
                       <div>
                         <span class="fw-bold text-dark d-block">{{ $dosen->nama_dosen }}</span>
                         <small class="text-muted">{{ $dosen->prodi?->judul ?? $dosen->prodi_nama }}</small>
                       </div>
-                    </div>
+                    @endif
                   </td>
                   <td class="text-center">
                     @if(!empty($dosen->jabatan_fungsional))
@@ -169,24 +170,66 @@
       </div>
     </div>
 
-    <!-- Pagination (10 data per halaman) -->
+    <!-- Pagination (10 data per halaman — Aktif Otomatis jika Data Melebihi 10) -->
     @if(isset($dosens) && $dosens->hasPages())
-      <div class="mt-4 d-flex justify-content-center" data-aos="fade-up">
-        {{ $dosens->links('pagination::bootstrap-5') }}
+      <div class="mt-4 d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 p-3 bg-white rounded-4 border shadow-sm" data-aos="fade-up">
+        <div class="small text-muted">
+          Menampilkan <strong>{{ $dosens->firstItem() }}</strong> – <strong>{{ $dosens->lastItem() }}</strong> dari <strong>{{ $dosens->total() }}</strong> dosen (10 data per halaman)
+        </div>
+        <div class="pagination-wrapper mb-0">
+          {{ $dosens->links('pagination::bootstrap-5') }}
+        </div>
+      </div>
+    @elseif(isset($dosens) && $dosens->total() > 0)
+      <div class="mt-3 text-center small text-muted">
+        Menampilkan seluruh <strong>{{ $dosens->total() }}</strong> data dosen (Pagination otomatis aktif jika data melebihi 10 data).
       </div>
     @endif
 
-    <!-- Info Bantuan Box -->
-    <div class="mt-5 p-4 rounded-4 text-white d-flex flex-wrap align-items-center justify-content-between gap-3 shadow-sm" style="background: #000000; border: 1px solid rgba(255,255,255,0.2);" data-aos="fade-up">
-      <div>
-        <h5 class="fw-bold text-white mb-1"><i class="bi bi-mortarboard-fill me-2" style="color: #f9dc4b;"></i>Tertarik Menjadi Mahasiswa Bimbingan Dosen Teknik Informatika?</h5>
-        <p class="text-white-50 small mb-0">Daftarkan diri Anda pada program sarjana & magister melalui jalur PMB Online Teknik Informatika Batam.</p>
+    <!-- Statistik Jabatan Fungsional Dosen -->
+    <div class="mt-5 pt-3 pb-2" data-aos="fade-up">
+      <h3 class="text-center fw-bold text-dark mb-4" style="font-size: 28px; letter-spacing: -0.5px; font-family: 'Plus Jakarta Sans', sans-serif;">
+        Jabatan Fungsional
+      </h3>
+      <div class="row text-center g-4 justify-content-center">
+        <div class="col-6 col-md-3">
+          <div class="jabatan-count-number">{{ $countTenagaPengajar ?? 0 }}</div>
+          <div class="jabatan-count-label">Tenaga Pengajar</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="jabatan-count-number">{{ $countAsistenAhli ?? 0 }}</div>
+          <div class="jabatan-count-label">Asisten Ahli</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="jabatan-count-number">{{ $countLektor ?? 0 }}</div>
+          <div class="jabatan-count-label">Lektor</div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="jabatan-count-number">{{ $countLektorKepala ?? 0 }}</div>
+          <div class="jabatan-count-label">Lektor Kepala</div>
+        </div>
       </div>
-      <a href="{{ route('homepage.kontak') }}" class="btn btn-warning rounded-pill px-4 fw-bold" style="color: #000000;">
-        <i class="bi bi-arrow-right-circle me-1"></i> Informasi PMB
-      </a>
     </div>
 
   </div>
 </section>
+
+@push('styles')
+<style>
+  .jabatan-count-number {
+    font-size: 46px;
+    font-weight: 800;
+    color: #0b1320;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .jabatan-count-label {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: #1e293b;
+    letter-spacing: 0.1px;
+  }
+</style>
+@endpush
 @endsection
