@@ -15,13 +15,13 @@ class FacultyStatSeeder extends Seeder
         FacultyStat::truncate();
 
         FacultyStat::create([
-            'title' => 'FIKES UIS Dalam Angka',
+            'title' => 'Teknik Informatika Dalam Angka',
             'image' => 'faculty-stats/JKgC4vSssWEvmAyPdYIlazkOQ5Wch9xV8RiJxo2K.png',
-            'jumlah_prodi' => 5,
+            'jumlah_prodi' => 1,
             'total_mahasiswa' => 3450,
             'total_dosen' => 80,
             'total_alumni' => 6120,
-            'is_active' => true,
+            'is_active' => false,
         ]);
     }
 }
