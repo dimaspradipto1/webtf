@@ -149,7 +149,7 @@ class NewsController extends Controller
     public function uploadImage(Request $request): JsonResponse
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:5120',
         ]);
 
         if ($request->hasFile('file')) {

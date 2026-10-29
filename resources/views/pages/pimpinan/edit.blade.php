@@ -86,7 +86,7 @@
                                 </div>
                             @endif
                             <input type="file" name="foto" class="form-control" accept="image/jpeg,image/png,image/jpg,image/webp">
-                            <div class="form-text small">Kosongkan jika tidak ingin mengganti foto. Format: JPG, PNG, WEBP (Maks. 4MB).</div>
+                            <div class="form-text small">Kosongkan jika tidak ingin mengganti foto. Format: JPG, PNG, WEBP (Maks. 5 MB).</div>
                         </div>
 
                         <div class="row g-2 mb-3">

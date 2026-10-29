@@ -29,7 +29,7 @@ class AkademikRequest extends FormRequest
             'link_url' => ['nullable', 'string', 'max:500'],
             'file_nama' => ['nullable', 'string', 'max:255'],
             'file_dokumen' => ['nullable', 'file', 'mimes:pdf,doc,docx,xls,xlsx,zip,rar', 'max:20480'],
-            'gambar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'gambar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:5120'],
             'is_active' => ['nullable', 'boolean'],
         ];
     }
@@ -45,7 +45,7 @@ class AkademikRequest extends FormRequest
             'file_dokumen.mimes' => 'Format file yang diperbolehkan: PDF, DOC, DOCX, XLS, XLSX, ZIP, RAR.',
             'file_dokumen.max' => 'Ukuran file dokumen maksimal 20MB.',
             'gambar.image' => 'File banner/gambar harus berupa gambar.',
-            'gambar.max' => 'Ukuran gambar maksimal 2 MB.',
+            'gambar.max' => 'Ukuran gambar maksimal 5 MB.',
         ];
     }
 }

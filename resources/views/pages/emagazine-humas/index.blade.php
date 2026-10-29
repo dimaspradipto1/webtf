@@ -130,7 +130,7 @@
                         <div class="col-md-6 col-12">
                             <label for="tab_1_cover_image" class="form-label fw-bold text-dark small">Gambar Sampul Custom (Opsional)</label>
                             <input type="file" id="tab_1_cover_image" name="tab_1_cover_image" class="form-control" accept="image/*">
-                            <div class="form-text small text-muted">Format: JPG, PNG, WEBP (Maks 3MB). Jika dikosongkan, menggunakan miniatur kartu default UIS.</div>
+                            <div class="form-text small text-muted">Format: JPG, PNG, WEBP (Maks 5 MB). Jika dikosongkan, menggunakan miniatur kartu default UIS.</div>
 
                             @if($emagazine->tab_1_cover_image)
                                 <div class="mt-2 p-2 border rounded d-flex align-items-center justify-content-between bg-light">
@@ -239,7 +239,7 @@
                         <div class="col-md-6 col-12">
                             <label for="tab_2_cover_image" class="form-label fw-bold text-dark small">Gambar Sampul Custom (Opsional)</label>
                             <input type="file" id="tab_2_cover_image" name="tab_2_cover_image" class="form-control" accept="image/*">
-                            <div class="form-text small text-muted">Format: JPG, PNG, WEBP (Maks 3MB).</div>
+                            <div class="form-text small text-muted">Format: JPG, PNG, WEBP (Maks 5 MB).</div>
 
                             @if($emagazine->tab_2_cover_image)
                                 <div class="mt-2 p-2 border rounded d-flex align-items-center justify-content-between bg-light">

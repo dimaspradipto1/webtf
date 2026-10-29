@@ -276,7 +276,7 @@
                                    multiple
                                    accept="image/*"
                                    onchange="previewGallery(this)">
-                            <div class="form-text text-muted">Bisa memilih lebih dari 1 file sekaligus (JPG, PNG, WebP. Maks 2 MB).</div>
+                            <div class="form-text text-muted">Bisa memilih lebih dari 1 file sekaligus (JPG, PNG, WebP. Maks 5 MB).</div>
                             @error('gallery')
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror

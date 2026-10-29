@@ -74,7 +74,7 @@
                         <div class="mb-3">
                             <label class="form-label fw-semibold small">Foto Pimpinan (Tampil Full Tanpa Bingkai)</label>
                             <input type="file" name="foto" class="form-control" accept="image/jpeg,image/png,image/jpg,image/webp">
-                            <div class="form-text small">Format: JPG, PNG, WEBP (Maks. 4MB). Gambar akan ditampilkan penuh tanpa bingkai kartu.</div>
+                            <div class="form-text small">Format: JPG, PNG, WEBP (Maks. 5 MB). Gambar akan ditampilkan penuh tanpa bingkai kartu.</div>
                         </div>
 
                         <div class="row g-2 mb-3">

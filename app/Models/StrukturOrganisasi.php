@@ -10,5 +10,11 @@ class StrukturOrganisasi extends Model
 
     protected $fillable = [
         'url_struktur',
+        'url_struktur_organisasi',
     ];
+
+    public function getUrlStrukturAttribute($value): ?string
+    {
+        return $value ?: ($this->attributes['url_struktur_organisasi'] ?? null);
+    }
 }

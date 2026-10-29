@@ -30,6 +30,7 @@ class StrukturOrganisasiController extends Controller
             // Upload new file
             $path = $request->file('url_struktur')->store('struktur-organisasi', 'public');
             $struktur->url_struktur = 'storage/'.$path;
+            $struktur->url_struktur_organisasi = 'storage/'.$path;
             $struktur->save();
         }
 
