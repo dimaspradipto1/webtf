@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\BahasaSetting;
+use App\Models\Beasiswa;
 use App\Models\Contact;
 use App\Models\Layanan;
 use App\Models\PmbSetting;
@@ -38,6 +39,11 @@ class AppServiceProvider extends ServiceProvider
             $pmbSetting = PmbSetting::first();
             $navProdis = Layanan::where('aktif', true)->orderBy('urutan')->get();
             $navPublikasis = Publikasi::where('aktif', true)->orderBy('urutan')->get();
+            try {
+                $navBeasiswas = Beasiswa::where('aktif', true)->orderBy('urutan')->get();
+            } catch (\Throwable $e) {
+                $navBeasiswas = collect();
+            }
             $topbarSetting = Topbar::where('is_active', true)->latest('id')->first();
 
             $cleanWa = '';
@@ -63,6 +69,7 @@ class AppServiceProvider extends ServiceProvider
                 'pmbSetting' => $pmbSetting,
                 'navProdis' => $navProdis,
                 'navPublikasis' => $navPublikasis,
+                'navBeasiswas' => $navBeasiswas,
                 'topbarSetting' => $topbarSetting,
                 'bahasaList' => $bahasaList,
                 'defaultBahasa' => $defaultBahasa,

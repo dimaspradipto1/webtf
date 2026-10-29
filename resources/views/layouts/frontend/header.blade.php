@@ -169,12 +169,23 @@
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.portal.page', 'laminfokom') }}">
+                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.portal.page', 'sertifikat-akreditasi') }}">
+                    <i class="bi bi-file-earmark-check"></i> Sertifikat Akreditasi
+                  </a>
+                </li>
+                @php
+                  $laminfokomItem = \App\Http\Controllers\AkademikController::getOrCreateItem('laminfokom');
+                  $laminfokomUrl = !empty($laminfokomItem->link_url) ? $laminfokomItem->link_url : 'https://laminfokom.or.id';
+                  $banPtItem = \App\Http\Controllers\AkademikController::getOrCreateItem('ban-pt');
+                  $banPtUrl = !empty($banPtItem->link_url) ? $banPtItem->link_url : 'https://www.banpt.or.id';
+                @endphp
+                <li>
+                  <a class="dropdown-item dropdown-item-custom" href="{{ $laminfokomUrl }}" target="_blank" rel="noopener noreferrer">
                     <i class="bi bi-award"></i> LAMINFOKOM
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.portal.page', 'ban-pt') }}">
+                  <a class="dropdown-item dropdown-item-custom" href="{{ $banPtUrl }}" target="_blank" rel="noopener noreferrer">
                     <i class="bi bi-shield-check"></i> BAN-PT
                   </a>
                 </li>
@@ -188,26 +199,28 @@
                 <i class="bi bi-chevron-right submenu-arrow" style="font-size: 10px;"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-custom dropdown-submenu-list">
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.portal.page', 'beasiswa-lpdp') }}">
-                    <i class="bi bi-star-fill"></i> LPDP
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.portal.page', 'beasiswa-kip') }}">
-                    <i class="bi bi-card-heading"></i> KIP
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.portal.page', 'beasiswa-bpddi') }}">
-                    <i class="bi bi-bookmark-star-fill"></i> BPDDI
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.portal.page', 'beasiswa-adik') }}">
-                    <i class="bi bi-people-fill"></i> ADIK
-                  </a>
-                </li>
+                @if(isset($navBeasiswas) && $navBeasiswas->count() > 0)
+                  @foreach($navBeasiswas as $b)
+                    @php
+                      $rawLink = trim($b->link ?? '');
+                      if (!empty($rawLink) && !str_starts_with($rawLink, 'http://') && !str_starts_with($rawLink, 'https://') && !str_starts_with($rawLink, '/') && !str_starts_with($rawLink, '#')) {
+                          $rawLink = 'https://' . $rawLink;
+                      }
+                      $hasLink = !empty($rawLink);
+                      $bHref = $hasLink ? $rawLink : '#';
+                      $isExternal = $hasLink && (str_starts_with($rawLink, 'http://') || str_starts_with($rawLink, 'https://'));
+                    @endphp
+                    <li>
+                      <a class="dropdown-item dropdown-item-custom"
+                         href="{{ $bHref }}"
+                         @if($isExternal) target="_blank" rel="noopener noreferrer" @endif>
+                        <i class="bi {{ $b->icon ?: 'bi-award-fill' }}"></i> {{ $b->judul }}
+                      </a>
+                    </li>
+                  @endforeach
+                @else
+                  <li><span class="dropdown-item dropdown-item-custom text-muted small">Belum ada beasiswa</span></li>
+                @endif
               </ul>
             </li>
 

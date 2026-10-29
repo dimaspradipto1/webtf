@@ -142,10 +142,10 @@
 
           <!-- 6. PORTAL (Tracer Study, E-Dokumen, SOP, Akreditasi, Beasiswa, Informasi, PMB) -->
           <li class="nav-item">
-            <a class="nav-link {{ Route::is('testimonial.*') || Route::is('unduhan.*') || Route::is('template-dokumen.*') || Route::is('akademik.portal.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') ? '' : 'collapsed' }}" data-bs-target="#portal-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link {{ Route::is('testimonial.*') || Route::is('unduhan.*') || Route::is('template-dokumen.*') || Route::is('akademik.portal.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') || Route::is('beasiswa.*') ? '' : 'collapsed' }}" data-bs-target="#portal-nav" data-bs-toggle="collapse" href="#">
               <i class="bi bi-compass"></i><span>Portal Layanan</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="portal-nav" class="nav-content collapse {{ Route::is('testimonial.*') || Route::is('unduhan.*') || Route::is('template-dokumen.*') || Route::is('akademik.portal.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="portal-nav" class="nav-content collapse {{ Route::is('testimonial.*') || Route::is('unduhan.*') || Route::is('template-dokumen.*') || Route::is('akademik.portal.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') || Route::is('beasiswa.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
               <li>
                 <a href="{{ route('akademik.portal.edit', 'tracer-study') }}" class="{{ request()->route('tipe') === 'tracer-study' ? 'active' : '' }}">
                   <i class="bi bi-circle"></i><span>Tracer Study (Link GDrive)</span>
@@ -172,33 +172,23 @@
                 </a>
               </li>
               <li>
+                <a href="{{ route('akademik.portal.edit', 'sertifikat-akreditasi') }}" class="{{ request()->route('tipe') === 'sertifikat-akreditasi' ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Sertifikat Akreditasi</span>
+                </a>
+              </li>
+              <li>
                 <a href="{{ route('akademik.portal.edit', 'laminfokom') }}" class="{{ request()->route('tipe') === 'laminfokom' ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Akreditasi LAMINFOKOM</span>
+                  <i class="bi bi-circle"></i><span>LAMINFOKOM (Link URL)</span>
                 </a>
               </li>
               <li>
                 <a href="{{ route('akademik.portal.edit', 'ban-pt') }}" class="{{ request()->route('tipe') === 'ban-pt' ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Akreditasi BAN-PT</span>
+                  <i class="bi bi-circle"></i><span>BAN-PT (Link URL)</span>
                 </a>
               </li>
               <li>
-                <a href="{{ route('akademik.portal.edit', 'beasiswa-lpdp') }}" class="{{ request()->route('tipe') === 'beasiswa-lpdp' ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Beasiswa LPDP</span>
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('akademik.portal.edit', 'beasiswa-kip') }}" class="{{ request()->route('tipe') === 'beasiswa-kip' ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Beasiswa KIP</span>
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('akademik.portal.edit', 'beasiswa-bpddi') }}" class="{{ request()->route('tipe') === 'beasiswa-bpddi' ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Beasiswa BPDDI</span>
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('akademik.portal.edit', 'beasiswa-adik') }}" class="{{ request()->route('tipe') === 'beasiswa-adik' ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Beasiswa ADIK</span>
+                <a href="{{ route('beasiswa.index') }}" class="{{ Route::is('beasiswa.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Beasiswa</span>
                 </a>
               </li>
               <li>

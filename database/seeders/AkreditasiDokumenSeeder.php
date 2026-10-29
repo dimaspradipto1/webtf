@@ -114,6 +114,53 @@ class AkreditasiDokumenSeeder extends Seeder
                 'urutan' => 5,
                 'is_active' => true,
             ],
+
+            // Sertifikat Akreditasi
+            [
+                'kategori_tab' => 'sertifikat',
+                'nama_tab' => 'Sertifikat Akreditasi',
+                'grup' => null,
+                'nama_dokumen' => 'Sertifikat Akreditasi Teknik Informatika',
+                'gdrive_url' => $defaultDrive,
+                'urutan' => 1,
+                'is_active' => true,
+            ],
+            [
+                'kategori_tab' => 'sertifikat',
+                'nama_tab' => 'Sertifikat Akreditasi',
+                'grup' => null,
+                'nama_dokumen' => 'Sertifikat Akreditasi Teknik Industri',
+                'gdrive_url' => $defaultDrive,
+                'urutan' => 2,
+                'is_active' => true,
+            ],
+            [
+                'kategori_tab' => 'sertifikat',
+                'nama_tab' => 'Sertifikat Akreditasi',
+                'grup' => null,
+                'nama_dokumen' => 'Sertifikat Akreditas Logistik',
+                'gdrive_url' => $defaultDrive,
+                'urutan' => 3,
+                'is_active' => true,
+            ],
+            [
+                'kategori_tab' => 'sertifikat',
+                'nama_tab' => 'Sertifikat Akreditasi',
+                'grup' => null,
+                'nama_dokumen' => 'Sertifikat Teknik Perkapalan',
+                'gdrive_url' => $defaultDrive,
+                'urutan' => 4,
+                'is_active' => true,
+            ],
+            [
+                'kategori_tab' => 'sertifikat',
+                'nama_tab' => 'Sertifikat Akreditasi',
+                'grup' => null,
+                'nama_dokumen' => 'Sertifikat Sitem Informasi',
+                'gdrive_url' => $defaultDrive,
+                'urutan' => 5,
+                'is_active' => true,
+            ],
         ];
 
         AkreditasiDokumen::truncate();

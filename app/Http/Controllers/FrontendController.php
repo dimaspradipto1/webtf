@@ -254,13 +254,45 @@ class FrontendController extends Controller
         $item = AkademikController::getOrCreateItem($slug);
         $pageTitle = $item->judul;
 
+        if (in_array($slug, ['tracer-study', 'laminfokom', 'ban-pt'])) {
+            $defaultUrls = [
+                'tracer-study' => 'https://drive.google.com',
+                'laminfokom' => 'https://laminfokom.or.id',
+                'ban-pt' => 'https://www.banpt.or.id',
+            ];
+            $url = !empty($item->link_url) ? $item->link_url : ($defaultUrls[$slug] ?? 'https://drive.google.com');
+            return redirect()->away($url);
+        }
+
+        if (str_starts_with($slug, 'beasiswa-')) {
+            $keyword = strtoupper(str_replace('beasiswa-', '', $slug));
+            $foundBeasiswa = \App\Models\Beasiswa::where('aktif', true)
+                ->where(function ($q) use ($keyword) {
+                    $q->where('judul', 'like', "%{$keyword}%");
+                })->first();
+            if ($foundBeasiswa && !empty($foundBeasiswa->link)) {
+                return redirect()->away($foundBeasiswa->link);
+            }
+        }
+
         if ($slug === 'dokumen-akreditasi-tf') {
             $akreditasiItems = \App\Models\AkreditasiDokumen::where('is_active', true)
+                ->whereIn('kategori_tab', ['instrumen', 'kelengkapan'])
                 ->orderBy('urutan')
                 ->orderBy('id')
                 ->get();
 
             return view('layouts.frontend.akademik', compact('item', 'pageTitle', 'akreditasiItems'));
+        }
+
+        if ($slug === 'sertifikat-akreditasi') {
+            $sertifikatItems = \App\Models\AkreditasiDokumen::where('is_active', true)
+                ->where('kategori_tab', 'sertifikat')
+                ->orderBy('urutan')
+                ->orderBy('id')
+                ->get();
+
+            return view('layouts.frontend.akademik', compact('item', 'pageTitle', 'sertifikatItems'));
         }
 
         return view('layouts.frontend.akademik', compact('item', 'pageTitle'));

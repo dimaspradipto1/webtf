@@ -5,6 +5,7 @@ use App\Http\Controllers\AkademikController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BahasaSettingController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\BeasiswaController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DesainGrafisController;
@@ -211,6 +212,8 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::post('admin-program-studi', [LayananController::class, 'updateAll'])->name('layanan.update-all');
     Route::get('admin-publikasi', [PublikasiController::class, 'index'])->name('publikasi.index');
     Route::post('admin-publikasi', [PublikasiController::class, 'updateAll'])->name('publikasi.update-all');
+    Route::get('admin-beasiswa', [BeasiswaController::class, 'index'])->name('beasiswa.index');
+    Route::post('admin-beasiswa', [BeasiswaController::class, 'updateAll'])->name('beasiswa.update-all');
 
     // Dosen Bulk Actions & Excel Import / Template
     Route::post('admin-dosen/bulk-delete', [DosenController::class, 'bulkDelete'])->name('dosen.bulk-delete');

@@ -47,6 +47,12 @@ class AkademikController extends Controller
             'deskripsi' => '<p>Program Studi S1 Teknik Informatika Fakultas Sains dan Teknologi berkomitmen menjaga budaya mutu akademik secara berkelanjutan sesuai standar nasional pendidikan tinggi. Halaman ini memuat sertifikat akreditasi dan dokumen pendukung akreditasi Program Studi Teknik Informatika yang dapat diunduh oleh mahasiswa, alumni, dan pemangku kepentingan.</p>',
             'link_url' => '',
         ],
+        'sertifikat-akreditasi' => [
+            'judul' => 'Sertifikat Akreditasi Program Studi',
+            'subjudul' => 'Pusat berkas resmi Sertifikat Akreditasi Program Studi di lingkungan Fakultas Sains dan Teknologi.',
+            'deskripsi' => '<p>Halaman ini memuat salinan resmi Sertifikat Akreditasi Program Studi yang dapat diunduh untuk keperluan administrasi akademik, alumni, dan pemangku kepentingan.</p>',
+            'link_url' => '',
+        ],
         'laminfokom' => [
             'judul' => 'Akreditasi LAMINFOKOM — Teknik Informatika',
             'subjudul' => 'Lembaga Akreditasi Mandiri Informatika dan Komputer (LAMINFOKOM) untuk Program Studi S1 Teknik Informatika.',
@@ -244,12 +250,22 @@ class AkademikController extends Controller
         $pageTitle = self::$defaults[$tipe]['judul'];
 
         if ($tipe === 'dokumen-akreditasi-tf') {
-            $akreditasiItems = AkreditasiDokumen::orderBy('kategori_tab')
+            $akreditasiItems = AkreditasiDokumen::whereIn('kategori_tab', ['instrumen', 'kelengkapan'])
+                ->orderBy('kategori_tab')
                 ->orderBy('urutan')
                 ->orderBy('id')
                 ->get();
 
             return view('pages.akademik.edit', compact('item', 'pageTitle', 'tipe', 'akreditasiItems'));
+        }
+
+        if ($tipe === 'sertifikat-akreditasi') {
+            $sertifikatItems = AkreditasiDokumen::where('kategori_tab', 'sertifikat')
+                ->orderBy('urutan')
+                ->orderBy('id')
+                ->get();
+
+            return view('pages.akademik.edit', compact('item', 'pageTitle', 'tipe', 'sertifikatItems'));
         }
 
         return view('pages.akademik.edit', compact('item', 'pageTitle', 'tipe'));
@@ -258,22 +274,25 @@ class AkademikController extends Controller
     public function storeAkreditasiItem(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'kategori_tab' => ['required', 'string', 'in:instrumen,kelengkapan'],
+            'kategori_tab' => ['required', 'string', 'in:instrumen,kelengkapan,sertifikat'],
             'nama_tab' => ['nullable', 'string', 'max:255'],
             'grup' => ['nullable', 'string', 'max:255'],
             'nama_dokumen' => ['required', 'string', 'max:255'],
             'gdrive_url' => ['required', 'url', 'max:1000'],
             'urutan' => ['nullable', 'integer', 'min:0'],
         ], [
-            'nama_dokumen.required' => 'Nama Dokumen Akreditasi wajib diisi.',
-            'gdrive_url.required' => 'Link Google Drive wajib diisi.',
-            'gdrive_url.url' => 'Link Google Drive harus berupa URL yang valid (diawali https://).',
+            'nama_dokumen.required' => 'Nama Dokumen / Sertifikat wajib diisi.',
+            'gdrive_url.required' => 'Link Google Drive / Download wajib diisi.',
+            'gdrive_url.url' => 'Link Google Drive / Download harus berupa URL yang valid (diawali https://).',
         ]);
 
         if (empty($validated['nama_tab'])) {
-            $validated['nama_tab'] = $validated['kategori_tab'] === 'instrumen' 
-                ? 'Instrumen Akreditasi' 
-                : 'Kelengkapan Dokumen Teknik Informatika';
+            $validated['nama_tab'] = match ($validated['kategori_tab']) {
+                'instrumen' => 'Instrumen Akreditasi',
+                'kelengkapan' => 'Kelengkapan Dokumen Teknik Informatika',
+                'sertifikat' => 'Sertifikat Akreditasi',
+                default => 'Dokumen Akreditasi',
+            };
         }
 
         $validated['urutan'] = $validated['urutan'] ?? (AkreditasiDokumen::where('kategori_tab', $validated['kategori_tab'])->max('urutan') + 1);
@@ -281,9 +300,11 @@ class AkademikController extends Controller
 
         AkreditasiDokumen::create($validated);
 
+        $targetTipe = $validated['kategori_tab'] === 'sertifikat' ? 'sertifikat-akreditasi' : 'dokumen-akreditasi-tf';
+
         return redirect()
-            ->route('akademik.portal.edit', 'dokumen-akreditasi-tf')
-            ->with('success', 'Dokumen Akreditasi baru berhasil ditambahkan!');
+            ->route('akademik.portal.edit', $targetTipe)
+            ->with('success', 'Dokumen / Sertifikat Akreditasi baru berhasil ditambahkan!');
     }
 
     public function updateAkreditasiItem(Request $request, int $id): RedirectResponse
@@ -291,22 +312,25 @@ class AkademikController extends Controller
         $akreditasiItem = AkreditasiDokumen::findOrFail($id);
 
         $validated = $request->validate([
-            'kategori_tab' => ['required', 'string', 'in:instrumen,kelengkapan'],
+            'kategori_tab' => ['required', 'string', 'in:instrumen,kelengkapan,sertifikat'],
             'nama_tab' => ['nullable', 'string', 'max:255'],
             'grup' => ['nullable', 'string', 'max:255'],
             'nama_dokumen' => ['required', 'string', 'max:255'],
             'gdrive_url' => ['required', 'url', 'max:1000'],
             'urutan' => ['nullable', 'integer', 'min:0'],
         ], [
-            'nama_dokumen.required' => 'Nama Dokumen Akreditasi wajib diisi.',
-            'gdrive_url.required' => 'Link Google Drive wajib diisi.',
-            'gdrive_url.url' => 'Link Google Drive harus berupa URL yang valid (diawali https://).',
+            'nama_dokumen.required' => 'Nama Dokumen / Sertifikat wajib diisi.',
+            'gdrive_url.required' => 'Link Google Drive / Download wajib diisi.',
+            'gdrive_url.url' => 'Link Google Drive / Download harus berupa URL yang valid (diawali https://).',
         ]);
 
         if (empty($validated['nama_tab'])) {
-            $validated['nama_tab'] = $validated['kategori_tab'] === 'instrumen' 
-                ? 'Instrumen Akreditasi' 
-                : 'Kelengkapan Dokumen Teknik Informatika';
+            $validated['nama_tab'] = match ($validated['kategori_tab']) {
+                'instrumen' => 'Instrumen Akreditasi',
+                'kelengkapan' => 'Kelengkapan Dokumen Teknik Informatika',
+                'sertifikat' => 'Sertifikat Akreditasi',
+                default => 'Dokumen Akreditasi',
+            };
         }
 
         $validated['urutan'] = $validated['urutan'] ?? 0;
@@ -314,19 +338,22 @@ class AkademikController extends Controller
 
         $akreditasiItem->update($validated);
 
+        $targetTipe = $validated['kategori_tab'] === 'sertifikat' ? 'sertifikat-akreditasi' : 'dokumen-akreditasi-tf';
+
         return redirect()
-            ->route('akademik.portal.edit', 'dokumen-akreditasi-tf')
-            ->with('success', 'Dokumen Akreditasi berhasil diperbarui!');
+            ->route('akademik.portal.edit', $targetTipe)
+            ->with('success', 'Dokumen / Sertifikat Akreditasi berhasil diperbarui!');
     }
 
     public function destroyAkreditasiItem(int $id): RedirectResponse
     {
         $akreditasiItem = AkreditasiDokumen::findOrFail($id);
+        $targetTipe = $akreditasiItem->kategori_tab === 'sertifikat' ? 'sertifikat-akreditasi' : 'dokumen-akreditasi-tf';
         $akreditasiItem->delete();
 
         return redirect()
-            ->route('akademik.portal.edit', 'dokumen-akreditasi-tf')
-            ->with('success', 'Dokumen Akreditasi berhasil dihapus!');
+            ->route('akademik.portal.edit', $targetTipe)
+            ->with('success', 'Dokumen / Sertifikat Akreditasi berhasil dihapus!');
     }
 
     public function update(AkademikRequest $request, string $tipe): RedirectResponse
@@ -362,10 +389,15 @@ class AkademikController extends Controller
 
         $item->update($validated);
 
-        if ($tipe === 'tracer-study') {
+        if (in_array($tipe, ['tracer-study', 'laminfokom', 'ban-pt'])) {
+            $label = match ($tipe) {
+                'tracer-study' => 'Link Google Drive Tracer Study',
+                'laminfokom' => 'Link URL Akreditasi LAMINFOKOM',
+                'ban-pt' => 'Link URL Akreditasi BAN-PT',
+            };
             return redirect()
                 ->route('akademik.portal.edit', $tipe)
-                ->with('success', 'Link Google Drive Tracer Study berhasil disimpan!');
+                ->with('success', "{$label} berhasil disimpan!");
         }
 
         if (in_array($tipe, ['kurikulum', 'kalender', 'pedoman', 'sistem'])) {

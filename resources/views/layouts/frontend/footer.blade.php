@@ -54,6 +54,7 @@
           <li><a href="{{ route('homepage.unduhan') }}"><i class="bi bi-chevron-right"></i> E-Dokumen</a></li>
           <li><a href="{{ route('homepage.template-dokumen') }}"><i class="bi bi-chevron-right"></i> SOP</a></li>
           <li><a href="{{ route('homepage.portal.page', 'dokumen-akreditasi-tf') }}"><i class="bi bi-chevron-right"></i> Akreditasi TF</a></li>
+          <li><a href="{{ route('homepage.portal.page', 'sertifikat-akreditasi') }}"><i class="bi bi-chevron-right"></i> Sertifikat Akreditasi</a></li>
         </ul>
       </div>
 

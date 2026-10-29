@@ -91,12 +91,8 @@
             <div class="tab-content akreditasi-tab-card" id="akreditasiTabContent">
               {{-- PANE 1: Instrumen Akreditasi --}}
               <div class="tab-pane fade show active" id="instrumen-pane" role="tabpanel" aria-labelledby="instrumen-tab" tabindex="0">
-                <div class="akreditasi-search-wrapper mb-3">
-                  <input type="text" id="searchInstrumen" class="form-control quick-search-input" placeholder="Cari dokumen...">
-                </div>
-
                 <div class="table-responsive">
-                  <table class="akreditasi-table" id="instrumenTable">
+                  <table class="table table-bordered align-middle akreditasi-table w-100 mb-0" id="instrumenTable" style="width: 100% !important;">
                     <thead>
                       <tr>
                         <th style="width: 8%; text-align: center;">No</th>
@@ -143,12 +139,8 @@
 
               {{-- PANE 2: Kelengkapan Dokumen --}}
               <div class="tab-pane fade" id="kelengkapan-pane" role="tabpanel" aria-labelledby="kelengkapan-tab" tabindex="0">
-                <div class="akreditasi-search-wrapper mb-3">
-                  <input type="text" id="searchKelengkapan" class="form-control quick-search-input" placeholder="Cari dokumen...">
-                </div>
-
                 <div class="table-responsive">
-                  <table class="akreditasi-table" id="kelengkapanTable">
+                  <table class="table table-bordered align-middle akreditasi-table w-100 mb-0" id="kelengkapanTable" style="width: 100% !important;">
                     <thead>
                       <tr>
                         <th style="width: 8%; text-align: center;">No</th>
@@ -189,6 +181,48 @@
                   </table>
                 </div>
               </div>
+            </div>
+          </div>
+        @elseif(isset($sertifikatItems))
+          {{-- Tabel Dokumen Sertifikat Akreditasi --}}
+          <div class="akreditasi-tab-card" style="border: 1px solid #dcdcdc; border-radius: 8px;">
+            <div class="table-responsive">
+              <table class="table table-bordered align-middle akreditasi-table w-100 mb-0" id="sertifikatTable" style="width: 100% !important;">
+                <thead>
+                  <tr>
+                    <th style="width: 8%; text-align: center;">No</th>
+                    <th style="width: 68%;">Nama Document</th>
+                    <th style="width: 24%; text-align: center;">Link Document</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @forelse($sertifikatItems as $sItem)
+                    <tr>
+                      <td class="text-center fw-semibold text-muted">{{ $loop->iteration }}</td>
+                      <td class="fw-semibold text-dark">{{ $sItem->nama_dokumen }}</td>
+                      <td class="text-center">
+                        @if(!empty($sItem->gdrive_url))
+                          <a href="{{ $sItem->gdrive_url }}" target="_blank" rel="noopener noreferrer" class="btn-document-link" title="Download {{ $sItem->nama_dokumen }}">
+                            <i class="bi bi-download"></i>
+                            <span>Download</span>
+                          </a>
+                        @else
+                          <span class="btn-document-link disabled" style="opacity: 0.6; cursor: not-allowed;">
+                            <i class="bi bi-download"></i>
+                            <span>Download</span>
+                          </span>
+                        @endif
+                      </td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <td colspan="3" class="text-center py-4 text-muted">
+                        Belum ada dokumen sertifikat akreditasi yang tersedia saat ini.
+                      </td>
+                    </tr>
+                  @endforelse
+                </tbody>
+              </table>
             </div>
           </div>
         @else
@@ -384,7 +418,7 @@
 </script>
 @endif
 
-@if(isset($akreditasiItems))
+@if(isset($akreditasiItems) || isset($sertifikatItems))
 @push('styles')
 <!-- DataTables CSS Bootstrap 5 -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
@@ -431,34 +465,24 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   }
 
-  /* Quick search input */
-  .quick-search-input {
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    padding: 8px 14px;
-    font-size: 13.5px;
-    color: #334155;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    width: 230px;
-    max-width: 100%;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-  .quick-search-input::placeholder {
-    color: #94a3b8;
-  }
-  .quick-search-input:focus {
-    background-color: #ffffff;
-    border-color: #0b1626;
-    box-shadow: 0 0 0 3px rgba(11, 22, 38, 0.1);
-  }
-
-  /* Akreditasi Table */
-  .akreditasi-table {
+  /* Akreditasi Table Full Width */
+  table.akreditasi-table,
+  table.akreditasi-table.dataTable,
+  #instrumenTable,
+  #kelengkapanTable,
+  .dataTables_wrapper table.dataTable {
     border-collapse: collapse !important;
     border: 1px solid #0b1626 !important;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+  .dataTables_wrapper {
+    width: 100% !important;
+  }
+  .akreditasi-tab-card .table-responsive {
+    width: 100% !important;
   }
   .akreditasi-table thead th {
     background-color: #0b1626 !important;
@@ -530,14 +554,16 @@
     cursor: pointer;
   }
   .akreditasi-tab-card .dataTables_wrapper .dataTables_filter input {
-    padding: 5px 12px;
+    padding: 6px 14px;
     border: 1px solid #cbd5e1;
-    border-radius: 4px;
-    font-size: 13px;
-    margin-left: 6px;
-    width: 200px;
+    border-radius: 6px;
+    font-size: 13.5px;
+    margin-left: 8px;
+    width: 220px;
     background-color: #ffffff;
     outline: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
   .akreditasi-tab-card .dataTables_wrapper .dataTables_filter input:focus {
     border-color: #0b1626;
@@ -574,15 +600,17 @@
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 <script>
   $(document).ready(function() {
+    @if(isset($akreditasiItems))
     // DataTables for Tab 1 (Instrumen Akreditasi) with Group Headers
     var instrumenTable = $('#instrumenTable').DataTable({
+      autoWidth: false,
       pageLength: 10,
       responsive: true,
       ordering: false,
       columnDefs: [
-        { targets: 0, className: 'text-center fw-semibold text-muted' },
-        { targets: 1, className: 'fw-semibold text-dark' },
-        { targets: 2, className: 'text-center', orderable: false, searchable: false },
+        { targets: 0, width: '8%', className: 'text-center fw-semibold text-muted' },
+        { targets: 1, width: '68%', className: 'fw-semibold text-dark' },
+        { targets: 2, width: '24%', className: 'text-center', orderable: false, searchable: false },
         { targets: 3, visible: false, searchable: true }
       ],
       drawCallback: function (settings) {
@@ -602,6 +630,7 @@
       language: {
         lengthMenu: "_MENU_ entries per page",
         search: "Search:",
+        searchPlaceholder: "Cari dokumen...",
         info: "Showing _START_ to _END_ of _TOTAL_ entries",
         infoEmpty: "Showing 0 to 0 of 0 entries",
         infoFiltered: "(filtered from _MAX_ total entries)",
@@ -613,25 +642,22 @@
       }
     });
 
-    // Quick search for Tab 1 synchronizes with DataTables search
-    $('#searchInstrumen').on('keyup', function() {
-      instrumenTable.search(this.value).draw();
-    });
-
     // DataTables for Tab 2 (Kelengkapan)
     var kelengkapanTable = $('#kelengkapanTable').DataTable({
+      autoWidth: false,
       pageLength: 10,
       responsive: true,
       ordering: true,
       order: [[0, 'asc']],
       columnDefs: [
-        { targets: 0, className: 'text-center fw-semibold text-muted' },
-        { targets: 1, className: 'fw-semibold text-dark' },
-        { targets: 2, className: 'text-center', orderable: false, searchable: false }
+        { targets: 0, width: '8%', className: 'text-center fw-semibold text-muted' },
+        { targets: 1, width: '68%', className: 'fw-semibold text-dark' },
+        { targets: 2, width: '24%', className: 'text-center', orderable: false, searchable: false }
       ],
       language: {
         lengthMenu: "_MENU_ entries per page",
         search: "Search:",
+        searchPlaceholder: "Cari dokumen...",
         info: "Showing _START_ to _END_ of _TOTAL_ entries",
         infoEmpty: "Showing 0 to 0 of 0 entries",
         infoFiltered: "(filtered from _MAX_ total entries)",
@@ -643,16 +669,52 @@
       }
     });
 
-    // Quick search for Tab 2 synchronizes with DataTables search
-    $('#searchKelengkapan').on('keyup', function() {
-      kelengkapanTable.search(this.value).draw();
-    });
-
     // Auto-adjust DataTable columns when tab is shown
     $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
-      instrumenTable.columns.adjust().draw();
-      kelengkapanTable.columns.adjust().draw();
+      setTimeout(function() {
+        instrumenTable.columns.adjust().draw(false);
+        kelengkapanTable.columns.adjust().draw(false);
+      }, 50);
     });
+
+    // Initial adjust
+    setTimeout(function() {
+      instrumenTable.columns.adjust().draw(false);
+    }, 100);
+    @endif
+
+    @if(isset($sertifikatItems))
+    // DataTables for Sertifikat Akreditasi
+    var sertifikatTable = $('#sertifikatTable').DataTable({
+      autoWidth: false,
+      pageLength: 10,
+      responsive: true,
+      ordering: true,
+      order: [[0, 'asc']],
+      columnDefs: [
+        { targets: 0, width: '8%', className: 'text-center fw-semibold text-muted' },
+        { targets: 1, width: '68%', className: 'fw-semibold text-dark' },
+        { targets: 2, width: '24%', className: 'text-center', orderable: false, searchable: false }
+      ],
+      language: {
+        lengthMenu: "_MENU_ entries per page",
+        search: "Search:",
+        searchPlaceholder: "Cari dokumen...",
+        info: "Showing _START_ to _END_ of _TOTAL_ entries",
+        infoEmpty: "Showing 0 to 0 of 0 entries",
+        infoFiltered: "(filtered from _MAX_ total entries)",
+        zeroRecords: "Tidak ada dokumen yang sesuai dengan pencarian",
+        paginate: {
+          previous: "&lsaquo;",
+          next: "&rsaquo;"
+        }
+      }
+    });
+
+    setTimeout(function() {
+      sertifikatTable.columns.adjust().draw(false);
+    }, 100);
+    @endif
   });
 </script>
 @endpush

@@ -221,6 +221,38 @@
             @endif
 
             @if($tipe === 'dokumen-akreditasi-tf' && isset($akreditasiItems))
+            {{-- Form Pengaturan Header Hero untuk Akreditasi --}}
+            <form action="{{ route('akademik.update', $tipe) }}" method="POST" class="mb-4">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="is_active" value="1">
+                <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-sliders text-primary fs-5"></i>
+                            <h6 class="card-title mb-0 p-0 fw-bold text-dark">Pengaturan Header Halaman Dokumen Akreditasi</h6>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="judul" class="form-label fw-semibold small">Judul Utama Halaman <span class="text-danger">*</span></label>
+                                <input type="text" id="judul" name="judul" class="form-control" value="{{ old('judul', $item->judul) }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="subjudul" class="form-label fw-semibold small">Subjudul / Ringkasan Header</label>
+                                <input type="text" id="subjudul" name="subjudul" class="form-control" value="{{ old('subjudul', $item->subjudul) }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light py-3 text-end">
+                        <button type="submit" class="btn btn-primary px-4 rounded-3 fw-bold" style="background: #000000; border: none !important;">
+                            <i class="bi bi-check2-circle me-1"></i> Simpan Header
+                        </button>
+                    </div>
+                </div>
+            </form>
+
             <!-- ═══════════════════════════════════════════════════════════
                  DAFTAR DOKUMEN AKREDITASI (GOOGLE DRIVE)
             ═══════════════════════════════════════════════════════════ -->
@@ -418,8 +450,10 @@
                     </div>
                 </div>
             </div>
+            @endif
 
-            {{-- Form Pengaturan Header Hero untuk Akreditasi --}}
+            @if($tipe === 'sertifikat-akreditasi' && isset($sertifikatItems))
+            {{-- Form Pengaturan Header Hero untuk Sertifikat Akreditasi --}}
             <form action="{{ route('akademik.update', $tipe) }}" method="POST" class="mb-4">
                 @csrf
                 @method('PUT')
@@ -428,18 +462,18 @@
                     <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center gap-2">
                             <i class="bi bi-sliders text-primary fs-5"></i>
-                            <h6 class="card-title mb-0 p-0 fw-bold text-dark">Pengaturan Header Halaman Dokumen Akreditasi</h6>
+                            <h6 class="card-title mb-0 p-0 fw-bold text-dark">Pengaturan Header Halaman Sertifikat Akreditasi</h6>
                         </div>
                     </div>
                     <div class="card-body p-4">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="judul" class="form-label fw-semibold small">Judul Utama Halaman <span class="text-danger">*</span></label>
-                                <input type="text" id="judul" name="judul" class="form-control" value="{{ old('judul', $item->judul) }}" required>
+                                <input type="text" id="judul" name="judul" class="form-control" value="{{ old('judul', $item->judul ?: 'Sertifikat Akreditasi') }}" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="subjudul" class="form-label fw-semibold small">Subjudul / Ringkasan Header</label>
-                                <input type="text" id="subjudul" name="subjudul" class="form-control" value="{{ old('subjudul', $item->subjudul) }}">
+                                <input type="text" id="subjudul" name="subjudul" class="form-control" value="{{ old('subjudul', $item->subjudul ?: 'Dokumen resmi Sertifikat Akreditasi Program Studi di lingkungan Fakultas Sains dan Teknologi.') }}">
                             </div>
                         </div>
                     </div>
@@ -450,43 +484,246 @@
                     </div>
                 </div>
             </form>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 PENGELOLAAN SERTIFIKAT AKREDITASI (TABEL & LINK GDRIVE)
+            ═══════════════════════════════════════════════════════════ -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-file-earmark-check-fill text-warning fs-4"></i>
+                        <div>
+                            <h5 class="card-title mb-0 p-0 fw-bold text-dark">Daftar Sertifikat Akreditasi</h5>
+                            <div class="small text-muted">Kelola dokumen Sertifikat Akreditasi beserta tautan unduhan Google Drive.</div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm px-3 py-2 rounded-3 fw-bold" data-bs-toggle="modal" data-bs-target="#modalTambahSertifikat">
+                        <i class="bi bi-plus-lg me-1"></i> Tambah Sertifikat
+                    </button>
+                </div>
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-center" style="width: 50px;">Urutan</th>
+                                    <th>Nama Sertifikat / Dokumen</th>
+                                    <th style="width: 30%;">Link Dokumen (Google Drive)</th>
+                                    <th class="text-center" style="width: 90px;">Status</th>
+                                    <th class="text-center" style="width: 110px;">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($sertifikatItems as $sItem)
+                                <tr>
+                                    <td class="text-center">
+                                        <span class="badge bg-secondary">{{ $sItem->urutan }}</span>
+                                    </td>
+                                    <td class="fw-semibold text-dark">{{ $sItem->nama_dokumen }}</td>
+                                    <td>
+                                        @if($sItem->gdrive_url)
+                                            <a href="{{ $sItem->gdrive_url }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none d-inline-flex align-items-center gap-1 small fw-semibold text-primary">
+                                                <i class="bi bi-box-arrow-up-right"></i> {{ Str::limit($sItem->gdrive_url, 40) }}
+                                            </a>
+                                        @else
+                                            <span class="text-muted small">-</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        @if($sItem->is_active)
+                                            <span class="badge bg-success">Aktif</span>
+                                        @else
+                                            <span class="badge bg-secondary">Nonaktif</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center gap-1">
+                                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditSertifikat{{ $sItem->id }}" title="Sunting">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </button>
+                                            <form action="{{ route('akademik.akreditasi.item.destroy', $sItem->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="confirmDeleteAkreditasi(event, this)" data-name="{{ $sItem->nama_dokumen }}" title="Hapus">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">Belum ada sertifikat akreditasi.</td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Modals Edit Sertifikat --}}
+            @foreach($sertifikatItems as $sItem)
+            <div class="modal fade" id="modalEditSertifikat{{ $sItem->id }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content rounded-4 border-0 shadow">
+                        <form action="{{ route('akademik.akreditasi.item.update', $sItem->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="kategori_tab" value="sertifikat">
+                            <div class="modal-header border-bottom py-3">
+                                <h5 class="modal-title fw-bold text-dark"><i class="bi bi-pencil-square me-2 text-warning"></i>Edit Sertifikat Akreditasi</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold small">Nama Dokumen / Sertifikat <span class="text-danger">*</span></label>
+                                        <input type="text" name="nama_dokumen" class="form-control" value="{{ $sItem->nama_dokumen }}" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold small"><i class="bi bi-google text-success me-1"></i>Link Google Drive Dokumen <span class="text-danger">*</span></label>
+                                        <input type="url" name="gdrive_url" class="form-control" value="{{ $sItem->gdrive_url }}" placeholder="https://drive.google.com/..." required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold small">Urutan Tampil</label>
+                                        <input type="number" name="urutan" class="form-control" value="{{ $sItem->urutan }}" min="0">
+                                    </div>
+                                    <div class="col-md-6 d-flex align-items-end">
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="activeEditSertifikat{{ $sItem->id }}" name="is_active" value="1" {{ $sItem->is_active ? 'checked' : '' }}>
+                                            <label class="form-check-label fw-semibold small" for="activeEditSertifikat{{ $sItem->id }}">Tampilkan di Halaman</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-light py-2">
+                                <button type="button" class="btn btn-secondary btn-sm px-3" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary btn-sm px-4 fw-bold"><i class="bi bi-save me-1"></i> Simpan Perubahan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
+            {{-- Modal Tambah Sertifikat Baru --}}
+            <div class="modal fade" id="modalTambahSertifikat" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content rounded-4 border-0 shadow">
+                        <form action="{{ route('akademik.akreditasi.item.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="kategori_tab" value="sertifikat">
+                            <div class="modal-header border-bottom py-3">
+                                <h5 class="modal-title fw-bold text-dark"><i class="bi bi-plus-circle-fill me-2 text-primary"></i>Tambah Sertifikat Akreditasi</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold small">Nama Dokumen / Sertifikat <span class="text-danger">*</span></label>
+                                        <input type="text" name="nama_dokumen" class="form-control" placeholder="Contoh: Sertifikat Akreditasi Teknik Informatika" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold small"><i class="bi bi-google text-success me-1"></i>Link Google Drive Dokumen <span class="text-danger">*</span></label>
+                                        <input type="url" name="gdrive_url" class="form-control" placeholder="https://drive.google.com/..." required>
+                                        <div class="form-text small">Tempelkan tautan file Google Drive yang dapat diakses publik.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold small">Urutan Tampil</label>
+                                        <input type="number" name="urutan" class="form-control" value="{{ ($sertifikatItems->max('urutan') ?? 0) + 1 }}" min="0">
+                                    </div>
+                                    <div class="col-md-6 d-flex align-items-end">
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="activeNewSertifikat" name="is_active" value="1" checked>
+                                            <label class="form-check-label fw-semibold small" for="activeNewSertifikat">Tampilkan di Halaman</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-light py-2">
+                                <button type="button" class="btn btn-secondary btn-sm px-3" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary btn-sm px-4 fw-bold"><i class="bi bi-plus-lg me-1"></i> Tambah Dokumen</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             @endif
 
-            @if($tipe === 'tracer-study')
+            @if(in_array($tipe, ['tracer-study', 'laminfokom', 'ban-pt']))
             <!-- ═══════════════════════════════════════════════════════════
-                 FORM KHUSUS TRACER STUDY (HANYA 1 FIELD GDRIVE)
+                 FORM KHUSUS LINK URL (TRACER STUDY, LAMINFOKOM, BAN-PT)
             ═══════════════════════════════════════════════════════════ -->
+            @php
+                $urlConfig = [
+                    'tracer-study' => [
+                        'title' => 'Link Google Drive Tracer Study',
+                        'icon' => 'bi-google text-success',
+                        'badge' => 'Langsung ke Google Drive',
+                        'badge_class' => 'bg-success-subtle text-success',
+                        'label' => 'Tautan / Link Google Drive',
+                        'input_icon' => 'bi-google',
+                        'placeholder' => 'https://drive.google.com/...',
+                        'desc' => 'Masukkan tautan Google Drive kuesioner atau formulir Tracer Study Alumni. Saat menu <strong>Tracer Study</strong> diklik di website (navbar atau footer), pengunjung akan langsung diarahkan ke link ini.',
+                        'btn_text' => 'Simpan Link Google Drive',
+                    ],
+                    'laminfokom' => [
+                        'title' => 'Link URL Akreditasi LAMINFOKOM',
+                        'icon' => 'bi-award text-primary',
+                        'badge' => 'Langsung ke Tautan Eksternal',
+                        'badge_class' => 'bg-primary-subtle text-primary',
+                        'label' => 'Tautan / Link URL LAMINFOKOM',
+                        'input_icon' => 'bi-award',
+                        'placeholder' => 'https://laminfokom.or.id',
+                        'desc' => 'Masukkan tautan resmi LAMINFOKOM atau direktori dokumen akreditasi. Saat menu <strong>LAMINFOKOM</strong> diklik di navbar (submenu Akreditasi), pengunjung akan langsung diarahkan ke link ini.',
+                        'btn_text' => 'Simpan Link LAMINFOKOM',
+                    ],
+                    'ban-pt' => [
+                        'title' => 'Link URL Akreditasi BAN-PT',
+                        'icon' => 'bi-shield-check text-success',
+                        'badge' => 'Langsung ke Tautan Eksternal',
+                        'badge_class' => 'bg-success-subtle text-success',
+                        'label' => 'Tautan / Link URL BAN-PT',
+                        'input_icon' => 'bi-shield-check',
+                        'placeholder' => 'https://www.banpt.or.id',
+                        'desc' => 'Masukkan tautan resmi BAN-PT atau direktori sertifikat akreditasi. Saat menu <strong>BAN-PT</strong> diklik di navbar (submenu Akreditasi), pengunjung akan langsung diarahkan ke link ini.',
+                        'btn_text' => 'Simpan Link BAN-PT',
+                    ],
+                ];
+                $cfg = $urlConfig[$tipe];
+            @endphp
             <form action="{{ route('akademik.update', $tipe) }}" method="POST">
                 @csrf
                 @method('PUT')
 
-                <input type="hidden" name="judul" value="{{ old('judul', $item->judul ?: 'Tracer Study Alumni Teknik Informatika') }}">
+                <input type="hidden" name="judul" value="{{ old('judul', $item->judul ?: $cfg['title']) }}">
                 <input type="hidden" name="is_active" value="1">
 
                 <div class="card shadow-sm border-0 rounded-4">
                     <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-google text-success fs-4"></i>
-                            <h5 class="card-title mb-0 p-0 fw-bold text-dark">Link Google Drive Tracer Study</h5>
+                            <i class="bi {{ $cfg['icon'] }} fs-4"></i>
+                            <h5 class="card-title mb-0 p-0 fw-bold text-dark">{{ $cfg['title'] }}</h5>
                         </div>
-                        <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill fw-semibold">
-                            <i class="bi bi-check-circle-fill me-1"></i> Langsung ke Google Drive
+                        <span class="badge {{ $cfg['badge_class'] }} px-3 py-2 rounded-pill fw-semibold">
+                            <i class="bi bi-box-arrow-up-right me-1"></i> {{ $cfg['badge'] }}
                         </span>
                     </div>
 
                     <div class="card-body p-4">
                         <div class="mb-3">
                             <label for="link_url" class="form-label fw-bold text-dark">
-                                <i class="bi bi-link-45deg text-primary me-1 fs-5"></i> Tautan / Link Google Drive <span class="text-danger">*</span>
+                                <i class="bi bi-link-45deg text-primary me-1 fs-5"></i> {{ $cfg['label'] }} <span class="text-danger">*</span>
                             </label>
                             <div class="input-group">
-                                <span class="input-group-text bg-light text-muted"><i class="bi bi-google"></i></span>
+                                <span class="input-group-text bg-light text-muted"><i class="bi {{ $cfg['input_icon'] }}"></i></span>
                                 <input type="url" 
                                        id="link_url" 
                                        name="link_url" 
                                        class="form-control form-control-lg @error('link_url') is-invalid @enderror" 
                                        value="{{ old('link_url', $item->link_url) }}" 
-                                       placeholder="https://drive.google.com/..." 
+                                       placeholder="{{ $cfg['placeholder'] }}" 
                                        required>
                                 @error('link_url')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -494,14 +731,14 @@
                             </div>
                             <div class="form-text mt-2 text-muted">
                                 <i class="bi bi-info-circle me-1"></i>
-                                Masukkan tautan Google Drive kuesioner atau formulir Tracer Study Alumni. Saat menu <strong>Tracer Study</strong> diklik di website (navbar atau footer), pengunjung akan langsung diarahkan ke link ini.
+                                {!! $cfg['desc'] !!}
                             </div>
                         </div>
 
                         @if(!empty($item->link_url))
                             <div class="p-3 rounded-3 bg-light border d-flex align-items-center justify-content-between mt-3">
                                 <div class="text-truncate me-3">
-                                    <small class="text-muted d-block">Tautan Google Drive saat ini:</small>
+                                    <small class="text-muted d-block">Tautan saat ini:</small>
                                     <a href="{{ $item->link_url }}" target="_blank" rel="noopener noreferrer" class="fw-semibold text-primary text-truncate d-inline-block" style="max-width: 500px;">
                                         <i class="bi bi-box-arrow-up-right me-1"></i> {{ $item->link_url }}
                                     </a>
@@ -518,12 +755,12 @@
                             <i class="bi bi-arrow-left me-1"></i> Kembali ke Dashboard
                         </a>
                         <button type="submit" class="btn btn-primary px-4 rounded-3 fw-bold" style="background: #000000; border: none !important;">
-                            <i class="bi bi-check2-circle me-1"></i> Simpan Link Google Drive
+                            <i class="bi bi-check2-circle me-1"></i> {{ $cfg['btn_text'] }}
                         </button>
                     </div>
                 </div>
             </form>
-            @elseif($tipe !== 'kalender' && $tipe !== 'dokumen-akreditasi-tf')
+            @elseif($tipe !== 'kalender' && $tipe !== 'dokumen-akreditasi-tf' && $tipe !== 'sertifikat-akreditasi')
             <form action="{{ route('akademik.update', $tipe) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
