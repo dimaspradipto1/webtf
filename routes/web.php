@@ -251,13 +251,17 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::post('admin-bahasa/{id}/set-default', [BahasaSettingController::class, 'setDefault'])->name('bahasa.set-default');
     Route::delete('admin-bahasa/{id}', [BahasaSettingController::class, 'destroy'])->name('bahasa.destroy');
 
-    // Backup Database & Storage (Drive D: & Otomatis Harian)
+    // Backup Database & Storage (Drive D: / C: & Otomatis Harian)
     Route::prefix('admin-backup')->name('backup.')->group(function () {
         Route::get('/', [BackupController::class, 'index'])->name('index');
         Route::post('/database', [BackupController::class, 'backupDatabase'])->name('database');
         Route::post('/storage', [BackupController::class, 'backupStorage'])->name('storage');
         Route::post('/all', [BackupController::class, 'backupAll'])->name('all');
         Route::get('/download/{filename}', [BackupController::class, 'download'])->name('download');
+        Route::get('/download-sync-script', [BackupController::class, 'downloadSyncScript'])->name('download-sync-script');
         Route::delete('/{filename}', [BackupController::class, 'destroy'])->name('destroy');
     });
 });
+
+// Endpoint API Sinkronisasi Otomatis cPanel -> Laptop (Diproteksi Token Rahasia Tanpa GDrive)
+Route::get('/api/backup-sync/download', [BackupController::class, 'syncDownload'])->name('backup.sync-download');

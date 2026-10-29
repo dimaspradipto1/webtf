@@ -18,16 +18,29 @@ class BackupService
     protected const FOLDER_NAME = 'website teknik informatika';
 
     /**
-     * Dapatkan path direktori backup (Drive D: diprioritaskan)
+     * Dapatkan path direktori backup (Fleksibel: Mendukung Drive D: atau Drive C: di Windows, & cPanel Linux)
      */
     public function getBackupDirectory(): string
     {
-        // Cek ketersediaan Drive D: pada sistem Windows
-        if (is_dir('D:\\') || is_dir('D:/')) {
+        // 1. Cek jika dikonfigurasi khusus melalui .env
+        $envPath = env('BACKUP_DIRECTORY');
+        if (!empty($envPath)) {
+            $path = rtrim($envPath, '\\/');
+        } elseif (is_dir('D:\\') || is_dir('D:/')) {
+            // 2. Lingkungan Windows: Jika ada Drive D: gunakan D:\
             $path = 'D:\\' . self::FOLDER_NAME;
+        } elseif (is_dir('C:\\') || is_dir('C:/')) {
+            // 3. Lingkungan Windows: Jika laptop TIDAK ADA Drive D:, otomatis beralih ke Drive C:\
+            $path = 'C:\\' . self::FOLDER_NAME;
         } else {
-            // Fallback aman jika sistem tidak memiliki Drive D:
-            $path = storage_path('app/backups/' . self::FOLDER_NAME);
+            // 4. Lingkungan Server Linux / cPanel:
+            // Simpan di luar public_html (misal: /home/username/website teknik informatika) agar aman dari akses web publik
+            $parentDir = dirname(base_path());
+            if (@is_dir($parentDir) && @is_writable($parentDir)) {
+                $path = $parentDir . DIRECTORY_SEPARATOR . self::FOLDER_NAME;
+            } else {
+                $path = storage_path('app/backups/' . self::FOLDER_NAME);
+            }
         }
 
         if (!File::exists($path)) {
@@ -44,6 +57,8 @@ class BackupService
     {
         $dir = $this->getBackupDirectory();
         $isDriveD = Str::startsWith(strtoupper($dir), 'D:');
+        $isDriveC = Str::startsWith(strtoupper($dir), 'C:');
+        $isLinux = DIRECTORY_SEPARATOR === '/';
 
         $freeBytes = @disk_free_space($dir) ?: 0;
         $totalBytes = @disk_total_space($dir) ?: 0;
@@ -51,9 +66,22 @@ class BackupService
         $files = $this->getBackupList();
         $totalBackupBytes = array_sum(array_column($files, 'raw_size'));
 
+        if ($isDriveD) {
+            $locationLabel = 'Drive D: (Lokal Windows)';
+        } elseif ($isDriveC) {
+            $locationLabel = 'Drive C: (Lokal Windows)';
+        } elseif ($isLinux) {
+            $locationLabel = 'Server Hosting (cPanel / Linux)';
+        } else {
+            $locationLabel = 'Penyimpanan Server';
+        }
+
         return [
             'directory' => $dir,
             'is_drive_d' => $isDriveD,
+            'is_drive_c' => $isDriveC,
+            'is_linux' => $isLinux,
+            'location_label' => $locationLabel,
             'free_space' => $this->formatBytes($freeBytes),
             'total_space' => $this->formatBytes($totalBytes),
             'free_bytes' => $freeBytes,
@@ -272,6 +300,21 @@ class BackupService
         });
 
         return $list;
+    }
+
+    /**
+     * Dapatkan item file backup terbaru berdasarkan tipe ('database' atau 'storage')
+     */
+    public function getLatestBackup(string $type = 'database'): ?array
+    {
+        $list = $this->getBackupList();
+        foreach ($list as $item) {
+            if ($item['type'] === $type) {
+                return $item;
+            }
+        }
+
+        return null;
     }
 
     /**

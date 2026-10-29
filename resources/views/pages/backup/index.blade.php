@@ -42,7 +42,7 @@
                         <div class="col-lg-8">
                             <div class="d-flex align-items-center gap-2 mb-2">
                                 <span class="badge bg-warning text-dark fw-bold px-3 py-2 rounded-pill">
-                                    <i class="bi bi-hdd-fill me-1"></i> Drive Target: {{ $targetInfo['is_drive_d'] ? 'Drive D:' : 'Lokal' }}
+                                    <i class="bi bi-hdd-fill me-1"></i> Target: {{ $targetInfo['location_label'] }}
                                 </span>
                                 <span class="badge bg-success fw-bold px-3 py-2 rounded-pill">
                                     <i class="bi bi-clock-history me-1"></i> Jadwal Otomatis Harian Aktif (01:00 WIB)
@@ -80,6 +80,58 @@
                 </div>
             </div>
 
+            {{-- Informasi Jadwal Otomatis Harian & Sinkronisasi Laptop --}}
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                        <i class="bi bi-gear-wide-connected text-warning"></i>
+                        Informasi Jadwal Backup Otomatis & Sinkronisasi Laptop
+                    </h5>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-3 border h-100">
+                                <h6 class="fw-bold text-dark mb-2"><i class="bi bi-calendar2-check text-success me-1"></i> Jadwal cPanel / Server</h6>
+                                <p class="small text-muted mb-2">
+                                    Sistem telah terkonfigurasi untuk mengeksekusi backup database dan storage setiap hari secara otomatis:
+                                </p>
+                                <ul class="small text-muted mb-0 ps-3">
+                                    <li><strong>Waktu:</strong> Pukul 01:00 WIB (Harian)</li>
+                                    <li><strong>Target:</strong> <code>{{ $targetInfo['directory'] }}</code></li>
+                                    <li><strong>Format:</strong> <code>date_namafile</code></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-3 border h-100">
+                                <h6 class="fw-bold text-dark mb-2"><i class="bi bi-terminal text-primary me-1"></i> Perintah Manual Server</h6>
+                                <p class="small text-muted mb-2">
+                                    Eksekusi manual dapat dipicu kapan saja melalui terminal / SSH:
+                                </p>
+                                <div class="bg-dark text-white p-2 rounded small font-monospace mb-2">
+                                    php artisan system:backup
+                                </div>
+                                <small class="text-muted d-block">
+                                    Juga dapat dipicu via Cron Jobs cPanel dengan interval sesuai kebutuhan.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-3 border h-100 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h6 class="fw-bold text-dark mb-2"><i class="bi bi-laptop text-warning me-1"></i> Auto-Sync ke Laptop (Drive D: / C:)</h6>
+                                    <p class="small text-muted mb-2">
+                                        Ingin backup dari cPanel otomatis tersimpan di laptop ke <strong>Drive D:</strong> (atau ke <strong>Drive C:</strong> jika tidak ada D:) tanpa Google Drive?
+                                    </p>
+                                </div>
+                                <a href="{{ route('backup.download-sync-script') }}" class="btn btn-warning btn-sm w-100 fw-bold rounded-3 text-dark mt-2 shadow-sm">
+                                    <i class="bi bi-download me-1"></i> Unduh Skrip Sync Laptop (.bat)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {{-- Action Cards --}}
             <div class="row g-4 mb-4">
                 {{-- Card 1: Backup Database --}}
@@ -106,7 +158,7 @@
                                     </code>
                                 </div>
                             </div>
-                            <form action="{{ route('backup.database') }}" method="POST" onsubmit="return confirmBackup(this, 'Database SQL')">
+                            <form action="{{ route('backup.database') }}" method="POST" onsubmit="return handleBackupConfirm(event, this, 'Database MySQL (.sql)')">
                                 @csrf
                                 <div class="mb-2">
                                     <input type="text" name="name" class="form-control form-control-sm rounded-3" placeholder="Label tambahan (opsional)">
@@ -143,12 +195,12 @@
                                     </code>
                                 </div>
                             </div>
-                            <form action="{{ route('backup.storage') }}" method="POST" onsubmit="return confirmBackup(this, 'Storage Uploads')">
+                            <form action="{{ route('backup.storage') }}" method="POST" onsubmit="return handleBackupConfirm(event, this, 'Storage Media Uploads (.zip)')">
                                 @csrf
                                 <div class="mb-2">
                                     <input type="text" name="name" class="form-control form-control-sm rounded-3" placeholder="Label tambahan (opsional)">
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100 fw-bold rounded-3 py-2 shadow-sm">
+                                <button type="submit" class="btn btn-primary w-100 fw-bold rounded-3 py-2 shadow-sm text-white">
                                     <i class="bi bi-file-zip-fill me-1"></i> Backup Storage Sekarang
                                 </button>
                             </form>
@@ -180,7 +232,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <form action="{{ route('backup.all') }}" method="POST" onsubmit="return confirmBackup(this, 'Database dan Storage sekaligus')">
+                            <form action="{{ route('backup.all') }}" method="POST" onsubmit="return handleBackupConfirm(event, this, 'Database dan Storage Sekaligus')">
                                 @csrf
                                 <button type="submit" class="btn btn-warning w-100 fw-bold rounded-3 py-2 text-dark shadow">
                                     <i class="bi bi-arrow-repeat me-1"></i> Jalankan Backup Lengkap
@@ -239,8 +291,8 @@
                                                     <i class="bi bi-database me-1"></i> Database SQL
                                                 </span>
                                             @else
-                                                <span class="badge bg-primary bg-opacity-15 text-primary fw-bold px-3 py-2 rounded-pill border border-primary">
-                                                    <i class="bi bi-archive me-1"></i> Storage ZIP
+                                                <span class="badge bg-primary text-white fw-bold px-3 py-2 rounded-pill shadow-sm" style="color: #ffffff !important;">
+                                                    <i class="bi bi-archive me-1 text-white"></i> Storage ZIP
                                                 </span>
                                             @endif
                                         </td>
@@ -258,10 +310,10 @@
                                                 <a href="{{ route('backup.download', $item['filename']) }}" class="btn btn-sm btn-outline-success rounded-3" title="Unduh File">
                                                     <i class="bi bi-download"></i>
                                                 </a>
-                                                <form action="{{ route('backup.destroy', $item['filename']) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus file backup {{ $item['filename'] }}? Tindakan ini tidak dapat dibatalkan.');" class="d-inline">
+                                                <form id="delete-form-{{ $index }}" action="{{ route('backup.destroy', $item['filename']) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-outline-danger rounded-3" title="Hapus File">
+                                                    <button type="button" class="btn btn-sm btn-outline-danger rounded-3" title="Hapus File" onclick="confirmDeleteBackup('{{ $item['filename'] }}', 'delete-form-{{ $index }}')">
                                                         <i class="bi bi-trash"></i>
                                                     </button>
                                                 </form>
@@ -285,70 +337,108 @@
                 </div>
             </div>
 
-            {{-- Informasi Jadwal Otomatis Harian --}}
-            <div class="card shadow-sm border-0 rounded-4">
-                <div class="card-body p-4">
-                    <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
-                        <i class="bi bi-gear-wide-connected text-warning"></i>
-                        Informasi Jadwal Backup Otomatis Harian
-                    </h5>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <div class="p-3 bg-light rounded-3 border h-100">
-                                <h6 class="fw-bold text-dark mb-2"><i class="bi bi-calendar2-check text-success me-1"></i> Jadwal Laravel Scheduler</h6>
-                                <p class="small text-muted mb-2">
-                                    Sistem telah terkonfigurasi untuk mengeksekusi backup database dan storage setiap hari secara otomatis:
-                                </p>
-                                <ul class="small text-muted mb-0 ps-3">
-                                    <li><strong>Waktu Eksekusi:</strong> Setiap hari pukul 01:00 WIB</li>
-                                    <li><strong>Tipe Backup:</strong> Database MySQL (.sql) & Storage (.zip)</li>
-                                    <li><strong>Lokasi Simpan:</strong> <code>{{ $targetInfo['directory'] }}</code></li>
-                                    <li><strong>Format File:</strong> <code>date_namafile</code></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="p-3 bg-light rounded-3 border h-100">
-                                <h6 class="fw-bold text-dark mb-2"><i class="bi bi-terminal text-primary me-1"></i> Perintah Manual via Command Line</h6>
-                                <p class="small text-muted mb-2">
-                                    Backup otomatis juga dapat dipicu kapan saja melalui terminal / Windows Task Scheduler:
-                                </p>
-                                <div class="bg-dark text-white p-2 rounded small font-monospace mb-2">
-                                    php artisan system:backup
-                                </div>
-                                <small class="text-muted d-block">
-                                    File batch otomatis <code>backup-daily.bat</code> telah disiapkan di root proyek untuk penjadwalan via Windows Task Scheduler.
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>
 
-{{-- Script Helper --}}
+{{-- Script Helper (SweetAlert2 Modern Popup) --}}
 <script>
 function copyPath(text) {
     if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(function() {
-            alert('Lokasi direktori berhasil disalin ke clipboard:\n' + text);
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Lokasi direktori berhasil disalin!',
+                showConfirmButton: false,
+                timer: 2200,
+                timerProgressBar: true
+            });
         });
     } else {
-        prompt('Salin lokasi direktori:', text);
+        Swal.fire({
+            title: 'Lokasi Direktori',
+            html: '<input type="text" class="form-control font-monospace text-center mt-2" value="' + text + '" readonly>',
+            icon: 'info',
+            confirmButtonText: 'Tutup',
+            customClass: {
+                popup: 'rounded-4 border-0'
+            }
+        });
     }
 }
 
-function confirmBackup(form, label) {
-    const btn = form.querySelector('button[type="submit"]');
-    if (confirm('Jalankan proses backup ' + label + ' sekarang?')) {
-        btn.disabled = true;
-        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span> Sedang Memproses Backup...';
-        return true;
-    }
+function handleBackupConfirm(event, form, label) {
+    event.preventDefault();
+    Swal.fire({
+        title: 'Jalankan Backup ' + label + '?',
+        html: 'Sistem akan mengekspor berkas cadangan dan langsung menyimpannya ke direktori target yang aman.',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#f9dc4b',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: '<span class="text-dark fw-bold"><i class="bi bi-play-circle-fill me-1"></i> Ya, Jalankan</span>',
+        cancelButtonText: 'Batal',
+        reverseButtons: true,
+        customClass: {
+            popup: 'rounded-4 shadow-lg border-0',
+            confirmButton: 'px-4 py-2 rounded-3 bg-warning border-0 shadow-sm',
+            cancelButton: 'px-4 py-2 rounded-3'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Sedang Memproses Backup...',
+                html: '<div class="text-muted small">Mohon tunggu beberapa detik, sistem sedang mencadangkan berkas.</div>',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+                customClass: {
+                    popup: 'rounded-4 shadow-lg border-0'
+                }
+            });
+            form.submit();
+        }
+    });
     return false;
+}
+
+function confirmDeleteBackup(filename, formId) {
+    Swal.fire({
+        title: 'Hapus File Backup?',
+        html: 'Apakah Anda yakin ingin menghapus file cadangan:<br><code class="d-inline-block text-danger font-monospace fs-6 mt-2 p-1 bg-light rounded border">' + filename + '</code><br><small class="text-muted mt-2 d-block">Tindakan ini permanen dan tidak dapat dibatalkan.</small>',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: '<i class="bi bi-trash-fill me-1"></i> Ya, Hapus',
+        cancelButtonText: 'Batal',
+        reverseButtons: true,
+        focusCancel: true,
+        customClass: {
+            popup: 'rounded-4 shadow-lg border-0',
+            confirmButton: 'px-4 py-2 rounded-3 fw-bold',
+            cancelButton: 'px-4 py-2 rounded-3'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Menghapus Berkas...',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+                customClass: {
+                    popup: 'rounded-4 shadow-lg border-0'
+                }
+            });
+            document.getElementById(formId).submit();
+        }
+    });
 }
 </script>
 @endsection
