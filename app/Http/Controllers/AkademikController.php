@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AkademikRequest;
 use App\Models\Akademik;
 use App\Models\AkreditasiDokumen;
+use App\Models\InformasiPmb;
 use App\Models\KalenderAkademikItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -268,6 +269,11 @@ class AkademikController extends Controller
             return view('pages.akademik.edit', compact('item', 'pageTitle', 'tipe', 'sertifikatItems'));
         }
 
+        if ($tipe === 'informasi-pmb') {
+            $pmb = InformasiPmb::getOrCreate();
+            return view('pages.akademik.informasi-pmb-edit', compact('item', 'pageTitle', 'tipe', 'pmb'));
+        }
+
         return view('pages.akademik.edit', compact('item', 'pageTitle', 'tipe'));
     }
 
@@ -410,5 +416,72 @@ class AkademikController extends Controller
         return redirect()
             ->route('akademik.portal.edit', $tipe)
             ->with('success', "Pengaturan data " . self::$defaults[$tipe]['judul'] . " berhasil diperbarui!");
+    }
+
+    public function updateInformasiPmb(Request $request): RedirectResponse
+    {
+        $pmb = InformasiPmb::getOrCreate();
+
+        $validated = $request->validate([
+            'judul_hero' => ['required', 'string', 'max:255'],
+            'subjudul_hero' => ['nullable', 'string', 'max:255'],
+            'link_pendaftaran' => ['nullable', 'url', 'max:500'],
+            'no_whatsapp' => ['nullable', 'string', 'max:50'],
+            'banner_hero' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:10240'],
+            'brosur_gambar' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:10240'],
+            'brosur_pdf' => ['nullable', 'file', 'mimes:pdf', 'max:30720'],
+            'akreditasi_predikat' => ['nullable', 'string', 'max:50'],
+            'akreditasi_teks' => ['nullable', 'string', 'max:500'],
+            'jadwal_gambar' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:10240'],
+            'biaya_gambar' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:10240'],
+            'alur_gambar' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:10240'],
+            'reguler_b_nama' => ['nullable', 'string', 'max:100'],
+            'reguler_b_biaya' => ['nullable', 'string', 'max:100'],
+            'reguler_b_keterangan' => ['nullable', 'string'],
+            'reguler_a_nama' => ['nullable', 'string', 'max:100'],
+            'reguler_a_biaya' => ['nullable', 'string', 'max:100'],
+            'reguler_a_keterangan' => ['nullable', 'string'],
+            'reguler_c_nama' => ['nullable', 'string', 'max:100'],
+            'reguler_c_biaya' => ['nullable', 'string', 'max:100'],
+            'reguler_c_keterangan' => ['nullable', 'string'],
+            'banner_cta' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:10240'],
+            'cta_judul' => ['nullable', 'string', 'max:255'],
+            'cta_subjudul' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        $fileFields = [
+            'banner_hero' => 'pmb/banner',
+            'brosur_gambar' => 'pmb/brosur',
+            'brosur_pdf' => 'pmb/dokumen',
+            'jadwal_gambar' => 'pmb/jadwal',
+            'biaya_gambar' => 'pmb/biaya',
+            'alur_gambar' => 'pmb/alur',
+            'banner_cta' => 'pmb/cta',
+        ];
+
+        foreach ($fileFields as $field => $folder) {
+            if ($request->hasFile($field)) {
+                if ($pmb->$field && Storage::disk('public')->exists($pmb->$field)) {
+                    Storage::disk('public')->delete($pmb->$field);
+                }
+                $validated[$field] = $request->file($field)->store($folder, 'public');
+            }
+        }
+
+        $validated['is_active'] = $request->has('is_active');
+
+        $pmb->update($validated);
+
+        $item = self::getOrCreateItem('informasi-pmb');
+        $item->update([
+            'judul' => $validated['judul_hero'],
+            'subjudul' => $validated['subjudul_hero'] ?? $item->subjudul,
+            'link_url' => $validated['link_pendaftaran'] ?? $item->link_url,
+            'is_active' => $validated['is_active'],
+        ]);
+
+        return redirect()
+            ->route('akademik.portal.edit', 'informasi-pmb')
+            ->with('success', 'Data Informasi PMB & Berkas Infografis (PNG/PDF) berhasil diperbarui!');
     }
 }

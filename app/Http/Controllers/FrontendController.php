@@ -275,6 +275,16 @@ class FrontendController extends Controller
             }
         }
 
+        if ($slug === 'informasi-pmb') {
+            $pmb = \App\Models\InformasiPmb::getOrCreate();
+            $contact = \App\Models\Contact::first();
+            $cleanWa = preg_replace('/[^0-9]/', '', $pmb->no_whatsapp ?? '081270000000');
+            if (str_starts_with($cleanWa, '08')) {
+                $cleanWa = '628' . substr($cleanWa, 2);
+            }
+            return view('layouts.frontend.informasi-pmb', compact('item', 'pageTitle', 'pmb', 'contact', 'cleanWa'));
+        }
+
         if ($slug === 'dokumen-akreditasi-tf') {
             $akreditasiItems = \App\Models\AkreditasiDokumen::where('is_active', true)
                 ->whereIn('kategori_tab', ['instrumen', 'kelengkapan'])

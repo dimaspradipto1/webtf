@@ -129,7 +129,7 @@
 
         <!-- 6. PORTAL -->
         <li class="nav-item dropdown">
-          <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.testimoni*') || request()->routeIs('homepage.unduhan*') || request()->routeIs('homepage.template-dokumen*') || request()->routeIs('homepage.portal.page*') || request()->routeIs('homepage.news*') || request()->routeIs('homepage.galeri*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+          <a class="nav-link nav-link-custom dropdown-toggle {{ (request()->routeIs('homepage.testimoni*') || request()->routeIs('homepage.unduhan*') || request()->routeIs('homepage.template-dokumen*') || (request()->routeIs('homepage.portal.page*') && !in_array(request()->route('slug'), ['pendaftaran-pmb', 'informasi-pmb', 'pengumuman-pmb'])) || request()->routeIs('homepage.news*') || request()->routeIs('homepage.galeri*')) ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
             Portal <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
@@ -253,30 +253,29 @@
                 </li>
               </ul>
             </li>
+          </ul>
+        </li>
 
-            <!-- G. PMB (Submenu) -->
-            <li class="dropdown-submenu">
-              <a class="dropdown-item dropdown-item-custom dropdown-submenu-toggle d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                <span class="d-flex align-items-center gap-2"><i class="bi bi-person-plus-fill"></i> PMB</span>
-                <i class="bi bi-chevron-right submenu-arrow" style="font-size: 10px;"></i>
+        <!-- 7. PMB (Penerimaan Mahasiswa Baru) -->
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-link-custom dropdown-toggle {{ (request()->routeIs('homepage.portal.page*') && in_array(request()->route('slug'), ['pendaftaran-pmb', 'informasi-pmb', 'pengumuman-pmb'])) || request()->is('portal/pendaftaran-pmb') || request()->is('portal/informasi-pmb') || request()->is('portal/pengumuman-pmb') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            PMB <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-custom">
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->route('slug') === 'pendaftaran-pmb' ? 'active' : '' }}" href="{{ route('homepage.portal.page', 'pendaftaran-pmb') }}">
+                <i class="bi bi-pencil-square"></i> Pendaftaran PMB
               </a>
-              <ul class="dropdown-menu dropdown-menu-custom dropdown-submenu-list">
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.portal.page', 'pendaftaran-pmb') }}">
-                    <i class="bi bi-pencil-square"></i> Pendaftaran PMB
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.portal.page', 'informasi-pmb') }}">
-                    <i class="bi bi-info-circle"></i> Informasi PMB
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.portal.page', 'pengumuman-pmb') }}">
-                    <i class="bi bi-megaphone-fill"></i> Pengumuman PMB
-                  </a>
-                </li>
-              </ul>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->route('slug') === 'informasi-pmb' ? 'active' : '' }}" href="{{ route('homepage.portal.page', 'informasi-pmb') }}">
+                <i class="bi bi-info-circle"></i> Informasi PMB
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->route('slug') === 'pengumuman-pmb' ? 'active' : '' }}" href="{{ route('homepage.portal.page', 'pengumuman-pmb') }}">
+                <i class="bi bi-megaphone-fill"></i> Pengumuman PMB
+              </a>
             </li>
           </ul>
         </li>
@@ -334,10 +333,6 @@
 
       <!-- CTA Buttons -->
       <div class="d-flex align-items-center gap-2 mt-3 mt-xl-0">
-        <a href="{{ route('homepage.portal.page', 'pendaftaran-pmb') }}" class="btn-pmb-nav" title="Penerimaan Mahasiswa Baru">
-          <i class="bi bi-pencil-square"></i>
-          <span>PMB</span>
-        </a>
         <a href="{{ route('login') }}" class="btn-portal-nav" title="Login">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Login</span>

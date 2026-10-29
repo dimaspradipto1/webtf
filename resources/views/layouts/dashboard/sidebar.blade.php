@@ -140,12 +140,16 @@
             </a>
           </li>
 
-          <!-- 6. PORTAL (Tracer Study, E-Dokumen, SOP, Akreditasi, Beasiswa, Informasi, PMB) -->
+          <!-- 6. PORTAL (Tracer Study, E-Dokumen, SOP, Akreditasi, Beasiswa, Informasi) -->
+          @php
+            $isPortalNavActive = Route::is('testimonial.*') || Route::is('unduhan.*') || Route::is('template-dokumen.*') || (Route::is('akademik.portal.*') && !in_array(request()->route('tipe'), ['pendaftaran-pmb', 'informasi-pmb', 'pengumuman-pmb'])) || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') || Route::is('beasiswa.*');
+            $isPmbNavActive = in_array(request()->route('tipe'), ['pendaftaran-pmb', 'informasi-pmb', 'pengumuman-pmb']);
+          @endphp
           <li class="nav-item">
-            <a class="nav-link {{ Route::is('testimonial.*') || Route::is('unduhan.*') || Route::is('template-dokumen.*') || Route::is('akademik.portal.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') || Route::is('beasiswa.*') ? '' : 'collapsed' }}" data-bs-target="#portal-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link {{ $isPortalNavActive ? '' : 'collapsed' }}" data-bs-target="#portal-nav" data-bs-toggle="collapse" href="#">
               <i class="bi bi-compass"></i><span>Portal Layanan</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="portal-nav" class="nav-content collapse {{ Route::is('testimonial.*') || Route::is('unduhan.*') || Route::is('template-dokumen.*') || Route::is('akademik.portal.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') || Route::is('beasiswa.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="portal-nav" class="nav-content collapse {{ $isPortalNavActive ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
               <li>
                 <a href="{{ route('akademik.portal.edit', 'tracer-study') }}" class="{{ request()->route('tipe') === 'tracer-study' ? 'active' : '' }}">
                   <i class="bi bi-circle"></i><span>Tracer Study (Link GDrive)</span>
@@ -192,6 +196,25 @@
                 </a>
               </li>
               <li>
+                <a href="{{ route('prestasi.index') }}" class="{{ Route::is('prestasi.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Prestasi Mahasiswa</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('organisasi-mahasiswa.index') }}" class="{{ Route::is('organisasi-mahasiswa.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Organisasi Mahasiswa</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- 7. PMB (Penerimaan Mahasiswa Baru - Dropdown Sendiri) -->
+          <li class="nav-item">
+            <a class="nav-link {{ $isPmbNavActive ? '' : 'collapsed' }}" data-bs-target="#pmb-nav" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-person-plus-fill"></i><span>PMB</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="pmb-nav" class="nav-content collapse {{ $isPmbNavActive ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <li>
                 <a href="{{ route('akademik.portal.edit', 'pendaftaran-pmb') }}" class="{{ request()->route('tipe') === 'pendaftaran-pmb' ? 'active' : '' }}">
                   <i class="bi bi-circle"></i><span>Pendaftaran PMB</span>
                 </a>
@@ -204,16 +227,6 @@
               <li>
                 <a href="{{ route('akademik.portal.edit', 'pengumuman-pmb') }}" class="{{ request()->route('tipe') === 'pengumuman-pmb' ? 'active' : '' }}">
                   <i class="bi bi-circle"></i><span>Pengumuman PMB</span>
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('prestasi.index') }}" class="{{ Route::is('prestasi.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Prestasi Mahasiswa</span>
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('organisasi-mahasiswa.index') }}" class="{{ Route::is('organisasi-mahasiswa.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Organisasi Mahasiswa</span>
                 </a>
               </li>
             </ul>

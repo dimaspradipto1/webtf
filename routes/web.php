@@ -183,6 +183,7 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
         Route::delete('akreditasi/item/{id}', [AkademikController::class, 'destroyAkreditasiItem'])->name('akreditasi.item.destroy');
         Route::get('pedoman', [AkademikController::class, 'pedoman'])->name('pedoman');
         Route::get('sistem', [AkademikController::class, 'sistem'])->name('sistem');
+        Route::put('informasi-pmb-update', [AkademikController::class, 'updateInformasiPmb'])->name('informasi-pmb.update');
         Route::get('portal/{tipe}', [AkademikController::class, 'portalEdit'])->name('portal.edit');
         Route::put('{tipe}', [AkademikController::class, 'update'])->name('update');
     });
