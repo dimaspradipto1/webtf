@@ -91,6 +91,11 @@
 <body>
 
 <!-- ═══════════════════════════════════════════════
+     TOPBAR — MARQUEE & SOSMED
+═══════════════════════════════════════════════ -->
+@include('layouts.frontend.partials.topbar')
+
+<!-- ═══════════════════════════════════════════════
      NAVBAR HEADER UTAMA
 ═══════════════════════════════════════════════ -->
 @include('layouts.frontend.header')

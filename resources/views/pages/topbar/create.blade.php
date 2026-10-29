@@ -23,16 +23,25 @@
             @csrf
 
             <div class="row g-3">
-                {{-- Section 1: Badge Topbar --}}
+                {{-- Section 1: Marquee & Badge Topbar --}}
                 <div class="col-12">
                     <h6 class="fw-bold text-dark border-bottom pb-2 mb-2">
-                        <i class="bi bi-tag-fill me-1 text-primary"></i>1. Badge Kiri Topbar
+                        <i class="bi bi-broadcast me-1 text-danger"></i>1. Teks Berjalan (Marquee) & Badge Topbar
                     </h6>
+                </div>
+
+                <div class="col-12">
+                    <label for="marquee_text" class="form-label fw-semibold text-dark">Teks Marquee (Berjalan) <span class="text-danger">*</span></label>
+                    <textarea name="marquee_text" id="marquee_text" rows="2" class="form-control @error('marquee_text') is-invalid @enderror" placeholder="Contoh: Fakultas Sains & Teknologi Universitas Ibnu Sina Fakultasnya Teknokrat Unggul — Program Studi S1 Teknik Informatika" required>{{ old('marquee_text', 'Fakultas Sains & Teknologi Universitas Ibnu Sina Fakultasnya Teknokrat Unggul — Program Studi S1 Teknik Informatika (UIS)') }}</textarea>
+                    <small class="text-muted">Teks pengumuman berjalan / running text yang tampil di tengah bilah topbar hitam.</small>
+                    @error('marquee_text')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="col-md-6">
                     <label for="badge_text" class="form-label fw-semibold text-dark">Teks Badge <span class="text-danger">*</span></label>
-                    <input type="text" name="badge_text" id="badge_text" class="form-control @error('badge_text') is-invalid @enderror" placeholder="Contoh: Teknik Informatika" value="{{ old('badge_text', 'Teknik Informatika') }}" required>
+                    <input type="text" name="badge_text" id="badge_text" class="form-control @error('badge_text') is-invalid @enderror" placeholder="Contoh: TEKNIK INFORMATIKA" value="{{ old('badge_text', 'TEKNIK INFORMATIKA') }}" required>
                     @error('badge_text')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -40,8 +49,8 @@
 
                 <div class="col-md-6">
                     <label for="badge_icon" class="form-label fw-semibold text-dark">Ikon Bootstrap Badge</label>
-                    <input type="text" name="badge_icon" id="badge_icon" class="form-control @error('badge_icon') is-invalid @enderror" placeholder="Contoh: bi-shield-check" value="{{ old('badge_icon', 'bi-shield-check') }}">
-                    <small class="text-muted">Nama class Bootstrap Icons (misal: <code>bi-shield-check</code>, <code>bi-mortarboard-fill</code>)</small>
+                    <input type="text" name="badge_icon" id="badge_icon" class="form-control @error('badge_icon') is-invalid @enderror" placeholder="Contoh: bi-laptop" value="{{ old('badge_icon', 'bi-laptop') }}">
+                    <small class="text-muted">Nama class Bootstrap Icons (misal: <code>bi-laptop</code>, <code>bi-shield-check</code>)</small>
                     @error('badge_icon')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

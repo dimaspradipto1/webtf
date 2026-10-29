@@ -17,11 +17,14 @@ class TopbarDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('DT_RowIndex', '')
+            ->addColumn('marquee_preview', function ($t) {
+                return '<div class="small fw-semibold text-dark" style="max-width: 250px;"><i class="bi bi-broadcast text-danger me-1"></i>'.e($t->marquee_text ?? '-').'</div>';
+            })
             ->addColumn('badge_preview', function ($t) {
-                $icon = ! empty($t->badge_icon) ? $t->badge_icon : 'bi-shield-check';
+                $icon = ! empty($t->badge_icon) ? $t->badge_icon : 'bi-laptop';
 
-                return '<span class="badge rounded-pill text-nowrap" style="background: rgba(130, 60, 162, 0.15); color: #823ca2; border: 1px solid #823ca2; font-weight:700; padding:6px 12px;">
-                            <i class="bi '.e($icon).' me-1"></i>'.e($t->badge_text).'
+                return '<span class="badge rounded-pill text-nowrap" style="background: rgba(249, 220, 75, 0.25); color: #000000; border: 1px solid #f9dc4b; font-weight:700; padding:6px 12px;">
+                            <i class="bi '.e($icon).' me-1 text-warning"></i>'.e($t->badge_text).'
                         </span>';
             })
             ->editColumn('alamat', function ($t) {
@@ -70,7 +73,7 @@ class TopbarDataTable extends DataTable
                 $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
 
                 $btn .= '<a href="'.route('topbar.edit', $t->id).'"
-                            class="btn btn-sm btn-warning text-white"
+                            class="btn btn-sm btn-warning text-dark fw-bold"
                             style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"
                             title="Edit">
                             <i class="bi bi-pencil-fill" style="font-size:12px"></i>
@@ -93,7 +96,7 @@ class TopbarDataTable extends DataTable
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
-            ->rawColumns(['badge_preview', 'alamat', 'jam_operasional', 'kontak_info', 'sosmed_preview', 'status', 'action']);
+            ->rawColumns(['marquee_preview', 'badge_preview', 'alamat', 'jam_operasional', 'kontak_info', 'sosmed_preview', 'status', 'action']);
     }
 
     public function query(Topbar $model): QueryBuilder
@@ -126,10 +129,9 @@ class TopbarDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->width('50px')->addClass('text-center')->searchable(false)->orderable(false),
-            Column::make('badge_preview')->title('Badge Topbar')->width('160px')->searchable(true),
-            Column::make('alamat')->title('Alamat Kampus')->width('260px')->searchable(true),
-            Column::make('jam_operasional')->title('Jam Operasional')->width('200px')->searchable(true),
-            Column::make('kontak_info')->title('Kontak & Email')->width('180px')->searchable(true),
+            Column::make('marquee_preview')->title('Teks Marquee (Berjalan)')->width('260px')->searchable(true),
+            Column::make('badge_preview')->title('Badge Topbar')->width('140px')->searchable(true),
+            Column::make('kontak_info')->title('Kontak & Email')->width('160px')->searchable(true),
             Column::make('sosmed_preview')->title('Media Sosial')->width('140px')->addClass('text-center'),
             Column::make('status')->title('Status')->width('90px')->addClass('text-center'),
             Column::computed('action')->title('Aksi')->exportable(false)->printable(false)->width('90px')->addClass('text-center'),

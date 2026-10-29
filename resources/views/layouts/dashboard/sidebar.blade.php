@@ -19,6 +19,13 @@
           @endphp
 
           @if($isAdmin)
+          <!-- 1a. Topbar & Marquee -->
+          <li class="nav-item">
+              <a class="nav-link {{ Route::is('topbar.*') ? '' : 'collapsed' }}" href="{{ route('topbar.index') }}">
+                  <i class="bi bi-window-dock"></i><span>Topbar & Marquee</span>
+              </a>
+          </li>
+
           <!-- 1b. Konten Beranda -->
           <li class="nav-item">
               <a class="nav-link {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('social-media.*') || Route::is('feature.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') || Route::is('partner.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') ? '' : 'collapsed' }}" data-bs-target="#beranda-nav" data-bs-toggle="collapse" href="#">
