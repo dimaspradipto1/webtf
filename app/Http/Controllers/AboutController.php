@@ -12,11 +12,11 @@ use Illuminate\View\View;
 
 class AboutController extends Controller
 {
-    public function index(AboutDataTable $dataTable)
+    public function index(): View
     {
         $pimpinans = Pimpinan::orderBy('baris')->orderBy('urutan')->orderBy('id')->get();
 
-        return $dataTable->render('pages.about.index', compact('pimpinans'));
+        return view('pages.about.index', compact('pimpinans'));
     }
 
     public function create(): View

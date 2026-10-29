@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Profil Pimpinan & Prodi</h1>
+    <h1>Profil Pimpinan</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Profil Pimpinan & Prodi</li>
+            <li class="breadcrumb-item active">Profil Pimpinan</li>
         </ol>
     </nav>
 </div>
@@ -19,8 +19,8 @@
     </div>
 @endif
 
-{{-- 1. KELOLA PROFIL PIMPINAN --}}
-<div class="card shadow-sm mb-4">
+{{-- KELOLA PROFIL PIMPINAN --}}
+<div class="card shadow-sm">
     <div class="card-header d-flex align-items-center justify-content-between py-3">
         <div>
             <h5 class="mb-0 fw-semibold">
@@ -112,34 +112,4 @@
         </div>
     </div>
 </div>
-
-{{-- 2. PROFIL PROGRAM STUDI / TENTANG KAMI --}}
-<div class="card shadow-sm">
-    <div class="card-header d-flex align-items-center justify-content-between py-3">
-        <h5 class="mb-0 fw-semibold">
-            <i class="bi bi-info-circle-fill me-2 text-primary"></i>Profil Program Studi (Deskripsi & Video Profil)
-        </h5>
-        @if(!\App\Models\About::exists())
-        <a href="{{ route('about.create') }}" class="btn btn-primary btn-sm">
-            <i class="bi bi-plus-lg me-1"></i> Tambah Profil
-        </a>
-        @endif
-    </div>
-    <div class="card-body pt-3">
-        <div class="table-responsive">
-            {{ $dataTable->table([
-                'class' => 'table table-striped table-bordered align-middle',
-                'style' => 'width:100%',
-            ]) }}
-        </div>
-    </div>
-</div>
 @endsection
-
-@push('scripts')
-    @if(app()->environment('production'))
-        {!! str_replace('http:', 'https:', $dataTable->scripts()) !!}
-    @else
-        {!! $dataTable->scripts() !!}
-    @endif
-@endpush

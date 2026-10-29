@@ -42,15 +42,17 @@
     </div>
 
     <div class="row g-4 g-lg-5 align-items-start">
-      {{-- Kolom Kiri: Foto Full Tanpa Bingkai Card --}}
-      <div class="col-lg-5 col-md-5" data-aos="fade-right">
+      {{-- Kolom Kiri: Foto Full Tanpa Bingkai Card (Proporsional & Tajam HD) --}}
+      <div class="col-lg-4 col-md-5" data-aos="fade-right">
         @if($pimpinan->foto)
           <img src="{{ asset('storage/' . $pimpinan->foto) }}"
                alt="{{ $pimpinan->nama }}"
-               style="width: 100%; height: auto; display: block; border: none !important; box-shadow: none !important; background: transparent !important;">
+               loading="eager"
+               decoding="sync"
+               style="width: 100%; max-width: 360px; height: auto; display: block; border: none !important; box-shadow: none !important; background: transparent !important;">
         @else
           <div class="d-flex flex-column align-items-center justify-content-center w-100"
-               style="min-height: 480px; background: #143622; color: #ffffff;">
+               style="max-width: 360px; min-height: 480px; background: #143622; color: #ffffff;">
             <i class="bi bi-person-fill" style="font-size: 96px; color: #f9dc4b;"></i>
             <h5 class="fw-bold mt-3 px-3 text-center text-white">{{ $pimpinan->nama }}</h5>
             <p class="small text-warning mb-0 px-3 text-center">{{ $pimpinan->jabatan }}</p>
@@ -59,7 +61,7 @@
       </div>
 
       {{-- Kolom Kanan: Biodata Lengkap --}}
-      <div class="col-lg-7 col-md-7" data-aos="fade-left" style="color: #475569; font-size: 15px; line-height: 1.8;">
+      <div class="col-lg-8 col-md-7" data-aos="fade-left" style="color: #475569; font-size: 15px; line-height: 1.8;">
         {{-- 1. Profil --}}
         <div class="mb-4">
           <h5 class="fw-bold mb-3" style="font-size: 16px; color: #334155;">Profil</h5>

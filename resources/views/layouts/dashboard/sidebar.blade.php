@@ -81,7 +81,7 @@
               </li>
               <li>
                 <a href="{{ route('about.index') }}" class="{{ Route::is('about.*') || Route::is('pimpinan.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Profil Pimpinan & Prodi</span>
+                  <i class="bi bi-circle"></i><span>Profil Pimpinan</span>
                 </a>
               </li>
               <li>
