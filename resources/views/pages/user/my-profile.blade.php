@@ -21,10 +21,14 @@
         <div class="col-xl-4">
             <div class="card shadow-sm border-0 rounded-4">
                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center text-center">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center mb-3 shadow-sm"
-                         style="width: 100px; height: 100px; background: #000000; color: #ffffff; font-size: 40px; font-weight: 700;">
-                        {{ strtoupper(substr($user->name, 0, 2)) }}
-                    </div>
+                    @if($user->avatar_url)
+                        <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="rounded-circle mb-3 shadow-sm" style="width: 100px; height: 100px; object-fit: cover; border: 3px solid #f9dc4b;">
+                    @else
+                        <div class="rounded-circle d-flex align-items-center justify-content-center mb-3 shadow-sm"
+                             style="width: 100px; height: 100px; background: #000000; color: #ffffff; font-size: 38px; font-weight: 700;">
+                            {{ $user->initials ?? 'AD' }}
+                        </div>
+                    @endif
                     <h4 class="fw-bold mb-1 text-dark">{{ $user->name }}</h4>
                     <span class="badge px-3 py-2 rounded-pill mb-3" style="background: rgba(0, 0, 0, 0.12); color: #000000; font-weight: 700; font-size: 12.5px;">
                         <i class="bi bi-shield-check me-1"></i> {{ strtoupper($user->roles) }}
@@ -104,9 +108,49 @@
 
                         {{-- TAB 2: EDIT PROFILE --}}
                         <div class="tab-pane fade profile-edit pt-2" id="profile-edit">
-                            <form action="{{ route('user.update-my-profile') }}" method="POST">
+                            <form action="{{ route('user.update-my-profile') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PATCH')
+
+                                {{-- Upload Foto Profil --}}
+                                <div class="mb-4 p-3 rounded-3" style="background: #f8fafc; border: 1px dashed #cbd5e1;">
+                                    <label class="form-label fw-semibold text-dark mb-2">
+                                        <i class="bi bi-image me-1"></i> Foto Profil (Avatar)
+                                    </label>
+                                    <div class="d-flex flex-column flex-sm-row align-items-center gap-3">
+                                        <div id="avatarPreviewWrapper" class="flex-shrink-0">
+                                            @if($user->avatar_url)
+                                                <img id="avatarPreviewImg" src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="rounded-circle shadow-sm" style="width: 76px; height: 76px; object-fit: cover; border: 3px solid #f9dc4b;">
+                                                <div id="avatarPreviewFallback" class="rounded-circle d-none align-items-center justify-content-center fw-bold shadow-sm" style="width: 76px; height: 76px; background: #000000; color: #ffffff; font-size: 26px;">
+                                                    {{ $user->initials ?? 'AD' }}
+                                                </div>
+                                            @else
+                                                <img id="avatarPreviewImg" src="" alt="Preview" class="rounded-circle shadow-sm d-none" style="width: 76px; height: 76px; object-fit: cover; border: 3px solid #f9dc4b;">
+                                                <div id="avatarPreviewFallback" class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 76px; height: 76px; background: #000000; color: #ffffff; font-size: 26px;">
+                                                    {{ $user->initials ?? 'AD' }}
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="flex-grow-1 w-100">
+                                            <input name="avatar" type="file" class="form-control form-control-sm @error('avatar') is-invalid @enderror" id="avatarInput" accept="image/png,image/jpeg,image/jpg,image/webp" onchange="handleAvatarPreview(event)">
+                                            <div class="form-text small mt-1 text-muted">
+                                                Format: <strong>PNG, JPG, JPEG, WEBP</strong> (Maksimal 5MB). Kosongkan jika tidak ingin mengubah foto.
+                                            </div>
+                                            @error('avatar')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
+
+                                            @if($user->avatar)
+                                                <div class="form-check mt-2 pt-1 border-top">
+                                                    <input class="form-check-input" type="checkbox" name="hapus_avatar" value="1" id="hapusAvatarCheck" onchange="handleHapusAvatarToggle(this)">
+                                                    <label class="form-check-label small text-danger fw-semibold" for="hapusAvatarCheck">
+                                                        <i class="bi bi-trash3 me-1"></i> Hapus foto profil saat ini (kembali ke default inisial)
+                                                    </label>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="mb-3">
                                     <label for="name" class="form-label fw-semibold text-dark">Nama Lengkap <span class="text-danger">*</span></label>
@@ -197,6 +241,64 @@ function togglePasswordVisibility(inputId, eyeIconId) {
     } else {
         input.type = 'password';
         icon.classList.replace('bi-eye-slash', 'bi-eye');
+    }
+}
+
+function handleAvatarPreview(event) {
+    const file = event.target.files[0];
+    const previewImg = document.getElementById('avatarPreviewImg');
+    const fallback = document.getElementById('avatarPreviewFallback');
+    const hapusCheck = document.getElementById('hapusAvatarCheck');
+
+    if (hapusCheck) {
+        hapusCheck.checked = false;
+    }
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            if (previewImg) {
+                previewImg.src = e.target.result;
+                previewImg.classList.remove('d-none');
+            }
+            if (fallback) {
+                fallback.classList.remove('d-flex');
+                fallback.classList.add('d-none');
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function handleHapusAvatarToggle(checkbox) {
+    const input = document.getElementById('avatarInput');
+    const previewImg = document.getElementById('avatarPreviewImg');
+    const fallback = document.getElementById('avatarPreviewFallback');
+
+    if (checkbox.checked) {
+        if (input) input.value = '';
+        if (previewImg) previewImg.classList.add('d-none');
+        if (fallback) {
+            fallback.classList.remove('d-none');
+            fallback.classList.add('d-flex');
+        }
+    } else {
+        @if($user->avatar_url)
+            if (previewImg) {
+                previewImg.src = "{{ $user->avatar_url }}";
+                previewImg.classList.remove('d-none');
+            }
+            if (fallback) {
+                fallback.classList.remove('d-flex');
+                fallback.classList.add('d-none');
+            }
+        @else
+            if (previewImg) previewImg.classList.add('d-none');
+            if (fallback) {
+                fallback.classList.remove('d-none');
+                fallback.classList.add('d-flex');
+            }
+        @endif
     }
 }
 </script>

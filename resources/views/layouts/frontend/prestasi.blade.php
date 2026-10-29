@@ -4,23 +4,32 @@
 @section('meta_description', 'Daftar capaian prestasi, kejuaraan, dan penghargaan mahasiswa Teknik Informatika (UIS) UIS di tingkat regional, nasional, dan internasional.')
 
 @section('content')
-<!-- Header Banner -->
-<div class="prestasi-hero text-white">
-  <div class="container text-center">
-    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: #f9dc4b; color: #000000; border: 1px solid #f9dc4b; font-weight: 700; font-size: 13px; letter-spacing: 0.5px;">
-      <i class="bi bi-trophy-fill me-1"></i> Hall of Fame & Prestasi
+@php
+  $hPrestasi = \App\Models\PageHeader::get('prestasi');
+@endphp
+<!-- ═══════════════════════════════════════════════
+     HERO HEADER & BREADCRUMB
+═══════════════════════════════════════════════ -->
+<section class="akademik-hero">
+  <div class="container position-relative" data-aos="fade-up">
+    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange, #f9dc4b); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
+      {{ $hPrestasi->badge_text ?: 'PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI' }}
     </div>
-    <h1 class="fw-bold mb-3 text-white" style="font-size: 38px; color: #ffffff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.35);">Prestasi Mahasiswa Teknik Informatika</h1>
-    <p class="mx-auto text-white mb-2" style="max-width: 680px; line-height: 1.7; color: rgba(255, 255, 255, 0.92) !important; font-size: 15.5px;">
-      Koleksi prestasi gemilang, medali kejuaraan, dan publikasi ilmiah sivitas akademika Teknik Informatika di tingkat regional, nasional, dan internasional.
-    </p>
-    <div class="breadcrumb-custom justify-content-center mt-3">
+    <h1 class="display-6 fw-bold text-white mb-2">{{ $hPrestasi->judul }}</h1>
+    @if(!empty($hPrestasi->subjudul))
+      <p class="lead text-white-50 mb-0" style="max-width: 760px; font-size: 16px;">
+        {{ $hPrestasi->subjudul }}
+      </p>
+    @endif
+    <div class="breadcrumb-custom mt-3">
       <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
       <span>/</span>
-      <span class="active">Prestasi Mahasiswa</span>
+      <span>Portal Layanan</span>
+      <span>/</span>
+      <span class="active">{{ $hPrestasi->breadcrumb_label ?: 'Prestasi Mahasiswa' }}</span>
     </div>
   </div>
-</div>
+</section>
 
 <!-- Main Content -->
 <section class="section-bg-sand py-5">

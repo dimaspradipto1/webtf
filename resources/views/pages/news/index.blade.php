@@ -27,6 +27,13 @@
     </div>
 @endif
 
+@include('layouts.dashboard.partials.header-setting-card', [
+    'pageKey' => 'berita',
+    'pageTitle' => 'Berita & Warta Kampus',
+    'defaultJudul' => 'Berita & Warta Kampus',
+    'defaultSubjudul' => 'Kumpulan warta kegiatan akademik, seminar, riset terapan, dan inovasi civitas akademika Program Studi Teknik Informatika — Fakultas Sains dan Teknologi.'
+])
+
 <div class="card shadow-sm">
     <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2 py-3">
         <h5 class="mb-0 fw-semibold">

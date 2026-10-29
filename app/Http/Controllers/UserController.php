@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -110,17 +111,33 @@ class UserController extends Controller
     }
 
     /**
-     * Update profil (nama & email) user yang sedang login.
+     * Update profil (nama, email & foto avatar) user yang sedang login.
      */
     public function updateMyProfile(UserRequest $request): RedirectResponse
     {
         /** @var User $user */
         $user = Auth::user();
 
-        $user->update([
+        $data = [
             'name' => $request->name,
             'email' => $request->email,
-        ]);
+        ];
+
+        // Handle upload avatar baru
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+            $data['avatar'] = $request->file('avatar')->store('avatars', 'public');
+        } elseif ($request->boolean('hapus_avatar')) {
+            // Jika memilih hapus foto (kembali ke default inisial)
+            if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+            $data['avatar'] = null;
+        }
+
+        $user->update($data);
 
         alert()->success('Berhasil!', 'Profil akun Anda berhasil diperbarui.');
 

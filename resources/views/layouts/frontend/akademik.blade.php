@@ -4,24 +4,31 @@
 @section('meta_description', Str::limit(strip_tags($item->subjudul ?? $item->deskripsi), 160))
 
 @section('content')
+@php
+  $pageHeaderCustom = \App\Models\PageHeader::where('page_key', $item->tipe)->first();
+  $heroBadge = $pageHeaderCustom->badge_text ?? 'PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI';
+  $heroJudul = $pageHeaderCustom->judul ?? $item->judul;
+  $heroSubjudul = $pageHeaderCustom->subjudul ?? $item->subjudul;
+  $heroBreadcrumb = $pageHeaderCustom->breadcrumb_label ?? $pageTitle;
+@endphp
 <!-- ═══════════════════════════════════════════════
      HERO HEADER
 ═══════════════════════════════════════════════ -->
 <section class="akademik-hero">
   <div class="container position-relative" data-aos="fade-up">
     <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
-      PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI
+      {{ $heroBadge }}
     </div>
-    <h1 class="display-6 fw-bold text-white mb-2">{{ $item->judul }}</h1>
-    @if($item->subjudul)
+    <h1 class="display-6 fw-bold text-white mb-2">{{ $heroJudul }}</h1>
+    @if($heroSubjudul)
       <p class="lead text-white-50 mb-0" style="max-width: 760px; font-size: 16px;">
-        {{ $item->subjudul }}
+        {{ $heroSubjudul }}
       </p>
     @endif
     <div class="breadcrumb-custom mt-3">
       <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
       <span>/</span>
-      <span class="active">{{ $pageTitle }}</span>
+      <span class="active">{{ $heroBreadcrumb }}</span>
     </div>
   </div>
 </section>
@@ -35,10 +42,13 @@
       
       {{-- Kolom Konten Utama (Full Width) --}}
       <div class="col-12" data-aos="fade-up">
-        @if(isset($kalenderItems) && $kalenderItems->count() > 0)
-          {{-- Accordion Daftar Kalender Akademik per Tahun (Link Google Drive) --}}
+        @php
+          $accordionItems = $kalenderItems ?? ($pengumumanPmbItems ?? null);
+        @endphp
+        @if(isset($accordionItems) && $accordionItems->count() > 0)
+          {{-- Accordion Daftar Dokumen (Model Dropdown seperti Kalender Akademik) --}}
           <div class="kalender-accordion-list">
-            @foreach($kalenderItems as $idx => $kItem)
+            @foreach($accordionItems as $idx => $kItem)
               @php $isOpen = ($idx === 0); @endphp
               <div class="kalender-acc-item {{ $isOpen ? 'active' : '' }}">
                 <button type="button"
@@ -64,7 +74,7 @@
                          target="_blank"
                          rel="noopener noreferrer"
                          class="kalender-doc-btn">
-                        {{ $kItem->tombol_teks ?: 'Lihat Document' }}
+                        {{ $kItem->tombol_teks ?: 'Lihat Dokumen' }}
                       </a>
                     @endif
                   </div>
@@ -281,7 +291,7 @@
   </div>
 </section>
 
-@if(isset($kalenderItems) && $kalenderItems->count() > 0)
+@if((isset($kalenderItems) && $kalenderItems->count() > 0) || (isset($pengumumanPmbItems) && $pengumumanPmbItems->count() > 0))
 @push('styles')
 <style>
   .kalender-accordion-list {

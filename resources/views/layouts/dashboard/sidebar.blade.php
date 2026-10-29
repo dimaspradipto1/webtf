@@ -37,7 +37,7 @@
                   </li>
                   <li>
                       <a href="{{ route('social-media.index', ['kategori' => 'universitas']) }}" class="{{ Route::is('social-media.*') && request('kategori') !== 'humas' ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Media Sosial Prodi</span>
+                          <i class="bi bi-circle"></i><span>Media Sosial Fakultas Sains dan Teknologi</span>
                       </a>
                   </li>
                   <li>
@@ -292,6 +292,13 @@
           </li>
 
           @if($isAdmin)
+          <li class="nav-item">
+              <a class="nav-link {{ Route::is('page-header.*') ? '' : 'collapsed' }}" href="{{ route('page-header.index') }}">
+                  <i class="bi bi-sliders"></i>
+                  <span>Header & Breadcrumb</span>
+              </a>
+          </li>
+
           <li class="nav-item">
               <a class="nav-link {{ Route::is('bahasa.*') ? '' : 'collapsed' }}" href="{{ route('bahasa.index') }}">
                   <i class="bi bi-translate"></i>

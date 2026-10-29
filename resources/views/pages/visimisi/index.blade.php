@@ -11,6 +11,13 @@
     </nav>
 </div>
 
+@include('layouts.dashboard.partials.header-setting-card', [
+    'pageKey' => 'visi-misi',
+    'pageTitle' => 'Visi, Misi, Tujuan & Sasaran (VMTS)',
+    'defaultJudul' => 'Visi, Misi, Tujuan & Sasaran (VMTS)',
+    'defaultSubjudul' => 'Komitmen fundamental yang mengarahkan penyelenggaraan Tri Dharma Perguruan Tinggi di Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi.'
+])
+
 <div class="card shadow-sm">
     <div class="card-header d-flex align-items-center justify-content-between py-3">
         <h5 class="mb-0 fw-semibold">

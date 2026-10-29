@@ -19,6 +19,13 @@
     </div>
 @endif
 
+@include('layouts.dashboard.partials.header-setting-card', [
+    'pageKey' => 'pimpinan',
+    'pageTitle' => 'Profil Pimpinan',
+    'defaultJudul' => 'Profil Pimpinan Program Studi',
+    'defaultSubjudul' => 'Mengenal jajaran pimpinan dan pengelola akademik Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi.'
+])
+
 {{-- KELOLA PROFIL PIMPINAN --}}
 <div class="card shadow-sm">
     <div class="card-header d-flex align-items-center justify-content-between py-3">

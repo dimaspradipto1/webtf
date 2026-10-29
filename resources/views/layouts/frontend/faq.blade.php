@@ -15,23 +15,12 @@
   }
 @endphp
 
-<!-- ═══════════════════════════════════════════════
-     HERO BANNER
-═══════════════════════════════════════════════ -->
-<div class="faq-hero">
-  <div class="container">
-    <div class="faq-hero-content" data-aos="fade-up" data-aos-duration="800">
-      <h1 class="faq-hero-title">
-        Tanya Jawab <em>(FAQ)</em>
-      </h1>
-      <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
-        <span>/</span>
-        <span class="active">Tanya Jawab (FAQ)</span>
-      </div>
-    </div>
-  </div>
-</div>
+@include('layouts.frontend.partials.hero-header', [
+    'pageKey' => 'faq',
+    'defaultJudul' => 'Tanya Jawab (FAQ)',
+    'defaultSubjudul' => 'Jawaban lengkap atas pertanyaan yang paling sering diajukan seputar pendaftaran, perkuliahan, dan layanan akademik Program Studi Teknik Informatika.',
+    'defaultBreadcrumb' => 'Tanya Jawab (FAQ)'
+])
 
 <!-- ═══════════════════════════════════════════════
      FAQ SECTION

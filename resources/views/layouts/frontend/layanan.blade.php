@@ -6,23 +6,12 @@
 
 @section('content')
 
-<!-- ═══════════════════════════════════════════════
-     HERO BANNER
-═══════════════════════════════════════════════ -->
-<div class="layanan-hero">
-  <div class="container">
-    <div class="layanan-hero-content" data-aos="fade-up" data-aos-duration="800">
-      <h1 class="layanan-hero-title">
-        Program Studi & <em>Fasilitas</em>
-      </h1>
-      <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
-        <span>/</span>
-        <span class="active">Program Studi</span>
-      </div>
-    </div>
-  </div>
-</div>
+@include('layouts.frontend.partials.hero-header', [
+    'pageKey' => 'layanan',
+    'defaultJudul' => 'Program Studi & Fasilitas',
+    'defaultSubjudul' => 'Jelajahi program studi unggulan serta sarana prasarana akademik terpadu di lingkungan Fakultas Sains dan Teknologi.',
+    'defaultBreadcrumb' => 'Program Studi'
+])
 
 <!-- ═══════════════════════════════════════════════
      LAYANAN LIST

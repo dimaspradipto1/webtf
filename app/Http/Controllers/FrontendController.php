@@ -305,6 +305,15 @@ class FrontendController extends Controller
             return view('layouts.frontend.akademik', compact('item', 'pageTitle', 'sertifikatItems'));
         }
 
+        if ($slug === 'pengumuman-pmb') {
+            $pengumumanPmbItems = \App\Models\PengumumanPmbItem::where('is_active', true)
+                ->orderBy('urutan')
+                ->orderBy('id')
+                ->get();
+
+            return view('layouts.frontend.akademik', compact('item', 'pageTitle', 'pengumumanPmbItems'));
+        }
+
         return view('layouts.frontend.akademik', compact('item', 'pageTitle'));
     }
 

@@ -4,29 +4,29 @@
 @section('meta_description', 'Daftar Lembaga, Organisasi Mahasiswa (BEM, HIMA, UKM, Komunitas), serta wadah kreativitas dan kegiatan mahasiswa UIS Teknik Informatika.')
 
 @section('content')
-<!-- HERO SECTION -->
-<section class="ormawa-hero">
-  <div class="container position-relative">
-    <div class="row align-items-center">
-      <div class="col-lg-8" data-aos="fade-up">
-        <div class="ormawa-hero-badge">
-          <i class="bi bi-people-fill"></i>
-          <span>Kemahasiswaan Teknik Informatika</span>
-        </div>
-        <h1 class="fw-bold mb-3 text-white" style="font-size: clamp(26px, 3.5vw, 42px); line-height: 1.2;">
-          Organisasi & Kegiatan Mahasiswa
-        </h1>
-        <p class="text-white-50 mb-0" style="font-size: 16px; max-width: 650px;">
-          Wadah pengembangan potensi, kepemimpinan, riset keilmuan, kreativitas, serta kepedulian sosial mahasiswa Teknik Informatika.
-        </p>
-      </div>
-      <div class="col-lg-4 text-lg-end mt-4 mt-lg-0" data-aos="fade-left">
-        <div class="breadcrumb-custom justify-content-lg-end">
-          <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
-          <span>/</span>
-          <span class="active">Organisasi Mahasiswa</span>
-        </div>
-      </div>
+@php
+  $hOrganisasi = \App\Models\PageHeader::get('organisasi');
+@endphp
+<!-- ═══════════════════════════════════════════════
+     HERO HEADER & BREADCRUMB
+═══════════════════════════════════════════════ -->
+<section class="akademik-hero">
+  <div class="container position-relative" data-aos="fade-up">
+    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange, #f9dc4b); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
+      {{ $hOrganisasi->badge_text ?: 'PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI' }}
+    </div>
+    <h1 class="display-6 fw-bold text-white mb-2">{{ $hOrganisasi->judul }}</h1>
+    @if(!empty($hOrganisasi->subjudul))
+      <p class="lead text-white-50 mb-0" style="max-width: 760px; font-size: 16px;">
+        {{ $hOrganisasi->subjudul }}
+      </p>
+    @endif
+    <div class="breadcrumb-custom mt-3">
+      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+      <span>/</span>
+      <span>Portal Layanan</span>
+      <span>/</span>
+      <span class="active">{{ $hOrganisasi->breadcrumb_label ?: 'Organisasi Mahasiswa' }}</span>
     </div>
   </div>
 </section>

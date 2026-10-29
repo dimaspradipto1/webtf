@@ -19,6 +19,13 @@
     </div>
 @endif
 
+@include('layouts.dashboard.partials.header-setting-card', [
+    'pageKey' => 'faq',
+    'pageTitle' => 'Tanya Jawab (FAQ)',
+    'defaultJudul' => 'Tanya Jawab (FAQ)',
+    'defaultSubjudul' => 'Jawaban lengkap atas pertanyaan yang paling sering diajukan seputar pendaftaran, perkuliahan, dan layanan akademik Program Studi Teknik Informatika.'
+])
+
 <div class="card shadow-sm">
     <div class="card-header d-flex align-items-center justify-content-between py-3">
         <h5 class="mb-0 fw-semibold">

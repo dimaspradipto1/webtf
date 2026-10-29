@@ -1377,14 +1377,14 @@
 @endif
 
 <!-- ═══════════════════════════════════════════════
-     MEDIA SOSIAL (IKUTI UIS DI MEDIA SOSIAL)
+     MEDIA SOSIAL (IKUTI FAKULTAS SAINS DAN TEKNOLOGI DI MEDIA SOSIAL)
 ═══════════════════════════════════════════════ -->
 @if(isset($socialMedias) && $socialMedias->count() > 0)
 <section class="social-media-section" id="media-sosial">
   <div class="container">
     {{-- Header Judul Seksi --}}
     <h2 class="social-media-title" data-aos="fade-up">
-      {{ $socialMediaSetting->judul_seksi ?? 'IKUTI UIS DI MEDIA SOSIAL' }}
+      {{ $socialMediaSetting->judul_seksi ?? 'IKUTI FAKULTAS SAINS DAN TEKNOLOGI DI MEDIA SOSIAL' }}
     </h2>
 
     {{-- Divider Garis Ikon Share --}}

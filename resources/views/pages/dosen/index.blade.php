@@ -28,6 +28,13 @@
     </div>
 @endif
 
+@include('layouts.dashboard.partials.header-setting-card', [
+    'pageKey' => 'dosen',
+    'pageTitle' => 'Daftar Dosen Pengajar',
+    'defaultJudul' => 'Daftar Dosen Pengajar',
+    'defaultSubjudul' => 'Tenaga pendidik berkualifikasi magister, doktor, dan profesor berdedikasi tinggi dalam membimbing mahasiswa Program Studi Teknik Informatika.'
+])
+
 <div class="card shadow-sm mb-4">
     <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2 py-3">
         <h5 class="mb-0 fw-semibold text-dark">

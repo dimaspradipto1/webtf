@@ -51,8 +51,10 @@
             opacity: 1 !important;
             height: 76px !important;
             padding: 12px 20px !important;
-            border-bottom: 2.5px solid #000000 !important;
-            box-shadow: 0 2px 14px rgba(0, 0, 0, 0.16) !important;
+            border: none !important;
+            border-top: none !important;
+            border-bottom: none !important;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
         }
         .header .logo span {
             color: #ffffff !important;

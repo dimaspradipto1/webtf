@@ -23,17 +23,31 @@
 
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm"
-                             style="width:36px;height:36px;background: #000000; color: #ffffff; border: 2px solid #ffffff; font-size:13px;">
-                            {{ strtoupper(substr(Auth::user()->name ?? 'AD', 0, 2)) }}
-                        </div>
+                        @if(Auth::user()->avatar_url)
+                            <img src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}" class="rounded-circle shadow-sm" style="width:36px;height:36px;object-fit:cover;border:2px solid #ffffff;">
+                        @else
+                            <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm"
+                                 style="width:36px;height:36px;background: #000000; color: #ffffff; border: 2px solid #ffffff; font-size:13px;">
+                                {{ Auth::user()->initials ?? 'AD' }}
+                            </div>
+                        @endif
                         <span class="d-none d-md-block dropdown-toggle ps-2 fw-semibold" style="color: #ffffff;">{{ Auth::user()->name }}</span>
                     </a><!-- End Profile Image Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                        <li class="dropdown-header text-start">
-                            <h6 class="mb-0 fw-bold" style="color: #000000;">{{ Auth::user()->name }}</h6>
-                            <span class="text-muted small">{{ ucfirst(Auth::user()->roles) }} — UIS</span>
+                        <li class="dropdown-header text-start d-flex align-items-center gap-2">
+                            @if(Auth::user()->avatar_url)
+                                <img src="{{ Auth::user()->avatar_url }}" alt="{{ Auth::user()->name }}" class="rounded-circle shadow-sm flex-shrink-0" style="width:40px;height:40px;object-fit:cover;border:2px solid #f9dc4b;">
+                            @else
+                                <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm flex-shrink-0"
+                                     style="width:40px;height:40px;background: #000000; color: #ffffff; font-size:14px;">
+                                    {{ Auth::user()->initials ?? 'AD' }}
+                                </div>
+                            @endif
+                            <div class="text-truncate">
+                                <h6 class="mb-0 fw-bold text-truncate" style="color: #000000;">{{ Auth::user()->name }}</h6>
+                                <span class="text-muted small">{{ ucfirst(Auth::user()->roles) }} — UIS</span>
+                            </div>
                         </li>
                         <li>
                             <hr class="dropdown-divider">

@@ -20,6 +20,13 @@
     </div>
 @endif
 
+@include('layouts.dashboard.partials.header-setting-card', [
+    'pageKey' => 'kurikulum',
+    'pageTitle' => 'Kurikulum Program Studi',
+    'defaultJudul' => 'Kurikulum & Capaian Pembelajaran',
+    'defaultSubjudul' => 'Struktur kurikulum berbasis kompetensi dan Outcome-Based Education (OBE) Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi.'
+])
+
 <div class="card shadow-sm mb-4">
     <div class="card-header d-flex align-items-center justify-content-between py-3">
         <h5 class="mb-0 fw-semibold text-dark">

@@ -6,27 +6,12 @@
 
 @section('content')
 
-<!-- ═══════════════════════════════════════════════
-     HERO BANNER
-═══════════════════════════════════════════════ -->
-<div class="about-hero">
-  <div class="container">
-    <div class="about-hero-content" data-aos="fade-up" data-aos-duration="800">
-      <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3" style="background: rgba(249, 220, 75, 0.15); border: 1px solid rgba(249, 220, 75, 0.4);">
-        <i class="bi bi-mortarboard-fill text-warning"></i>
-        <span class="text-warning small fw-bold">PORTAL ALUMNI & CIVITAS</span>
-      </div>
-      <h1 style="font-size: 38px; font-weight: 800; color: var(--white); margin-bottom: 10px;">
-        Kisah Sukses & <em style="font-style: normal; color: var(--uis-orange);">Testimoni Alumni</em>
-      </h1>
-      <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
-        <span>/</span>
-        <span class="active">Testimoni Alumni</span>
-      </div>
-    </div>
-  </div>
-</div>
+@include('layouts.frontend.partials.hero-header', [
+    'pageKey' => 'testimoni',
+    'defaultJudul' => 'Testimoni & Pengalaman Alumni',
+    'defaultSubjudul' => 'Cerita inspiratif dan jejak langkah sukses para alumni Program Studi Teknik Informatika di dunia industri dan profesional.',
+    'defaultBreadcrumb' => 'Testimoni Alumni'
+])
 
 <!-- ═══════════════════════════════════════════════
      RATING ANALYTICS & SUMMARY SECTION

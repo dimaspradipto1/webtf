@@ -6,7 +6,7 @@
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('social-media.index', ['kategori' => $socialMedia->kategori ?? 'universitas']) }}">Media Sosial {{ ($socialMedia->kategori ?? '') === 'humas' ? 'Humas' : 'Universitas' }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('social-media.index', ['kategori' => $socialMedia->kategori ?? 'universitas']) }}">Media Sosial {{ ($socialMedia->kategori ?? '') === 'humas' ? 'Humas' : 'Fakultas Sains dan Teknologi' }}</a></li>
             <li class="breadcrumb-item active">Edit</li>
         </ol>
     </nav>
@@ -46,13 +46,13 @@
                         </label>
                         <select name="kategori" id="kategori" class="form-select @error('kategori') is-invalid @enderror" required>
                             <option value="universitas" {{ old('kategori', $socialMedia->kategori ?? 'universitas') === 'universitas' ? 'selected' : '' }}>
-                                🏛️ Media Sosial Universitas (Tampil di Beranda Utama UIS)
+                                🏛️ Media Sosial Fakultas Sains dan Teknologi (Tampil di Beranda Utama)
                             </option>
                             <option value="humas" {{ old('kategori', $socialMedia->kategori) === 'humas' ? 'selected' : '' }}>
                                 📢 Media Sosial Humas (Tampil di Beranda Humas & Smartphone Video Mockup)
                             </option>
                         </select>
-                        <div class="form-text">Pilih apakah platform ini milik Universitas atau Humas.</div>
+                        <div class="form-text">Pilih apakah platform ini milik Fakultas Sains dan Teknologi atau Humas.</div>
                         @error('kategori')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

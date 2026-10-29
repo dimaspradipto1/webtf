@@ -7,6 +7,7 @@ use App\Models\Akademik;
 use App\Models\AkreditasiDokumen;
 use App\Models\InformasiPmb;
 use App\Models\KalenderAkademikItem;
+use App\Models\PengumumanPmbItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -274,6 +275,11 @@ class AkademikController extends Controller
             return view('pages.akademik.informasi-pmb-edit', compact('item', 'pageTitle', 'tipe', 'pmb'));
         }
 
+        if ($tipe === 'pengumuman-pmb') {
+            $pengumumanPmbItems = PengumumanPmbItem::orderBy('urutan')->orderBy('id')->get();
+            return view('pages.akademik.edit', compact('item', 'pageTitle', 'tipe', 'pengumumanPmbItems'));
+        }
+
         return view('pages.akademik.edit', compact('item', 'pageTitle', 'tipe'));
     }
 
@@ -362,6 +368,70 @@ class AkademikController extends Controller
             ->with('success', 'Dokumen / Sertifikat Akreditasi berhasil dihapus!');
     }
 
+    public function storePengumumanPmbItem(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'judul_tab' => ['required', 'string', 'max:255'],
+            'nama_dokumen' => ['required', 'string', 'max:255'],
+            'gdrive_url' => ['required', 'url', 'max:1000'],
+            'tombol_teks' => ['nullable', 'string', 'max:100'],
+            'urutan' => ['nullable', 'integer', 'min:0'],
+        ], [
+            'judul_tab.required' => 'Judul Tab / Periode Pengumuman wajib diisi.',
+            'nama_dokumen.required' => 'Nama Dokumen Pengumuman wajib diisi.',
+            'gdrive_url.required' => 'Link Dokumen / Google Drive wajib diisi.',
+            'gdrive_url.url' => 'Link Dokumen harus berupa URL yang valid (diawali https://).',
+        ]);
+
+        $validated['tombol_teks'] = $validated['tombol_teks'] ?: 'Lihat Dokumen';
+        $validated['urutan'] = $validated['urutan'] ?? ((PengumumanPmbItem::max('urutan') ?? 0) + 1);
+        $validated['is_active'] = $request->has('is_active');
+
+        PengumumanPmbItem::create($validated);
+
+        return redirect()
+            ->route('akademik.portal.edit', 'pengumuman-pmb')
+            ->with('success', 'Pengumuman Hasil Seleksi PMB berhasil ditambahkan!');
+    }
+
+    public function updatePengumumanPmbItem(Request $request, int $id): RedirectResponse
+    {
+        $pengumumanItem = PengumumanPmbItem::findOrFail($id);
+
+        $validated = $request->validate([
+            'judul_tab' => ['required', 'string', 'max:255'],
+            'nama_dokumen' => ['required', 'string', 'max:255'],
+            'gdrive_url' => ['required', 'url', 'max:1000'],
+            'tombol_teks' => ['nullable', 'string', 'max:100'],
+            'urutan' => ['nullable', 'integer', 'min:0'],
+        ], [
+            'judul_tab.required' => 'Judul Tab / Periode Pengumuman wajib diisi.',
+            'nama_dokumen.required' => 'Nama Dokumen Pengumuman wajib diisi.',
+            'gdrive_url.required' => 'Link Dokumen / Google Drive wajib diisi.',
+            'gdrive_url.url' => 'Link Dokumen harus berupa URL yang valid (diawali https://).',
+        ]);
+
+        $validated['tombol_teks'] = $validated['tombol_teks'] ?: 'Lihat Dokumen';
+        $validated['urutan'] = $validated['urutan'] ?? 0;
+        $validated['is_active'] = $request->has('is_active');
+
+        $pengumumanItem->update($validated);
+
+        return redirect()
+            ->route('akademik.portal.edit', 'pengumuman-pmb')
+            ->with('success', 'Pengumuman Hasil Seleksi PMB berhasil diperbarui!');
+    }
+
+    public function destroyPengumumanPmbItem(int $id): RedirectResponse
+    {
+        $pengumumanItem = PengumumanPmbItem::findOrFail($id);
+        $pengumumanItem->delete();
+
+        return redirect()
+            ->route('akademik.portal.edit', 'pengumuman-pmb')
+            ->with('success', 'Pengumuman Hasil Seleksi PMB berhasil dihapus!');
+    }
+
     public function update(AkademikRequest $request, string $tipe): RedirectResponse
     {
         if (! array_key_exists($tipe, self::$defaults)) {
@@ -394,6 +464,16 @@ class AkademikController extends Controller
         }
 
         $item->update($validated);
+
+        if (isset($validated['judul'])) {
+            \App\Models\PageHeader::updateOrCreate(
+                ['page_key' => $tipe],
+                [
+                    'judul' => $validated['judul'],
+                    'subjudul' => $validated['subjudul'] ?? null,
+                ]
+            );
+        }
 
         if (in_array($tipe, ['tracer-study', 'laminfokom', 'ban-pt'])) {
             $label = match ($tipe) {
@@ -482,6 +562,14 @@ class AkademikController extends Controller
             'link_url' => $validated['link_pendaftaran'] ?? $item->link_url,
             'is_active' => $validated['is_active'],
         ]);
+
+        \App\Models\PageHeader::updateOrCreate(
+            ['page_key' => 'informasi-pmb'],
+            [
+                'judul' => $validated['judul_hero'],
+                'subjudul' => $validated['subjudul_hero'] ?? null,
+            ]
+        );
 
         return redirect()
             ->route('akademik.portal.edit', 'informasi-pmb')

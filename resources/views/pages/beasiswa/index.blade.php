@@ -36,6 +36,13 @@
             </div>
         @endif
 
+        @include('layouts.dashboard.partials.header-setting-card', [
+            'pageKey' => 'beasiswa',
+            'pageTitle' => 'Menu Beasiswa',
+            'defaultJudul' => 'Program Beasiswa Kuliah',
+            'defaultSubjudul' => 'Informasi dan panduan pengajuan berbagai program beasiswa bagi mahasiswa Program Studi Teknik Informatika.'
+        ])
+
         {{-- Info Box --}}
         <div class="alert alert-info d-flex align-items-start gap-3 shadow-sm rounded-3 mb-4" role="alert" style="background-color: #e8f4fd; border-color: #b8e0fe; color: #0c5460;">
             <i class="bi bi-info-circle-fill fs-4 text-primary mt-1"></i>

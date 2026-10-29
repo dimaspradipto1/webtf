@@ -11,6 +11,13 @@
     </nav>
 </div>
 
+@include('layouts.dashboard.partials.header-setting-card', [
+    'pageKey' => 'struktur-organisasi',
+    'pageTitle' => 'Struktur Organisasi',
+    'defaultJudul' => 'Struktur Organisasi Program Studi',
+    'defaultSubjudul' => 'Bagan tata kelola dan susunan pejabat struktural Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi.'
+])
+
 <div class="row">
     <div class="col-lg-6">
         <div class="card shadow-sm">

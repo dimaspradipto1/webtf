@@ -33,6 +33,8 @@ class UserRequest extends FormRequest
             return [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.($this->user()?->id ?? '')],
+                'avatar' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:5120'],
+                'hapus_avatar' => ['nullable', 'boolean'],
             ];
         }
 
@@ -73,6 +75,9 @@ class UserRequest extends FormRequest
             // Nama & Role
             'name.required' => 'Nama wajib diisi.',
             'name.max' => 'Nama maksimal 255 karakter.',
+            'avatar.image' => 'File foto profil harus berupa gambar.',
+            'avatar.mimes' => 'Format foto profil harus berupa PNG, JPG, JPEG, atau WEBP.',
+            'avatar.max' => 'Ukuran file foto profil maksimal 5MB.',
             'roles.required' => 'Role wajib dipilih.',
             'roles.in' => 'Role tidak valid.',
         ];

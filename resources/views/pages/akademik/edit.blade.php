@@ -37,6 +37,38 @@
             @endif
 
             @if($tipe === 'kalender' && isset($kalenderItems))
+            {{-- Form Pengaturan Header Hero untuk Kalender Akademik --}}
+            <form action="{{ route('akademik.update', $tipe) }}" method="POST" class="mb-4">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="is_active" value="1">
+                <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-sliders text-warning fs-5"></i>
+                            <h6 class="card-title mb-0 p-0 fw-bold text-dark">Pengaturan Header Halaman Kalender Akademik</h6>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="judul" class="form-label fw-semibold small">Judul Utama Halaman <span class="text-danger">*</span></label>
+                                <input type="text" id="judul" name="judul" class="form-control" value="{{ old('judul', $item->judul) }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="subjudul" class="form-label fw-semibold small">Subjudul / Ringkasan Header</label>
+                                <input type="text" id="subjudul" name="subjudul" class="form-control" value="{{ old('subjudul', $item->subjudul) }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light py-3 text-end">
+                        <button type="submit" class="btn btn-primary px-4 rounded-3 fw-bold" style="background: #000000; border: none !important;">
+                            <i class="bi bi-check2-circle me-1" style="color: #f9dc4b;"></i> Simpan Header
+                        </button>
+                    </div>
+                </div>
+            </form>
+
             <!-- ═══════════════════════════════════════════════════════════
                  DAFTAR TAHUN & LINK GOOGLE DRIVE KALENDER AKADEMIK
             ═══════════════════════════════════════════════════════════ -->
@@ -651,6 +683,222 @@
             </div>
             @endif
 
+            @if($tipe === 'pengumuman-pmb' && isset($pengumumanPmbItems))
+            {{-- Form Pengaturan Header Hero untuk Pengumuman PMB --}}
+            <form action="{{ route('akademik.update', $tipe) }}" method="POST" class="mb-4">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="is_active" value="1">
+                <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-sliders text-warning fs-5"></i>
+                            <h6 class="card-title mb-0 p-0 fw-bold text-dark">Pengaturan Header Halaman Pengumuman Hasil Seleksi PMB</h6>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="judul" class="form-label fw-semibold small">Judul Utama Halaman <span class="text-danger">*</span></label>
+                                <input type="text" id="judul" name="judul" class="form-control" value="{{ old('judul', $item->judul) }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="subjudul" class="form-label fw-semibold small">Subjudul / Ringkasan Header</label>
+                                <input type="text" id="subjudul" name="subjudul" class="form-control" value="{{ old('subjudul', $item->subjudul) }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light py-3 text-end">
+                        <button type="submit" class="btn btn-primary px-4 rounded-3 fw-bold" style="background: #000000; border: none !important;">
+                            <i class="bi bi-check2-circle me-1"></i> Simpan Header
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 DAFTAR PENGUMUMAN HASIL SELEKSI PMB (MODEL DROPDOWN / ACCORDION)
+            ═══════════════════════════════════════════════════════════ -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-header bg-white py-3 border-bottom d-flex flex-wrap align-items-center justify-content-between gap-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-megaphone-fill text-warning fs-4"></i>
+                        <div>
+                            <h5 class="card-title mb-0 p-0 fw-bold text-dark">Daftar Dokumen Pengumuman PMB (Model Dropdown)</h5>
+                            <div class="small text-muted">Kelola daftar pengumuman seleksi PMB per gelombang / periode beserta tautan berkas resmi (Google Drive / Link).</div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm px-3 py-2 rounded-3 fw-bold" data-bs-toggle="modal" data-bs-target="#modalTambahPengumumanPmb">
+                        <i class="bi bi-plus-lg me-1"></i> Tambah Pengumuman PMB
+                    </button>
+                </div>
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-center" style="width: 60px;">Urutan</th>
+                                    <th style="width: 25%;">Judul Tab / Gelombang</th>
+                                    <th style="width: 25%;">Nama Dokumen</th>
+                                    <th>Link Dokumen / Google Drive</th>
+                                    <th class="text-center" style="width: 100px;">Status</th>
+                                    <th class="text-center" style="width: 120px;">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($pengumumanPmbItems as $pItem)
+                                <tr>
+                                    <td class="text-center">
+                                        <span class="badge bg-secondary">{{ $pItem->urutan }}</span>
+                                    </td>
+                                    <td class="fw-bold text-dark">{{ $pItem->judul_tab }}</td>
+                                    <td>{{ $pItem->nama_dokumen }}</td>
+                                    <td>
+                                        @if($pItem->gdrive_url)
+                                            <a href="{{ $pItem->gdrive_url }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none d-inline-flex align-items-center gap-1 small fw-semibold text-primary">
+                                                <i class="bi bi-box-arrow-up-right"></i> {{ Str::limit($pItem->gdrive_url, 48) }}
+                                            </a>
+                                        @else
+                                            <span class="text-muted small">-</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        @if($pItem->is_active)
+                                            <span class="badge bg-success">Aktif</span>
+                                        @else
+                                            <span class="badge bg-secondary">Nonaktif</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center gap-1">
+                                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditPengumumanPmb{{ $pItem->id }}" title="Sunting">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </button>
+                                            <form action="{{ route('akademik.pengumuman-pmb.item.destroy', $pItem->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="confirmDeleteAkreditasi(event, this)" data-name="{{ $pItem->judul_tab }}" title="Hapus">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted py-4">Belum ada daftar pengumuman PMB. Silakan klik tombol "Tambah Pengumuman PMB" di atas.</td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Modal Edit Pengumuman PMB --}}
+            @foreach($pengumumanPmbItems as $pItem)
+            <div class="modal fade" id="modalEditPengumumanPmb{{ $pItem->id }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content rounded-4 border-0 shadow">
+                        <form action="{{ route('akademik.pengumuman-pmb.item.update', $pItem->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="modal-header border-bottom py-3">
+                                <h5 class="modal-title fw-bold text-dark"><i class="bi bi-pencil-square me-2 text-warning"></i>Sunting {{ $pItem->judul_tab }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold small">Judul Tab / Periode Seleksi <span class="text-danger">*</span></label>
+                                        <input type="text" name="judul_tab" class="form-control" value="{{ $pItem->judul_tab }}" placeholder="Contoh: Pengumuman Seleksi PMB Gelombang 1" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold small">Nama Dokumen Pengumuman <span class="text-danger">*</span></label>
+                                        <input type="text" name="nama_dokumen" class="form-control" value="{{ $pItem->nama_dokumen }}" placeholder="Contoh: SK REKTOR & DAFTAR KELULUSAN PMB GELOMBANG 1" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold small"><i class="bi bi-link-45deg text-primary me-1"></i>Link Dokumen / Google Drive <span class="text-danger">*</span></label>
+                                        <input type="url" name="gdrive_url" class="form-control" value="{{ $pItem->gdrive_url }}" placeholder="https://drive.google.com/file/d/.../view?usp=sharing" required>
+                                        <div class="form-text small">Masukkan link Google Drive berkas SK / daftar kelulusan PMB (pastikan diset publik/siapa saja yang memiliki link).</div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="form-label fw-semibold small">Teks Tombol</label>
+                                        <input type="text" name="tombol_teks" class="form-control" value="{{ $pItem->tombol_teks ?: 'Lihat Dokumen' }}" placeholder="Lihat Dokumen">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label fw-semibold small">Urutan Tampil</label>
+                                        <input type="number" name="urutan" class="form-control" value="{{ $pItem->urutan }}" min="0">
+                                    </div>
+                                    <div class="col-md-4 d-flex align-items-end">
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="activeEditPmb{{ $pItem->id }}" name="is_active" value="1" {{ $pItem->is_active ? 'checked' : '' }}>
+                                            <label class="form-check-label fw-semibold small" for="activeEditPmb{{ $pItem->id }}">Tampilkan di Halaman</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-light py-2">
+                                <button type="button" class="btn btn-secondary btn-sm px-3" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary btn-sm px-4 fw-bold"><i class="bi bi-save me-1"></i> Simpan Perubahan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
+            {{-- Modal Tambah Pengumuman PMB --}}
+            <div class="modal fade" id="modalTambahPengumumanPmb" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content rounded-4 border-0 shadow">
+                        <form action="{{ route('akademik.pengumuman-pmb.item.store') }}" method="POST">
+                            @csrf
+                            <div class="modal-header border-bottom py-3">
+                                <h5 class="modal-title fw-bold text-dark"><i class="bi bi-plus-circle-fill me-2 text-primary"></i>Tambah Pengumuman Hasil Seleksi PMB</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold small">Judul Tab / Periode Seleksi <span class="text-danger">*</span></label>
+                                        <input type="text" name="judul_tab" class="form-control" placeholder="Contoh: Pengumuman Kelulusan PMB Gelombang 1" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold small">Nama Dokumen Pengumuman <span class="text-danger">*</span></label>
+                                        <input type="text" name="nama_dokumen" class="form-control" placeholder="Contoh: SK REKTOR & DAFTAR KELULUSAN PMB GELOMBANG 1" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold small"><i class="bi bi-link-45deg text-primary me-1"></i>Link Dokumen / Google Drive <span class="text-danger">*</span></label>
+                                        <input type="url" name="gdrive_url" class="form-control" placeholder="https://drive.google.com/file/d/.../view?usp=sharing" required>
+                                        <div class="form-text small">Masukkan link Google Drive dokumen SK / pengumuman hasil seleksi PMB.</div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="form-label fw-semibold small">Teks Tombol</label>
+                                        <input type="text" name="tombol_teks" class="form-control" value="Lihat Dokumen" placeholder="Lihat Dokumen">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label fw-semibold small">Urutan Tampil</label>
+                                        <input type="number" name="urutan" class="form-control" value="{{ ($pengumumanPmbItems->max('urutan') ?? 0) + 1 }}" min="0">
+                                    </div>
+                                    <div class="col-md-4 d-flex align-items-end">
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="activeNewPmb" name="is_active" value="1" checked>
+                                            <label class="form-check-label fw-semibold small" for="activeNewPmb">Tampilkan di Halaman</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-light py-2">
+                                <button type="button" class="btn btn-secondary btn-sm px-3" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary btn-sm px-4 fw-bold"><i class="bi bi-plus-lg me-1"></i> Tambah Pengumuman</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @endif
+
             @if(in_array($tipe, ['tracer-study', 'laminfokom', 'ban-pt']))
             <!-- ═══════════════════════════════════════════════════════════
                  FORM KHUSUS LINK URL (TRACER STUDY, LAMINFOKOM, BAN-PT)
@@ -760,7 +1008,7 @@
                     </div>
                 </div>
             </form>
-            @elseif($tipe !== 'kalender' && $tipe !== 'dokumen-akreditasi-tf' && $tipe !== 'sertifikat-akreditasi')
+            @elseif($tipe !== 'kalender' && $tipe !== 'dokumen-akreditasi-tf' && $tipe !== 'sertifikat-akreditasi' && $tipe !== 'pengumuman-pmb')
             <form action="{{ route('akademik.update', $tipe) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')

@@ -28,6 +28,13 @@
     </div>
 @endif
 
+@include('layouts.dashboard.partials.header-setting-card', [
+    'pageKey' => 'organisasi',
+    'pageTitle' => 'Organisasi & Kegiatan Mahasiswa',
+    'defaultJudul' => 'Organisasi & Kegiatan Mahasiswa',
+    'defaultSubjudul' => 'Wadah pengembangan potensi, kepemimpinan, riset keilmuan, kreativitas, serta kepedulian sosial mahasiswa Teknik Informatika.'
+])
+
 {{-- 1. Pengaturan Header & Editorial Seksi Organisasi Mahasiswa --}}
 <div class="card shadow-sm border-0 mb-4" style="border-radius: 12px;">
     <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between" style="border-top: 3px solid #000000; border-radius: 12px 12px 0 0;">

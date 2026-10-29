@@ -12,6 +12,13 @@
     </nav>
 </div>
 
+@include('layouts.dashboard.partials.header-setting-card', [
+    'pageKey' => 'prestasi',
+    'pageTitle' => 'Prestasi Mahasiswa',
+    'defaultJudul' => 'Prestasi Mahasiswa Teknik Informatika',
+    'defaultSubjudul' => 'Koleksi prestasi gemilang, medali kejuaraan, dan capaian membanggakan sivitas akademika Teknik Informatika di tingkat regional, nasional, dan internasional.'
+])
+
 <div class="card shadow-sm border-0">
     <div class="card-header bg-white d-flex align-items-center justify-content-between py-3">
         <h5 class="mb-0 fw-semibold text-dark">

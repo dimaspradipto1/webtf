@@ -27,6 +27,13 @@
             </div>
         @endif
 
+        @include('layouts.dashboard.partials.header-setting-card', [
+            'pageKey' => 'layanan',
+            'pageTitle' => 'Program Studi',
+            'defaultJudul' => 'Program Studi & Fasilitas',
+            'defaultSubjudul' => 'Jelajahi program studi unggulan serta sarana prasarana akademik terpadu di lingkungan Fakultas Sains dan Teknologi.'
+        ])
+
         {{-- Info Box --}}
         <div class="alert alert-info d-flex align-items-start gap-3 shadow-sm rounded-3 mb-4" role="alert" style="background-color: #e8f4fd; border-color: #b8e0fe; color: #0c5460;">
             <i class="bi bi-info-circle-fill fs-4 text-primary mt-1"></i>

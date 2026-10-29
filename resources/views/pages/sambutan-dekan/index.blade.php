@@ -12,6 +12,13 @@
     </nav>
 </div>
 
+@include('layouts.dashboard.partials.header-setting-card', [
+    'pageKey' => 'sambutan-kaprodi',
+    'pageTitle' => 'Sambutan Kaprodi TF',
+    'defaultJudul' => 'Sambutan Ketua Program Studi Teknik Informatika',
+    'defaultSubjudul' => 'Pesan, arah pengembangan, dan komitmen keunggulan akademik dari Ketua Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi.'
+])
+
 <div class="row">
     <div class="col-lg-10">
         <div class="card shadow-sm border-0 rounded-4">

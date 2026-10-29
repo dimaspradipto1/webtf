@@ -11,6 +11,13 @@
     </nav>
 </div>
 
+@include('layouts.dashboard.partials.header-setting-card', [
+    'pageKey' => 'fasilitas',
+    'pageTitle' => 'Fasilitas Kampus',
+    'defaultJudul' => 'Fasilitas Kampus & Laboratorium',
+    'defaultSubjudul' => 'Sarana laboratorium komputasi modern, perpustakaan, ruang kuliah ber-AC, dan fasilitas penunjang akademik Program Studi Teknik Informatika.'
+])
+
 <div class="card shadow-sm">
     <div class="card-header d-flex align-items-center justify-content-between py-3">
         <h5 class="mb-0 fw-semibold">

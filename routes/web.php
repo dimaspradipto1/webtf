@@ -25,6 +25,7 @@ use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NilaiPerusahaanController;
 use App\Http\Controllers\OrganisasiMahasiswaController;
+use App\Http\Controllers\PageHeaderController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PimpinanController;
 use App\Http\Controllers\PmbSettingController;
@@ -235,6 +236,10 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('visimisi', VisiMisiController::class);
     Route::resource('nilaiperusahaan', NilaiPerusahaanController::class);
     Route::resource('faculty-stat', FacultyStatController::class);
+
+    // Pengaturan Header & Breadcrumb Halaman Frontend
+    Route::get('admin-header-breadcrumb', [PageHeaderController::class, 'index'])->name('page-header.index');
+    Route::post('admin-header-breadcrumb/{pageKey}', [PageHeaderController::class, 'update'])->name('page-header.update');
 
     // Pengaturan Bahasa (Multi-Language)
     Route::get('admin-bahasa', [BahasaSettingController::class, 'index'])->name('bahasa.index');

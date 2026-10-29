@@ -12,6 +12,13 @@
     </nav>
 </div>
 
+@include('layouts.dashboard.partials.header-setting-card', [
+    'pageKey' => 'edokumen',
+    'pageTitle' => 'E-Dokumen',
+    'defaultJudul' => 'E-Dokumen & Berkas Resmi',
+    'defaultSubjudul' => 'Pusat berkas dokumen resmi, buku pedoman perkuliahan, dan panduan akademik Program Studi Teknik Informatika.'
+])
+
 <div class="card shadow-sm">
     <div class="card-header d-flex align-items-center justify-content-between py-3">
         <h5 class="mb-0 fw-semibold">

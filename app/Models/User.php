@@ -7,6 +7,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'avatar',
         'password',
         'roles',
         'is_active',
@@ -107,5 +109,32 @@ class User extends Authenticatable
     public function isOrganisasi(): bool
     {
         return in_array('organisasi', $this->roles_array);
+    }
+
+    /**
+     * Get avatar public URL if exists.
+     */
+    public function getAvatarUrlAttribute(): ?string
+    {
+        if (! empty($this->avatar) && Storage::disk('public')->exists($this->avatar)) {
+            return asset('storage/' . $this->avatar);
+        }
+
+        return null;
+    }
+
+    /**
+     * Get user name initials (1-2 uppercase letters).
+     */
+    public function getInitialsAttribute(): string
+    {
+        $raw = trim($this->name ?? 'User');
+        $words = preg_split('/\s+/', $raw);
+
+        if (count($words) >= 2) {
+            return strtoupper(substr($words[0], 0, 1) . substr($words[1], 0, 1));
+        }
+
+        return strtoupper(substr($raw, 0, 2));
     }
 }

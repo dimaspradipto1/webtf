@@ -6,7 +6,7 @@
         @if($kategori === 'humas')
             Media Sosial Humas
         @elseif($kategori === 'universitas')
-            Media Sosial Universitas
+            Media Sosial Fakultas Sains dan Teknologi
         @else
             Link Media Sosial
         @endif
@@ -19,7 +19,7 @@
                 <li class="breadcrumb-item active">Media Sosial Humas</li>
             @else
                 <li class="breadcrumb-item">Konten Beranda</li>
-                <li class="breadcrumb-item active">{{ $kategori === 'universitas' ? 'Media Sosial Universitas' : 'Link Media Sosial' }}</li>
+                <li class="breadcrumb-item active">{{ $kategori === 'universitas' ? 'Media Sosial Fakultas Sains dan Teknologi' : 'Link Media Sosial' }}</li>
             @endif
         </ol>
     </nav>
@@ -42,8 +42,8 @@
                 <a href="{{ route('social-media.index', ['kategori' => 'universitas']) }}" 
                    class="nav-link py-2 px-3 fw-semibold d-flex align-items-center justify-content-center gap-2 {{ $kategori === 'universitas' ? 'active bg-primary text-white' : 'text-secondary bg-light' }}"
                    style="border-radius: 8px;">
-                    <i class="bi bi-building"></i>
-                    <span>Media Sosial Universitas</span>
+                    <i class="bi bi-buildings"></i>
+                    <span>Media Sosial Fakultas Sains dan Teknologi</span>
                     <span class="badge {{ $kategori === 'universitas' ? 'bg-white text-primary' : 'bg-secondary text-white' }} rounded-pill">{{ $countUniversitas }}</span>
                 </a>
             </li>
@@ -84,8 +84,8 @@
                                id="judul_seksi"
                                name="judul_seksi"
                                class="form-control @error('judul_seksi') is-invalid @enderror"
-                               value="{{ old('judul_seksi', $setting->judul_seksi ?? 'IKUTI UIS DI MEDIA SOSIAL') }}"
-                               placeholder="Contoh: IKUTI UIS DI MEDIA SOSIAL"
+                               value="{{ old('judul_seksi', $setting->judul_seksi ?? 'IKUTI FAKULTAS SAINS DAN TEKNOLOGI DI MEDIA SOSIAL') }}"
+                               placeholder="Contoh: IKUTI FAKULTAS SAINS DAN TEKNOLOGI DI MEDIA SOSIAL"
                                required>
                         <div class="form-text text-muted" style="font-size: 12px;">Teks judul huruf kapital di atas garis divider icon share.</div>
                         @error('judul_seksi')
@@ -122,7 +122,7 @@
                     <div class="text-center py-2 px-1">
                         {{-- Judul Preview --}}
                         <h3 id="preview-heading" class="fw-bold mb-2 text-uppercase" style="color: #2b7044; font-size: 20px; letter-spacing: 0.6px; font-family: 'Plus Jakarta Sans', sans-serif;">
-                            {{ $setting->judul_seksi ?? 'IKUTI UIS DI MEDIA SOSIAL' }}
+                            {{ $setting->judul_seksi ?? 'IKUTI FAKULTAS SAINS DAN TEKNOLOGI DI MEDIA SOSIAL' }}
                         </h3>
 
                         {{-- Divider Preview --}}
@@ -134,7 +134,7 @@
 
                         {{-- Subjudul Kutipan Preview --}}
                         <p id="preview-quote" class="mt-3 mb-0 mx-auto text-dark" style="max-width: 780px; font-size: 14.5px; line-height: 1.6; font-style: normal;">
-                            "{{ $setting->subjudul_seksi ?? 'Dapatkan update terbaru, berita inspiratif, dan berbagai informasi menarik lainnya langsung dari platform media sosial kami. Jangan lewatkan momen penting dari UIS klik ikon di bawah untuk terhubung sekarang juga!' }}"
+                            "{{ $setting->subjudul_seksi ?? 'Dapatkan update terbaru, berita inspiratif, dan berbagai informasi menarik lainnya langsung dari platform media sosial kami. Jangan lewatkan momen penting dari Fakultas Sains dan Teknologi, klik ikon di bawah untuk terhubung sekarang juga!' }}"
                         </p>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
     <div class="card-header bg-white py-3 d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-top: 3px solid {{ $kategori === 'humas' ? '#6366f1' : '#000000' }}; border-radius: 12px 12px 0 0;">
         <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
             <i class="bi bi-share-fill me-2" style="color: {{ $kategori === 'humas' ? '#6366f1' : '#000000' }};"></i>
-            Daftar Link & Logo {{ $kategori === 'humas' ? 'Media Sosial Humas' : ($kategori === 'universitas' ? 'Media Sosial Universitas' : 'Media Sosial') }}
+            Daftar Link & Logo {{ $kategori === 'humas' ? 'Media Sosial Humas' : ($kategori === 'universitas' ? 'Media Sosial Fakultas Sains dan Teknologi' : 'Media Sosial') }}
         </h5>
         <div class="d-flex align-items-center gap-2">
             @if($kategori !== 'humas')
@@ -178,7 +178,7 @@
             <a href="{{ route('social-media.create', ['kategori' => $kategori ?? 'universitas']) }}" 
                class="btn fw-semibold shadow-sm btn-sm" 
                style="background-color: {{ $kategori === 'humas' ? '#6366f1' : '#000000' }}; color: #ffffff; border: none; padding: 7px 18px; border-radius: 8px;">
-                <i class="bi bi-plus-lg me-1"></i> Tambah {{ $kategori === 'humas' ? 'Medsos Humas' : ($kategori === 'universitas' ? 'Medsos Universitas' : 'Media Sosial') }}
+                <i class="bi bi-plus-lg me-1"></i> Tambah {{ $kategori === 'humas' ? 'Medsos Humas' : ($kategori === 'universitas' ? 'Medsos Fakultas Sains & Teknologi' : 'Media Sosial') }}
             </a>
         </div>
     </div>
@@ -189,9 +189,9 @@
                 @if($kategori === 'humas')
                     <strong>Info Media Sosial Humas:</strong> Platform di bawah ini tampil di halaman <strong>/humas</strong> pada kartu smartphone interaktif. Masukkan link video TikTok atau YouTube untuk pemutaran otomatis (autoplay).
                 @elseif($kategori === 'universitas')
-                    <strong>Info Media Sosial Universitas:</strong> Logo PNG di bawah ini tampil secara horizontal di barisan seksi Media Sosial pada <strong>Beranda Utama Website</strong>.
+                    <strong>Info Media Sosial Fakultas Sains dan Teknologi:</strong> Logo PNG di bawah ini tampil secara horizontal di barisan seksi Media Sosial pada <strong>Beranda Utama Website</strong>.
                 @else
-                    <strong>Info:</strong> Menampilkan seluruh data media sosial (Universitas & Humas). Gunakan tab di atas untuk menyaring per kategori.
+                    <strong>Info:</strong> Menampilkan seluruh data media sosial (Fakultas Sains dan Teknologi & Humas). Gunakan tab di atas untuk menyaring per kategori.
                 @endif
             </div>
             <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -223,7 +223,7 @@
 
             if (judulInput && previewHeading) {
                 judulInput.addEventListener('input', function () {
-                    previewHeading.textContent = this.value.trim() ? this.value : 'IKUTI UIS DI MEDIA SOSIAL';
+                    previewHeading.textContent = this.value.trim() ? this.value : 'IKUTI FAKULTAS SAINS DAN TEKNOLOGI DI MEDIA SOSIAL';
                 });
             }
 

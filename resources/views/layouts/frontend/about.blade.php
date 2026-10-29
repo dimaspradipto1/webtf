@@ -15,26 +15,32 @@
   }
 @endphp
 
+@php
+  $hPimpinan = \App\Models\PageHeader::get('pimpinan');
+@endphp
 <!-- ═══════════════════════════════════════════════
-     ABOUT HERO BANNER
+     HERO HEADER & BREADCRUMB
 ═══════════════════════════════════════════════ -->
-<div class="about-hero">
-  <div class="container">
-    <div class="about-hero-content" data-aos="fade-up" data-aos-duration="800">
-      <div class="badge px-3 py-2 rounded-pill mb-2" style="background: #f9dc4b; color: #000000; font-weight: 700; font-size: 12.5px;">
-        <i class="bi bi-person-vcard me-1"></i> Program Studi Teknik Informatika · Fakultas Sains dan Teknologi
-      </div>
-      <h1 class="about-hero-title">
-        Profil <em>Pimpinan</em>
-      </h1>
-      <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
-        <span>/</span>
-        <span class="active">Profil Pimpinan</span>
-      </div>
+<section class="akademik-hero">
+  <div class="container position-relative" data-aos="fade-up">
+    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange, #f9dc4b); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
+      {{ $hPimpinan->badge_text ?: 'PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI' }}
+    </div>
+    <h1 class="display-6 fw-bold text-white mb-2">{{ $hPimpinan->judul }}</h1>
+    @if(!empty($hPimpinan->subjudul))
+      <p class="lead text-white-50 mb-0" style="max-width: 760px; font-size: 16px;">
+        {{ $hPimpinan->subjudul }}
+      </p>
+    @endif
+    <div class="breadcrumb-custom mt-3">
+      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+      <span>/</span>
+      <a href="{{ route('homepage.tentang') }}">Profil</a>
+      <span>/</span>
+      <span class="active">{{ $hPimpinan->breadcrumb_label ?: 'Profil Pimpinan' }}</span>
     </div>
   </div>
-</div>
+</section>
 
 <!-- ═══════════════════════════════════════════════
      PROFIL PIMPINAN

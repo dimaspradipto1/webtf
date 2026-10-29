@@ -21,6 +21,13 @@
     </div>
 @endif
 
+@include('layouts.dashboard.partials.header-setting-card', [
+    'pageKey' => 'sejarah',
+    'pageTitle' => 'Sejarah YAPISTA',
+    'defaultJudul' => 'Sejarah YAPISTA & Milestone Program Studi',
+    'defaultSubjudul' => 'Perjalanan panjang Yayasan Pendidikan Ibnu Sina Batam (YAPISTA) dan sejarah pendirian Program Studi Teknik Informatika.'
+])
+
 <div class="row">
     <!-- Pengaturan Narasi Sejarah, Link External & Pimpinan dari Masa ke Masa -->
     <div class="col-12 mb-4">

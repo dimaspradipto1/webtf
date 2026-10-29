@@ -25,3 +25,4 @@ class PengumumanPmbItem extends Model
         'urutan' => 'integer',
     ];
 }
+

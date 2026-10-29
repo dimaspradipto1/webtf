@@ -6,27 +6,30 @@
 
 @section('content')
 
+@php
+  $hBerita = \App\Models\PageHeader::get('berita');
+@endphp
 <!-- ═══════════════════════════════════════════════
-     HERO BANNER
+     HERO HEADER & BREADCRUMB
 ═══════════════════════════════════════════════ -->
-<div class="news-hero">
-  <div class="container">
-    <div data-aos="fade-up">
-      <div class="badge px-2.5 py-1 rounded-pill mb-2" style="background: rgba(0, 0, 0, 0.45); color: var(--uis-orange); border: 1px solid rgba(249, 220, 75, 0.4); font-size: 11px;">
-        <i class="bi bi-newspaper me-1"></i> Warta & Informasi Teknik Informatika
-      </div>
-      <h1 class="news-hero-title">Berita & <em>Warta Kampus</em> UIS</h1>
-      <p class="text-white-50 mb-2" style="max-width: 650px; font-size: 13px; line-height: 1.45;">
-        Kumpulan warta kegiatan universitas, pengumuman akademik, prestasi mahasiswa, riset terapan, dan inovasi civitas akademika Teknik Informatika Batam.
+<section class="akademik-hero">
+  <div class="container position-relative" data-aos="fade-up">
+    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange, #f9dc4b); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
+      {{ $hBerita->badge_text ?: 'PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI' }}
+    </div>
+    <h1 class="display-6 fw-bold text-white mb-2">{{ $hBerita->judul }}</h1>
+    @if(!empty($hBerita->subjudul))
+      <p class="lead text-white-50 mb-0" style="max-width: 760px; font-size: 16px;">
+        {{ $hBerita->subjudul }}
       </p>
-      <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
-        <span>/</span>
-        <span class="active">Berita & Warta Kampus</span>
-      </div>
+    @endif
+    <div class="breadcrumb-custom mt-3">
+      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+      <span>/</span>
+      <span class="active">{{ $hBerita->breadcrumb_label ?: 'Berita' }}</span>
     </div>
   </div>
-</div>
+</section>
 
 <!-- ═══════════════════════════════════════════════
      NEWS PORTAL CONTENT
