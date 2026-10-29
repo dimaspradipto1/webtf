@@ -21,10 +21,10 @@
           @if($isAdmin)
           <!-- 1b. Konten Beranda -->
           <li class="nav-item">
-              <a class="nav-link {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('social-media.*') || Route::is('feature.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') || Route::is('partner.*') || Route::is('prestasi.*') ? '' : 'collapsed' }}" data-bs-target="#beranda-nav" data-bs-toggle="collapse" href="#">
+              <a class="nav-link {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('social-media.*') || Route::is('feature.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') || Route::is('partner.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') ? '' : 'collapsed' }}" data-bs-target="#beranda-nav" data-bs-toggle="collapse" href="#">
                   <i class="bi bi-layout-text-window-reverse"></i><span>Konten Beranda</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-              <ul id="beranda-nav" class="nav-content collapse {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || (Route::is('social-media.*') && request('kategori') !== 'humas') || Route::is('feature.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') || Route::is('partner.*') || Route::is('prestasi.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <ul id="beranda-nav" class="nav-content collapse {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || (Route::is('social-media.*') && request('kategori') !== 'humas') || Route::is('feature.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') || Route::is('partner.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                   <li>
                       <a href="{{ route('banner.index') }}" class="{{ Route::is('banner.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Banner Hero</span>
@@ -68,6 +68,11 @@
                   <li>
                       <a href="{{ route('prestasi.index') }}" class="{{ Route::is('prestasi.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Prestasi Mahasiswa</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('organisasi-mahasiswa.index') }}" class="{{ Route::is('organisasi-mahasiswa.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Organisasi Mahasiswa</span>
                       </a>
                   </li>
               </ul>
@@ -147,7 +152,7 @@
 
           <!-- 6. PORTAL (Tracer Study, E-Dokumen, SOP, Akreditasi, Beasiswa, Informasi) -->
           @php
-            $isPortalNavActive = Route::is('testimonial.*') || Route::is('unduhan.*') || Route::is('template-dokumen.*') || (Route::is('akademik.portal.*') && !in_array(request()->route('tipe'), ['pendaftaran-pmb', 'informasi-pmb', 'pengumuman-pmb'])) || Route::is('organisasi-mahasiswa.*') || Route::is('beasiswa.*');
+            $isPortalNavActive = Route::is('testimonial.*') || Route::is('unduhan.*') || Route::is('template-dokumen.*') || (Route::is('akademik.portal.*') && !in_array(request()->route('tipe'), ['pendaftaran-pmb', 'informasi-pmb', 'pengumuman-pmb'])) || Route::is('beasiswa.*');
             $isPmbNavActive = in_array(request()->route('tipe'), ['pendaftaran-pmb', 'informasi-pmb', 'pengumuman-pmb']);
           @endphp
           <li class="nav-item">
@@ -198,11 +203,6 @@
               <li>
                 <a href="{{ route('beasiswa.index') }}" class="{{ Route::is('beasiswa.*') ? 'active' : '' }}">
                   <i class="bi bi-circle"></i><span>Beasiswa</span>
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('organisasi-mahasiswa.index') }}" class="{{ Route::is('organisasi-mahasiswa.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Organisasi Mahasiswa</span>
                 </a>
               </li>
             </ul>

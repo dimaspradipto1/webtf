@@ -82,9 +82,10 @@
                                 class="form-select @error('category') is-invalid @enderror"
                                 required>
                             <option value="" disabled>Pilih Kategori</option>
-                            <option value="pemesanan" {{ old('category', $faq->category) === 'pemesanan' ? 'selected' : '' }}>Pemesanan & Pembayaran</option>
-                            <option value="spesifikasi" {{ old('category', $faq->category) === 'spesifikasi' ? 'selected' : '' }}>Spesifikasi & Kustomisasi</option>
-                            <option value="pengiriman" {{ old('category', $faq->category) === 'pengiriman' ? 'selected' : '' }}>Pengiriman & Klaim Garansi</option>
+                            <option value="akademik" {{ old('category', $faq->category) === 'akademik' ? 'selected' : '' }}>Akademik & Kurikulum</option>
+                            <option value="pendaftaran" {{ old('category', $faq->category) === 'pendaftaran' ? 'selected' : '' }}>Pendaftaran & PMB</option>
+                            <option value="fasilitas" {{ old('category', $faq->category) === 'fasilitas' ? 'selected' : '' }}>Fasilitas & Laboratorium</option>
+                            <option value="karir" {{ old('category', $faq->category) === 'karir' ? 'selected' : '' }}>Karir & Magang Industri</option>
                         </select>
                         @error('category')
                             <div class="invalid-feedback">{{ $message }}</div>

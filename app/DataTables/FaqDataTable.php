@@ -32,13 +32,14 @@ class FaqDataTable extends DataTable
                 return e(Str::limit($clean, 100));
             })
             ->addColumn('category', function ($faq) {
-                $categories = [
-                    'pemesanan' => 'Pemesanan & Pembayaran',
-                    'spesifikasi' => 'Spesifikasi & Kustomisasi',
-                    'pengiriman' => 'Pengiriman & Klaim Garansi',
+                $badges = [
+                    'akademik' => '<span class="badge bg-primary px-2 py-1">Akademik & Kurikulum</span>',
+                    'pendaftaran' => '<span class="badge bg-warning text-dark px-2 py-1">Pendaftaran & PMB</span>',
+                    'fasilitas' => '<span class="badge bg-success px-2 py-1">Fasilitas & Lab</span>',
+                    'karir' => '<span class="badge bg-info text-dark px-2 py-1">Karir & Magang</span>',
                 ];
 
-                return $categories[$faq->category] ?? $faq->category;
+                return $badges[$faq->category] ?? '<span class="badge bg-secondary px-2 py-1">'.e(ucfirst($faq->category)).'</span>';
             })
             ->addColumn('action', function ($faq) {
                 $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
@@ -69,7 +70,7 @@ class FaqDataTable extends DataTable
                 return $btn;
             })
             ->setRowId('DT_RowIndex')
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'category']);
     }
 
     /**

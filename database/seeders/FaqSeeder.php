@@ -15,50 +15,55 @@ class FaqSeeder extends Seeder
         Faq::truncate();
 
         $faqs = [
-            // Akademik & Program Studi
+            // Akademik & Kurikulum
             [
-                'question' => 'Apa saja program studi yang tersedia di Fakultas Ilmu Kesehatan (FIKES)?',
-                'answer' => 'FIKES menyelenggarakan berbagai program studi unggulan seperti S1 Ilmu Keperawatan & Profesi Ners, Kebidanan (D3/S1 & Profesi), S1 Farmasi, S1 Ilmu Gizi, serta S1 Kesehatan Masyarakat.',
+                'question' => 'Apa saja bidang peminatan dan fokus keilmuan di Program Studi S1 Teknik Informatika?',
+                'answer' => 'Program Studi S1 Teknik Informatika berfokus pada 3 bidang keunggulan utama: Rekayasa Perangkat Lunak (Software Engineering & Mobile Development), Kecerdasan Buatan (Artificial Intelligence & Data Science), serta Jaringan Komputer & Keamanan Siber (Cyber Security & Cloud Computing) yang diselaraskan dengan kurikulum Outcome-Based Education (OBE).',
                 'category' => 'akademik',
             ],
             [
-                'question' => 'Bagaimana status akreditasi program studi di FIKES?',
-                'answer' => 'Seluruh program studi di FIKES telah terakreditasi oleh Lembaga Akreditasi Mandiri Pendidikan Tinggi Kesehatan Indonesia (LAM-PTKes) dan Badan Akreditasi Nasional Perguruan Tinggi (BAN-PT).',
+                'question' => 'Bagaimana status akreditasi Program Studi S1 Teknik Informatika?',
+                'answer' => 'Program Studi S1 Teknik Informatika Fakultas Sains dan Teknologi telah terakreditasi oleh LAM-INFOKOM (Lembaga Akreditasi Mandiri Informatika dan Komputer) serta BAN-PT dengan jaminan standar mutu kurikulum nasional dan keterhubungan industri.',
                 'category' => 'akademik',
             ],
             [
-                'question' => 'Apakah lulusan FIKES langsung mendapatkan gelar profesi?',
-                'answer' => 'Untuk program studi yang memiliki jenjang profesi (seperti Keperawatan Ners dan Bidan), mahasiswa dapat melanjutkan ke tahap pendidikan profesi setelah menyelesaikan tahap sarjana untuk memperoleh Surat Tanda Registrasi (STR).',
+                'question' => 'Berapa lama masa studi dan berapa total SKS untuk lulus S1 Teknik Informatika?',
+                'answer' => 'Masa studi normal dapat diselesaikan dalam 8 semester (4 tahun) dengan total beban studi 144 SKS, termasuk program Magang Industri Bersertifikat (MBKM), riset terapan, dan tugas akhir/skripsi.',
                 'category' => 'akademik',
             ],
 
-            // Pendaftaran & Penerimaan Mahasiswa Baru
+            // Pendaftaran & PMB
             [
-                'question' => 'Bagaimana alur pendaftaran mahasiswa baru di FIKES?',
-                'answer' => 'Pendaftaran dapat dilakukan secara online melalui portal resmi PMB atau datang langsung ke sekretariat pendaftaran FIKES dengan membawa berkas persyaratan akademik dan kesehatan.',
+                'question' => 'Bagaimana alur pendaftaran mahasiswa baru di S1 Teknik Informatika?',
+                'answer' => 'Pendaftaran dapat dilakukan secara online melalui portal resmi PMB Teknik Informatika UIS atau datang langsung ke ruang sekretariat PMB di kampus dengan membawa fotokopi ijazah/SKL, rapor, KK/KTP, dan pas foto terbaru.',
                 'category' => 'pendaftaran',
             ],
             [
-                'question' => 'Apakah ada tes kesehatan khusus dalam seleksi masuk FIKES?',
-                'answer' => 'Ya, calon mahasiswa wajib mengikuti pemeriksaan kesehatan (seperti tes bebas buta warna untuk program studi tertentu, bebas narkoba, dan pemeriksaan fisik dasar) demi memastikan kesiapan praktek klinik.',
+                'question' => 'Apakah lulusan SMK / Non-IPA bisa mendaftar di Program Studi S1 Teknik Informatika?',
+                'answer' => 'Bisa. S1 Teknik Informatika menerima lulusan SMA/SMK/MA dari semua jurusan (baik IPA, IPS, RPL, TKJ, Multimedia, maupun bidang kejuruan lainnya). Program studi menyelenggarakan matrikulasi algoritma dan dasar pemrograman bagi mahasiswa baru.',
                 'category' => 'pendaftaran',
             ],
             [
-                'question' => 'Apakah tersedia program beasiswa di FIKES?',
-                'answer' => 'Tersedia berbagai pilihan beasiswa, antara lain KIP-Kuliah, Beasiswa Prestasi Akademik/Non-Akademik, Beasiswa Yayasan, dan Beasiswa Kemitraan Instansi.',
+                'question' => 'Apakah tersedia program beasiswa untuk mahasiswa Teknik Informatika?',
+                'answer' => 'Ya, tersedia berbagai pilihan beasiswa, antara lain KIP-Kuliah (Kemendikbudristek), Beasiswa Prestasi Akademik & Kejuaraan IT/Lomba Coding, Beasiswa Yayasan Pendidikan Ibnu Sina (YAPISNA), serta beasiswa kemitraan industri.',
                 'category' => 'pendaftaran',
             ],
 
-            // Fasilitas & Praktek Kerja
+            // Fasilitas & Laboratorium
             [
-                'question' => 'Di mana saja mahasiswa FIKES melaksanakan praktek klinik / lapangan?',
-                'answer' => 'Mahasiswa melaksanakan praktek di rumah sakit pendidikan tipe A & B, RSUD, RS swasta terakreditasi paripurna, Puskesmas, laboratorium klinik, dan industri farmasi mitra resmi FIKES.',
+                'question' => 'Fasilitas laboratorium apa saja yang disediakan untuk mahasiswa Teknik Informatika?',
+                'answer' => 'Tersedia Laboratorium Komputasi Cerdas & AI, Laboratorium Rekayasa Perangkat Lunak, Laboratorium Jaringan & Cyber Security, Studio Multimedia & Desain Grafis, serta server komputasi berkecepatan tinggi dengan koneksi internet serat optik.',
                 'category' => 'fasilitas',
             ],
             [
-                'question' => 'Fasilitas laboratorium apa saja yang disediakan di kampus FIKES?',
-                'answer' => 'Kampus menyediakan Laboratorium Keterampilan Medis (OSCE Center), Mini Hospital, Laboratorium Farmakologi & Kimia, Laboratorium Dietetika & Pangan, serta Laboratorium Simulasi Kebidanan.',
+                'question' => 'Di mana saja mahasiswa Teknik Informatika melaksanakan magang industri?',
+                'answer' => 'Mahasiswa melaksanakan magang di berbagai korporasi teknologi, industri manufaktur multinasional di Batam (kawasan Batamindo, Muka Kuning, Kabil, Nongsa Digital Park), BUMN, instansi perbankan, software house, dan startup digital.',
                 'category' => 'fasilitas',
+            ],
+            [
+                'question' => 'Bagaimana prospek karir lulusan S1 Teknik Informatika?',
+                'answer' => 'Lulusan memiliki prospek karir luas sebagai Software Engineer, Fullstack Web & Mobile Developer, AI & Data Scientist, Cloud & Cyber Security Specialist, Database Administrator, IT Consultant, Project Manager IT, hingga Technopreneur pendiri startup digital.',
+                'category' => 'karir',
             ],
         ];
 

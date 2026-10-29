@@ -16,7 +16,7 @@ class FaqRequest extends FormRequest
         return [
             'question' => ['required', 'string', 'max:255'],
             'answer' => ['required', 'string'],
-            'category' => ['required', 'in:pemesanan,spesifikasi,pengiriman'],
+            'category' => ['required', 'string', 'in:akademik,pendaftaran,fasilitas,karir,pemesanan,spesifikasi,pengiriman'],
         ];
     }
 
