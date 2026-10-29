@@ -254,6 +254,15 @@ class FrontendController extends Controller
         $item = AkademikController::getOrCreateItem($slug);
         $pageTitle = $item->judul;
 
+        if ($slug === 'dokumen-akreditasi-tf') {
+            $akreditasiItems = \App\Models\AkreditasiDokumen::where('is_active', true)
+                ->orderBy('urutan')
+                ->orderBy('id')
+                ->get();
+
+            return view('layouts.frontend.akademik', compact('item', 'pageTitle', 'akreditasiItems'));
+        }
+
         return view('layouts.frontend.akademik', compact('item', 'pageTitle'));
     }
 
@@ -949,6 +958,14 @@ class FrontendController extends Controller
             ->get();
 
         return view('layouts.frontend.organisasi-detail', compact('organisasi', 'otherOrganisasis'));
+    }
+
+    public function tracerStudy()
+    {
+        $item = AkademikController::getOrCreateItem('tracer-study');
+        $url = !empty($item->link_url) ? $item->link_url : 'https://drive.google.com';
+
+        return redirect()->away($url);
     }
 
     public function testimoni(Request $request)

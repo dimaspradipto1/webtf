@@ -81,7 +81,7 @@ class TemplateDokumenController extends Controller
             'is_active' => $request->has('is_active'),
         ]);
 
-        alert()->success('Berhasil!', 'Template dokumen baru berhasil ditambahkan.');
+        alert()->success('Berhasil!', 'Item SOP baru berhasil ditambahkan.');
 
         return redirect()->route('template-dokumen.index');
     }
@@ -110,7 +110,7 @@ class TemplateDokumenController extends Controller
             'judul' => $validated['judul'],
             'tipe_file' => $validated['tipe_file'] ?? null,
             'link_drive' => $linkDrive,
-            'icon_preset' => $validated['icon_preset'],
+            'icon_preset' => $validated['icon_preset'] ?? 'pdf',
             'urutan' => $validated['urutan'] ?? $templateDokumen->urutan,
             'is_active' => $request->has('is_active'),
         ];
@@ -124,7 +124,7 @@ class TemplateDokumenController extends Controller
 
         $templateDokumen->update($data);
 
-        alert()->success('Berhasil!', 'Data template dokumen berhasil diperbarui.');
+        alert()->success('Berhasil!', 'Data SOP berhasil diperbarui.');
 
         return redirect()->route('template-dokumen.index');
     }
@@ -140,7 +140,7 @@ class TemplateDokumenController extends Controller
 
         $templateDokumen->delete();
 
-        alert()->success('Berhasil!', 'Template dokumen berhasil dihapus.');
+        alert()->success('Berhasil!', 'Item SOP berhasil dihapus.');
 
         return redirect()->route('template-dokumen.index');
     }

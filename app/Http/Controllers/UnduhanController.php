@@ -48,7 +48,7 @@ class UnduhanController extends Controller
             'download_count' => 0,
         ]);
 
-        alert()->success('Berhasil!', 'Item unduhan baru berhasil ditambahkan.');
+        alert()->success('Berhasil!', 'Item E-Dokumen baru berhasil ditambahkan.');
 
         return redirect()->route('unduhan.index');
     }
@@ -85,7 +85,7 @@ class UnduhanController extends Controller
 
         $unduhan->update($data);
 
-        alert()->success('Berhasil!', 'Item unduhan berhasil diperbarui.');
+        alert()->success('Berhasil!', 'Item E-Dokumen berhasil diperbarui.');
 
         return redirect()->route('unduhan.index');
     }
@@ -98,7 +98,7 @@ class UnduhanController extends Controller
 
         $unduhan->delete();
 
-        alert()->success('Berhasil!', 'Item unduhan berhasil dihapus.');
+        alert()->success('Berhasil!', 'Item E-Dokumen berhasil dihapus.');
 
         return redirect()->route('unduhan.index');
     }

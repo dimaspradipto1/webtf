@@ -1,180 +1,257 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Template Dokumen — Teknik Informatika (UIS)')
-@section('meta_description', 'Pusat template dokumen resmi Teknik Informatika (UIS) Batam. Download templat PowerPoint (.pptx), Word (.docx), Desain (.psd) via Google Drive.')
-@section('meta_keywords', 'template dokumen uis, templat pptx uis, templat docx uis, standar komunikasi merek uis')
+@section('title', 'SOP (Standar Operasional Prosedur) — Teknik Informatika')
+@section('meta_description', 'Pusat dokumen Standar Operasional Prosedur (SOP) dan panduan teknis Program Studi Teknik Informatika.')
+@section('meta_keywords', 'sop teknik informatika, standar operasional prosedur, sop skripsi, sop kp, sop perkuliahan')
 
 @section('content')
-<style>
-  /* ═══════════════════════════════════════════════
-     STYLING TEMPLATE DOKUMEN (Matching Reference)
-  ═══════════════════════════════════════════════ */
-  .template-doc-section {
-    background-color: #ffffff;
-    padding: 60px 0 80px 0;
-  }
-
-  .template-card-link {
-    display: block;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-
-  .template-icon-card {
-    background-color: #f9dc4b;
-    border: 1px solid #f9dc4b;
-    border-radius: 12px;
-    height: 240px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
-  }
-
-  /* Decorative Wavy Cloud Header on Top of the Card */
-  .template-card-cloud {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 48px;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.65;
-  }
-
-  .template-card-link:hover .template-icon-card {
-    transform: translateY(-8px);
-    background-color: #fffef2;
-    border-color: #f59e0b;
-    box-shadow: 0 16px 36px rgba(245, 158, 11, 0.22), 0 0 0 1.5px #f59e0b !important;
-  }
-
-  .template-svg-wrap {
-    position: relative;
-    z-index: 2;
-    transition: transform 0.35s ease;
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.06));
-  }
-
-  .template-card-link:hover .template-svg-wrap {
-    transform: scale(1.06);
-  }
-
-  .template-card-title {
-    font-weight: 700;
-    color: #000000;
-    font-size: 17px;
-    margin-top: 15px;
-    text-align: center;
-    letter-spacing: -0.2px;
-    transition: all 0.25s ease;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-  }
-
-  .template-card-link:hover .template-card-title {
-    color: #d97706;
-    text-decoration: underline;
-    text-decoration-color: #f59e0b;
-    text-underline-offset: 5px;
-    text-decoration-thickness: 2px;
-  }
-
-  /* Yellow Divider Line matching FAQ Section */
-  .divider-line-gold {
-    width: 60px;
-    height: 4px;
-    background: #f9dc4b;
-    border-radius: 4px;
-    margin: 14px auto 22px auto;
-  }
-</style>
-
 <!-- ═══════════════════════════════════════════════
-     HERO BANNER (Persis Banner FAQ di Image 1)
+     HERO HEADER
 ═══════════════════════════════════════════════ -->
-<div class="faq-hero">
-  <div class="container">
-    <div class="faq-hero-content" data-aos="fade-up" data-aos-duration="800">
-      <h1 class="faq-hero-title">
-        Template Dokumen <em>(UIS)</em>
-      </h1>
-      <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
-        <span>/</span>
-        <a href="{{ route('homepage.humas') }}">Humas</a>
-        <span>/</span>
-        <span class="active">Template Dokumen</span>
-      </div>
+<section class="akademik-hero">
+  <div class="container position-relative" data-aos="fade-up">
+    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange, #f9dc4b); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
+      PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI
+    </div>
+    <h1 class="display-6 fw-bold text-white mb-2">SOP (Standar Operasional Prosedur)</h1>
+    <p class="lead text-white-50 mb-0" style="max-width: 760px; font-size: 16px;">
+      Pusat dokumen Standar Operasional Prosedur (SOP) dan panduan alur teknis Program Studi Teknik Informatika.
+    </p>
+    <div class="breadcrumb-custom mt-3">
+      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+      <span>/</span>
+      <span>Portal Layanan</span>
+      <span>/</span>
+      <span class="active">SOP</span>
     </div>
   </div>
-</div>
+</section>
 
 <!-- ═══════════════════════════════════════════════
-     TEMPLATE DOKUMEN SECTION (Persis di Image 1 & 2)
+     MAIN CONTENT
 ═══════════════════════════════════════════════ -->
-<section class="template-doc-section">
-  <div class="container text-center">
-    
-    {{-- Header Judul Seksi (Pusat Bantuan & Standar Dokumen) --}}
-    <div class="mb-5" data-aos="fade-up">
-      <div class="section-label mx-auto mb-3">
-        PUSAT BANTUAN & INFORMASI
+<section class="section-bg-sand py-5" style="background-color: #f8fafc; min-height: 70vh;">
+  <div class="container py-3">
+    <div class="row justify-content-center">
+      <div class="col-12" data-aos="fade-up">
+        
+        <div class="sop-card">
+          <div class="table-responsive">
+            <table id="sopTable" class="table table-bordered align-middle w-100 mb-0">
+              <thead>
+                <tr>
+                  <th style="width: 8%; text-align: center;">No</th>
+                  <th style="width: 68%;">Nama Document</th>
+                  <th style="width: 24%; text-align: center;">Link Document</th>
+                </tr>
+              </thead>
+              <tbody>
+                @forelse($templates as $index => $item)
+                  <tr>
+                    <td class="text-center fw-semibold text-muted">{{ $loop->iteration }}</td>
+                    <td class="fw-semibold text-dark">
+                      {{ $item->judul }}
+                    </td>
+                    <td class="text-center">
+                      @php
+                        $targetUrl = $item->link_drive;
+                        $hasLink = !empty($targetUrl) && $targetUrl !== '#';
+                      @endphp
+                      @if($hasLink)
+                        <a href="{{ $targetUrl }}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn-document-link"
+                           title="Buka Dokumen {{ $item->judul }}">
+                          <i class="bi bi-file-earmark-text-fill"></i>
+                          <span>Document</span>
+                        </a>
+                      @else
+                        <span class="btn-document-link disabled" style="opacity: 0.6; cursor: not-allowed;">
+                          <i class="bi bi-file-earmark-text"></i>
+                          <span>Document</span>
+                        </span>
+                      @endif
+                    </td>
+                  </tr>
+                @empty
+                  <tr>
+                    <td colspan="3" class="text-center py-4 text-muted">
+                      <i class="bi bi-inbox fs-3 d-block mb-2 text-secondary"></i>
+                      Belum ada berkas SOP yang tersedia saat ini.
+                    </td>
+                  </tr>
+                @endforelse
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
-      
-      <h2 class="fw-bold mb-0" style="color: #000000; font-size: 32px; letter-spacing: 0.5px; font-family: 'Plus Jakarta Sans', sans-serif;">
-        {{ $setting->judul_seksi ?? 'TEMPLATE DOKUMEN' }}
-      </h2>
-      
-      <div class="divider-line-gold"></div>
-
-      <p class="text-muted mx-auto mb-0" style="max-width: 860px; font-size: 15px; line-height: 1.75;">
-        {!! nl2br(e($setting->deskripsi_seksi ?? 'Kami menyediakan Templat untuk Desain, Ms. Power Point, Ms. Word dan berbagai format lainnya. Guna menyeragamkan tampilan desain di lingkungan Teknik Informatika. Berdasarkan Peraturan Rektor tentang STANDAR KOMUNIKASI MEREK TEKNIK INFORMATIKA')) !!}
-      </p>
     </div>
-
-    {{-- Grid 3 Kartu Template Dokumen (Persis Image 2) --}}
-    <div class="row g-4 justify-content-center">
-      @forelse($templates as $index => $item)
-        <div class="col-lg-4 col-md-6 col-12" data-aos="fade-up" data-aos-delay="{{ (($index % 3) + 1) * 100 }}">
-          <a href="{{ $item->link_drive }}" 
-             target="_blank" 
-             rel="noopener noreferrer" 
-             class="template-card-link"
-             title="Buka & Download {{ $item->judul }} di Google Drive">
-            
-            {{-- Kotak Ikon Hijau Lembut dengan Aksen Gelombang Awan di Atas --}}
-            <div class="template-icon-card">
-              <div class="template-card-cloud">
-                <svg viewBox="0 0 350 48" preserveAspectRatio="none" style="width: 100%; height: 100%;">
-                  <path d="M0 48 Q 25 15, 60 38 Q 95 10, 135 32 Q 175 8, 220 30 Q 260 12, 295 36 Q 325 18, 350 48 L 350 0 L 0 0 Z" fill="#ffffff" opacity="0.6"/>
-                  <path d="M0 40 Q 35 8, 85 30 Q 135 4, 185 24 Q 235 6, 285 26 Q 325 10, 350 40 L 350 0 L 0 0 Z" fill="#ffffff" opacity="0.4"/>
-                </svg>
-              </div>
-
-              {{-- Ikon Presisi Sesuai Image 2 --}}
-              <div class="template-svg-wrap">
-                {!! $item->icon_html !!}
-              </div>
-            </div>
-
-            {{-- Label Judul di Bawah Kotak --}}
-            <div class="template-card-title">
-              {{ $item->judul }}
-            </div>
-          </a>
-        </div>
-      @empty
-        <div class="col-12 py-5 text-center text-muted">
-          <i class="bi bi-file-earmark-text fs-1 d-block mb-2 text-muted"></i>
-          Belum ada template dokumen yang dipublikasikan saat ini.
-        </div>
-      @endforelse
-    </div>
-
   </div>
 </section>
 @endsection
+
+@push('styles')
+<!-- DataTables CSS Bootstrap 5 -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+<style>
+  /* Container Card */
+  .sop-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 28px 24px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    border: 1px solid #e2e8f0;
+  }
+
+  /* Table Style matching User Screenshot & E-Dokumen */
+  #sopTable {
+    border-collapse: collapse !important;
+    border: 1px solid #0b1626 !important;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  #sopTable thead th {
+    background-color: #0b1626 !important;
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 18px;
+    border: 1px solid #1a2a40 !important;
+    letter-spacing: 0.2px;
+    vertical-align: middle;
+  }
+
+  #sopTable tbody td {
+    padding: 14px 18px;
+    font-size: 14.5px;
+    border: 1px solid #e2e8f0 !important;
+    background-color: #ffffff;
+  }
+
+  #sopTable tbody tr:hover td {
+    background-color: #f8fafc;
+  }
+
+  /* Link Document Button Pill Style */
+  .btn-document-link {
+    background-color: #0b1626;
+    color: #ffffff !important;
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 7px 22px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #0b1626;
+    box-shadow: 0 2px 6px rgba(11, 22, 38, 0.2);
+  }
+
+  .btn-document-link:hover {
+    background-color: #1a2a40;
+    color: #f9dc4b !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(11, 22, 38, 0.28);
+  }
+
+  /* DataTables Controls Layout */
+  .dataTables_wrapper .dataTables_length,
+  .dataTables_wrapper .dataTables_filter {
+    margin-bottom: 18px;
+    font-size: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .dataTables_wrapper .dataTables_length select {
+    padding: 5px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 13.5px;
+    margin: 0 6px;
+    background-color: #ffffff;
+    cursor: pointer;
+  }
+
+  .dataTables_wrapper .dataTables_filter input {
+    padding: 6px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 13.5px;
+    margin-left: 8px;
+    width: 220px;
+    background-color: #ffffff;
+    outline: none;
+  }
+
+  .dataTables_wrapper .dataTables_filter input:focus {
+    border-color: #0b1626;
+    box-shadow: 0 0 0 3px rgba(11, 22, 38, 0.12);
+  }
+
+  .dataTables_wrapper .dataTables_info,
+  .dataTables_wrapper .dataTables_paginate {
+    margin-top: 18px;
+    font-size: 13.5px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .pagination {
+    margin-bottom: 0;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .page-item .page-link {
+    color: #0b1626;
+    border: 1px solid #cbd5e1;
+    padding: 5px 12px;
+    border-radius: 4px;
+    margin: 0 2px;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .page-item.active .page-link {
+    background-color: #0b1626;
+    border-color: #0b1626;
+    color: #ffffff;
+  }
+</style>
+@endpush
+
+@push('scripts')
+<!-- jQuery & DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#sopTable').DataTable({
+      pageLength: 10,
+      responsive: true,
+      ordering: true,
+      order: [[0, 'asc']],
+      columnDefs: [
+        { targets: 0, className: 'text-center fw-semibold text-muted' },
+        { targets: 1, className: 'fw-semibold text-dark' },
+        { targets: 2, className: 'text-center', orderable: false, searchable: false }
+      ],
+      language: {
+        lengthMenu: "_MENU_ entries per page",
+        search: "Search:",
+        info: "Showing _START_ to _END_ of _TOTAL_ entries",
+        infoEmpty: "Showing 0 to 0 of 0 entries",
+        infoFiltered: "(filtered from _MAX_ total entries)",
+        zeroRecords: "Tidak ada dokumen yang sesuai dengan pencarian",
+        paginate: {
+          previous: "&lsaquo;",
+          next: "&rsaquo;"
+        }
+      }
+    });
+  });
+</script>
+@endpush

@@ -22,12 +22,16 @@ class UnduhanDataTable extends DataTable
             ->addColumn('DT_RowIndex', '')
             ->addColumn('judul', fn ($u) => '<span class="fw-semibold text-dark">'.e($u->judul).'</span>')
             ->addColumn('kategori', function ($u) {
-                return match ($u->kategori) {
+                $kat = strtolower($u->kategori ?? '');
+                return match ($kat) {
+                    'dokumen', 'document' => '<span class="badge" style="background:#0b1626; color:#fff"><i class="bi bi-file-earmark-text me-1"></i>Dokumen</span>',
+                    'pedoman' => '<span class="badge bg-primary"><i class="bi bi-book me-1"></i>Pedoman</span>',
+                    'panduan' => '<span class="badge bg-info text-dark"><i class="bi bi-compass me-1"></i>Panduan</span>',
+                    'template' => '<span class="badge" style="background:#7c3aed; color:#fff"><i class="bi bi-brush me-1"></i>Template</span>',
                     'image' => '<span class="badge" style="background:#047857; color:#fff"><i class="bi bi-image me-1"></i>Image</span>',
                     'video' => '<span class="badge bg-primary"><i class="bi bi-camera-video me-1"></i>Video</span>',
                     'audio' => '<span class="badge bg-warning text-dark"><i class="bi bi-music-note-beamed me-1"></i>Audio</span>',
-                    'template' => '<span class="badge" style="background:#7c3aed; color:#fff"><i class="bi bi-brush me-1"></i>Template</span>',
-                    default => '<span class="badge bg-secondary">'.e(ucfirst($u->kategori)).'</span>',
+                    default => '<span class="badge bg-secondary">'.e(ucfirst($u->kategori ?: 'Dokumen')).'</span>',
                 };
             })
             ->addColumn('file_info', function ($u) {
@@ -41,12 +45,12 @@ class UnduhanDataTable extends DataTable
             ->addColumn('tautan', function ($u) {
                 $url = $u->download_url;
                 if ($url && $url !== '#') {
-                    return '<a href="'.$url.'" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-danger fw-bold rounded-pill px-3 py-1" style="font-size:12px">
-                                <i class="bi bi-download me-1"></i>Download
+                    return '<a href="'.$url.'" target="_blank" rel="noopener noreferrer" class="btn btn-sm text-white rounded-pill px-3 py-1 shadow-sm d-inline-flex align-items-center gap-1" style="font-size:12px; background:#0b1626; border:1px solid #0b1626">
+                                <i class="bi bi-file-earmark-text-fill"></i> Document
                             </a>';
                 }
 
-                return '<span class="text-muted small"># (Dummy Link)</span>';
+                return '<span class="text-muted small"># (Belum Ada Link)</span>';
             })
             ->addColumn('urutan', fn ($u) => '<span class="badge bg-secondary">'.$u->urutan.'</span>')
             ->addColumn('is_active', function ($u) {
@@ -114,13 +118,13 @@ class UnduhanDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No')->width('5%')->addClass('text-center')->searchable(false)->orderable(false),
-            Column::make('judul')->title('Item / Nama Unduhan')->width('30%'),
+            Column::make('judul')->title('Nama Document')->width('32%'),
             Column::make('kategori')->title('Kategori')->width('12%')->addClass('text-center'),
-            Column::computed('file_info')->title('Format / Ukuran')->width('15%')->addClass('text-center'),
-            Column::computed('tautan')->title('Preview Download')->width('15%')->addClass('text-center'),
-            Column::make('urutan')->title('Urutan')->width('8%')->addClass('text-center'),
-            Column::make('is_active')->title('Status')->width('10%')->addClass('text-center'),
-            Column::computed('action')->title('Aksi')->exportable(false)->printable(false)->width('10%')->addClass('text-center'),
+            Column::computed('file_info')->title('Format / Ukuran')->width('14%')->addClass('text-center'),
+            Column::computed('tautan')->title('Link Document')->width('15%')->addClass('text-center'),
+            Column::make('urutan')->title('Urutan')->width('7%')->addClass('text-center'),
+            Column::make('is_active')->title('Status')->width('7%')->addClass('text-center'),
+            Column::computed('action')->title('Aksi')->exportable(false)->printable(false)->width('8%')->addClass('text-center'),
         ];
     }
 

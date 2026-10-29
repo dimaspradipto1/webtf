@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Unduhan Dokumen Humas</h1>
+    <h1>E-Dokumen</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item">Layanan Humas</li>
-            <li class="breadcrumb-item active">Unduhan Dokumen Humas</li>
+            <li class="breadcrumb-item">Portal Layanan</li>
+            <li class="breadcrumb-item active">E-Dokumen</li>
         </ol>
     </nav>
 </div>
@@ -15,21 +15,16 @@
 <div class="card shadow-sm">
     <div class="card-header d-flex align-items-center justify-content-between py-3">
         <h5 class="mb-0 fw-semibold">
-            <i class="bi bi-cloud-arrow-down me-2 text-success"></i>Daftar Berkas & Unduhan Dokumen Humas
+            <i class="bi bi-folder2-open me-2 text-warning"></i>Daftar Berkas E-Dokumen
         </h5>
         <a href="{{ route('unduhan.create') }}" class="btn btn-primary btn-sm">
-            <i class="bi bi-plus-lg me-1"></i> Tambah Unduhan
+            <i class="bi bi-plus-lg me-1"></i> Tambah E-Dokumen
         </a>
     </div>
     <div class="card-body pt-3">
         <div class="alert alert-info alert-dismissible fade show mb-3" role="alert">
             <i class="bi bi-info-circle-fill me-2"></i>
-            <strong>Info Kategori:</strong> Kelola berkas unduhan publik dalam 4 kategori utama: 
-            <span class="badge" style="background:#047857; color:#fff"><i class="bi bi-image me-1"></i>Image</span>, 
-            <span class="badge bg-primary"><i class="bi bi-camera-video me-1"></i>Video</span>, 
-            <span class="badge bg-warning text-dark"><i class="bi bi-music-note-beamed me-1"></i>Audio</span>, dan 
-            <span class="badge" style="background:#7c3aed; color:#fff"><i class="bi bi-brush me-1"></i>Template</span>. 
-            Semua item yang aktif otomatis tampil di halaman portal publik <a href="{{ route('homepage.unduhan') }}" target="_blank" class="fw-bold text-decoration-underline">/unduhan</a>.
+            <strong>Info E-Dokumen:</strong> Kelola berkas dan panduan dokumen resmi akademik (seperti Pedoman Akademik FST, Panduan Skripsi, Panduan KP, dll). Seluruh dokumen yang berstatus aktif otomatis tampil pada tabel portal publik <a href="{{ route('homepage.unduhan') }}" target="_blank" class="fw-bold text-decoration-underline">/unduhan (E-Dokumen)</a>.
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
         <div class="table-responsive">

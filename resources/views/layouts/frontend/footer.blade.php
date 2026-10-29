@@ -46,7 +46,11 @@
           <li><a href="{{ route('homepage.kalender-akademik') }}"><i class="bi bi-chevron-right"></i> Kalender Akademik</a></li>
           <li><a href="{{ route('homepage.kurikulum') }}"><i class="bi bi-chevron-right"></i> Kurikulum TF</a></li>
           <li><a href="{{ route('homepage.dosen') }}"><i class="bi bi-chevron-right"></i> Data Dosen</a></li>
-          <li><a href="{{ route('homepage.testimoni') }}"><i class="bi bi-chevron-right"></i> Tracer Study</a></li>
+          @php
+            $footerTracerItem = \App\Http\Controllers\AkademikController::getOrCreateItem('tracer-study');
+            $footerTracerUrl = !empty($footerTracerItem->link_url) ? $footerTracerItem->link_url : 'https://drive.google.com';
+          @endphp
+          <li><a href="{{ $footerTracerUrl }}" target="_blank" rel="noopener noreferrer"><i class="bi bi-chevron-right"></i> Tracer Study</a></li>
           <li><a href="{{ route('homepage.unduhan') }}"><i class="bi bi-chevron-right"></i> E-Dokumen</a></li>
           <li><a href="{{ route('homepage.template-dokumen') }}"><i class="bi bi-chevron-right"></i> SOP</a></li>
           <li><a href="{{ route('homepage.portal.page', 'dokumen-akreditasi-tf') }}"><i class="bi bi-chevron-right"></i> Akreditasi TF</a></li>

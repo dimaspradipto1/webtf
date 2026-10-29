@@ -135,16 +135,9 @@
 
           <!-- 5. PUBLIKASI -->
           <li class="nav-item">
-            <a class="nav-link {{ Route::is('publikasi.*') ? '' : 'collapsed' }}" data-bs-target="#penelitian-nav" data-bs-toggle="collapse" href="#">
-              <i class="bi bi-journal-richtext"></i><span>Publikasi</span><i class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link {{ Route::is('publikasi.*') ? '' : 'collapsed' }}" href="{{ route('publikasi.index') }}">
+              <i class="bi bi-journal-richtext"></i><span>Publikasi</span>
             </a>
-            <ul id="penelitian-nav" class="nav-content collapse {{ Route::is('publikasi.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
-              <li>
-                <a href="{{ route('publikasi.index') }}" class="{{ Route::is('publikasi.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Daftar Jurnal Publikasi</span>
-                </a>
-              </li>
-            </ul>
           </li>
 
           <!-- 6. PORTAL (Tracer Study, E-Dokumen, SOP, Akreditasi, Beasiswa, Informasi, PMB) -->
@@ -154,8 +147,13 @@
             </a>
             <ul id="portal-nav" class="nav-content collapse {{ Route::is('testimonial.*') || Route::is('unduhan.*') || Route::is('template-dokumen.*') || Route::is('akademik.portal.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
               <li>
+                <a href="{{ route('akademik.portal.edit', 'tracer-study') }}" class="{{ request()->route('tipe') === 'tracer-study' ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Tracer Study (Link GDrive)</span>
+                </a>
+              </li>
+              <li>
                 <a href="{{ route('testimonial.index') }}" class="{{ Route::is('testimonial.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Tracer Study & Alumni</span>
+                  <i class="bi bi-circle"></i><span>Testimoni Alumni</span>
                 </a>
               </li>
               <li>
@@ -165,7 +163,7 @@
               </li>
               <li>
                 <a href="{{ route('template-dokumen.index') }}" class="{{ Route::is('template-dokumen.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>SOP & Template Dokumen</span>
+                  <i class="bi bi-circle"></i><span>SOP</span>
                 </a>
               </li>
               <li>

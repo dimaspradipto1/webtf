@@ -134,8 +134,12 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
             <!-- A. TRACER STUDY -->
+            @php
+              $tracerStudyItem = \App\Http\Controllers\AkademikController::getOrCreateItem('tracer-study');
+              $tracerGdriveUrl = !empty($tracerStudyItem->link_url) ? $tracerStudyItem->link_url : 'https://drive.google.com';
+            @endphp
             <li>
-              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.testimoni*') ? 'active' : '' }}" href="{{ route('homepage.testimoni') }}">
+              <a class="dropdown-item dropdown-item-custom" href="{{ $tracerGdriveUrl }}" target="_blank" rel="noopener noreferrer">
                 <i class="bi bi-mortarboard-fill"></i> Tracer Study
               </a>
             </li>

@@ -1,337 +1,257 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Downloads & Unduhan Berkas Media — Teknik Informatika (UIS)')
-@section('meta_description', 'Pusat unduhan berkas resmi, logo universitas, aset grafis, video promosi, jingle mars, dan dokumen template resmi UIS.')
-@section('meta_keywords', 'unduhan uis, logo uis, template uis, mars uis, audio uis, aset media universitas')
+@section('title', 'E-Dokumen — Teknik Informatika')
+@section('meta_description', 'Pusat berkas dokumen resmi, buku pedoman, dan panduan akademik Program Studi Teknik Informatika.')
+@section('meta_keywords', 'e-dokumen, pedoman akademik, panduan skripsi, panduan kp, teknik informatika')
 
 @section('content')
-@php
-  $cleanWa = $cleanWa ?? '';
-  if (empty($cleanWa) && !empty($contact->no_wa)) {
-      $cleanWa = preg_replace('/[^0-9]/', '', $contact->no_wa);
-      if (strpos($cleanWa, '08') === 0) {
-          $cleanWa = '628' . substr($cleanWa, 2);
-      }
-  }
-@endphp
+<!-- ═══════════════════════════════════════════════
+     HERO HEADER
+═══════════════════════════════════════════════ -->
+<section class="akademik-hero">
+  <div class="container position-relative" data-aos="fade-up">
+    <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange, #f9dc4b); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
+      PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI
+    </div>
+    <h1 class="display-6 fw-bold text-white mb-2">E-Dokumen</h1>
+    <p class="lead text-white-50 mb-0" style="max-width: 760px; font-size: 16px;">
+      Pusat berkas dokumen resmi, buku pedoman perkuliahan, dan panduan akademik Program Studi Teknik Informatika.
+    </p>
+    <div class="breadcrumb-custom mt-3">
+      <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
+      <span>/</span>
+      <span>Portal Layanan</span>
+      <span>/</span>
+      <span class="active">E-Dokumen</span>
+    </div>
+  </div>
+</section>
 
+<!-- ═══════════════════════════════════════════════
+     MAIN CONTENT
+═══════════════════════════════════════════════ -->
+<section class="section-bg-sand py-5" style="background-color: #f8fafc; min-height: 70vh;">
+  <div class="container py-3">
+    <div class="row justify-content-center">
+      <div class="col-12" data-aos="fade-up">
+        
+        <div class="edokumen-card">
+          <div class="table-responsive">
+            <table id="edokumenTable" class="table table-bordered align-middle w-100 mb-0">
+              <thead>
+                <tr>
+                  <th style="width: 8%; text-align: center;">No</th>
+                  <th style="width: 68%;">Nama Document</th>
+                  <th style="width: 24%; text-align: center;">Link Document</th>
+                </tr>
+              </thead>
+              <tbody>
+                @forelse($unduhans as $index => $item)
+                  <tr>
+                    <td class="text-center fw-semibold text-muted">{{ $loop->iteration }}</td>
+                    <td class="fw-semibold text-dark">
+                      {{ $item->judul }}
+                    </td>
+                    <td class="text-center">
+                      @php
+                        $targetUrl = $item->download_url;
+                        $hasLink = !empty($targetUrl) && $targetUrl !== '#';
+                      @endphp
+                      @if($hasLink)
+                        <a href="{{ $targetUrl }}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn-document-link"
+                           title="Buka Dokumen {{ $item->judul }}">
+                          <i class="bi bi-file-earmark-text-fill"></i>
+                          <span>Document</span>
+                        </a>
+                      @else
+                        <span class="btn-document-link disabled" style="opacity: 0.6; cursor: not-allowed;">
+                          <i class="bi bi-file-earmark-text"></i>
+                          <span>Document</span>
+                        </span>
+                      @endif
+                    </td>
+                  </tr>
+                @empty
+                  <tr>
+                    <td colspan="3" class="text-center py-4 text-muted">
+                      <i class="bi bi-inbox fs-3 d-block mb-2 text-secondary"></i>
+                      Belum ada berkas E-Dokumen yang tersedia saat ini.
+                    </td>
+                  </tr>
+                @endforelse
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+@endsection
+
+@push('styles')
+<!-- DataTables CSS Bootstrap 5 -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 <style>
-  /* Hero Banner & Breadcrumb (Matches standard site header banner) */
-  .download-hero {
-    background: #000000 !important;
-    border-bottom: 3px solid #f9dc4b !important;
-    position: relative;
-    overflow: hidden;
-    padding-top: 26px !important;
-    padding-bottom: 22px !important;
-  }
-
-  .download-hero-title {
-    color: #ffffff !important;
-    font-weight: 800 !important;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
-    font-size: 26px !important;
-    margin-bottom: 6px !important;
-    line-height: 1.25 !important;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-  }
-
-  .download-hero-title em {
-    color: #f9dc4b !important;
-    font-style: normal;
-  }
-
-  .unduhan-page-body {
-    background: #f8fafc;
-    min-height: 70vh;
-    padding: 45px 0 80px 0;
-  }
-
-  /* Main Card (Reflects user screenshot) */
-  .downloads-card {
+  /* Container Card */
+  .edokumen-card {
     background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08);
+    border-radius: 12px;
+    padding: 28px 24px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
     border: 1px solid #e2e8f0;
-    overflow: hidden;
-    max-width: 1080px;
-    margin: 0 auto;
   }
 
-  .downloads-top-accent {
-    height: 6px;
-    background: linear-gradient(90deg, #000000 0%, #d97706 50%, #000000 100%);
-    width: 100%;
-  }
-
-  .downloads-card-header {
-    padding: 36px 24px 24px 24px;
-    text-align: center;
-  }
-
-  .downloads-title {
+  /* Table Style matching User Screenshot */
+  #edokumenTable {
+    border-collapse: collapse !important;
+    border: 1px solid #0b1626 !important;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 32px;
-    font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 24px;
-    letter-spacing: -0.5px;
   }
 
-  .downloads-tabs {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-bottom: 6px;
-  }
-
-  .downloads-tab-btn {
-    border: none;
-    background: transparent;
-    color: #334155;
+  #edokumenTable thead th {
+    background-color: #0b1626 !important;
+    color: #ffffff !important;
     font-weight: 700;
     font-size: 15px;
-    padding: 10px 26px;
-    border-radius: 8px;
+    padding: 14px 18px;
+    border: 1px solid #1a2a40 !important;
+    letter-spacing: 0.2px;
+    vertical-align: middle;
+  }
+
+  #edokumenTable tbody td {
+    padding: 14px 18px;
+    font-size: 14.5px;
+    border: 1px solid #e2e8f0 !important;
+    background-color: #ffffff;
+  }
+
+  #edokumenTable tbody tr:hover td {
+    background-color: #f8fafc;
+  }
+
+  /* Link Document Button Pill Style */
+  .btn-document-link {
+    background-color: #0b1626;
+    color: #ffffff !important;
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 7px 22px;
+    border-radius: 50px;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #0b1626;
+    box-shadow: 0 2px 6px rgba(11, 22, 38, 0.2);
+  }
+
+  .btn-document-link:hover {
+    background-color: #1a2a40;
+    color: #f9dc4b !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(11, 22, 38, 0.28);
+  }
+
+  /* DataTables Controls Layout */
+  .dataTables_wrapper .dataTables_length,
+  .dataTables_wrapper .dataTables_filter {
+    margin-bottom: 18px;
+    font-size: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .dataTables_wrapper .dataTables_length select {
+    padding: 5px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 13.5px;
+    margin: 0 6px;
+    background-color: #ffffff;
     cursor: pointer;
   }
 
-  .downloads-tab-btn:hover {
-    color: #000000;
-    background: #f1f5f9;
-  }
-
-  .downloads-tab-btn.active {
-    background: #000000;
-    color: #ffffff;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-  }
-
-  /* Table Style */
-  .downloads-table-wrap {
-    overflow-x: auto;
-  }
-
-  .downloads-table {
-    width: 100%;
-    margin-bottom: 0;
-    border-collapse: collapse;
-  }
-
-  .downloads-table thead th {
-    background: #e1f0fa;
-    color: #0f2d4a;
-    font-weight: 800;
+  .dataTables_wrapper .dataTables_filter input {
+    padding: 6px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
     font-size: 13.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    padding: 16px 28px;
-    border: none;
-  }
-
-  .downloads-table tbody tr {
-    border-bottom: 1px solid #f1f5f9;
-    transition: background 0.15s ease;
-  }
-
-  .downloads-table tbody tr:hover {
-    background: #f8fafc;
-  }
-
-  .downloads-table tbody td {
-    padding: 16px 28px;
-    font-size: 14.5px;
-    vertical-align: middle;
-    border: none;
-  }
-
-  .downloads-item-name {
-    font-weight: 600;
-    color: #334155;
-    line-height: 1.4;
-  }
-
-  .downloads-item-size {
-    display: inline-block;
-    font-size: 11.5px;
-    color: #64748b;
-    font-weight: 500;
     margin-left: 8px;
+    width: 220px;
+    background-color: #ffffff;
+    outline: none;
   }
 
-  .downloads-action-link {
-    color: #dc2626;
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 14.5px;
-    transition: all 0.15s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+  .dataTables_wrapper .dataTables_filter input:focus {
+    border-color: #0b1626;
+    box-shadow: 0 0 0 3px rgba(11, 22, 38, 0.12);
   }
 
-  .downloads-action-link:hover {
-    color: #991b1b;
-    text-decoration: underline;
+  .dataTables_wrapper .dataTables_info,
+  .dataTables_wrapper .dataTables_paginate {
+    margin-top: 18px;
+    font-size: 13.5px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .pagination {
+    margin-bottom: 0;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .page-item .page-link {
+    color: #0b1626;
+    border: 1px solid #cbd5e1;
+    padding: 5px 12px;
+    border-radius: 4px;
+    margin: 0 2px;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .page-item.active .page-link {
+    background-color: #0b1626;
+    border-color: #0b1626;
+    color: #ffffff;
   }
 </style>
+@endpush
 
-<!-- ═══════════════════════════════════════════════
-     1. DOWNLOAD HERO BANNER (GREEN BANNER WITH BREADCRUMB)
-═══════════════════════════════════════════════ -->
-<div class="download-hero">
-  <div class="container">
-    <div class="download-hero-content" data-aos="fade-up" data-aos-duration="800">
-      <h1 class="download-hero-title">
-        Downloads Dokumen <em>Humas</em>
-      </h1>
-      <div class="breadcrumb-custom">
-        <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Home page</a>
-        <span>/</span>
-        <a href="{{ route('homepage.humas') }}">Humas & Protokoler</a>
-        <span>/</span>
-        <span class="active">Downloads</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════
-     2. MAIN CONTENT CARD
-═══════════════════════════════════════════════ -->
-<div class="unduhan-page-body">
-  <div class="container">
-
-    <!-- Main Downloads Card -->
-    <div class="downloads-card" data-aos="fade-up" data-aos-duration="700">
-      <div class="downloads-top-accent"></div>
-      
-      <div class="downloads-card-header">
-        <h2 class="downloads-title">Downloads</h2>
-        
-        <!-- Category Tabs -->
-        <div class="downloads-tabs">
-          <button type="button" class="downloads-tab-btn {{ ($selectedCat ?? 'image') === 'image' ? 'active' : '' }}" onclick="filterCategory('image', this)">
-            <i class="bi bi-image"></i> Image
-          </button>
-          <button type="button" class="downloads-tab-btn {{ ($selectedCat ?? '') === 'video' ? 'active' : '' }}" onclick="filterCategory('video', this)">
-            <i class="bi bi-camera-video"></i> Video
-          </button>
-          <button type="button" class="downloads-tab-btn {{ ($selectedCat ?? '') === 'audio' ? 'active' : '' }}" onclick="filterCategory('audio', this)">
-            <i class="bi bi-music-note-beamed"></i> Audio
-          </button>
-          <button type="button" class="downloads-tab-btn {{ ($selectedCat ?? '') === 'template' ? 'active' : '' }}" onclick="filterCategory('template', this)">
-            <i class="bi bi-brush"></i> Template
-          </button>
-        </div>
-      </div>
-
-      <!-- Table Section -->
-      <div class="downloads-table-wrap">
-        <table class="downloads-table">
-          <thead>
-            <tr>
-              <th style="text-align: left; width: 75%;">ITEM</th>
-              <th style="text-align: right; width: 25%;">DOWNLOAD</th>
-            </tr>
-          </thead>
-          <tbody id="downloadsTableBody">
-            @php
-              $activeItems = $unduhans ?? collect();
-              $initCat = $selectedCat ?? 'image';
-            @endphp
-
-            @forelse($activeItems as $item)
-              @php
-                $itemCat = strtolower($item->kategori);
-                $isMatch = ($itemCat === $initCat);
-              @endphp
-              <tr class="download-row category-{{ $itemCat }}" data-cat="{{ $itemCat }}" style="{{ $isMatch ? '' : 'display: none;' }}">
-                <td class="text-start">
-                  <span class="downloads-item-name">{{ $item->judul }}</span>
-                  @if(!empty($item->file_size))
-                    <span class="downloads-item-size">({{ $item->file_size }})</span>
-                  @endif
-                </td>
-                <td class="text-end">
-                  <a href="{{ $item->download_url }}" {{ $item->download_url !== '#' ? 'target=_blank download' : '' }} class="downloads-action-link">
-                    Download
-                  </a>
-                </td>
-              </tr>
-            @empty
-              <tr>
-                <td colspan="2" class="text-center py-5 text-muted">
-                  <i class="bi bi-folder-x fs-1 d-block mb-2 text-secondary"></i>
-                  Belum ada berkas unduhan yang tersedia.
-                </td>
-              </tr>
-            @endforelse
-
-            <tr id="emptyCategoryRow" style="display: none;">
-              <td colspan="2" class="text-center py-5 text-muted">
-                <i class="bi bi-folder2-open fs-2 d-block mb-2 text-secondary"></i>
-                Tidak ada berkas unduhan pada kategori ini.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-  </div>
-</div>
+@push('scripts')
+<!-- jQuery & DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
-  function filterCategory(cat, btnElement) {
-    // Update active tab styling
-    document.querySelectorAll('.downloads-tab-btn').forEach(btn => btn.classList.remove('active'));
-    if (btnElement) {
-      btnElement.classList.add('active');
-    }
-
-    // Filter table rows
-    const rows = document.querySelectorAll('.download-row');
-    let visibleCount = 0;
-
-    rows.forEach(row => {
-      const rowCat = row.getAttribute('data-cat');
-      if (rowCat === cat) {
-        row.style.display = '';
-        visibleCount++;
-      } else {
-        row.style.display = 'none';
+  $(document).ready(function() {
+    $('#edokumenTable').DataTable({
+      pageLength: 10,
+      responsive: true,
+      ordering: true,
+      order: [[0, 'asc']],
+      columnDefs: [
+        { targets: 0, className: 'text-center fw-semibold text-muted' },
+        { targets: 1, className: 'fw-semibold text-dark' },
+        { targets: 2, className: 'text-center', orderable: false, searchable: false }
+      ],
+      language: {
+        lengthMenu: "_MENU_ entries per page",
+        search: "Search:",
+        info: "Showing _START_ to _END_ of _TOTAL_ entries",
+        infoEmpty: "Showing 0 to 0 of 0 entries",
+        infoFiltered: "(filtered from _MAX_ total entries)",
+        zeroRecords: "Tidak ada dokumen yang sesuai dengan pencarian",
+        paginate: {
+          previous: "&lsaquo;",
+          next: "&rsaquo;"
+        }
       }
     });
-
-    const emptyRow = document.getElementById('emptyCategoryRow');
-    if (emptyRow) {
-      emptyRow.style.display = (visibleCount === 0) ? '' : 'none';
-    }
-
-    // Update URL with slug without page reload
-    if (history.pushState) {
-      const newUrl = "{{ url('/unduhan') }}/" + cat;
-      window.history.replaceState({path: newUrl}, '', newUrl);
-    }
-  }
-
-  // Handle URL query on load if present
-  document.addEventListener('DOMContentLoaded', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const catParam = urlParams.get('kategori');
-    if (catParam && ['image', 'video', 'audio', 'template'].includes(catParam.toLowerCase())) {
-      const targetBtn = Array.from(document.querySelectorAll('.downloads-tab-btn')).find(b => b.textContent.toLowerCase().includes(catParam.toLowerCase()));
-      if (targetBtn) {
-        filterCategory(catParam.toLowerCase(), targetBtn);
-      }
-    }
   });
 </script>
-@endsection
+@endpush

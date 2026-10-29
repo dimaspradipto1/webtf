@@ -80,7 +80,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/organisasi-mahasiswa/{slug}', 'organisasiMahasiswaDetail')->name('homepage.organisasi.detail');
     Route::get('/dosen', 'dosen')->name('homepage.dosen');
     Route::get('/testimoni', 'testimoni')->name('homepage.testimoni');
-    Route::get('/tracer-study', 'testimoni')->name('homepage.tracer-study');
+    Route::get('/tracer-study', 'tracerStudy')->name('homepage.tracer-study');
     Route::get('/alumni', 'testimoni')->name('homepage.alumni');
     Route::get('/alumni/kirim-testimoni', 'alumniCreateTestimoni')->name('homepage.alumni.create');
     Route::post('/alumni/kirim-testimoni', 'storeTestimonial')->name('homepage.alumni.store');
@@ -177,6 +177,9 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
         Route::post('kalender/item', [AkademikController::class, 'storeKalenderItem'])->name('kalender.item.store');
         Route::put('kalender/item/{id}', [AkademikController::class, 'updateKalenderItem'])->name('kalender.item.update');
         Route::delete('kalender/item/{id}', [AkademikController::class, 'destroyKalenderItem'])->name('kalender.item.destroy');
+        Route::post('akreditasi/item', [AkademikController::class, 'storeAkreditasiItem'])->name('akreditasi.item.store');
+        Route::put('akreditasi/item/{id}', [AkademikController::class, 'updateAkreditasiItem'])->name('akreditasi.item.update');
+        Route::delete('akreditasi/item/{id}', [AkademikController::class, 'destroyAkreditasiItem'])->name('akreditasi.item.destroy');
         Route::get('pedoman', [AkademikController::class, 'pedoman'])->name('pedoman');
         Route::get('sistem', [AkademikController::class, 'sistem'])->name('sistem');
         Route::get('portal/{tipe}', [AkademikController::class, 'portalEdit'])->name('portal.edit');

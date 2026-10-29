@@ -2,11 +2,12 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Tambah Unduhan Dokumen Humas</h1>
+    <h1>Tambah E-Dokumen</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('unduhan.index') }}">Unduhan Dokumen Humas</a></li>
+            <li class="breadcrumb-item">Portal Layanan</li>
+            <li class="breadcrumb-item"><a href="{{ route('unduhan.index') }}">E-Dokumen</a></li>
             <li class="breadcrumb-item active">Tambah</li>
         </ol>
     </nav>
@@ -17,7 +18,7 @@
         <div class="card shadow-sm">
             <div class="card-header py-3">
                 <h5 class="mb-0 fw-semibold">
-                    <i class="bi bi-cloud-plus me-2 text-success"></i>Form Tambah Berkas / Item Unduhan
+                    <i class="bi bi-file-earmark-plus me-2 text-warning"></i>Form Tambah Berkas E-Dokumen
                 </h5>
             </div>
             <div class="card-body pt-4">
@@ -38,13 +39,13 @@
                 <form action="{{ route('unduhan.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    <!-- Judul Item -->
+                    <!-- Judul Item / Nama Dokumen -->
                     <div class="mb-3">
-                        <label for="judul" class="form-label fw-semibold">Nama / Judul Item <span class="text-danger">*</span></label>
+                        <label for="judul" class="form-label fw-semibold">Nama / Judul Dokumen <span class="text-danger">*</span></label>
                         <input type="text" id="judul" name="judul"
                                class="form-control @error('judul') is-invalid @enderror"
                                value="{{ old('judul') }}"
-                               placeholder="Contoh: Logo Resmi Universitas Islam Riau (HD Vector)" required>
+                               placeholder="Contoh: Pedoman Akademik FST" required>
                         @error('judul')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -52,13 +53,14 @@
 
                     <!-- Kategori -->
                     <div class="mb-3">
-                        <label for="kategori" class="form-label fw-semibold">Kategori Unduhan <span class="text-danger">*</span></label>
+                        <label for="kategori" class="form-label fw-semibold">Kategori Dokumen <span class="text-danger">*</span></label>
                         <select id="kategori" name="kategori" class="form-select @error('kategori') is-invalid @enderror" required>
-                            <option value="" disabled {{ old('kategori') ? '' : 'selected' }}>-- Pilih Kategori --</option>
-                            <option value="image" {{ old('kategori') == 'image' ? 'selected' : '' }}>🖼️ Image (Logo, Banner, Poster, Foto Resmi)</option>
-                            <option value="video" {{ old('kategori') == 'video' ? 'selected' : '' }}>🎬 Video (Video Bumper, Teaser, Profil Kampus)</option>
-                            <option value="audio" {{ old('kategori') == 'audio' ? 'selected' : '' }}>🎵 Audio (Jingle, Mars, Hymne, Sound Effect)</option>
-                            <option value="template" {{ old('kategori') == 'template' ? 'selected' : '' }}>🖌️ Template (PPT, Frame Feed, Sertifikat, Dokumen)</option>
+                            <option value="Dokumen" {{ old('kategori', 'Dokumen') == 'Dokumen' ? 'selected' : '' }}>📄 Dokumen Resmi</option>
+                            <option value="Panduan" {{ old('kategori') == 'Panduan' ? 'selected' : '' }}>📘 Panduan Akademik & Praktikum</option>
+                            <option value="Pedoman" {{ old('kategori') == 'Pedoman' ? 'selected' : '' }}>📕 Buku Pedoman</option>
+                            <option value="SOP" {{ old('kategori') == 'SOP' ? 'selected' : '' }}>📋 Standar Operasional Prosedur (SOP)</option>
+                            <option value="Template" {{ old('kategori') == 'Template' ? 'selected' : '' }}>📑 Template & Formulir</option>
+                            <option value="Lainnya" {{ old('kategori') == 'Lainnya' ? 'selected' : '' }}>📁 Dokumen Lainnya</option>
                         </select>
                         @error('kategori')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -68,7 +70,7 @@
                     <!-- Upload File Lokal -->
                     <div class="mb-3">
                         <label for="file" class="form-label fw-semibold">
-                            Unggah File Dokumen / Media
+                            Unggah File Dokumen (PDF, DOCX, ZIP, dll)
                             <span class="badge bg-secondary fw-normal ms-1" style="font-size:10px">Opsional jika ada Link</span>
                         </label>
                         <input type="file" id="file" name="file"
@@ -76,26 +78,26 @@
                                onchange="detectFileInfo(this)">
                         <div class="form-text">
                             <i class="bi bi-info-circle me-1"></i>
-                            Dapat berupa berkas gambar (PNG, JPG), video (MP4), audio (MP3), arsip ZIP/RAR, PDF, PSD, AI, PPTX. Maks: 50 MB.
+                            Dapat berupa berkas PDF, Word (DOC/DOCX), PPTX, arsip ZIP/RAR, atau gambar. Maks: 50 MB.
                         </div>
                         @error('file')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <!-- URL Eksternal / Cloud Link -->
+                    <!-- URL Eksternal / Google Drive Link -->
                     <div class="mb-3">
                         <label for="file_url" class="form-label fw-semibold">
-                            Tautan / Link Unduhan Eksternal
-                            <span class="badge bg-secondary fw-normal ms-1" style="font-size:10px">Alternatif</span>
+                            Tautan / Link Google Drive Dokumen
+                            <span class="badge bg-secondary fw-normal ms-1" style="font-size:10px">Alternatif / Cloud</span>
                         </label>
                         <input type="url" id="file_url" name="file_url"
                                class="form-control @error('file_url') is-invalid @enderror"
                                value="{{ old('file_url') }}"
-                               placeholder="Contoh: https://drive.google.com/file/d/xxxx/view atau https://link.uir.ac.id/asset">
+                               placeholder="Contoh: https://drive.google.com/file/d/xxxx/view?usp=sharing">
                         <div class="form-text">
                             <i class="bi bi-link-45deg me-1"></i>
-                            Gunakan jika berkas tersimpan di Google Drive, Dropbox, OneDrive, atau server CDN.
+                            Gunakan tautan Google Drive, Dropbox, atau server penyimpanan kampus.
                         </div>
                         @error('file_url')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -121,7 +123,7 @@
                             <input type="text" id="deskripsi" name="deskripsi"
                                    class="form-control @error('deskripsi') is-invalid @enderror"
                                    value="{{ old('deskripsi') }}"
-                                   placeholder="Keterangan tambahan">
+                                   placeholder="Keterangan tambahan dokumen">
                             @error('deskripsi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -143,7 +145,7 @@
                                 <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="1"
                                        {{ old('is_active', true) ? 'checked' : '' }}>
                                 <label class="form-check-label fw-semibold" for="is_active">
-                                    Aktifkan (tampil di halaman Unduhan Humas)
+                                    Aktifkan (tampil di halaman E-Dokumen)
                                 </label>
                             </div>
                         </div>
@@ -154,7 +156,7 @@
                             <i class="bi bi-arrow-left me-1"></i> Batal
                         </a>
                         <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-save me-1"></i> Simpan Unduhan
+                            <i class="bi bi-save me-1"></i> Simpan Dokumen
                         </button>
                     </div>
                 </form>
@@ -162,30 +164,27 @@
         </div>
     </div>
 </div>
-@endsection
 
-@push('scripts')
 <script>
     function detectFileInfo(input) {
         if (input.files && input.files[0]) {
             const file = input.files[0];
             const sizeInBytes = file.size;
-            
-            // Format bytes
-            const units = ['B', 'KB', 'MB', 'GB'];
-            let size = sizeInBytes;
-            let unitIndex = 0;
-            while (size >= 1024 && unitIndex < units.length - 1) {
-                size /= 1024;
-                unitIndex++;
-            }
-            const formattedSize = size.toFixed(1) + ' ' + units[unitIndex];
+            let formattedSize = '';
 
-            const ukuranInput = document.getElementById('file_size');
-            if (ukuranInput && (!ukuranInput.value || ukuranInput.value.trim() === '')) {
-                ukuranInput.value = formattedSize;
+            if (sizeInBytes >= 1048576) {
+                formattedSize = (sizeInBytes / 1048576).toFixed(1) + ' MB';
+            } else if (sizeInBytes >= 1024) {
+                formattedSize = (sizeInBytes / 1024).toFixed(0) + ' KB';
+            } else {
+                formattedSize = sizeInBytes + ' B';
+            }
+
+            const sizeInput = document.getElementById('file_size');
+            if (sizeInput && !sizeInput.value) {
+                sizeInput.value = formattedSize;
             }
         }
     }
 </script>
-@endpush
+@endsection
