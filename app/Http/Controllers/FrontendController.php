@@ -192,8 +192,12 @@ class FrontendController extends Controller
     {
         $item = AkademikController::getOrCreateItem('kalender');
         $pageTitle = 'Kalender Akademik';
+        $kalenderItems = \App\Models\KalenderAkademikItem::where('is_active', true)
+            ->orderBy('urutan')
+            ->orderBy('id')
+            ->get();
 
-        return view('layouts.frontend.akademik', compact('item', 'pageTitle'));
+        return view('layouts.frontend.akademik', compact('item', 'pageTitle', 'kalenderItems'));
     }
 
     public function pedomanAkademik()

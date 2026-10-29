@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AkademikRequest;
 use App\Models\Akademik;
+use App\Models\KalenderAkademikItem;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -138,8 +140,73 @@ class AkademikController extends Controller
         $item = self::getOrCreateItem('kalender');
         $pageTitle = 'Kalender Akademik';
         $tipe = 'kalender';
+        $kalenderItems = KalenderAkademikItem::orderBy('urutan')->orderBy('id')->get();
 
-        return view('pages.akademik.edit', compact('item', 'pageTitle', 'tipe'));
+        return view('pages.akademik.edit', compact('item', 'pageTitle', 'tipe', 'kalenderItems'));
+    }
+
+    public function storeKalenderItem(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'judul_tab' => ['required', 'string', 'max:255'],
+            'nama_dokumen' => ['required', 'string', 'max:255'],
+            'gdrive_url' => ['required', 'url', 'max:1000'],
+            'tombol_teks' => ['nullable', 'string', 'max:100'],
+            'urutan' => ['nullable', 'integer', 'min:0'],
+        ], [
+            'judul_tab.required' => 'Judul Tab Tahun Akademik wajib diisi.',
+            'nama_dokumen.required' => 'Nama Dokumen wajib diisi.',
+            'gdrive_url.required' => 'Link Google Drive wajib diisi.',
+            'gdrive_url.url' => 'Link Google Drive harus berupa URL yang valid (diawali https://).',
+        ]);
+
+        $validated['tombol_teks'] = $validated['tombol_teks'] ?: 'Lihat Document';
+        $validated['urutan'] = $validated['urutan'] ?? (KalenderAkademikItem::max('urutan') + 1);
+        $validated['is_active'] = $request->has('is_active');
+
+        KalenderAkademikItem::create($validated);
+
+        return redirect()
+            ->route('akademik.kalender')
+            ->with('success', 'Data tahun Kalender Akademik berhasil ditambahkan!');
+    }
+
+    public function updateKalenderItem(Request $request, int $id): RedirectResponse
+    {
+        $kalenderItem = KalenderAkademikItem::findOrFail($id);
+
+        $validated = $request->validate([
+            'judul_tab' => ['required', 'string', 'max:255'],
+            'nama_dokumen' => ['required', 'string', 'max:255'],
+            'gdrive_url' => ['required', 'url', 'max:1000'],
+            'tombol_teks' => ['nullable', 'string', 'max:100'],
+            'urutan' => ['nullable', 'integer', 'min:0'],
+        ], [
+            'judul_tab.required' => 'Judul Tab Tahun Akademik wajib diisi.',
+            'nama_dokumen.required' => 'Nama Dokumen wajib diisi.',
+            'gdrive_url.required' => 'Link Google Drive wajib diisi.',
+            'gdrive_url.url' => 'Link Google Drive harus berupa URL yang valid (diawali https://).',
+        ]);
+
+        $validated['tombol_teks'] = $validated['tombol_teks'] ?: 'Lihat Document';
+        $validated['urutan'] = $validated['urutan'] ?? 0;
+        $validated['is_active'] = $request->has('is_active');
+
+        $kalenderItem->update($validated);
+
+        return redirect()
+            ->route('akademik.kalender')
+            ->with('success', 'Data tahun Kalender Akademik berhasil diperbarui!');
+    }
+
+    public function destroyKalenderItem(int $id): RedirectResponse
+    {
+        $kalenderItem = KalenderAkademikItem::findOrFail($id);
+        $kalenderItem->delete();
+
+        return redirect()
+            ->route('akademik.kalender')
+            ->with('success', 'Data tahun Kalender Akademik berhasil dihapus!');
     }
 
     public function pedoman(): View

@@ -36,6 +36,191 @@
                 </div>
             @endif
 
+            @if($tipe === 'kalender' && isset($kalenderItems))
+            <!-- ═══════════════════════════════════════════════════════════
+                 DAFTAR TAHUN & LINK GOOGLE DRIVE KALENDER AKADEMIK
+            ═══════════════════════════════════════════════════════════ -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-header bg-white py-3 border-bottom d-flex flex-wrap align-items-center justify-content-between gap-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-google text-success fs-4"></i>
+                        <div>
+                            <h5 class="card-title mb-0 p-0 fw-bold text-dark">Daftar Dokumen Kalender Akademik per Tahun (Link Google Drive)</h5>
+                            <div class="small text-muted">Kelola daftar akordion Kalender Akademik per Tahun Akademik beserta tautan dokumen Google Drive.</div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm px-3 py-2 rounded-3 fw-bold" data-bs-toggle="modal" data-bs-target="#modalTambahKalender">
+                        <i class="bi bi-plus-lg me-1"></i> Tambah Tahun Kalender
+                    </button>
+                </div>
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-center" style="width: 60px;">Urutan</th>
+                                    <th style="width: 24%;">Judul Tab / Tahun Akademik</th>
+                                    <th style="width: 26%;">Nama Dokumen</th>
+                                    <th>Link Google Drive</th>
+                                    <th class="text-center" style="width: 100px;">Status</th>
+                                    <th class="text-center" style="width: 120px;">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($kalenderItems as $kItem)
+                                <tr>
+                                    <td class="text-center">
+                                        <span class="badge bg-secondary">{{ $kItem->urutan }}</span>
+                                    </td>
+                                    <td class="fw-bold text-dark">{{ $kItem->judul_tab }}</td>
+                                    <td>{{ $kItem->nama_dokumen }}</td>
+                                    <td>
+                                        @if($kItem->gdrive_url)
+                                            <a href="{{ $kItem->gdrive_url }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none d-inline-flex align-items-center gap-1 small fw-semibold text-primary">
+                                                <i class="bi bi-box-arrow-up-right"></i> {{ Str::limit($kItem->gdrive_url, 48) }}
+                                            </a>
+                                        @else
+                                            <span class="text-muted small">-</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        @if($kItem->is_active)
+                                            <span class="badge bg-success">Aktif</span>
+                                        @else
+                                            <span class="badge bg-secondary">Nonaktif</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center gap-1">
+                                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditKalender{{ $kItem->id }}" title="Sunting">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </button>
+                                            <form action="{{ route('akademik.kalender.item.destroy', $kItem->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus {{ $kItem->judul_tab }}?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted py-4">Belum ada daftar tahun Kalender Akademik.</td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Modal Edit per Item --}}
+            @foreach($kalenderItems as $kItem)
+            <div class="modal fade" id="modalEditKalender{{ $kItem->id }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content rounded-4 border-0 shadow">
+                        <form action="{{ route('akademik.kalender.item.update', $kItem->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="modal-header border-bottom py-3">
+                                <h5 class="modal-title fw-bold text-dark"><i class="bi bi-pencil-square me-2 text-warning"></i>Sunting {{ $kItem->judul_tab }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold small">Judul Tab / Tahun Akademik <span class="text-danger">*</span></label>
+                                        <input type="text" name="judul_tab" class="form-control" value="{{ $kItem->judul_tab }}" placeholder="Contoh: Kalender Akademik 2026/2027" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold small">Nama Dokumen <span class="text-danger">*</span></label>
+                                        <input type="text" name="nama_dokumen" class="form-control" value="{{ $kItem->nama_dokumen }}" placeholder="Contoh: KALENDER AKADEMIK UIS 2026-2027" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold small"><i class="bi bi-google text-success me-1"></i>Link Google Drive Dokumen <span class="text-danger">*</span></label>
+                                        <input type="url" name="gdrive_url" class="form-control" value="{{ $kItem->gdrive_url }}" placeholder="https://drive.google.com/file/d/.../view?usp=sharing" required>
+                                        <div class="form-text small">Masukkan link Google Drive dokumen Kalender Akademik (pastikan akses diset ke "Anyone with the link").</div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="form-label fw-semibold small">Teks Tombol</label>
+                                        <input type="text" name="tombol_teks" class="form-control" value="{{ $kItem->tombol_teks ?: 'Lihat Document' }}" placeholder="Lihat Document">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label fw-semibold small">Urutan Tampil</label>
+                                        <input type="number" name="urutan" class="form-control" value="{{ $kItem->urutan }}" min="0">
+                                    </div>
+                                    <div class="col-md-4 d-flex align-items-end">
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="activeEdit{{ $kItem->id }}" name="is_active" value="1" {{ $kItem->is_active ? 'checked' : '' }}>
+                                            <label class="form-check-label fw-semibold small" for="activeEdit{{ $kItem->id }}">Tampilkan di Halaman</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-light py-2">
+                                <button type="button" class="btn btn-secondary btn-sm px-3" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary btn-sm px-4 fw-bold"><i class="bi bi-save me-1"></i> Simpan Perubahan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
+            {{-- Modal Tambah Tahun Kalender Baru --}}
+            <div class="modal fade" id="modalTambahKalender" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content rounded-4 border-0 shadow">
+                        <form action="{{ route('akademik.kalender.item.store') }}" method="POST">
+                            @csrf
+                            <div class="modal-header border-bottom py-3">
+                                <h5 class="modal-title fw-bold text-dark"><i class="bi bi-plus-circle-fill me-2 text-primary"></i>Tambah Tahun Kalender Akademik</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold small">Judul Tab / Tahun Akademik <span class="text-danger">*</span></label>
+                                        <input type="text" name="judul_tab" class="form-control" placeholder="Contoh: Kalender Akademik 2026/2027" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold small">Nama Dokumen <span class="text-danger">*</span></label>
+                                        <input type="text" name="nama_dokumen" class="form-control" placeholder="Contoh: KALENDER AKADEMIK UIS 2026-2027" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold small"><i class="bi bi-google text-success me-1"></i>Link Google Drive Dokumen <span class="text-danger">*</span></label>
+                                        <input type="url" name="gdrive_url" class="form-control" placeholder="https://drive.google.com/file/d/.../view?usp=sharing" required>
+                                        <div class="form-text small">Tempelkan link Google Drive untuk dokumen Kalender Akademik.</div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="form-label fw-semibold small">Teks Tombol</label>
+                                        <input type="text" name="tombol_teks" class="form-control" value="Lihat Document" placeholder="Lihat Document">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label fw-semibold small">Urutan Tampil</label>
+                                        <input type="number" name="urutan" class="form-control" value="{{ ($kalenderItems->max('urutan') ?? 0) + 1 }}" min="0">
+                                    </div>
+                                    <div class="col-md-4 d-flex align-items-end">
+                                        <div class="form-check form-switch mb-2">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="activeNewKalender" name="is_active" value="1" checked>
+                                            <label class="form-check-label fw-semibold small" for="activeNewKalender">Tampilkan di Halaman</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-light py-2">
+                                <button type="button" class="btn btn-secondary btn-sm px-3" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary btn-sm px-4 fw-bold"><i class="bi bi-plus-lg me-1"></i> Tambah Kalender</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            @if($tipe !== 'kalender')
             <form action="{{ route('akademik.update', $tipe) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -161,6 +346,7 @@
                     </div>
                 </div>
             </form>
+            @endif
 
         </div>
     </div>
