@@ -45,7 +45,7 @@
             <input type="hidden" name="tingkat" value="{{ $selectedTingkat }}">
           @endif
           <input type="text" name="q" value="{{ $search ?? '' }}" class="form-control form-control-sm rounded-pill px-3" placeholder="Cari nama / kejuaraan..." style="max-width: 240px;">
-          <button type="submit" class="btn btn-sm btn-primary rounded-pill px-3" style="background: #000000; border-color: #000000;">
+          <button type="submit" class="btn btn-sm btn-primary rounded-pill px-3" style="background: #000000; border: none !important;">
             <i class="bi bi-search"></i>
           </button>
         </form>

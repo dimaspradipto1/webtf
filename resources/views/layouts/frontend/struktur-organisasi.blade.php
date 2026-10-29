@@ -32,11 +32,11 @@
 <section class="section-bg-sand">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
-      <div class="section-label mx-auto">Tata Kelola Fakultas</div>
-      <h2 class="section-title">Bagan <em>Kepemimpinan & Organisasi</em> UIS</h2>
+      <div class="section-label mx-auto">Tata Kelola Program Studi · Fakultas Sains dan Teknologi</div>
+      <h2 class="section-title">Bagan <em>Kepemimpinan & Organisasi</em> Teknik Informatika</h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
-        Tata kelola yang profesional, transparan, dan akuntabel di bawah pimpinan Pimpinan serta Ketua Program Studi Teknik Informatika.
+        Tata kelola yang profesional, transparan, dan akuntabel di bawah pimpinan Fakultas Sains dan Teknologi serta Ketua Program Studi Teknik Informatika.
       </p>
     </div>
 

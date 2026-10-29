@@ -51,7 +51,7 @@
                         <a href="{{ route('homepage') }}" target="_blank" class="btn btn-sm btn-outline-secondary">
                             <i class="bi bi-box-arrow-up-right me-1"></i> Lihat di Navbar
                         </a>
-                        <button type="button" class="btn btn-sm fw-semibold shadow-sm text-white" id="btn-add-publikasi" style="background: #000000; border-color: #000000;">
+                        <button type="button" class="btn btn-sm fw-semibold shadow-sm text-white" id="btn-add-publikasi" style="background: #000000; border: none !important;">
                             <i class="bi bi-plus-circle-fill me-1"></i> Tambah Menu Publikasi
                         </button>
                     </div>

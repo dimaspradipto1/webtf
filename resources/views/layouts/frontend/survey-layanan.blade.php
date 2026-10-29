@@ -85,7 +85,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    border: 1.5px solid #000000;
+    border: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     width: fit-content;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
@@ -94,7 +94,7 @@
   /* Saat Card di-hover: Tombol lebih kontras & elegan */
   .survey-card-box:hover .btn-survey-action {
     background-color: #000000 !important;
-    border-color: #000000 !important;
+    border: none !important;
     color: #f9dc4b !important;
     transform: scale(1.04);
     box-shadow: 0 6px 16px rgba(3, 66, 23, 0.35);
@@ -102,7 +102,7 @@
 
   .btn-survey-action:hover {
     background-color: #000000 !important;
-    border-color: #000000 !important;
+    border: none !important;
     color: #ffffff !important;
   }
 

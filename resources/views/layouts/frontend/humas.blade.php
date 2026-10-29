@@ -505,7 +505,7 @@
   .humas-media-box:hover {
     transform: translateY(-8px);
     box-shadow: 0 18px 36px rgba(0, 0, 0, 0.15);
-    border-color: #000000;
+    border: none !important;
   }
   .humas-media-box.has-bg:hover::before {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.75) 100%);
@@ -1162,7 +1162,7 @@
                target="_blank" 
                rel="noopener noreferrer" 
                class="btn btn-success rounded-pill px-4 fw-semibold" 
-               style="background: #000000; border-color: #000000;">
+               style="background: #000000; border: none !important;">
               <i class="bi bi-download me-1"></i> <span id="emagzDownloadText">{{ $emagazine?->tab_1_btn_download_text ?: 'Unduh Dokumen' }}</span>
             </a>
           </div>

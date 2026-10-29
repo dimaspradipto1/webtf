@@ -79,10 +79,11 @@
     <!-- Header Section Full -->
     <div class="row justify-content-center text-center mb-4" data-aos="fade-up">
       <div class="col-12">
-        <div class="section-label mx-auto">Profil Universitas</div>
-        <h2 class="section-title">
-          {{ $about->judul_profil ?? 'Teknik Informatika' }}
+        <div class="section-label mx-auto">Profil Program Studi · Fakultas Sains dan Teknologi</div>
+        <h2 class="section-title mb-1">
+          {{ $about->judul_profil ?? 'Program Studi S1 Teknik Informatika' }}
         </h2>
+        <p class="fw-bold mb-2" style="color: #000000; font-size: 15px; letter-spacing: 0.4px;">Fakultas Sains dan Teknologi</p>
         <div class="divider-line centered"></div>
       </div>
     </div>

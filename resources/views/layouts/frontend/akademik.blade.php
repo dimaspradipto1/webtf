@@ -10,7 +10,7 @@
 <section class="akademik-hero">
   <div class="container position-relative" data-aos="fade-up">
     <div class="badge px-3 py-2 rounded-pill mb-3" style="background: var(--uis-orange); color: #000000; font-weight: 800; font-size: 11.5px; letter-spacing: 0.8px;">
-      LAYANAN AKADEMIK Teknik Informatika
+      PROGRAM STUDI TEKNIK INFORMATIKA · FAKULTAS SAINS DAN TEKNOLOGI
     </div>
     <h1 class="display-6 fw-bold text-white mb-2">{{ $item->judul }}</h1>
     @if($item->subjudul)
@@ -86,23 +86,29 @@
       {{-- Kolom Sidebar Navigasi Akademik --}}
       <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
         
-        {{-- Widget Menu Akademik Lainnya --}}
+        {{-- Widget Menu Akademik & Portal --}}
         <div class="nav-akademik-sidebar mb-4">
           <h6 class="fw-bold text-dark mb-3 pb-2 border-bottom">
-            <i class="bi bi-mortarboard-fill text-primary me-2"></i>Menu Akademik
+            <i class="bi bi-mortarboard-fill me-2" style="color: #000000;"></i>Menu Akademik & Portal
           </h6>
           <nav class="d-flex flex-column">
-            <a href="{{ route('homepage.kurikulum') }}" class="nav-akademik-link {{ request()->routeIs('homepage.kurikulum') ? 'active' : '' }}">
-              <i class="bi bi-journal-text"></i> Kurikulum
-            </a>
             <a href="{{ route('homepage.kalender-akademik') }}" class="nav-akademik-link {{ request()->routeIs('homepage.kalender-akademik') ? 'active' : '' }}">
               <i class="bi bi-calendar-check"></i> Kalender Akademik
             </a>
-            <a href="{{ route('homepage.pedoman-akademik') }}" class="nav-akademik-link {{ request()->routeIs('homepage.pedoman-akademik') ? 'active' : '' }}">
-              <i class="bi bi-book"></i> Pedoman Akademik
+            <a href="{{ route('homepage.kurikulum') }}" class="nav-akademik-link {{ request()->routeIs('homepage.kurikulum') ? 'active' : '' }}">
+              <i class="bi bi-journal-text"></i> Kurikulum Teknik Informatika
             </a>
-            <a href="{{ route('homepage.sistem-akademik') }}" class="nav-akademik-link {{ request()->routeIs('homepage.sistem-akademik') ? 'active' : '' }}">
-              <i class="bi bi-laptop"></i> Sistem Akademik
+            <a href="{{ route('homepage.portal.page', 'dokumen-akreditasi-tf') }}" class="nav-akademik-link {{ request()->is('portal/dokumen-akreditasi-tf') ? 'active' : '' }}">
+              <i class="bi bi-patch-check"></i> Dokumen Akreditasi TF
+            </a>
+            <a href="{{ route('homepage.portal.page', 'laminfokom') }}" class="nav-akademik-link {{ request()->is('portal/laminfokom') ? 'active' : '' }}">
+              <i class="bi bi-award"></i> LAMINFOKOM
+            </a>
+            <a href="{{ route('homepage.portal.page', 'ban-pt') }}" class="nav-akademik-link {{ request()->is('portal/ban-pt') ? 'active' : '' }}">
+              <i class="bi bi-shield-check"></i> BAN-PT
+            </a>
+            <a href="{{ route('homepage.portal.page', 'pendaftaran-pmb') }}" class="nav-akademik-link {{ request()->is('portal/pendaftaran-pmb') ? 'active' : '' }}">
+              <i class="bi bi-pencil-square"></i> Pendaftaran PMB
             </a>
           </nav>
         </div>

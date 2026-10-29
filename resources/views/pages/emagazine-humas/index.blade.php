@@ -311,7 +311,7 @@
         </div>
 
         <div class="card-footer bg-light py-3 d-flex align-items-center justify-content-end gap-2" style="border-radius: 0 0 12px 12px;">
-            <button type="submit" class="btn btn-success fw-bold px-4 shadow-sm" style="background: #000000; border-color: #000000;">
+            <button type="submit" class="btn btn-success fw-bold px-4 shadow-sm" style="background: #000000; border: none !important;">
                 <i class="bi bi-save2-fill me-1"></i> Simpan Perubahan
             </button>
         </div>

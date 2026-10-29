@@ -184,7 +184,7 @@
             </div>
 
             <div class="mt-3 text-center pt-2 border-top">
-              <a href="{{ route('homepage.prestasi') }}" class="btn btn-sm btn-outline-primary w-100 rounded-pill" style="color: #000000; border-color: #000000;">
+              <a href="{{ route('homepage.prestasi') }}" class="btn btn-sm btn-outline-primary w-100 rounded-pill" style="color: #000000; border: none !important;">
                 Lihat Semua Prestasi
               </a>
             </div>

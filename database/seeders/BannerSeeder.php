@@ -16,14 +16,14 @@ class BannerSeeder extends Seeder
 
         $banners = [
             [
-                'judul' => 'Mewujudkan Tenaga Kesehatan Unggul, Profesional & Berintegritas',
-                'url' => 'banners/U5BsPjmGmPRWbcUG2FlnoBQjlHIYIksdUPwZYi2W.png',
+                'judul' => 'Teknik Informatika — Unggul, Profesional & Berintegritas',
+                'url' => 'banners/Tb0YYibcNvgugtIoShmS6gQJKDGqxi1fT1j7PHg9.webp',
                 'urutan' => 1,
                 'aktif' => true,
             ],
             [
-                'judul' => 'Fasilitas Laboratorium Modern & Kerjasama Rumah Sakit Terpadu',
-                'url' => 'banners/xWH57UmSDG5rm40tdAeLBk7Jor3IIGSJwhdG1oYK.png',
+                'judul' => 'Fasilitas Laboratorium Komputasi Modern & Kurikulum Berbasis Industri',
+                'url' => 'banners/XpzG6Y4oCBhFY5aFRRGgSaacuH5xuhQ8cOGVAx78.webp',
                 'urutan' => 2,
                 'aktif' => true,
             ],

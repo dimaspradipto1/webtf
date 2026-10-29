@@ -19,12 +19,12 @@
           @endphp
 
           @if($isAdmin)
-          <!-- 2. Konten Beranda / Landing Page -->
+          <!-- 1b. Konten Beranda -->
           <li class="nav-item">
-              <a class="nav-link {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('social-media.*') || Route::is('feature.*') || Route::is('sarana.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') ? '' : 'collapsed' }}" data-bs-target="#beranda-nav" data-bs-toggle="collapse" href="#">
+              <a class="nav-link {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('social-media.*') || Route::is('feature.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') ? '' : 'collapsed' }}" data-bs-target="#beranda-nav" data-bs-toggle="collapse" href="#">
                   <i class="bi bi-layout-text-window-reverse"></i><span>Konten Beranda</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-              <ul id="beranda-nav" class="nav-content collapse {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || (Route::is('social-media.*') && request('kategori') !== 'humas') || Route::is('feature.*') || Route::is('sarana.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <ul id="beranda-nav" class="nav-content collapse {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || (Route::is('social-media.*') && request('kategori') !== 'humas') || Route::is('feature.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                   <li>
                       <a href="{{ route('banner.index') }}" class="{{ Route::is('banner.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Banner Hero</span>
@@ -37,22 +37,17 @@
                   </li>
                   <li>
                       <a href="{{ route('social-media.index', ['kategori' => 'universitas']) }}" class="{{ Route::is('social-media.*') && request('kategori') !== 'humas' ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Media Sosial Universitas</span>
+                          <i class="bi bi-circle"></i><span>Media Sosial Prodi</span>
                       </a>
                   </li>
                   <li>
                       <a href="{{ route('faculty-stat.index') }}" class="{{ Route::is('faculty-stat.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Statistik Universitas</span>
+                          <i class="bi bi-circle"></i><span>Statistik Program Studi</span>
                       </a>
                   </li>
                   <li>
                       <a href="{{ route('feature.index') }}" class="{{ Route::is('feature.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Keunggulan Universitas</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('sarana.index') }}" class="{{ Route::is('sarana.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Sarana Kampus</span>
+                          <i class="bi bi-circle"></i><span>Keunggulan Program Studi</span>
                       </a>
                   </li>
                   <li>
@@ -67,28 +62,26 @@
                   </li>
               </ul>
           </li>
-          @endif
 
-          @if($isAdmin)
-          <!-- 3. Profil (Sesuai Urutan & Dropdown Header) -->
+          <!-- 2. PROFIL (Sesuai Urutan Menu Header) -->
           <li class="nav-item">
-            <a class="nav-link {{ Route::is('about.*') || Route::is('visimisi.*') || Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') || Route::is('struktur-organisasi.*') || Route::is('milestone.*') ? '' : 'collapsed' }}" data-bs-target="#profil-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link {{ Route::is('milestone.*') || Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') || Route::is('about.*') || Route::is('struktur-organisasi.*') || Route::is('visimisi.*') || Route::is('sarana.*') ? '' : 'collapsed' }}" data-bs-target="#profil-nav" data-bs-toggle="collapse" href="#">
               <i class="bi bi-building"></i><span>Profil</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="profil-nav" class="nav-content collapse {{ Route::is('about.*') || Route::is('visimisi.*') || Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') || Route::is('struktur-organisasi.*') || Route::is('milestone.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="profil-nav" class="nav-content collapse {{ Route::is('milestone.*') || Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') || Route::is('about.*') || Route::is('struktur-organisasi.*') || Route::is('visimisi.*') || Route::is('sarana.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
               <li>
-                <a href="{{ route('about.index') }}" class="{{ Route::is('about.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Tentang UIS</span>
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('visimisi.index') }}" class="{{ Route::is('visimisi.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Visi & Misi</span>
+                <a href="{{ route('milestone.index') }}" class="{{ Route::is('milestone.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Sejarah YAPISTA</span>
                 </a>
               </li>
               <li>
                 <a href="{{ route('sambutan-rektor.index') }}" class="{{ Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Sambutan Rektor</span>
+                  <i class="bi bi-circle"></i><span>Sambutan Kaprodi TF</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('about.index') }}" class="{{ Route::is('about.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Profil Pimpinan & Prodi</span>
                 </a>
               </li>
               <li>
@@ -97,27 +90,139 @@
                 </a>
               </li>
               <li>
-                <a href="{{ route('milestone.index') }}" class="{{ Route::is('milestone.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Sejarah Universitas</span>
+                <a href="{{ route('visimisi.index') }}" class="{{ Route::is('visimisi.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Visi Misi dan Tujuan TF</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('sarana.index') }}" class="{{ Route::is('sarana.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Fasilitas Kampus</span>
                 </a>
               </li>
             </ul>
           </li>
 
-
-          <!-- 4. Fakultas (Sesuai Urutan Header) -->
+          <!-- 3. AKADEMIK & PROGRAM STUDI -->
           <li class="nav-item">
-            <a class="nav-link {{ Route::is('layanan.*') ? '' : 'collapsed' }}" href="{{ route('layanan.index') }}">
-              <i class="bi bi-mortarboard"></i><span>Fakultas</span>
+            <a class="nav-link {{ Route::is('akademik.kalender') || Route::is('kurikulum.*') || Route::is('layanan.*') ? '' : 'collapsed' }}" data-bs-target="#akademik-nav" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-mortarboard"></i><span>Akademik & Prodi</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="akademik-nav" class="nav-content collapse {{ Route::is('akademik.kalender') || Route::is('kurikulum.*') || Route::is('layanan.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <li>
+                <a href="{{ route('akademik.kalender') }}" class="{{ Route::is('akademik.kalender') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Kalender Akademik</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('kurikulum.index') }}" class="{{ Route::is('kurikulum.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Kurikulum Teknik Informatika</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('layanan.index') }}" class="{{ Route::is('layanan.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Program Studi</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- 4. DOSEN -->
+          <li class="nav-item">
+            <a class="nav-link {{ Route::is('dosen.*') ? '' : 'collapsed' }}" href="{{ route('dosen.index') }}">
+              <i class="bi bi-person-workspace"></i><span>Dosen</span>
             </a>
           </li>
 
-          <!-- 5. Kemahasiswaan (Sesuai Urutan Header) -->
+          <!-- 5. PUBLIKASI -->
           <li class="nav-item">
-            <a class="nav-link {{ Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') || Route::is('gallery.*') || Route::is('testimonial.*') ? '' : 'collapsed' }}" data-bs-target="#kemahasiswaan-nav" data-bs-toggle="collapse" href="#">
-              <i class="bi bi-people"></i><span>Kemahasiswaan</span><i class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link {{ Route::is('publikasi.*') || Route::is('partner.*') ? '' : 'collapsed' }}" data-bs-target="#penelitian-nav" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-journal-richtext"></i><span>Publikasi</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="kemahasiswaan-nav" class="nav-content collapse {{ Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') || Route::is('gallery.*') || Route::is('testimonial.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="penelitian-nav" class="nav-content collapse {{ Route::is('publikasi.*') || Route::is('partner.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <li>
+                <a href="{{ route('publikasi.index') }}" class="{{ Route::is('publikasi.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Daftar Jurnal Publikasi</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('partner.index') }}" class="{{ Route::is('partner.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Mitra Kerjasama Riset</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- 6. PORTAL (Tracer Study, E-Dokumen, SOP, Akreditasi, Beasiswa, Informasi, PMB) -->
+          <li class="nav-item">
+            <a class="nav-link {{ Route::is('testimonial.*') || Route::is('unduhan.*') || Route::is('template-dokumen.*') || Route::is('akademik.portal.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') ? '' : 'collapsed' }}" data-bs-target="#portal-nav" data-bs-toggle="collapse" href="#">
+              <i class="bi bi-compass"></i><span>Portal Layanan</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="portal-nav" class="nav-content collapse {{ Route::is('testimonial.*') || Route::is('unduhan.*') || Route::is('template-dokumen.*') || Route::is('akademik.portal.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <li>
+                <a href="{{ route('testimonial.index') }}" class="{{ Route::is('testimonial.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Tracer Study & Alumni</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('unduhan.index') }}" class="{{ Route::is('unduhan.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>E-Dokumen</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('template-dokumen.index') }}" class="{{ Route::is('template-dokumen.*') ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>SOP & Template Dokumen</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('akademik.portal.edit', 'dokumen-akreditasi-tf') }}" class="{{ request()->route('tipe') === 'dokumen-akreditasi-tf' ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Dokumen Akreditasi TF</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('akademik.portal.edit', 'laminfokom') }}" class="{{ request()->route('tipe') === 'laminfokom' ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Akreditasi LAMINFOKOM</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('akademik.portal.edit', 'ban-pt') }}" class="{{ request()->route('tipe') === 'ban-pt' ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Akreditasi BAN-PT</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('akademik.portal.edit', 'beasiswa-lpdp') }}" class="{{ request()->route('tipe') === 'beasiswa-lpdp' ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Beasiswa LPDP</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('akademik.portal.edit', 'beasiswa-kip') }}" class="{{ request()->route('tipe') === 'beasiswa-kip' ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Beasiswa KIP</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('akademik.portal.edit', 'beasiswa-bpddi') }}" class="{{ request()->route('tipe') === 'beasiswa-bpddi' ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Beasiswa BPDDI</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('akademik.portal.edit', 'beasiswa-adik') }}" class="{{ request()->route('tipe') === 'beasiswa-adik' ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Beasiswa ADIK</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('akademik.portal.edit', 'pendaftaran-pmb') }}" class="{{ request()->route('tipe') === 'pendaftaran-pmb' ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Pendaftaran PMB</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('akademik.portal.edit', 'informasi-pmb') }}" class="{{ request()->route('tipe') === 'informasi-pmb' ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Informasi PMB</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('akademik.portal.edit', 'pengumuman-pmb') }}" class="{{ request()->route('tipe') === 'pengumuman-pmb' ? 'active' : '' }}">
+                  <i class="bi bi-circle"></i><span>Pengumuman PMB</span>
+                </a>
+              </li>
               <li>
                 <a href="{{ route('prestasi.index') }}" class="{{ Route::is('prestasi.*') ? 'active' : '' }}">
                   <i class="bi bi-circle"></i><span>Prestasi Mahasiswa</span>
@@ -128,44 +233,9 @@
                   <i class="bi bi-circle"></i><span>Organisasi Mahasiswa</span>
                 </a>
               </li>
-              <li>
-                <a href="{{ route('gallery.index') }}" class="{{ Route::is('gallery.index') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Galeri Dokumentasi</span>
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('gallery.create') }}" class="{{ Route::is('gallery.create') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Upload Dokumentasi</span>
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('testimonial.index') }}" class="{{ Route::is('testimonial.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Alumni & Testimoni</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- 6. Publikasi dan mitra (Sesuai Urutan Header) -->
-          <li class="nav-item">
-            <a class="nav-link {{ Route::is('publikasi.*') || Route::is('partner.*') ? '' : 'collapsed' }}" data-bs-target="#penelitian-nav" data-bs-toggle="collapse" href="#">
-              <i class="bi bi-file-earmark-medical"></i><span>Publikasi dan mitra</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="penelitian-nav" class="nav-content collapse {{ Route::is('publikasi.*') || Route::is('partner.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
-              <li>
-                <a href="{{ route('publikasi.index') }}" class="{{ Route::is('publikasi.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Publikasi</span>
-                </a>
-              </li>
-              <li>
-                <a href="{{ route('partner.index') }}" class="{{ Route::is('partner.*') ? 'active' : '' }}">
-                  <i class="bi bi-circle"></i><span>Mitra Kerjasama Riset</span>
-                </a>
-              </li>
             </ul>
           </li>
           @elseif($isOrganisasi)
-          <!-- Menu Khusus Role Organisasi Mahasiswa -->
           <li class="nav-item">
             <a class="nav-link {{ Route::is('organisasi-mahasiswa.*') ? '' : 'collapsed' }}" href="{{ route('organisasi-mahasiswa.index') }}">
               <i class="bi bi-people-fill"></i><span>Organisasi Mahasiswa</span>
@@ -174,15 +244,15 @@
           @endif
 
           @if($isAdmin || $isPenulis)
-          <!-- 7. Informasi (Berita & Pengumuman) -->
+          <!-- 7. Informasi (Berita, Pengumuman, Undangan, Galeri) -->
           <li class="nav-item">
-              <a class="nav-link {{ Route::is('news.*') || Route::is('faq.*') ? '' : 'collapsed' }}" data-bs-target="#informasi-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-newspaper"></i><span>Informasi</span><i class="bi bi-chevron-down ms-auto"></i>
+              <a class="nav-link {{ Route::is('news.*') || Route::is('gallery.*') || Route::is('faq.*') ? '' : 'collapsed' }}" data-bs-target="#informasi-nav" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-newspaper"></i><span>Informasi & Galeri</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-              <ul id="informasi-nav" class="nav-content collapse {{ Route::is('news.*') || Route::is('faq.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <ul id="informasi-nav" class="nav-content collapse {{ Route::is('news.*') || Route::is('gallery.*') || Route::is('faq.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                   <li>
                       <a href="{{ route('news.index') }}" class="{{ Route::is('news.index') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Semua Berita & Pengumuman</span>
+                          <i class="bi bi-circle"></i><span>Berita, Pengumuman & Undangan</span>
                       </a>
                   </li>
                   <li>
@@ -191,6 +261,11 @@
                       </a>
                   </li>
                   @if($isAdmin)
+                  <li>
+                      <a href="{{ route('gallery.index') }}" class="{{ Route::is('gallery.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Galeri Dokumentasi</span>
+                      </a>
+                  </li>
                   <li>
                       <a href="{{ route('faq.index') }}" class="{{ Route::is('faq.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>FAQ Informasi</span>
@@ -202,85 +277,7 @@
           @endif
 
           @if($isAdmin)
-          <li class="nav-heading">Layanan Humas</li>
-          <li class="nav-item">
-              <a class="nav-link {{ Route::is('hero-humas.*') || (Route::is('social-media.*') && request('kategori') === 'humas') || Route::is('pusat-informasi.*') || Route::is('emagazine-humas.*') ? '' : 'collapsed' }}" data-bs-target="#humas-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-newspaper"></i><span>Beranda Humas</span><i class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="humas-nav" class="nav-content collapse {{ Route::is('hero-humas.*') || (Route::is('social-media.*') && request('kategori') === 'humas') || Route::is('pusat-informasi.*') || Route::is('emagazine-humas.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('hero-humas.index') }}" class="{{ Route::is('hero-humas.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Hero Humas</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('social-media.index', ['kategori' => 'humas']) }}" class="{{ Route::is('social-media.*') && request('kategori') === 'humas' ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Media Sosial Humas</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('pusat-informasi.index') }}" class="{{ Route::is('pusat-informasi.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Hubungi Kami & Pusat Informasi</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('emagazine-humas.index') }}" class="{{ Route::is('emagazine-humas.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>E-Magazine & Buku Saku</span>
-                      </a>
-                  </li>
-              </ul>
-          </li>
-
-          <!-- Layanan Humas (Dropdown 8 Layanan Sesuai Floating Bar Frontend) -->
-          <li class="nav-item">
-              <a class="nav-link {{ Route::is('unduhan.*') || Route::is('desain-grafis.*') || (Route::is('gallery.*') && request('kategori') === 'humas') || Route::is('layanan-humas.*') || Route::is('template-dokumen.*') ? '' : 'collapsed' }}" data-bs-target="#layanan-humas-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-grid-fill"></i><span>Layanan Humas</span><i class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="layanan-humas-nav" class="nav-content collapse {{ Route::is('unduhan.*') || Route::is('desain-grafis.*') || (Route::is('gallery.*') && request('kategori') === 'humas') || Route::is('layanan-humas.*') || Route::is('template-dokumen.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('unduhan.index') }}" class="{{ Route::is('unduhan.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Unduhan</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('desain-grafis.index') }}" class="{{ Route::is('desain-grafis.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Desain Grafis</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('template-dokumen.index') }}" class="{{ Route::is('template-dokumen.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Template Dokumen</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('layanan-humas.edit-item', 'panduan-desain') }}" class="{{ request()->route('kode') === 'panduan-desain' ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Panduan Desain & Video</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('gallery.index', ['kategori' => 'humas']) }}" class="{{ Route::is('gallery.*') && request('kategori') === 'humas' ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Galeri Kegiatan</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('layanan-humas.edit-item', 'permintaan-rilis') }}" class="{{ request()->route('kode') === 'permintaan-rilis' ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Permintaan Rilis</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('layanan-humas.edit-item', 'pendampingan-acara') }}" class="{{ request()->route('kode') === 'pendampingan-acara' ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Pendampingan Acara</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('layanan-humas.edit-item', 'survey-layanan') }}" class="{{ request()->route('kode') === 'survey-layanan' ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Survey Layanan</span>
-                      </a>
-                  </li>
-              </ul>
-          </li>
-
-          <!-- 8. Kontak (Sesuai Urutan Header) -->
+          <!-- 8. Kontak -->
           <li class="nav-item">
               <a class="nav-link {{ Route::is('contact.*') ? '' : 'collapsed' }}" href="{{ route('contact.index') }}">
                   <i class="bi bi-telephone"></i>
@@ -290,7 +287,6 @@
           @endif
 
           <li class="nav-heading">Pengaturan & Administrator</li>
-
 
           <li class="nav-item">
               <a class="nav-link {{ Route::is('user.my-profile') || Route::is('profil.*') ? '' : 'collapsed' }}" href="{{ route('user.my-profile') }}">

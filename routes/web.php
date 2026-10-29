@@ -46,21 +46,25 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Frontend / Public Routes — FIKES (Fakultas Ilmu Kesehatan)
+| Frontend / Public Routes — Program Studi Teknik Informatika (FST)
 |--------------------------------------------------------------------------
 */
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'homepage')->name('homepage');
     Route::get('/tentang', 'tentang')->name('homepage.tentang');
+    Route::get('/profil-pimpinan', 'tentang')->name('homepage.profil-pimpinan');
     Route::get('/sambutan-rektor', 'sambutanDekan')->name('homepage.sambutan-rektor');
+    Route::get('/sambutan-kaprodi', 'sambutanDekan')->name('homepage.sambutan-kaprodi');
     Route::get('/sambutan-dekan', fn () => redirect()->route('homepage.sambutan-rektor', [], 301))->name('homepage.sambutan-dekan');
     Route::get('/visi-misi', 'visiMisi')->name('homepage.visi-misi');
     Route::get('/sejarah', 'sejarah')->name('homepage.sejarah');
     Route::get('/organisasi', 'strukturOrganisasi')->name('homepage.struktur-organisasi');
+    Route::get('/fasilitas-kampus', 'fasilitas')->name('homepage.fasilitas');
     Route::get('/kurikulum', 'kurikulum')->name('homepage.kurikulum');
     Route::get('/kalender-akademik', 'kalenderAkademik')->name('homepage.kalender-akademik');
     Route::get('/pedoman-akademik', 'pedomanAkademik')->name('homepage.pedoman-akademik');
     Route::get('/sistem-akademik', 'sistemAkademik')->name('homepage.sistem-akademik');
+    Route::get('/portal/{slug}', 'portalPage')->name('homepage.portal.page');
     Route::get('/layanan', 'layanan')->name('homepage.layanan');
     Route::get('/layanan/{slug}', 'layananDetail')->name('homepage.layanan.detail');
     Route::get('/galeri', 'galeri')->name('homepage.galeri');
@@ -71,8 +75,9 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/prestasi-mahasiswa/{slug}', 'prestasiDetail')->name('homepage.prestasi.detail');
     Route::get('/organisasi-mahasiswa', 'organisasiMahasiswa')->name('homepage.organisasi');
     Route::get('/organisasi-mahasiswa/{slug}', 'organisasiMahasiswaDetail')->name('homepage.organisasi.detail');
-    Route::redirect('/dosen', '/layanan')->name('homepage.dosen');
+    Route::get('/dosen', 'dosen')->name('homepage.dosen');
     Route::get('/testimoni', 'testimoni')->name('homepage.testimoni');
+    Route::get('/tracer-study', 'testimoni')->name('homepage.tracer-study');
     Route::get('/alumni', 'testimoni')->name('homepage.alumni');
     Route::get('/alumni/kirim-testimoni', 'alumniCreateTestimoni')->name('homepage.alumni.create');
     Route::post('/alumni/kirim-testimoni', 'storeTestimonial')->name('homepage.alumni.store');
@@ -161,12 +166,13 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
         ->parameters(['admin-template-dokumen' => 'templateDokumen'])
         ->names('template-dokumen');
 
-    // Akademik Routes
+    // Akademik & Portal Routes
     Route::prefix('admin-akademik')->name('akademik.')->group(function () {
         Route::get('kurikulum', [AkademikController::class, 'kurikulum'])->name('kurikulum');
         Route::get('kalender', [AkademikController::class, 'kalender'])->name('kalender');
         Route::get('pedoman', [AkademikController::class, 'pedoman'])->name('pedoman');
         Route::get('sistem', [AkademikController::class, 'sistem'])->name('sistem');
+        Route::get('portal/{tipe}', [AkademikController::class, 'portalEdit'])->name('portal.edit');
         Route::put('{tipe}', [AkademikController::class, 'update'])->name('update');
     });
 

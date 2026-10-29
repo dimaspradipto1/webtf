@@ -1,5 +1,6 @@
 <!-- ═══════════════════════════════════════════════
-     FOOTER — TEKNIK INFORMATIKA
+     FOOTER — PROGRAM STUDI TEKNIK INFORMATIKA
+     FAKULTAS SAINS DAN TEKNOLOGI
 ═══════════════════════════════════════════════ -->
 <footer class="footer-main">
   <div class="container">
@@ -8,10 +9,13 @@
       <div class="col-lg-4">
         <a href="{{ route('homepage') }}" class="footer-logo mb-3 d-inline-flex align-items-center gap-2 text-decoration-none">
           <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo Teknik Informatika" style="height: 48px; width: auto; object-fit: contain;">
-          <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: #f9dc4b; letter-spacing: 0.5px;">TEKNIK INFORMATIKA</span>
+          <div class="d-flex flex-column">
+            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: #f9dc4b; letter-spacing: 0.5px; line-height: 1.15;">TEKNIK INFORMATIKA</span>
+            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: #ffffff; letter-spacing: 0.3px;">Fakultas Sains dan Teknologi</span>
+          </div>
         </a>
         <p class="footer-desc">
-          Teknik Informatika (UIS) Batam — Kampusnya Profesional Muda. Berkomitmen menyelenggarakan pendidikan tinggi unggul, bermartabat, bereputasi nasional dan internasional serta berjiwa entrepreneur berbasis Imtaq.
+          Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi. Berkomitmen menyelenggarakan pendidikan tinggi teknologi informasi yang unggul, bermartabat, bereputasi nasional dan internasional, serta berjiwa technopreneur berbasis Imtaq.
         </p>
         <div class="footer-social">
           <a href="https://www.instagram.com/universitasibnusina/" target="_blank" rel="noopener"><i class="bi bi-instagram"></i></a>
@@ -21,35 +25,37 @@
         </div>
       </div>
 
-      <!-- Links -->
+      <!-- Links Profil -->
       <div class="col-6 col-lg-2">
-        <div class="footer-heading">Navigasi</div>
+        <div class="footer-heading">Profil Prodi</div>
         <ul class="footer-links">
           <li><a href="{{ route('homepage') }}"><i class="bi bi-chevron-right"></i> Beranda</a></li>
-          <li><a href="{{ route('homepage.layanan') }}"><i class="bi bi-chevron-right"></i> Program Studi</a></li>
-          <li><a href="{{ route('homepage.galeri') }}"><i class="bi bi-chevron-right"></i> Galeri Kegiatan</a></li>
-          <li><a href="{{ route('homepage.news') }}"><i class="bi bi-chevron-right"></i> Berita Kampus</a></li>
-          <li><a href="{{ route('homepage.tentang') }}"><i class="bi bi-chevron-right"></i> Tentang UIS</a></li>
-          <li><a href="{{ route('homepage.humas') }}"><i class="bi bi-chevron-right"></i> Layanan Humas</a></li>
-          <li><a href="{{ route('homepage.kontak') }}"><i class="bi bi-chevron-right"></i> Hubungi Kami</a></li>
+          <li><a href="{{ route('homepage.sejarah') }}"><i class="bi bi-chevron-right"></i> Sejarah YAPISTA</a></li>
+          <li><a href="{{ route('homepage.sambutan-rektor') }}"><i class="bi bi-chevron-right"></i> Sambutan Kaprodi TF</a></li>
+          <li><a href="{{ route('homepage.tentang') }}"><i class="bi bi-chevron-right"></i> Profil Pimpinan</a></li>
+          <li><a href="{{ route('homepage.struktur-organisasi') }}"><i class="bi bi-chevron-right"></i> Struktur Organisasi</a></li>
+          <li><a href="{{ route('homepage.visi-misi') }}"><i class="bi bi-chevron-right"></i> Visi Misi & Tujuan TF</a></li>
+          <li><a href="{{ route('homepage.fasilitas') }}"><i class="bi bi-chevron-right"></i> Fasilitas Kampus</a></li>
         </ul>
       </div>
 
-      <!-- Informasi Kampus -->
+      <!-- Akademik & Portal -->
       <div class="col-6 col-lg-2">
-        <div class="footer-heading">Informasi</div>
+        <div class="footer-heading">Akademik & Portal</div>
         <ul class="footer-links">
-          <li><a href="{{ route('homepage.visi-misi') }}"><i class="bi bi-chevron-right"></i> Visi & Misi</a></li>
-          <li><a href="{{ route('homepage.sambutan-rektor') }}"><i class="bi bi-chevron-right"></i> Sambutan Rektor</a></li>
-          <li><a href="{{ route('homepage.struktur-organisasi') }}"><i class="bi bi-chevron-right"></i> Struktur Organisasi</a></li>
-          <li><a href="{{ route('homepage.testimoni') }}"><i class="bi bi-chevron-right"></i> Alumni & Testimoni</a></li>
-          <li><a href="{{ route('homepage.faq') }}"><i class="bi bi-chevron-right"></i> Tanya Jawab (FAQ)</a></li>
+          <li><a href="{{ route('homepage.kalender-akademik') }}"><i class="bi bi-chevron-right"></i> Kalender Akademik</a></li>
+          <li><a href="{{ route('homepage.kurikulum') }}"><i class="bi bi-chevron-right"></i> Kurikulum TF</a></li>
+          <li><a href="{{ route('homepage.dosen') }}"><i class="bi bi-chevron-right"></i> Data Dosen</a></li>
+          <li><a href="{{ route('homepage.testimoni') }}"><i class="bi bi-chevron-right"></i> Tracer Study</a></li>
+          <li><a href="{{ route('homepage.unduhan') }}"><i class="bi bi-chevron-right"></i> E-Dokumen</a></li>
+          <li><a href="{{ route('homepage.template-dokumen') }}"><i class="bi bi-chevron-right"></i> SOP</a></li>
+          <li><a href="{{ route('homepage.portal.page', 'dokumen-akreditasi-tf') }}"><i class="bi bi-chevron-right"></i> Akreditasi TF</a></li>
         </ul>
       </div>
 
       <!-- Contact -->
       <div class="col-lg-4">
-        <div class="footer-heading">Kontak Kampus</div>
+        <div class="footer-heading">Kontak Program Studi</div>
         <div class="footer-contact-item">
           <div class="footer-contact-icon"><i class="bi bi-geo-alt"></i></div>
           <div class="footer-contact-text">
@@ -68,7 +74,7 @@
           <div class="footer-contact-icon"><i class="bi bi-envelope"></i></div>
           <div class="footer-contact-text">
             <strong>Email Resmi</strong>
-            {{ $contact->email ?? 'info@uis.ac.id' }}
+            {{ $contact->email ?? 'informatika@uis.ac.id' }}
           </div>
         </div>
         <div class="footer-contact-item">
@@ -84,7 +90,7 @@
     <div class="footer-divider"></div>
 
     <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 footer-bottom">
-      <span>© {{ date('Y') }} Teknik Informatika (UIS). All rights reserved.</span>
+      <span>© {{ date('Y') }} Program Studi Teknik Informatika — Fakultas Sains dan Teknologi. All rights reserved.</span>
       <div class="d-flex gap-3">
         <a href="#">Kebijakan Privasi</a>
         <a href="#">Syarat & Ketentuan</a>

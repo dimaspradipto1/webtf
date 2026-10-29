@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Sejarah & Milestone — Teknik Informatika (UIS)')
-@section('meta_description', 'Sejarah perjalanan, pendirian, dan tonggak sejarah milestone Teknik Informatika.')
-@section('meta_keywords', 'sejarah uis, milestone teknik informatika, pendirian teknik informatika')
+@section('title', 'Sejarah YAPISTA — Program Studi Teknik Informatika')
+@section('meta_description', 'Sejarah perjalanan Yayasan Pendidikan Ibnu Sina Batam (YAPISTA) dan pendirian Program Studi Teknik Informatika — Fakultas Sains dan Teknologi.')
+@section('meta_keywords', 'sejarah yapista, milestone teknik informatika, fakultas sains dan teknologi')
 
 @section('content')
 
@@ -12,15 +12,18 @@
 <div class="sejarah-hero">
   <div class="container">
     <div data-aos="fade-up">
+      <div class="badge px-3 py-2 rounded-pill mb-2" style="background: #f9dc4b; color: #000000; font-weight: 700; font-size: 12.5px;">
+        <i class="bi bi-hourglass-split me-1"></i> Program Studi Teknik Informatika · Fakultas Sains dan Teknologi
+      </div>
       <h1 class="sejarah-hero-title">
-        Sejarah & <em>Milestone</em>
+        Sejarah <em>YAPISTA</em>
       </h1>
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
         <span>/</span>
         <a href="{{ route('homepage.tentang') }}">Profil</a>
         <span>/</span>
-        <span class="active">Sejarah Universitas</span>
+        <span class="active">Sejarah YAPISTA</span>
       </div>
     </div>
   </div>
@@ -33,7 +36,7 @@
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-6" data-aos="fade-right">
-        <div class="section-label">{{ $about?->sejarah_label ?: 'Jejak Langkah Universitas' }}</div>
+        <div class="section-label">{{ $about?->sejarah_label ?: 'Jejak Langkah YAPISTA & Program Studi' }}</div>
         <h2 class="section-title">
           {{ $about?->sejarah_judul ?: 'Perjalanan Berkelanjutan' }}
           <em>{{ $about?->sejarah_judul_highlight ?: 'Mencetak Profesional Muda' }}</em>

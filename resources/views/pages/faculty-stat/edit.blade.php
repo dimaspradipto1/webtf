@@ -264,7 +264,7 @@
                         <a href="{{ route('faculty-stat.index') }}" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-1"></i> Batal
                         </a>
-                        <button type="submit" class="btn btn-success fw-bold px-4 shadow-sm" style="background:#000000;border-color:#000000;">
+                        <button type="submit" class="btn btn-success fw-bold px-4 shadow-sm" style="background:#000000;border: none !important;">
                             <i class="bi bi-save me-1"></i> Perbarui Data Statistik
                         </button>
                     </div>

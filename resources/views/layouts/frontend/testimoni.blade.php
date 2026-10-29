@@ -120,7 +120,7 @@
 
         <!-- Submit & Reset -->
         <div class="col-md-2 d-flex gap-2">
-          <button type="submit" class="btn btn-primary w-100 fw-bold" style="background:#000000; border-color:#000000;">
+          <button type="submit" class="btn btn-primary w-100 fw-bold" style="background:#000000; border: none !important;">
             Filter
           </button>
           @if(!empty($search) || !empty($selectedKategori) || !empty($selectedRating))
@@ -173,7 +173,7 @@
             <i class="bi bi-chat-square-text text-muted" style="font-size: 48px;"></i>
             <h5 class="fw-bold mt-3 text-dark">Tidak Ada Testimoni yang Sesuai</h5>
             <p class="text-muted small">Coba ubah kata kunci pencarian atau reset filter untuk menampilkan semua ulasan.</p>
-            <a href="{{ route('homepage.testimoni') }}" class="btn btn-sm btn-outline-primary" style="color:#000000; border-color:#000000;">Reset Filter</a>
+            <a href="{{ route('homepage.testimoni') }}" class="btn btn-sm btn-outline-primary" style="color:#000000; border: none !important;">Reset Filter</a>
           </div>
         </div>
       @endforelse

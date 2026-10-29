@@ -148,9 +148,9 @@
 
     --text-light: #000000;
 
-    --border-light: #000000;
+    --border-light: #e2e8f0;
 
-    --border-purple: #000000;
+    --border-purple: transparent;
 
     --border-orange: #f9dc4b;
 
@@ -212,7 +212,7 @@
 .badge-soft-green {
     background: #f9dc4b;
     color: #000000;
-    border: 1px solid #000000;
+    border: none;
     font-weight: 700;
 }
 
@@ -778,7 +778,9 @@ a {
 
     backdrop-filter: none !important;
 
-    padding: 10px 0;
+    padding: 20px 0 !important;
+
+    min-height: 86px;
 
     position: -webkit-sticky;
 
@@ -816,9 +818,9 @@ a {
 }
 
 .brand-logo-img {
-    height: 46px;
+    height: 54px;
 
-    max-height: 46px;
+    max-height: 54px;
 
     width: auto;
 
@@ -830,11 +832,11 @@ a {
 .brand-title-main {
     font-family: "Plus Jakarta Sans", sans-serif;
 
-    font-size: 15px;
+    font-size: 16px;
 
     font-weight: 800;
 
-    color: #000000 !important;
+    color: #ffffff !important;
 
     opacity: 1 !important;
 
@@ -844,20 +846,20 @@ a {
 
     white-space: nowrap;
 
-    text-shadow: none !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35) !important;
 
     line-height: 1;
 }
 
 @media (max-width: 576px) {
     .brand-logo-img {
-        height: 38px;
+        height: 42px;
 
-        max-height: 38px;
+        max-height: 42px;
     }
 
     .brand-title-main {
-        font-size: 12.5px;
+        font-size: 13px;
 
         letter-spacing: 0.3px;
     }
@@ -866,17 +868,19 @@ a {
 .nav-link-custom {
     font-family: "Plus Jakarta Sans", sans-serif;
 
-    font-size: 13px;
+    font-size: 13.5px;
 
     font-weight: 700;
 
-    color: #000000 !important;
+    color: #ffffff !important;
+
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 
     background: transparent;
 
     opacity: 1 !important;
 
-    padding: 7px 10px !important;
+    padding: 9px 12px !important;
 
     border-radius: 8px;
 
@@ -894,9 +898,11 @@ a {
 .nav-link-custom:hover,
 .nav-link-custom.active,
 .show > .nav-link-custom {
-    color: #f9dc4b !important;
+    color: #ffffff !important;
 
     background: #000000 !important;
+
+    text-shadow: none;
 
     opacity: 1 !important;
 }
@@ -1029,7 +1035,7 @@ a {
 }
 
 .navbar-toggler {
-    border: 1.5px solid #000000 !important;
+    border: none !important;
 
     background: #ffffff !important;
 
@@ -1073,7 +1079,7 @@ a {
 .uis-lang-toggle {
     background: #000000 !important;
 
-    border: 1px solid #000000 !important;
+    border: none !important;
 
     opacity: 1 !important;
 
@@ -1364,9 +1370,9 @@ body > .skiptranslate {
 
         font-weight: 700 !important;
 
-        color: #000000 !important;
+        color: #ffffff !important;
 
-        background: #ffffff !important;
+        background: #000000 !important;
 
         border: 1px solid #000000 !important;
 
@@ -1386,7 +1392,7 @@ body > .skiptranslate {
     .show > .nav-link-custom {
         background: #000000 !important;
 
-        color: #f9dc4b !important;
+        color: #ffffff !important;
 
         opacity: 1 !important;
     }
@@ -1464,12 +1470,28 @@ body > .skiptranslate {
     }
 }
 
-/* CTA Buttons (100% Opacity) */
+/* CTA Buttons (100% Opacity, Tanpa Garis Hitam) */
+
+.btn,
+button.btn,
+a.btn,
+.btn-pmb-nav,
+.btn-portal-nav,
+.btn-primary-hero,
+.btn-outline-hero,
+.btn-uis-pill,
+.btn-agenda-pill,
+.uis-lang-toggle,
+.prodi-tab-btn,
+.cat-pill-item,
+.category-pill {
+    border: none !important;
+}
 
 .btn-pmb-nav {
     background: #000000 !important;
 
-    color: #f9dc4b !important;
+    color: #ffffff !important;
 
     opacity: 1 !important;
 
@@ -1491,7 +1513,7 @@ body > .skiptranslate {
 
     gap: 6px;
 
-    border: 1px solid #000000 !important;
+    border: none !important;
 
     transition: all 0.25s ease;
 
@@ -1499,7 +1521,7 @@ body > .skiptranslate {
 }
 
 .btn-pmb-nav i {
-    color: #f9dc4b !important;
+    color: #ffffff !important;
 
     opacity: 1 !important;
 
@@ -1509,7 +1531,7 @@ body > .skiptranslate {
 .btn-pmb-nav:hover {
     background: #ffffff !important;
 
-    border-color: #000000 !important;
+    border: none !important;
 
     color: #000000 !important;
 
@@ -1525,9 +1547,9 @@ body > .skiptranslate {
 }
 
 .btn-portal-nav {
-    background: #ffffff !important;
+    background: #000000 !important;
 
-    color: #000000 !important;
+    color: #ffffff !important;
 
     opacity: 1 !important;
 
@@ -1541,7 +1563,7 @@ body > .skiptranslate {
 
     border-radius: 8px;
 
-    border: 1px solid #000000 !important;
+    border: none !important;
 
     display: inline-flex;
 
@@ -1557,9 +1579,9 @@ body > .skiptranslate {
 .btn-portal-nav:hover {
     background: #000000 !important;
 
-    border-color: #000000 !important;
+    border: none !important;
 
-    color: #f9dc4b !important;
+    color: #ffffff !important;
 
     opacity: 1 !important;
 
@@ -1583,7 +1605,7 @@ body > .skiptranslate {
 
     border-radius: 12px;
 
-    border: 1.5px solid #000000;
+    border: none !important;
 
     box-shadow: var(--shadow-orange);
 
@@ -1599,7 +1621,7 @@ body > .skiptranslate {
 
     color: #f9dc4b;
 
-    border-color: #000000;
+    border: none !important;
 
     opacity: 1 !important;
 
@@ -1607,7 +1629,7 @@ body > .skiptranslate {
 }
 
 .btn-outline-hero {
-    background: #ffffff;
+    background: #f9dc4b;
 
     color: #000000;
 
@@ -1623,7 +1645,7 @@ body > .skiptranslate {
 
     border-radius: 12px;
 
-    border: 1.5px solid #000000;
+    border: none !important;
 
     display: inline-flex;
 
@@ -1637,7 +1659,7 @@ body > .skiptranslate {
 
     color: #f9dc4b;
 
-    border-color: #000000;
+    border: none !important;
 
     opacity: 1 !important;
 
@@ -3544,7 +3566,7 @@ section {
 }
 
 .news-search-pill:focus-within {
-    border-color: var(--uis-purple, #000000);
+    border-color: transparent;
 
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.14);
 }
@@ -3812,7 +3834,7 @@ section {
 .announcement-card-box:hover {
     background: var(--uis-purple-light, #f9dc4b);
 
-    border-color: var(--uis-purple, #000000);
+    border-color: transparent;
 
     transform: translateX(4px);
 }
@@ -3884,7 +3906,7 @@ section {
 
     background: var(--uis-purple-light, #f9dc4b);
 
-    border: 1px solid var(--uis-purple-subtle, #000000);
+    border: none !important;
 
     color: var(--uis-purple, #000000) !important;
 
@@ -4018,7 +4040,7 @@ section {
 .partner-marquee-card:hover {
     transform: translateY(-4px);
 
-    border-color: var(--uis-purple, #000000);
+    border-color: transparent;
 
     box-shadow: 0 12px 25px -8px rgba(0, 0, 0, 0.25);
 }
@@ -4320,7 +4342,7 @@ section {
 .page-item.active .page-link {
     background-color: var(--uis-purple, #000000) !important;
 
-    border-color: var(--uis-purple, #000000) !important;
+    border-color: transparent !important;
 
     color: #ffffff !important;
 
@@ -4332,7 +4354,7 @@ section {
 
     color: var(--uis-purple, #000000);
 
-    border-color: var(--uis-purple, #000000);
+    border-color: transparent;
 }
 
 /* PMB WhatsApp Outline Button */
@@ -5795,7 +5817,7 @@ section {
 
     color: #ffffff !important;
 
-    border-color: var(--uis-purple, #000000);
+    border-color: transparent;
 
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
@@ -5897,7 +5919,7 @@ section {
 .pagination .page-item.active .page-link {
     background-color: var(--uis-purple, #000000) !important;
 
-    border-color: var(--uis-purple, #000000) !important;
+    border-color: transparent !important;
 
     color: #ffffff !important;
 
@@ -6270,7 +6292,7 @@ section {
 
     color: #ffffff !important;
 
-    border-color: var(--uis-purple, #000000);
+    border-color: transparent;
 
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
@@ -8365,7 +8387,7 @@ section {
 
     color: #ffffff !important;
 
-    border-color: var(--uis-purple, #000000);
+    border-color: transparent;
 }
 
 /* Custom Pagination */
@@ -8395,7 +8417,7 @@ section {
 .page-item.active .page-link {
     background-color: var(--uis-purple, #000000) !important;
 
-    border-color: var(--uis-purple, #000000) !important;
+    border-color: transparent !important;
 
     color: #ffffff !important;
 
@@ -8407,7 +8429,7 @@ section {
 
     color: var(--uis-purple, #000000);
 
-    border-color: var(--uis-purple, #000000);
+    border-color: transparent;
 }
 
 /* ── Styles: sambutan-dekan.blade.php ── */
@@ -8949,4 +8971,115 @@ section {
     font-style: normal;
 
     color: var(--uis-orange);
+}
+
+/* Universal Button No-Black-Border Override */
+.btn,
+button.btn,
+a.btn,
+.btn-sm,
+.btn-lg,
+.btn-primary,
+.btn-secondary,
+.btn-success,
+.btn-warning,
+.btn-danger,
+.btn-info,
+.btn-outline-primary,
+.btn-outline-success,
+.btn-outline-secondary,
+.btn-pmb-nav,
+.btn-portal-nav,
+.btn-primary-hero,
+.btn-outline-hero,
+.btn-uis-pill,
+.btn-agenda-pill,
+.uis-lang-toggle,
+.navbar-toggler,
+.prodi-tab-btn,
+.cat-pill-item,
+.category-pill,
+.btn-lihat-dosen,
+.btn-rps-download,
+.btn-ormawa-detail,
+.btn-deck-arrow,
+.btn-ajukan-utama,
+.btn-survey-action {
+    border: none !important;
+    border-color: transparent !important;
+}
+
+
+/* Brand Subtitle (Fakultas Sains dan Teknologi) & Multi-level Dropdown Submenu */
+.brand-subtitle-main {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35) !important;
+    line-height: 1.25;
+    margin-top: 3px;
+}
+
+@media (max-width: 576px) {
+    .brand-subtitle-main {
+        font-size: 10.5px;
+        letter-spacing: 0.2px;
+    }
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-submenu-list {
+    display: none;
+    top: -6px;
+    left: 100%;
+    margin-top: 0;
+    margin-left: 2px;
+    min-width: 225px;
+    background: #ffffff !important;
+    opacity: 1 !important;
+    border-radius: 14px;
+    padding: 10px;
+    box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.22);
+}
+
+@media (min-width: 1200px) {
+    .dropdown-submenu:hover > .dropdown-submenu-list,
+    .dropdown-submenu.show > .dropdown-submenu-list {
+        display: block;
+        position: absolute;
+    }
+    .dropdown-submenu:hover > .dropdown-submenu-toggle {
+        background: #f9dc4b !important;
+        color: #000000 !important;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .dropdown-submenu > .dropdown-submenu-list {
+        position: static !important;
+        margin: 4px 0 6px 12px !important;
+        box-shadow: none !important;
+        border-left: 3px solid #f9dc4b !important;
+        border-top: none !important;
+        border-right: none !important;
+        border-bottom: none !important;
+        padding: 6px !important;
+    }
+    .dropdown-submenu.show > .dropdown-submenu-list {
+        display: block !important;
+    }
+    .dropdown-submenu .submenu-arrow {
+        transform: rotate(90deg);
+        transition: transform 0.2s ease;
+    }
+    .dropdown-submenu.show .submenu-arrow {
+        transform: rotate(270deg);
+    }
 }

@@ -21,7 +21,7 @@
             <a href="{{ route('homepage') }}#prestasi" target="_blank" class="btn btn-outline-secondary btn-sm">
                 <i class="bi bi-box-arrow-up-right me-1"></i> Preview di Website
             </a>
-            <a href="{{ route('prestasi.create') }}" class="btn btn-primary btn-sm" style="background: #000000; border-color: #000000;">
+            <a href="{{ route('prestasi.create') }}" class="btn btn-primary btn-sm" style="background: #000000; border: none !important;">
                 <i class="bi bi-plus-lg me-1"></i> Tambah Prestasi
             </a>
         </div>

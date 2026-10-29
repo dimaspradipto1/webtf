@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Visi & Misi — Teknik Informatika (UIS)')
-@section('meta_description', 'Visi, Misi, dan Nilai-nilai Budaya Civitas Akademika Teknik Informatika.')
-@section('meta_keywords', 'visi misi uis, visi teknik informatika, misi teknik informatika batam')
+@section('title', 'Visi Misi dan Tujuan TF — Program Studi Teknik Informatika')
+@section('meta_description', 'Visi, Misi, dan Tujuan Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi.')
+@section('meta_keywords', 'visi misi tf, tujuan teknik informatika, fakultas sains dan teknologi')
 
 @section('content')
 
@@ -12,15 +12,18 @@
 <div class="visimisi-hero">
   <div class="container">
     <div data-aos="fade-up">
+      <div class="badge px-3 py-2 rounded-pill mb-2" style="background: #f9dc4b; color: #000000; font-weight: 700; font-size: 12.5px;">
+        <i class="bi bi-bullseye me-1"></i> Program Studi Teknik Informatika · Fakultas Sains dan Teknologi
+      </div>
       <h1 class="visimisi-hero-title">
-        Visi & <em>Misi</em>
+        Visi, Misi & <em>Tujuan TF</em>
       </h1>
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
         <span>/</span>
         <a href="{{ route('homepage.tentang') }}">Profil</a>
         <span>/</span>
-        <span class="active">Visi & Misi</span>
+        <span class="active">Visi Misi dan Tujuan TF</span>
       </div>
     </div>
   </div>
@@ -32,10 +35,10 @@
 <section class="section-bg-sand py-5">
   <div class="container py-3">
     <div class="text-center mb-5" data-aos="fade-up">
-      <div class="section-label">Arah & Landasan Institusi</div>
-      <h2 class="section-title">Visi & Misi <em>Teknik Informatika</em></h2>
+      <div class="section-label">Arah & Landasan Program Studi</div>
+      <h2 class="section-title">Visi, Misi & Tujuan <em>Teknik Informatika</em></h2>
       <p class="section-desc mx-auto" style="max-width: 650px;">
-        Komitmen fundamental yang mengarahkan setiap langkah Tri Dharma Perguruan Tinggi di Teknik Informatika.
+        Komitmen fundamental yang mengarahkan penyelenggaraan Tri Dharma Perguruan Tinggi di Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi.
       </p>
     </div>
 

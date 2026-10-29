@@ -2,18 +2,21 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center">
-                <img src="{{ asset('frontend/img/logouis.png') }}" alt="Logo Teknik Informatika" style="height: 38px; max-height: 38px;">
-                <span class="d-none d-lg-block ms-2 fw-bold" style="font-size: 16px; color: #000000; letter-spacing: 0.5px;">Portal UIS</span>
+            <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center text-decoration-none">
+                <img src="{{ asset('frontend/img/logouis.png') }}" alt="Logo Teknik Informatika" style="height: 44px; max-height: 44px;">
+                <div class="d-none d-lg-flex flex-column ms-2">
+                    <span class="fw-bold" style="font-size: 14.5px; color: #ffffff; letter-spacing: 0.4px; line-height: 1.15;">TEKNIK INFORMATIKA</span>
+                    <span style="font-size: 10.5px; color: #ffffff; font-weight: 600; letter-spacing: 0.2px; line-height: 1.2;">Fakultas Sains dan Teknologi</span>
+                </div>
             </a>
-            <i class="bi bi-list toggle-sidebar-btn ms-2" style="color: #000000; font-size: 26px; cursor: pointer;"></i>
+            <i class="bi bi-list toggle-sidebar-btn ms-2" style="color: #ffffff; font-size: 26px; cursor: pointer;"></i>
         </div><!-- End Logo -->
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
                 <li class="nav-item me-3 d-none d-md-block">
-                    <a href="{{ route('homepage') }}" target="_blank" class="btn btn-sm rounded-pill px-3 py-1" style="font-size: 12.5px; background: #000000; color: #f9dc4b; font-weight: 700; border: none; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+                    <a href="{{ route('homepage') }}" target="_blank" class="btn btn-sm rounded-pill px-3 py-1" style="font-size: 12.5px; background: #000000; color: #ffffff; font-weight: 700; border: none; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
                         <i class="bi bi-globe2 me-1"></i> Website Utama
                     </a>
                 </li>
@@ -21,10 +24,10 @@
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                         <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm"
-                             style="width:36px;height:36px;background: #000000; color: #f9dc4b; border: 2px solid #ffffff; font-size:13px;">
+                             style="width:36px;height:36px;background: #000000; color: #ffffff; border: 2px solid #ffffff; font-size:13px;">
                             {{ strtoupper(substr(Auth::user()->name ?? 'AD', 0, 2)) }}
                         </div>
-                        <span class="d-none d-md-block dropdown-toggle ps-2 fw-semibold" style="color: #000000;">{{ Auth::user()->name }}</span>
+                        <span class="d-none d-md-block dropdown-toggle ps-2 fw-semibold" style="color: #ffffff;">{{ Auth::user()->name }}</span>
                     </a><!-- End Profile Image Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">

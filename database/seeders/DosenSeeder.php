@@ -12,143 +12,28 @@ class DosenSeeder extends Seeder
     {
         Dosen::truncate();
 
-        $prodiK3 = Layanan::where('judul', 'like', '%Kesehatan dan Keselamatan Kerja%')->first();
-        $prodiKesling = Layanan::where('judul', 'like', '%Kesehatan Lingkungan%')->first();
-        $prodiKesmas = Layanan::where('judul', 'like', '%Kesehatan Masyarakat%')->first();
+        $prodiTF = Layanan::where('judul', 'like', '%Teknik Informatika%')->first() ?? Layanan::first();
 
-        // 1. Dosen S1 K3
-        $k3Dosens = [
-            [
-                'nama_dosen' => 'Dr. Hengky Oktarizal, S.KM., M.KM',
-                'jabatan_fungsional' => 'Lektor Kepala',
-                'nidn' => '1021088101',
-                'nuptk' => '7153759660110033',
-                'link' => 'https://pddikti.kemdiktisaintek.go.id',
-            ],
-            [
-                'nama_dosen' => 'Dr. Ns. Ahmad Fauzi, M.Kep., Sp.Kep.Kom',
-                'jabatan_fungsional' => 'Lektor',
-                'nidn' => '1015048502',
-                'nuptk' => '8244761662200042',
-                'link' => 'https://pddikti.kemdiktisaintek.go.id',
-            ],
-            [
-                'nama_dosen' => 'Rina Marlina, S.KM., M.Kes (K3)',
-                'jabatan_fungsional' => 'Lektor',
-                'nidn' => '1008068903',
-                'nuptk' => '5339767668210013',
-                'link' => 'https://pddikti.kemdiktisaintek.go.id',
-            ],
-            [
-                'nama_dosen' => 'Budi Santoso, S.T., M.KKK',
-                'jabatan_fungsional' => 'Asisten Ahli',
-                'nidn' => '1012119101',
-                'nuptk' => '4251769670220021',
-                'link' => 'https://pddikti.kemdiktisaintek.go.id',
-            ],
-            [
-                'nama_dosen' => 'Siti Rahmawati, S.KM., M.Sc',
-                'jabatan_fungsional' => 'Tenaga Pengajar',
-                'nidn' => '1023029302',
-                'nuptk' => '3162771672230015',
-                'link' => 'https://pddikti.kemdiktisaintek.go.id',
-            ],
+        $tfDosens = [
+            ['nama_dosen' => 'Assoc. Prof. Dr. Ir. Larisang, S.T., M.T., IPU., ASEAN Eng.', 'jabatan_fungsional' => 'Lektor Kepala', 'nidn' => '1012057501', 'nuptk' => '7544753655110012'],
+            ['nama_dosen' => 'Dr. Ir. H. M. Ansyar Bora, S.T., M.T., IPM', 'jabatan_fungsional' => 'Lektor Kepala', 'nidn' => '1018087801', 'nuptk' => '8150756658110023'],
+            ['nama_dosen' => 'Okta Veza, S.Kom., M.Kom', 'jabatan_fungsional' => 'Lektor / Kaprodi Teknik Informatika', 'nidn' => '1024108801', 'nuptk' => '6356766667110034'],
+            ['nama_dosen' => 'M. Ropianto, S.Kom., M.Kom', 'jabatan_fungsional' => 'Lektor', 'nidn' => '1015038402', 'nuptk' => '5647762663110045'],
+            ['nama_dosen' => 'Novi Hendri Adi, S.Kom., M.Kom', 'jabatan_fungsional' => 'Lektor', 'nidn' => '1009118601', 'nuptk' => '4441764665110056'],
+            ['nama_dosen' => 'Fadli Suandi, S.T., M.Kom', 'jabatan_fungsional' => 'Lektor', 'nidn' => '1021048503', 'nuptk' => '3753763664110067'],
+            ['nama_dosen' => 'Ririt Dwiputri Permatasari, S.T., M.SI', 'jabatan_fungsional' => 'Lektor', 'nidn' => '1014078702', 'nuptk' => '2046765666210078'],
+            ['nama_dosen' => 'Ahmad Hamdan, S.Kom., M.Kom', 'jabatan_fungsional' => 'Asisten Ahli', 'nidn' => '1005099001', 'nuptk' => '1237768669110089'],
         ];
 
-        foreach ($k3Dosens as $idx => $d) {
+        foreach ($tfDosens as $idx => $d) {
             Dosen::create([
-                'layanan_id' => $prodiK3?->id,
-                'prodi_nama' => 'S1 Kesehatan dan Keselamatan Kerja',
+                'layanan_id' => $prodiTF?->id,
+                'prodi_nama' => 'Program Sarjana (S1) Teknik Informatika',
                 'nama_dosen' => $d['nama_dosen'],
                 'jabatan_fungsional' => $d['jabatan_fungsional'],
                 'nidn' => $d['nidn'],
                 'nuptk' => $d['nuptk'],
-                'link' => $d['link'],
-                'urutan' => $idx + 1,
-                'is_active' => true,
-            ]);
-        }
-
-        // 2. Dosen S1 Kesehatan Lingkungan
-        $keslingDosens = [
-            [
-                'nama_dosen' => 'Dr. Ir. Hendra Saputra, M.Si., M.Kes',
-                'jabatan_fungsional' => 'Lektor Kepala',
-                'nidn' => '1011037801',
-                'nuptk' => '6142756658110022',
                 'link' => 'https://pddikti.kemdiktisaintek.go.id',
-            ],
-            [
-                'nama_dosen' => 'Nurul Hidayah, S.Si., M.Ling',
-                'jabatan_fungsional' => 'Lektor',
-                'nidn' => '1027098602',
-                'nuptk' => '7253764665200031',
-                'link' => 'https://pddikti.kemdiktisaintek.go.id',
-            ],
-            [
-                'nama_dosen' => 'Eko Prasetyo, S.KM., M.Kes (KL)',
-                'jabatan_fungsional' => 'Asisten Ahli',
-                'nidn' => '1019089003',
-                'nuptk' => '8364768669210044',
-                'link' => 'https://pddikti.kemdiktisaintek.go.id',
-            ],
-            [
-                'nama_dosen' => 'Dewi Lestari, S.Si., M.Sc',
-                'jabatan_fungsional' => 'Tenaga Pengajar',
-                'nidn' => '1005129201',
-                'nuptk' => '9475770671220053',
-                'link' => 'https://pddikti.kemdiktisaintek.go.id',
-            ],
-        ];
-
-        foreach ($keslingDosens as $idx => $d) {
-            Dosen::create([
-                'layanan_id' => $prodiKesling?->id,
-                'prodi_nama' => 'S1 Kesehatan Lingkungan',
-                'nama_dosen' => $d['nama_dosen'],
-                'jabatan_fungsional' => $d['jabatan_fungsional'],
-                'nidn' => $d['nidn'],
-                'nuptk' => $d['nuptk'],
-                'link' => $d['link'],
-                'urutan' => $idx + 1,
-                'is_active' => true,
-            ]);
-        }
-
-        // 3. Dosen S2 Kesehatan Masyarakat
-        $kesmasDosens = [
-            [
-                'nama_dosen' => 'Prof. Dr. dr. H. Syamsudin, M.Kes., FISPH',
-                'jabatan_fungsional' => 'Guru Besar',
-                'nidn' => '1004016501',
-                'nuptk' => '5132743645110011',
-                'link' => 'https://pddikti.kemdiktisaintek.go.id',
-            ],
-            [
-                'nama_dosen' => 'Dr. Ratna Juwita, S.KM., M.Epid',
-                'jabatan_fungsional' => 'Lektor Kepala',
-                'nidn' => '1018077502',
-                'nuptk' => '6243753654200022',
-                'link' => 'https://pddikti.kemdiktisaintek.go.id',
-            ],
-            [
-                'nama_dosen' => 'Dr. Wahyu Hidayat, S.KM., M.Kes',
-                'jabatan_fungsional' => 'Lektor',
-                'nidn' => '1022108203',
-                'nuptk' => '7354760661210033',
-                'link' => 'https://pddikti.kemdiktisaintek.go.id',
-            ],
-        ];
-
-        foreach ($kesmasDosens as $idx => $d) {
-            Dosen::create([
-                'layanan_id' => $prodiKesmas?->id,
-                'prodi_nama' => 'S2 Kesehatan Masyarakat',
-                'nama_dosen' => $d['nama_dosen'],
-                'jabatan_fungsional' => $d['jabatan_fungsional'],
-                'nidn' => $d['nidn'],
-                'nuptk' => $d['nuptk'],
-                'link' => $d['link'],
                 'urutan' => $idx + 1,
                 'is_active' => true,
             ]);

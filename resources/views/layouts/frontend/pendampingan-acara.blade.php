@@ -127,7 +127,7 @@
   }
   .event-rendered-content ul li:hover {
     background: #ffffff;
-    border-color: #000000;
+    border: none !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
   }
@@ -155,7 +155,7 @@
   }
   .assistance-item:hover {
     background: #ffffff;
-    border-color: #000000;
+    border: none !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
   }

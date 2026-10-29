@@ -30,7 +30,7 @@
                 </p>
             </div>
         </div>
-        <a href="{{ route('homepage.permintaan-rilis') }}" target="_blank" class="btn btn-sm btn-success fw-bold shadow-sm d-none d-md-inline-flex align-items-center gap-1" style="background-color: #000000; border-color: #000000; border-radius: 8px;">
+        <a href="{{ route('homepage.permintaan-rilis') }}" target="_blank" class="btn btn-sm btn-success fw-bold shadow-sm d-none d-md-inline-flex align-items-center gap-1" style="background-color: #000000; border: none !important; border-radius: 8px;">
             <i class="bi bi-eye-fill"></i> Buka Halaman
         </a>
 @endif

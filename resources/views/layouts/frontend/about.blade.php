@@ -1,8 +1,8 @@
 @extends('layouts.frontend.template')
 
-@section('title', 'Tentang Kami — Teknik Informatika (UIS)')
-@section('meta_description', 'Kenali lebih dekat Teknik Informatika (UIS) — profil, visi misi, nilai karakter akademik, dan fasilitas unggulan kami.')
-@section('meta_keywords', 'tentang uis, profil teknik informatika, visi misi uis, struktur organisasi uis, pendidikan kesehatan')
+@section('title', 'Profil Pimpinan & Program Studi — Teknik Informatika')
+@section('meta_description', 'Profil Pimpinan dan Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi.')
+@section('meta_keywords', 'profil pimpinan teknik informatika, fakultas sains dan teknologi, program studi teknik informatika')
 
 @section('content')
 @php
@@ -21,20 +21,23 @@
 <div class="about-hero">
   <div class="container">
     <div class="about-hero-content" data-aos="fade-up" data-aos-duration="800">
+      <div class="badge px-3 py-2 rounded-pill mb-2" style="background: #f9dc4b; color: #000000; font-weight: 700; font-size: 12.5px;">
+        <i class="bi bi-person-vcard me-1"></i> Program Studi Teknik Informatika · Fakultas Sains dan Teknologi
+      </div>
       <h1 class="about-hero-title">
-        Tentang <em>UIS</em>
+        Profil <em>Pimpinan & Prodi</em>
       </h1>
       <div class="breadcrumb-custom">
         <a href="{{ route('homepage') }}"><i class="bi bi-house-door-fill me-1"></i>Beranda</a>
         <span>/</span>
-        <span class="active">Tentang Universitas</span>
+        <span class="active">Profil Pimpinan</span>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════
-     PROFIL UNIVERSITAS (FULL WIDTH & VIDEO)
+     PROFIL PROGRAM STUDI & PIMPINAN
 ═══════════════════════════════════════════════ -->
 <section class="section-bg-white py-5">
   <div class="container">
@@ -42,8 +45,8 @@
       <div class="col-12" data-aos="fade-up" data-aos-duration="800">
         <!-- Header Profil -->
         <div class="text-center mb-4">
-          <div class="section-label mx-auto">Profil Universitas</div>
-          <h2 class="section-title">{!! $about->judul_profil ?? 'Kampusnya Profesional Muda — <em>Teknik Informatika</em>' !!}</h2>
+          <div class="section-label mx-auto">Profil Program Studi · Fakultas Sains dan Teknologi</div>
+          <h2 class="section-title">{!! $about->judul_profil ?? 'Program Studi S1 <em>Teknik Informatika</em>' !!}</h2>
           <div class="divider-line centered"></div>
         </div>
 

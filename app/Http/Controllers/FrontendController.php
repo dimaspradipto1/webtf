@@ -120,8 +120,8 @@ class FrontendController extends Controller
 
         if (! $facultyStat) {
             $facultyStat = (object) [
-                'title' => 'FIKES UIS Dalam Angka',
-                'jumlah_prodi' => 0,
+                'title' => 'Teknik Informatika Dalam Angka',
+                'jumlah_prodi' => 1,
                 'total_mahasiswa' => 0,
                 'total_dosen' => 0,
                 'total_alumni' => 0,
@@ -182,20 +182,14 @@ class FrontendController extends Controller
         $totalSks = $courses->sum('sks');
         $totalMatakuliah = $courses->count();
 
-        $pageTitle = 'Kurikulum '.($currentProdi?->judul ?? 'Program Studi FIKES');
+        $pageTitle = 'Kurikulum '.($currentProdi?->judul ?? 'Program Studi Teknik Informatika');
 
         return view('layouts.frontend.kurikulum', compact('prodis', 'currentProdi', 'coursesBySemester', 'totalSks', 'totalMatakuliah', 'pageTitle'));
     }
 
     public function kalenderAkademik()
     {
-        $item = Akademik::firstOrCreate(['tipe' => 'kalender'], [
-            'judul' => 'Kalender Akademik Tahun Akademik 2026/2027',
-            'subjudul' => 'Jadwal perkuliahan, registrasi, UTS, UAS, dan kegiatan akademik fakultas.',
-            'deskripsi' => '<p>Kalender Akademik memuat seluruh linimasa kegiatan perkuliahan Semester Ganjil dan Genap, termasuk masa registrasi ulang, pengisian KRS, bimbingan akademik, hingga yudisium dan wisuda.</p>',
-            'link_url' => '',
-            'is_active' => true,
-        ]);
+        $item = AkademikController::getOrCreateItem('kalender');
         $pageTitle = 'Kalender Akademik';
 
         return view('layouts.frontend.akademik', compact('item', 'pageTitle'));
@@ -203,13 +197,7 @@ class FrontendController extends Controller
 
     public function pedomanAkademik()
     {
-        $item = Akademik::firstOrCreate(['tipe' => 'pedoman'], [
-            'judul' => 'Pedoman & Panduan Akademik Mahasiswa',
-            'subjudul' => 'Buku panduan tata tertib, prosedur skripsi, magang/PKL, dan etika akademik.',
-            'deskripsi' => '<p>Buku Pedoman Akademik merupakan acuan utama bagi seluruh civitas akademika FIKES UIS dalam menjalankan aktivitas belajar-mengajar, tata tertib perkuliahan, evaluasi hasil belajar, dan layanan kemahasiswaan.</p>',
-            'link_url' => '',
-            'is_active' => true,
-        ]);
+        $item = AkademikController::getOrCreateItem('pedoman');
         $pageTitle = 'Pedoman Akademik';
 
         return view('layouts.frontend.akademik', compact('item', 'pageTitle'));
@@ -217,16 +205,26 @@ class FrontendController extends Controller
 
     public function sistemAkademik()
     {
-        $item = Akademik::firstOrCreate(['tipe' => 'sistem'], [
-            'judul' => 'Portal Sistem Informasi Akademik (SIAKAD & E-Learning)',
-            'subjudul' => 'Layanan portal digital terpadu untuk pengisian KRS, presensi, nilai, dan pembelajaran online.',
-            'deskripsi' => '<p>Sistem Informasi Akademik (SIAKAD) FIKES Teknik Informatika memfasilitasi mahasiswa dan dosen dalam proses administrasi perkuliahan secara daring, cepat, dan transparan.</p>',
-            'link_url' => 'https://siakad.uis.ac.id',
-            'is_active' => true,
-        ]);
+        $item = AkademikController::getOrCreateItem('sistem');
         $pageTitle = 'Sistem Akademik & Portal Online';
 
         return view('layouts.frontend.akademik', compact('item', 'pageTitle'));
+    }
+
+    public function portalPage(string $slug)
+    {
+        $item = AkademikController::getOrCreateItem($slug);
+        $pageTitle = $item->judul;
+
+        return view('layouts.frontend.akademik', compact('item', 'pageTitle'));
+    }
+
+    public function fasilitas()
+    {
+        $saranas = Sarana::where('is_active', true)->orderBy('urutan')->get();
+        $about = About::first();
+
+        return view('layouts.frontend.fasilitas', compact('saranas', 'about'));
     }
 
     public function dosen(Request $request)
@@ -259,7 +257,7 @@ class FrontendController extends Controller
         $totalDosen = (clone $query)->count();
         $dosens = $query->orderBy('urutan')->orderBy('nama_dosen')->paginate(10)->withQueryString();
 
-        $pageTitle = 'Dosen '.($currentProdi?->judul ?? 'Program Studi FIKES UIS');
+        $pageTitle = 'Dosen '.($currentProdi?->judul ?? 'Program Studi Teknik Informatika');
 
         return view('layouts.frontend.dosen', compact('prodis', 'currentProdi', 'dosens', 'totalDosen', 'search', 'pageTitle'));
     }
@@ -685,9 +683,11 @@ class FrontendController extends Controller
             }
             if (! $selectedCat) {
                 if (str_contains($categorySlug, 'pengumuman') || str_contains($categorySlug, 'agenda')) {
-                    $selectedCat = 'Pengumuman & Agenda';
-                } elseif (str_contains($categorySlug, 'berita') || str_contains($categorySlug, 'kampus')) {
-                    $selectedCat = 'Berita Universitas';
+                    $selectedCat = 'Pengumuman';
+                } elseif (str_contains($categorySlug, 'undangan')) {
+                    $selectedCat = 'Undangan';
+                } elseif (str_contains($categorySlug, 'berita') || str_contains($categorySlug, 'peristiwa') || str_contains($categorySlug, 'kampus')) {
+                    $selectedCat = 'Berita';
                 } elseif (str_contains($categorySlug, 'humas')) {
                     $selectedCat = 'Berita Humas';
                 } else {

@@ -49,35 +49,40 @@
         .header {
             background-color: #f9dc4b !important;
             opacity: 1 !important;
+            height: 76px !important;
+            padding: 12px 20px !important;
             border-bottom: 2.5px solid #000000 !important;
             box-shadow: 0 2px 14px rgba(0, 0, 0, 0.16) !important;
         }
         .header .logo span {
-            color: #000000 !important;
+            color: #ffffff !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
             font-weight: 800;
             letter-spacing: 0.5px;
         }
         .header .toggle-sidebar-btn {
-            color: #000000 !important;
+            color: #ffffff !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
         }
         .header .toggle-sidebar-btn:hover {
-            color: #000000 !important;
+            color: #ffffff !important;
         }
         .header .nav-profile {
-            color: #000000 !important;
+            color: #ffffff !important;
         }
         .header .nav-profile span {
-            color: #000000 !important;
+            color: #ffffff !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
             font-weight: 700;
         }
         .header .nav-profile:hover span {
-            color: #000000 !important;
+            color: #ffffff !important;
         }
         .header .nav-icon {
-            color: #000000 !important;
+            color: #ffffff !important;
         }
         .header .nav-icon:hover {
-            color: #000000 !important;
+            color: #ffffff !important;
         }
         .sidebar {
             background-color: #ffffff !important;
@@ -112,32 +117,37 @@
         .sidebar-nav .nav-link:hover i {
             color: #f9dc4b;
         }
+        .btn {
+            border: none !important;
+        }
         .btn-primary {
             background-color: #000000 !important;
-            border-color: #000000 !important;
+            border: none !important;
             color: #f9dc4b !important;
         }
         .btn-primary:hover, .btn-primary:focus {
             background-color: #f9dc4b !important;
-            border-color: #000000 !important;
+            border: none !important;
             color: #000000 !important;
         }
         .btn-outline-primary {
+            background-color: #f9dc4b !important;
             color: #000000 !important;
-            border-color: #000000 !important;
+            border: none !important;
         }
         .btn-outline-primary:hover {
             background-color: #000000 !important;
             color: #f9dc4b !important;
+            border: none !important;
         }
         .btn-warning {
             background-color: #f9dc4b !important;
-            border-color: #000000 !important;
+            border: none !important;
             color: #000000 !important;
         }
         .btn-warning:hover {
             background-color: #000000 !important;
-            border-color: #000000 !important;
+            border: none !important;
             color: #f9dc4b !important;
         }
         .pagetitle h1 {

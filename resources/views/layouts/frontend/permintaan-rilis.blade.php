@@ -38,7 +38,7 @@
   .cta-action-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
-    border-color: #000000;
+    border: none !important;
   }
   .cta-icon-badge {
     width: 58px;
@@ -62,7 +62,7 @@
     box-shadow: 0 2px 10px rgba(0,0,0,0.02);
   }
   .rule-card:hover {
-    border-color: #000000;
+    border: none !important;
     transform: translateY(-4px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
   }
@@ -107,7 +107,7 @@
   }
   .step-flow-card:hover {
     transform: translateY(-4px);
-    border-color: #000000;
+    border: none !important;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
   }
   .step-num-circle {
@@ -198,11 +198,11 @@
               $waRilisApplyText = rawurlencode('Halo Tim Humas UIS, saya ingin mengajukan permohonan penerbitan rilis berita / siaran pers.');
             @endphp
             @if(!$isInvalidRilisForm)
-              <a href="{{ $rilisForm }}" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100 fw-bold py-2 shadow-sm" style="background-color: #000000; border-color: #000000; border-radius: 8px;">
+              <a href="{{ $rilisForm }}" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100 fw-bold py-2 shadow-sm" style="background-color: #000000; border: none !important; border-radius: 8px;">
                 <i class="bi bi-box-arrow-up-right me-1"></i> Isi Formulir Rilis
               </a>
             @else
-              <a href="https://wa.me/{{ $cleanWa }}?text={{ $waRilisApplyText }}" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100 fw-bold py-2 shadow-sm" style="background-color: #000000; border-color: #000000; border-radius: 8px;">
+              <a href="https://wa.me/{{ $cleanWa }}?text={{ $waRilisApplyText }}" target="_blank" rel="noopener noreferrer" class="btn btn-success w-100 fw-bold py-2 shadow-sm" style="background-color: #000000; border: none !important; border-radius: 8px;">
                 <i class="bi bi-whatsapp me-1"></i> Ajukan via WhatsApp
               </a>
             @endif
@@ -227,7 +227,7 @@
               $waTarget = !empty($cleanWa) ? $cleanWa : '6281234567890';
               $waMessage = rawurlencode('Halo Tim Humas UIS, saya ingin mengajukan draf berita/siaran pers acara untuk dipublikasikan.');
             @endphp
-            <a href="https://wa.me/{{ $waTarget }}?text={{ $waMessage }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-success w-100 fw-bold py-2" style="border-radius: 8px; color: #000000; border-color: #000000;">
+            <a href="https://wa.me/{{ $waTarget }}?text={{ $waMessage }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-success w-100 fw-bold py-2" style="border-radius: 8px; color: #000000; border: none !important;">
               <i class="bi bi-chat-dots-fill me-1"></i> Chat WhatsApp Humas
             </a>
           </div>
