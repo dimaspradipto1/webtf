@@ -28,10 +28,10 @@
 
           <!-- 1b. Konten Beranda -->
           <li class="nav-item">
-              <a class="nav-link {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('social-media.*') || Route::is('feature.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') || Route::is('partner.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') ? '' : 'collapsed' }}" data-bs-target="#beranda-nav" data-bs-toggle="collapse" href="#">
+              <a class="nav-link {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('social-media.*') || Route::is('feature.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('partner.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') ? '' : 'collapsed' }}" data-bs-target="#beranda-nav" data-bs-toggle="collapse" href="#">
                   <i class="bi bi-layout-text-window-reverse"></i><span>Konten Beranda</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-              <ul id="beranda-nav" class="nav-content collapse {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || (Route::is('social-media.*') && request('kategori') !== 'humas') || Route::is('feature.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('faculty-stat.*') || Route::is('partner.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+              <ul id="beranda-nav" class="nav-content collapse {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || (Route::is('social-media.*') && request('kategori') !== 'humas') || Route::is('feature.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('partner.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                   <li>
                       <a href="{{ route('banner.index') }}" class="{{ Route::is('banner.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Banner Hero</span>
@@ -45,11 +45,6 @@
                   <li>
                       <a href="{{ route('social-media.index', ['kategori' => 'universitas']) }}" class="{{ Route::is('social-media.*') && request('kategori') !== 'humas' ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Media Sosial Fakultas Sains dan Teknologi</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('faculty-stat.index') }}" class="{{ Route::is('faculty-stat.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Statistik Program Studi</span>
                       </a>
                   </li>
                   <li>

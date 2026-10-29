@@ -785,7 +785,9 @@ a {
     border-top: none !important;
     border-bottom: none !important;
     outline: none !important;
-    box-shadow: 0 -8px 0 0 #f9dc4b, 0 4px 18px rgba(0, 0, 0, 0.12) !important;
+    box-shadow:
+        0 -8px 0 0 #f9dc4b,
+        0 4px 18px rgba(0, 0, 0, 0.12) !important;
 }
 
 .navbar-brand-custom {
@@ -1853,7 +1855,9 @@ section {
     background: #f9dc4b !important;
     border-color: #f9dc4b !important;
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(249, 220, 75, 0.45), 0 6px 14px rgba(0, 0, 0, 0.06);
+    box-shadow:
+        0 20px 40px rgba(249, 220, 75, 0.45),
+        0 6px 14px rgba(0, 0, 0, 0.06);
 }
 
 .value-icon-wrap {
@@ -1876,7 +1880,9 @@ section {
     font-size: 42px;
     line-height: 1;
     display: block;
-    transition: transform 0.35s ease, color 0.35s ease;
+    transition:
+        transform 0.35s ease,
+        color 0.35s ease;
 }
 
 .value-card:hover .value-icon-wrap {
@@ -2720,7 +2726,7 @@ section {
     object-position: center;
     display: block;
     transition: transform 0.35s ease;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
 }
 .mirror-card-fallback-icon {
     width: 100%;
@@ -3337,7 +3343,9 @@ section {
     background: #f9dc4b !important;
     border-color: #f9dc4b !important;
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(249, 220, 75, 0.45), 0 6px 14px rgba(0, 0, 0, 0.06);
+    box-shadow:
+        0 20px 40px rgba(249, 220, 75, 0.45),
+        0 6px 14px rgba(0, 0, 0, 0.06);
 }
 
 .fasilitas-icon {
@@ -3360,7 +3368,9 @@ section {
     font-size: 42px;
     line-height: 1;
     display: block;
-    transition: transform 0.35s ease, color 0.35s ease;
+    transition:
+        transform 0.35s ease,
+        color 0.35s ease;
 }
 
 .fasilitas-box:hover .fasilitas-icon {
@@ -4515,11 +4525,7 @@ section {
 
     height: 440px;
 
-    background: radial-gradient(
-        circle,
-        #ffffff 0%,
-        transparent 70%
-    );
+    background: radial-gradient(circle, #ffffff 0%, transparent 70%);
 
     border-radius: 50%;
 
@@ -8980,7 +8986,6 @@ a.btn,
     border-color: transparent !important;
 }
 
-
 /* Brand Subtitle (Fakultas Sains dan Teknologi) & Multi-level Dropdown Submenu */
 .brand-subtitle-main {
     font-family: "Plus Jakarta Sans", sans-serif;
@@ -9054,7 +9059,6 @@ a.btn,
         transform: rotate(270deg);
     }
 }
-
 
 /* ═══════════════════════════════════════════════════════════
    COMPACT & STANDARDIZED HEADER HERO & BREADCRUMB

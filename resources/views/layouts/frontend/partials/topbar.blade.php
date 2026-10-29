@@ -1,8 +1,6 @@
 @php
   $topbar = $topbarSetting ?? \App\Models\Topbar::where('is_active', true)->latest('id')->first();
   $marqueeText = $topbar?->marquee_text ?: 'Fakultas Sains & Teknologi Universitas Ibnu Sina Fakultasnya Teknokrat Unggul — Program Studi S1 Teknik Informatika (UIS)';
-  $topbarBadge = $topbar?->badge_text ?: 'TEKNIK INFORMATIKA';
-  $topbarIcon = $topbar?->badge_icon ?: 'bi-laptop';
 
   $sosmedList = [];
   if ($topbar && is_array($topbar->social_media) && count($topbar->social_media) > 0) {
@@ -30,27 +28,20 @@
      TOPBAR HEADER — RUNNING TEXT & SOSMED
 ═══════════════════════════════════════════════ -->
 <div class="topbar-main">
-  <div class="container-fluid px-lg-4 px-xl-5">
-    <div class="d-flex align-items-center justify-content-between gap-3">
+  <div class="container-fluid px-lg-4 px-xl-5 h-100">
+    <div class="row align-items-center h-100 g-2">
       
-      <!-- Sisi Kiri / Tengah: Marquee Running Text -->
-      <div class="topbar-marquee-wrapper d-flex align-items-center flex-grow-1 overflow-hidden">
-        @if(!empty($topbarBadge))
-          <span class="topbar-badge d-none d-sm-inline-flex align-items-center gap-1 text-nowrap me-2 flex-shrink-0">
-            <i class="bi {{ $topbarIcon }}"></i>
-            <span>{{ $topbarBadge }}</span>
-          </span>
-        @endif
-
-        <div class="topbar-marquee-container flex-grow-1 overflow-hidden">
+      <!-- Sisi Kiri: col-6 (Tulisan Teks Marquee Berjalan) -->
+      <div class="col-6 h-100 d-flex align-items-center overflow-hidden">
+        <div class="topbar-marquee-container w-100 overflow-hidden d-flex align-items-center">
           <marquee behavior="scroll" direction="left" scrollamount="5" class="topbar-marquee-text" onmouseover="this.stop();" onmouseout="this.start();">
             {{ $marqueeText }}
           </marquee>
         </div>
       </div>
 
-      <!-- Sisi Kanan: Search Icon & Social Media Buttons -->
-      <div class="topbar-actions d-flex align-items-center gap-2 flex-shrink-0">
+      <!-- Sisi Kanan: col-6 (Media Sosial & Search - Rata Kanan) -->
+      <div class="col-6 h-100 d-flex align-items-center justify-content-end gap-2">
         <!-- Search Button (Memicu Modal Pencarian Cepat) -->
         <a href="javascript:void(0)" 
            class="topbar-search-btn" 
@@ -61,7 +52,7 @@
         </a>
 
         <!-- Ikon Sosial Media -->
-        <div class="topbar-socials d-flex align-items-center gap-1">
+        <div class="topbar-socials d-flex align-items-center gap-2">
           @foreach($sosmedList as $s)
             <a href="{{ $s['url'] }}" 
                target="_blank" 
@@ -119,82 +110,93 @@
 
 <style>
 /* ═══════════════════════════════════════════════
-   TOPBAR MAIN STYLES — HITAM SOLID & WHITE TEXT
+   TOPBAR MAIN STYLES — HITAM SOLID, TINGGI & PRESISI
 ═══════════════════════════════════════════════ */
 .topbar-main {
   background: #000000 !important;
   color: #ffffff !important;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  height: 36px;
-  line-height: 36px;
+  height: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
   position: relative;
   z-index: 1060;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-.topbar-badge {
-  background: #f9dc4b;
-  color: #000000;
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  padding: 2px 9px;
-  border-radius: 4px;
-  height: 22px;
-  line-height: 18px;
-  text-transform: uppercase;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+.topbar-marquee-wrapper {
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .topbar-marquee-container {
   min-width: 0;
-  height: 36px;
+  height: 100%;
   display: flex;
   align-items: center;
 }
 
 .topbar-marquee-text {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #ffffff;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.25px;
   margin: 0;
   padding: 0;
+  line-height: 1.4;
   white-space: nowrap;
+}
+
+.topbar-actions {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .topbar-search-btn {
   color: #ffffff !important;
-  font-size: 14px;
-  width: 26px;
-  height: 26px;
+  font-size: 15px;
+  width: 28px;
+  height: 28px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   border-radius: 4px;
   transition: all 0.2s ease;
+  line-height: 1;
 }
 
 .topbar-search-btn:hover {
   color: #f9dc4b !important;
-  transform: scale(1.1);
+  transform: scale(1.12);
+}
+
+.topbar-socials {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .topbar-sosmed-btn {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   background: #ffffff !important;
   color: #000000 !important;
-  border-radius: 4px;
+  border-radius: 6px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 11.5px;
+  font-size: 13px;
   text-decoration: none;
   line-height: 1;
   transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .topbar-sosmed-btn:hover {
@@ -205,17 +207,22 @@
 
 @media (max-width: 575.98px) {
   .topbar-main {
-    height: 34px;
-    line-height: 34px;
+    height: 40px;
+    min-height: 40px;
   }
   .topbar-marquee-text {
-    font-size: 12px;
+    font-size: 12.5px;
   }
   .topbar-sosmed-btn {
-    width: 20px;
-    height: 20px;
-    font-size: 10.5px;
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+    border-radius: 4px;
+  }
+  .topbar-search-btn {
+    font-size: 13px;
+    width: 24px;
+    height: 24px;
   }
 }
 </style>
-
