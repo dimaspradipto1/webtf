@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AkademikController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\BahasaSettingController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BeasiswaController;
@@ -249,4 +250,14 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::post('admin-bahasa/{id}/toggle', [BahasaSettingController::class, 'toggle'])->name('bahasa.toggle');
     Route::post('admin-bahasa/{id}/set-default', [BahasaSettingController::class, 'setDefault'])->name('bahasa.set-default');
     Route::delete('admin-bahasa/{id}', [BahasaSettingController::class, 'destroy'])->name('bahasa.destroy');
+
+    // Backup Database & Storage (Drive D: & Otomatis Harian)
+    Route::prefix('admin-backup')->name('backup.')->group(function () {
+        Route::get('/', [BackupController::class, 'index'])->name('index');
+        Route::post('/database', [BackupController::class, 'backupDatabase'])->name('database');
+        Route::post('/storage', [BackupController::class, 'backupStorage'])->name('storage');
+        Route::post('/all', [BackupController::class, 'backupAll'])->name('all');
+        Route::get('/download/{filename}', [BackupController::class, 'download'])->name('download');
+        Route::delete('/{filename}', [BackupController::class, 'destroy'])->name('destroy');
+    });
 });

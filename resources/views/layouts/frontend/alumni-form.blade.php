@@ -94,7 +94,7 @@
               {{-- Profesi / Pekerjaan --}}
               <div class="col-md-6">
                 <label class="form-label fw-semibold text-dark">Profesi / Jabatan / Tempat Bekerja <span class="text-danger">*</span></label>
-                <input type="text" name="pekerjaan" class="form-control form-control-lg @error('pekerjaan') is-invalid @enderror" placeholder="Contoh: Perawat Klinis di RSUD Embung Fatimah" value="{{ old('pekerjaan') }}" required style="border-radius: 12px; font-size: 14px;">
+                <input type="text" name="pekerjaan" class="form-control form-control-lg @error('pekerjaan') is-invalid @enderror" placeholder="Contoh: Software Engineer / Network Specialist / Konsultan IT" value="{{ old('pekerjaan') }}" required style="border-radius: 12px; font-size: 14px;">
                 @error('pekerjaan')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -104,13 +104,13 @@
               <div class="col-md-6">
                 <label class="form-label fw-semibold text-dark">Kategori Hubungan <span class="text-danger">*</span></label>
                 @php
-                  $kategoriOptions = ['Alumni', 'Mahasiswa', 'Mitra Rumah Sakit', 'Dosen & Staff', 'Industri / Perusahaan', 'Pengguna Lulusan / Stakeholder'];
+                  $kategoriOptions = ['Alumni', 'Mahasiswa', 'Mitra Industri', 'Dosen & Staff', 'Industri / Perusahaan', 'Pengguna Lulusan / Stakeholder'];
                   $oldKategori = old('kategori', 'Alumni');
                   $isCustom = $oldKategori && !in_array($oldKategori, $kategoriOptions);
                 @endphp
                 <select id="kategoriSelect" name="_kategori_select" class="form-select form-select-lg @error('kategori') is-invalid @enderror" style="border-radius: 12px; font-size: 14px;" onchange="handleKategoriChange(this)">
                   <option value="" disabled {{ (!$oldKategori || $isCustom) ? '' : '' }}>-- Pilih Kategori --</option>
-                  <option value="Alumni" {{ $oldKategori == 'Alumni' ? 'selected' : '' }}>Alumni UIS</option>
+                  <option value="Alumni" {{ $oldKategori == 'Alumni' ? 'selected' : '' }}>Alumni Prodi Teknik Informatika</option>
                   <option value="Mahasiswa" {{ $oldKategori == 'Mahasiswa' ? 'selected' : '' }}>Mahasiswa Aktif</option>
                   <option value="Mitra Industri" {{ $oldKategori == 'Mitra Industri' ? 'selected' : '' }}>Mitra Dunia Usaha & Industri (DUDI)</option>
                   <option value="Dosen & Staff" {{ $oldKategori == 'Dosen & Staff' ? 'selected' : '' }}>Dosen & Tenaga Kependidikan</option>
