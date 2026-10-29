@@ -53,8 +53,8 @@ class TestimonialDataTable extends DataTable
                     return '<span class="badge text-white" style="background:#823ca2;">Alumni</span>';
                 } elseif (str_contains($kat, 'mahasiswa')) {
                     return '<span class="badge bg-primary">Mahasiswa</span>';
-                } elseif (str_contains($kat, 'mitra') || str_contains($kat, 'rumah sakit')) {
-                    return '<span class="badge bg-success">Mitra RS / Klinik</span>';
+                } elseif (str_contains($kat, 'mitra') || str_contains($kat, 'industri')) {
+                    return '<span class="badge bg-success">Mitra Industri</span>';
                 } elseif (str_contains($kat, 'dosen') || str_contains($kat, 'staff')) {
                     return '<span class="badge bg-info text-dark">Dosen / Staff</span>';
                 }

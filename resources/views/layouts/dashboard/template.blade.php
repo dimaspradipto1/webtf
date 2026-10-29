@@ -398,10 +398,37 @@
             }
         });
 
+        // ── Realtime Frontend Synchronization ──────────────────────
+        function notifyFrontendLiveUpdate() {
+            const timestamp = Date.now();
+            if ('BroadcastChannel' in window) {
+                try {
+                    const bc = new BroadcastChannel('webtf_realtime_sync');
+                    bc.postMessage({ type: 'CONTENT_UPDATED', timestamp: timestamp });
+                } catch(e) {}
+            }
+            try {
+                localStorage.setItem('webtf_live_version', timestamp.toString());
+            } catch(e) {}
+        }
+
+        @if(session('success') || session('status') || session('pesan'))
+            // Kirim sinyal update realtime saat admin selesai menyimpan data (redirect success)
+            notifyFrontendLiveUpdate();
+        @endif
+
         // Trigger TinyMCE save on form submit so data is always synchronized
         $(document).on('submit', 'form', function () {
             if (typeof tinymce !== 'undefined') {
                 tinymce.triggerSave();
+            }
+            notifyFrontendLiveUpdate();
+        });
+
+        // Trigger saat ada AJAX admin berhasil (toggle status, delete row ajax, dll.)
+        $(document).ajaxSuccess(function (event, xhr, settings) {
+            if (settings && (settings.type === 'POST' || settings.type === 'PUT' || settings.type === 'DELETE' || settings.type === 'PATCH')) {
+                notifyFrontendLiveUpdate();
             }
         });
 

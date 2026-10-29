@@ -116,7 +116,7 @@
                             @php
                                 $rincianOld = old('rincian_list', [
                                     'Kurikulum terakreditasi berbasis riset terapan & kebijakan publik',
-                                    'Praktik lapangan di sektor industri & rumah sakit',
+                                    'Praktik lapangan di sektor industri & teknologi',
                                     'Bimbingan oleh dosen berpengalaman nasional & internasional'
                                 ]);
                             @endphp

@@ -265,3 +265,22 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
 
 // Endpoint API Sinkronisasi Otomatis cPanel -> Laptop (Diproteksi Token Rahasia Tanpa GDrive)
 Route::get('/api/backup-sync/download', [BackupController::class, 'syncDownload'])->name('backup.sync-download');
+
+// Endpoint API Realtime Live Sync: Mendeteksi pembaruan konten dari admin secara realtime
+Route::get('/api/live-version', function () {
+    $version = 0;
+    $filePath = storage_path('framework/content_version.txt');
+    if (file_exists($filePath)) {
+        $version = (int) trim(@file_get_contents($filePath));
+    }
+    if (! $version) {
+        $version = (int) \Illuminate\Support\Facades\Cache::get('frontend_content_version', now()->getTimestampMs());
+    }
+
+    return response()->json([
+        'version' => $version,
+        'timestamp' => now()->timestamp,
+    ])->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+      ->header('Pragma', 'no-cache')
+      ->header('Expires', '0');
+})->name('api.live-version');

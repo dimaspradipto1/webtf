@@ -10,6 +10,8 @@ use App\Models\PmbSetting;
 use App\Models\Publikasi;
 use App\Models\Topbar;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -33,6 +35,16 @@ class AppServiceProvider extends ServiceProvider
         if (app()->environment('production')) {
             URL::forceScheme('https');
         }
+
+        // Catat timestamp versi konten saat model Eloquent diupdate/disimpan/dihapus
+        Event::listen(['eloquent.saved: *', 'eloquent.deleted: *'], function ($event, $data) {
+            if (!empty($data) && is_object($data[0])) {
+                $class = get_class($data[0]);
+                if (str_starts_with($class, 'App\\Models\\')) {
+                    static::recordContentUpdate();
+                }
+            }
+        });
 
         View::composer('*', function ($view) {
             $contact = Contact::latest('id')->first();
@@ -75,5 +87,20 @@ class AppServiceProvider extends ServiceProvider
                 'defaultBahasa' => $defaultBahasa,
             ]);
         });
+    }
+
+    /**
+     * Catat timestamp pembaruan konten sistem untuk sinkronisasi realtime frontend
+     */
+    public static function recordContentUpdate(): void
+    {
+        $now = now()->getTimestampMs();
+        try {
+            Cache::forever('frontend_content_version', $now);
+            $filePath = storage_path('framework/content_version.txt');
+            @file_put_contents($filePath, (string) $now);
+        } catch (\Throwable $e) {
+            // fallback diam
+        }
     }
 }

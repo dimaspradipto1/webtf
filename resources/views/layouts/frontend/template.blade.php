@@ -264,6 +264,109 @@
 </script>
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
 
+<!-- ══════════════════════════════════════════════════════════════
+     REALTIME LIVE SYNC (Otomatis Update saat Admin Submit / Update)
+══════════════════════════════════════════════════════════════ -->
+<script>
+(function() {
+  var initialVersion = null;
+  var isReloading = false;
+  var deferredTimer = null;
+
+  function doLiveReload(source) {
+    if (isReloading) return;
+
+    // Jangan reload jika user sedang aktif mengetik di input / textarea formulir publik
+    var activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+    if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') {
+      if (!deferredTimer) {
+        deferredTimer = setTimeout(function() {
+          doLiveReload(source + '-deferred');
+        }, 4000);
+      }
+      return;
+    }
+
+    isReloading = true;
+    console.log('[LiveSync] Realtime content update detected from ' + source);
+
+    // Tampilkan notifikasi floating badge di pojok kanan bawah
+    var badge = document.getElementById('webtfLiveSyncBadge');
+    if (!badge) {
+      badge = document.createElement('div');
+      badge.id = 'webtfLiveSyncBadge';
+      badge.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:999999;background:#000000;color:#ffffff;padding:12px 22px;border-radius:50px;box-shadow:0 12px 35px rgba(0,0,0,0.45);border:2px solid #f9dc4b;display:flex;align-items:center;gap:12px;font-family:\'Plus Jakarta Sans\',sans-serif;font-size:13.5px;font-weight:600;letter-spacing:0.3px;pointer-events:none;animation:fadeInUp 0.3s ease;';
+      badge.innerHTML = '<span class="spinner-border spinner-border-sm text-warning" style="width:16px;height:16px;border-width:2.5px;" role="status"></span><span>Memperbarui data terbaru secara realtime...</span>';
+      document.body.appendChild(badge);
+    }
+
+    setTimeout(function() {
+      window.location.reload();
+    }, 450);
+  }
+
+  // 1. BroadcastChannel API: Komunikasi Lintas Tab di Browser yang Sama (0 ms latency)
+  if ('BroadcastChannel' in window) {
+    try {
+      var liveChannel = new BroadcastChannel('webtf_realtime_sync');
+      liveChannel.onmessage = function(ev) {
+        if (ev && ev.data && ev.data.type === 'CONTENT_UPDATED') {
+          doLiveReload('BroadcastChannel');
+        }
+      };
+    } catch(e) {}
+  }
+
+  // 2. LocalStorage Event: Fallback Lintas Jendela / Window
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'webtf_live_version') {
+      doLiveReload('LocalStorage');
+    }
+  });
+
+  // 3. Server Pulse Polling: Untuk Lintas Perangkat / Browser Berbeda / Incognito
+  var liveVersionUrl = '{{ route("api.live-version") }}';
+  function checkLivePulse() {
+    if (isReloading) return;
+    fetch(liveVersionUrl + '?_t=' + Date.now(), {
+      cache: 'no-store',
+      headers: { 'Cache-Control': 'no-cache, no-store' }
+    })
+    .then(function(res) {
+      if (!res.ok) throw new Error('Network error');
+      return res.json();
+    })
+    .then(function(data) {
+      if (!data || typeof data.version === 'undefined') return;
+      var serverVer = parseInt(data.version, 10);
+      if (initialVersion === null) {
+        initialVersion = serverVer;
+      } else if (serverVer > initialVersion) {
+        doLiveReload('ServerPulse');
+      }
+    })
+    .catch(function() {});
+  }
+
+  // Cek server saat halaman dimuat
+  checkLivePulse();
+
+  // Polling interval adaptif (setiap 3.5 detik saat tab aktif, 8 detik saat di background)
+  var pulseInterval = setInterval(checkLivePulse, 3500);
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      clearInterval(pulseInterval);
+      pulseInterval = setInterval(checkLivePulse, 8000);
+    } else {
+      clearInterval(pulseInterval);
+      checkLivePulse();
+      pulseInterval = setInterval(checkLivePulse, 3500);
+    }
+  });
+})();
+</script>
+
 @stack('scripts')
 
 </body>
