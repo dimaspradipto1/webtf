@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\AboutDataTable;
 use App\Http\Requests\AboutRequest;
 use App\Models\About;
+use App\Models\Pimpinan;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -13,7 +14,9 @@ class AboutController extends Controller
 {
     public function index(AboutDataTable $dataTable)
     {
-        return $dataTable->render('pages.about.index');
+        $pimpinans = Pimpinan::orderBy('baris')->orderBy('urutan')->orderBy('id')->get();
+
+        return $dataTable->render('pages.about.index', compact('pimpinans'));
     }
 
     public function create(): View

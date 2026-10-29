@@ -29,6 +29,7 @@ use App\Models\OrganisasiMahasiswaSetting;
 use App\Models\Partner;
 use App\Models\PendampinganAcaraSetting;
 use App\Models\PermintaanRilisSetting;
+use App\Models\Pimpinan;
 use App\Models\PmbSetting;
 use App\Models\Prestasi;
 use App\Models\PusatInformasiHumas;
@@ -363,8 +364,38 @@ class FrontendController extends Controller
         $milestones = Milestone::orderBy('tahun')->get();
         $partners = Partner::orderBy('urutan')->get();
         $contact = Contact::first();
+        $pimpinans = Pimpinan::where('is_active', true)
+            ->orderBy('baris')
+            ->orderBy('urutan')
+            ->orderBy('id')
+            ->get();
+        $pimpinansByBaris = $pimpinans->groupBy('baris');
 
-        return view('layouts.frontend.about', compact('about', 'features', 'milestones', 'partners', 'contact'));
+        return view('layouts.frontend.about', compact(
+            'about',
+            'features',
+            'milestones',
+            'partners',
+            'contact',
+            'pimpinans',
+            'pimpinansByBaris'
+        ));
+    }
+
+    public function pimpinanDetail(string $slug)
+    {
+        $pimpinan = Pimpinan::where('is_active', true)
+            ->where(function ($q) use ($slug) {
+                $q->where('slug', $slug);
+                if (is_numeric($slug)) {
+                    $q->orWhere('id', (int) $slug);
+                }
+            })
+            ->firstOrFail();
+
+        $contact = Contact::first();
+
+        return view('layouts.frontend.pimpinan-detail', compact('pimpinan', 'contact'));
     }
 
     public function sambutanDekan()

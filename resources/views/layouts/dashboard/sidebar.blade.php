@@ -65,10 +65,10 @@
 
           <!-- 2. PROFIL (Sesuai Urutan Menu Header) -->
           <li class="nav-item">
-            <a class="nav-link {{ Route::is('milestone.*') || Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') || Route::is('about.*') || Route::is('struktur-organisasi.*') || Route::is('visimisi.*') || Route::is('sarana.*') ? '' : 'collapsed' }}" data-bs-target="#profil-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link {{ Route::is('milestone.*') || Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') || Route::is('about.*') || Route::is('pimpinan.*') || Route::is('struktur-organisasi.*') || Route::is('visimisi.*') || Route::is('sarana.*') ? '' : 'collapsed' }}" data-bs-target="#profil-nav" data-bs-toggle="collapse" href="#">
               <i class="bi bi-building"></i><span>Profil</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="profil-nav" class="nav-content collapse {{ Route::is('milestone.*') || Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') || Route::is('about.*') || Route::is('struktur-organisasi.*') || Route::is('visimisi.*') || Route::is('sarana.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+            <ul id="profil-nav" class="nav-content collapse {{ Route::is('milestone.*') || Route::is('sambutan-dekan.*') || Route::is('sambutan-rektor.*') || Route::is('about.*') || Route::is('pimpinan.*') || Route::is('struktur-organisasi.*') || Route::is('visimisi.*') || Route::is('sarana.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
               <li>
                 <a href="{{ route('milestone.index') }}" class="{{ Route::is('milestone.*') ? 'active' : '' }}">
                   <i class="bi bi-circle"></i><span>Sejarah YAPISTA</span>
@@ -80,7 +80,7 @@
                 </a>
               </li>
               <li>
-                <a href="{{ route('about.index') }}" class="{{ Route::is('about.*') ? 'active' : '' }}">
+                <a href="{{ route('about.index') }}" class="{{ Route::is('about.*') || Route::is('pimpinan.*') ? 'active' : '' }}">
                   <i class="bi bi-circle"></i><span>Profil Pimpinan & Prodi</span>
                 </a>
               </li>

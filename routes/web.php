@@ -25,6 +25,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NilaiPerusahaanController;
 use App\Http\Controllers\OrganisasiMahasiswaController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\PimpinanController;
 use App\Http\Controllers\PmbSettingController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\ProfilController;
@@ -53,6 +54,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'homepage')->name('homepage');
     Route::get('/tentang', 'tentang')->name('homepage.tentang');
     Route::get('/profil-pimpinan', 'tentang')->name('homepage.profil-pimpinan');
+    Route::get('/profil-pimpinan/{slug}', 'pimpinanDetail')->name('homepage.pimpinan.detail');
     Route::get('/sambutan-rektor', 'sambutanDekan')->name('homepage.sambutan-rektor');
     Route::get('/sambutan-kaprodi', 'sambutanDekan')->name('homepage.sambutan-kaprodi');
     Route::get('/sambutan-dekan', fn () => redirect()->route('homepage.sambutan-rektor', [], 301))->name('homepage.sambutan-dekan');
@@ -137,6 +139,7 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
         ->parameters(['admin-faq' => 'faq'])
         ->names('faq');
     Route::resource('about', AboutController::class);
+    Route::resource('pimpinan', PimpinanController::class)->except(['index', 'show']);
     Route::get('sambutan-rektor-admin', [SambutanDekanController::class, 'index'])->name('sambutan-rektor.index');
     Route::put('sambutan-rektor-admin', [SambutanDekanController::class, 'update'])->name('sambutan-rektor.update');
     Route::get('sambutan-dekan-admin', [SambutanDekanController::class, 'index'])->name('sambutan-dekan.index');
