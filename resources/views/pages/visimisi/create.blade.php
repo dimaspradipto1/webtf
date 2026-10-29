@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Tambah Poin Visi/Misi</h1>
+    <h1>Tambah Poin VMTS (Visi, Misi, Tujuan & Sasaran)</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('visimisi.index') }}">Visi & Misi</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('visimisi.index') }}">VMTS</a></li>
             <li class="breadcrumb-item active">Tambah</li>
         </ol>
     </nav>
@@ -17,7 +17,7 @@
         <div class="card shadow-sm">
             <div class="card-header py-3">
                 <h5 class="mb-0 fw-semibold">
-                    <i class="bi bi-plus-circle-fill me-2 text-primary"></i>Form Tambah Poin
+                    <i class="bi bi-plus-circle-fill me-2 text-primary"></i>Form Tambah Poin VMTS
                 </h5>
             </div>
             <div class="card-body pt-4">
@@ -39,11 +39,13 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label for="tipe" class="form-label fw-semibold">Tipe <span class="text-danger">*</span></label>
+                        <label for="tipe" class="form-label fw-semibold">Tipe VMTS <span class="text-danger">*</span></label>
                         <select id="tipe" name="tipe" class="form-select @error('tipe') is-invalid @enderror" required>
-                            <option value="" disabled selected>Pilih Tipe</option>
+                            <option value="" disabled {{ old('tipe') ? '' : 'selected' }}>Pilih Tipe (Visi / Misi / Tujuan / Sasaran)</option>
                             <option value="visi" {{ old('tipe') == 'visi' ? 'selected' : '' }}>Visi</option>
                             <option value="misi" {{ old('tipe') == 'misi' ? 'selected' : '' }}>Misi</option>
+                            <option value="tujuan" {{ old('tipe') == 'tujuan' ? 'selected' : '' }}>Tujuan</option>
+                            <option value="sasaran" {{ old('tipe') == 'sasaran' ? 'selected' : '' }}>Sasaran</option>
                         </select>
                         @error('tipe')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -51,11 +53,11 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="isi" class="form-label fw-semibold">Isi <span class="text-danger">*</span></label>
+                        <label for="isi" class="form-label fw-semibold">Isi Poin <span class="text-danger">*</span></label>
                         <textarea id="isi" name="isi" rows="4"
                                   class="form-control @error('isi') is-invalid @enderror"
-                                  placeholder="Contoh: Menjadi Universitas Unggul, Bermartabat, Bereputasi Nasional dan Internasional serta berjiwa Entrepreneur berbasis Imtaq tahun 2029.">{{ old('isi') }}</textarea>
-                        <div class="form-text">Untuk Misi, isi satu poin saja per baris data (tambahkan poin lain sebagai data baru).</div>
+                                  placeholder="Masukkan isi poin Visi, Misi, Tujuan, atau Sasaran...">{{ old('isi') }}</textarea>
+                        <div class="form-text">Untuk Misi, Tujuan, dan Sasaran, isi satu poin saja per baris data (tambahkan poin lain sebagai data baru).</div>
                         @error('isi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

@@ -22,9 +22,13 @@ class VisiMisiDataTable extends DataTable
             ->addIndexColumn()
             ->addColumn('DT_RowIndex', '')
             ->addColumn('tipe', function ($vm) {
-                return $vm->tipe === 'visi'
-                    ? '<span class="badge bg-primary">Visi</span>'
-                    : '<span class="badge bg-info text-dark">Misi</span>';
+                return match ($vm->tipe) {
+                    'visi' => '<span class="badge bg-primary">Visi</span>',
+                    'misi' => '<span class="badge bg-info text-dark">Misi</span>',
+                    'tujuan' => '<span class="badge bg-success">Tujuan</span>',
+                    'sasaran' => '<span class="badge bg-warning text-dark">Sasaran</span>',
+                    default => '<span class="badge bg-secondary">'.e(ucfirst($vm->tipe)).'</span>',
+                };
             })
             ->addColumn('isi', fn ($vm) => e(Str::limit(trim(html_entity_decode(strip_tags($vm->isi ?? ''), ENT_QUOTES, 'UTF-8')), 90)))
             ->addColumn('urutan', fn ($vm) => '<span class="badge bg-secondary">'.$vm->urutan.'</span>')
@@ -62,7 +66,7 @@ class VisiMisiDataTable extends DataTable
     {
         return $model->newQuery()
             ->select(['id', 'tipe', 'isi', 'urutan'])
-            ->orderBy('tipe')
+            ->orderByRaw("FIELD(tipe, 'visi', 'misi', 'tujuan', 'sasaran')")
             ->orderBy('urutan');
     }
 
@@ -72,7 +76,7 @@ class VisiMisiDataTable extends DataTable
             ->setTableId('visimisi-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(1)
+            ->parameters(['order' => []])
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),

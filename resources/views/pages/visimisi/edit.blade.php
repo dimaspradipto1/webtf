@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Sunting Poin Visi/Misi</h1>
+    <h1>Sunting Poin VMTS (Visi, Misi, Tujuan & Sasaran)</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('visimisi.index') }}">Visi & Misi</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('visimisi.index') }}">VMTS</a></li>
             <li class="breadcrumb-item active">Sunting</li>
         </ol>
     </nav>
@@ -17,7 +17,7 @@
         <div class="card shadow-sm">
             <div class="card-header py-3">
                 <h5 class="mb-0 fw-semibold">
-                    <i class="bi bi-pencil-square me-2 text-warning"></i>Form Sunting Poin
+                    <i class="bi bi-pencil-square me-2 text-warning"></i>Form Sunting Poin VMTS
                 </h5>
             </div>
             <div class="card-body pt-4">
@@ -40,10 +40,12 @@
                     @method('PUT')
 
                     <div class="mb-3">
-                        <label for="tipe" class="form-label fw-semibold">Tipe <span class="text-danger">*</span></label>
+                        <label for="tipe" class="form-label fw-semibold">Tipe VMTS <span class="text-danger">*</span></label>
                         <select id="tipe" name="tipe" class="form-select @error('tipe') is-invalid @enderror" required>
                             <option value="visi" {{ old('tipe', $visiMisi->tipe) == 'visi' ? 'selected' : '' }}>Visi</option>
                             <option value="misi" {{ old('tipe', $visiMisi->tipe) == 'misi' ? 'selected' : '' }}>Misi</option>
+                            <option value="tujuan" {{ old('tipe', $visiMisi->tipe) == 'tujuan' ? 'selected' : '' }}>Tujuan</option>
+                            <option value="sasaran" {{ old('tipe', $visiMisi->tipe) == 'sasaran' ? 'selected' : '' }}>Sasaran</option>
                         </select>
                         @error('tipe')
                             <div class="invalid-feedback">{{ $message }}</div>

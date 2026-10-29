@@ -64,20 +64,26 @@
             </div>
             <div class="card-body pt-4 text-center" id="strukturPreviewContainer" style="overflow: visible !important;">
                 @if(isset($struktur) && $struktur->url_struktur)
+                    @php
+                        $strukturPath = public_path($struktur->url_struktur);
+                        $strukturVer = file_exists($strukturPath) ? filemtime($strukturPath) : time();
+                    @endphp
                     <div class="bg-light p-3 rounded border text-center d-inline-block w-100 position-relative" id="strukturPreviewBox" style="overflow: visible !important;">
-                        <div class="position-relative d-inline-block w-100" style="overflow: visible !important;">
-                            <img id="strukturPreviewImg" src="{{ asset($struktur->url_struktur) }}" alt="Struktur Organisasi" class="img-fluid rounded border shadow-sm w-100" crossorigin="anonymous">
+                        <div class="position-relative d-inline-block w-100" id="adminStrukturStage" style="overflow: visible !important;">
+                            <img id="strukturPreviewImg" src="{{ asset($struktur->url_struktur) . '?v=' . $strukturVer }}" alt="Struktur Organisasi" class="img-fluid rounded border shadow-sm w-100" crossorigin="anonymous">
                             <div id="adminStrukturHotspots" class="position-absolute top-0 start-0 w-100 h-100" style="pointer-events: none;"></div>
+                            <canvas id="adminStrukturZoomCanvas" class="admin-struktur-zoom-popup"></canvas>
                         </div>
                     </div>
                     <div class="mt-2 text-muted small" id="strukturPreviewPath">
-                        <i class="bi bi-zoom-in me-1"></i>Arahkan kursor (hover) pada kartu di dalam bagan untuk zoom-in kartu · Path: <code>{{ $struktur->url_struktur }}</code>
+                        <i class="bi bi-zoom-in me-1"></i>Arahkan kursor (hover) pada kartu di dalam bagan untuk zoom-in 4K HD · Path: <code>{{ $struktur->url_struktur }}</code>
                     </div>
                 @else
                     <div class="bg-light p-3 rounded border text-center d-none w-100 position-relative" id="strukturPreviewBox" style="overflow: visible !important;">
-                        <div class="position-relative d-inline-block w-100" style="overflow: visible !important;">
+                        <div class="position-relative d-inline-block w-100" id="adminStrukturStage" style="overflow: visible !important;">
                             <img id="strukturPreviewImg" src="" alt="Struktur Organisasi" class="img-fluid rounded border shadow-sm w-100" crossorigin="anonymous">
                             <div id="adminStrukturHotspots" class="position-absolute top-0 start-0 w-100 h-100" style="pointer-events: none;"></div>
+                            <canvas id="adminStrukturZoomCanvas" class="admin-struktur-zoom-popup"></canvas>
                         </div>
                     </div>
                     <div class="mt-2 text-muted small d-none" id="strukturPreviewPath"></div>
@@ -99,30 +105,78 @@
     pointer-events: auto;
     cursor: zoom-in;
     border-radius: 5px;
-    background-repeat: no-repeat;
-    background-color: #ffffff;
-    opacity: 0;
-    transform: scale(1);
-    transition: transform 0.22s cubic-bezier(0.2, 0.85, 0.3, 1.1),
-                opacity 0.15s ease,
-                box-shadow 0.22s ease;
-    z-index: 5;
+    z-index: 10;
   }
-  .admin-struktur-hotspot:hover {
+  .admin-struktur-zoom-popup {
+    position: absolute;
+    pointer-events: none;
+    z-index: 120;
+    background-color: #ffffff;
+    border-radius: 9px;
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.38), 0 0 0 3.5px #f9dc4b;
+    opacity: 0;
+    transform: scale(0.45);
+    transition: opacity 0.16s ease, transform 0.22s cubic-bezier(0.2, 0.85, 0.3, 1.08);
+    will-change: transform, opacity;
+  }
+  .admin-struktur-zoom-popup.is-visible {
     opacity: 1;
-    transform: scale(2.4);
-    z-index: 100;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32), 0 0 0 2.5px #f9dc4b;
+    transform: scale(1);
   }
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const fileInput = document.getElementById('url_struktur');
     const previewBox = document.getElementById('strukturPreviewBox');
+    const stage = document.getElementById('adminStrukturStage');
     const previewImg = document.getElementById('strukturPreviewImg');
     const previewPath = document.getElementById('strukturPreviewPath');
     const emptyState = document.getElementById('strukturEmptyState');
     const hotspotsLayer = document.getElementById('adminStrukturHotspots');
+    const zoomCanvas = document.getElementById('adminStrukturZoomCanvas');
+
+    function showAdminZoom(cx, cy, cw, ch) {
+        if (!stage || !previewImg || !zoomCanvas) return;
+        const w = previewImg.naturalWidth;
+        const h = previewImg.naturalHeight;
+        const stageRect = stage.getBoundingClientRect();
+        const zoomFactor = 2.6;
+
+        const cardDisplayW = (cw / w) * stageRect.width;
+        const cardDisplayH = (ch / h) * stageRect.height;
+        const targetDisplayW = Math.round(cardDisplayW * zoomFactor);
+        const targetDisplayH = Math.round(cardDisplayH * zoomFactor);
+
+        const dpr = Math.max(window.devicePixelRatio || 1, 2);
+        zoomCanvas.width = Math.max(cw, Math.round(targetDisplayW * dpr));
+        zoomCanvas.height = Math.max(ch, Math.round(targetDisplayH * dpr));
+        zoomCanvas.style.width = targetDisplayW + 'px';
+        zoomCanvas.style.height = targetDisplayH + 'px';
+
+        const zCtx = zoomCanvas.getContext('2d');
+        zCtx.imageSmoothingEnabled = true;
+        zCtx.imageSmoothingQuality = 'high';
+        zCtx.fillStyle = '#ffffff';
+        zCtx.fillRect(0, 0, zoomCanvas.width, zoomCanvas.height);
+        zCtx.drawImage(previewImg, cx, cy, cw, ch, 0, 0, zoomCanvas.width, zoomCanvas.height);
+
+        const cardCenterX = ((cx + cw / 2) / w) * stageRect.width;
+        const cardCenterY = ((cy + ch / 2) / h) * stageRect.height;
+
+        let leftPx = Math.round(cardCenterX - targetDisplayW / 2);
+        let topPx = Math.round(cardCenterY - targetDisplayH / 2);
+
+        leftPx = Math.max(0, Math.min(stageRect.width - targetDisplayW, leftPx));
+        topPx = Math.max(-10, Math.min(stageRect.height - targetDisplayH + 10, topPx));
+
+        zoomCanvas.style.left = leftPx + 'px';
+        zoomCanvas.style.top = topPx + 'px';
+        zoomCanvas.classList.add('is-visible');
+    }
+
+    function hideAdminZoom() {
+        if (zoomCanvas) zoomCanvas.classList.remove('is-visible');
+    }
 
     function buildAdminHotspots() {
         if (!previewImg || !hotspotsLayer) return;
@@ -131,35 +185,39 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!w || !h) return;
 
         hotspotsLayer.innerHTML = '';
+        const analysisW = Math.min(w, 1536);
+        const scale = w / analysisW;
+        const analysisH = Math.round(h / scale);
+
         const canvas = document.createElement('canvas');
-        canvas.width = w;
-        canvas.height = h;
+        canvas.width = analysisW;
+        canvas.height = analysisH;
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
-        ctx.drawImage(previewImg, 0, 0, w, h);
+        ctx.drawImage(previewImg, 0, 0, analysisW, analysisH);
 
         let imgData;
         try {
-            imgData = ctx.getImageData(0, 0, w, h).data;
+            imgData = ctx.getImageData(0, 0, analysisW, analysisH).data;
         } catch (e) {
             return;
         }
 
         function isDark(x, y) {
-            if (x < 0 || x >= w || y < 0 || y >= h) return false;
-            const idx = (y * w + x) * 4;
+            if (x < 0 || x >= analysisW || y < 0 || y >= analysisH) return false;
+            const idx = (y * analysisW + x) * 4;
             if (imgData[idx + 3] < 128) return false;
             return imgData[idx] < 95 && imgData[idx + 1] < 95 && imgData[idx + 2] < 95;
         }
 
-        const minCardW = Math.round(w * 0.042);
-        const maxCardW = Math.round(w * 0.32);
-        const minCardH = Math.round(h * 0.03);
-        const maxCardH = Math.round(h * 0.11);
+        const minCardW = Math.round(analysisW * 0.042);
+        const maxCardW = Math.round(analysisW * 0.32);
+        const minCardH = Math.round(analysisH * 0.03);
+        const maxCardH = Math.round(analysisH * 0.11);
 
         const horizSegments = [];
-        for (let y = 4; y < h - 4; y++) {
+        for (let y = 4; y < analysisH - 4; y++) {
             let runStart = -1;
-            for (let x = 4; x < w - 4; x++) {
+            for (let x = 4; x < analysisW - 4; x++) {
                 if (isDark(x, y)) {
                     if (runStart === -1) runStart = x;
                 } else if (runStart !== -1) {
@@ -194,7 +252,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (isDark(x2, yy) || isDark(x2 - 1, yy) || isDark(x2 - 2, yy)) rightDark++;
                     }
                     if (leftDark >= dy * 0.85 && rightDark >= dy * 0.85) {
-                        candidates.push({ x: x1, y: y1, w: x2 - x1, h: y2 - y1 });
+                        candidates.push({
+                            x: Math.round(x1 * scale),
+                            y: Math.round(y1 * scale),
+                            w: Math.round((x2 - x1) * scale),
+                            h: Math.round((y2 - y1) * scale)
+                        });
                     }
                 }
             }
@@ -217,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!overlaps) finalCards.push(c);
         }
 
-        const pad = 4;
+        const pad = Math.round(w * 0.003);
         finalCards.forEach(function (card) {
             const cx = Math.max(0, card.x - pad);
             const cy = Math.max(0, card.y - pad);
@@ -230,17 +293,11 @@ document.addEventListener('DOMContentLoaded', function () {
             el.style.top = ((cy / h) * 100) + '%';
             el.style.width = ((cw / w) * 100) + '%';
             el.style.height = ((ch / h) * 100) + '%';
-            el.style.backgroundImage = 'url("' + previewImg.src + '")';
-            el.style.backgroundSize = ((w / cw) * 100) + '% ' + ((h / ch) * 100) + '%';
-            el.style.backgroundPosition = ((w - cw) > 0 ? (cx / (w - cw)) * 100 : 0) + '% ' + ((h - ch) > 0 ? (cy / (h - ch)) * 100 : 0) + '%';
 
-            let originX = 'center';
-            if (cx / w < 0.14) originX = 'left';
-            else if ((cx + cw) / w > 0.86) originX = 'right';
-            let originY = 'center';
-            if (cy / h < 0.12) originY = 'top';
-            else if ((cy + ch) / h > 0.88) originY = 'bottom';
-            el.style.transformOrigin = originX + ' ' + originY;
+            el.addEventListener('mouseenter', function () {
+                showAdminZoom(cx, cy, cw, ch);
+            });
+            el.addEventListener('mouseleave', hideAdminZoom);
 
             hotspotsLayer.appendChild(el);
         });
