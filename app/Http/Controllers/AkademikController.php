@@ -468,6 +468,9 @@ class AkademikController extends Controller
             }
         }
 
+        $validated['reguler_b_is_best'] = $request->boolean('reguler_b_is_best');
+        $validated['reguler_a_is_best'] = $request->boolean('reguler_a_is_best');
+        $validated['reguler_c_is_best'] = $request->boolean('reguler_c_is_best');
         $validated['is_active'] = $request->has('is_active');
 
         $pmb->update($validated);

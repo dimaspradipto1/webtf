@@ -193,17 +193,31 @@
                         <i class="bi bi-tag-fill text-info fs-4"></i>
                         <div>
                             <h5 class="card-title mb-0 p-0 fw-bold text-dark">Paket Kelas PMB & Biaya Bulanan</h5>
-                            <div class="small text-muted">Sesuaikan 3 kartu pilihan kelas perkuliahan (Reguler B, Reguler A, dan Reguler C).</div>
+                            <div class="small text-muted">Sesuaikan 3 kartu pilihan kelas perkuliahan. Anda dapat mengaktifkan toggle <b>Best Choice</b> pada kartu manapun yang ingin dijadikan pilihan rekomendasi/unggulan.</div>
                         </div>
                     </div>
                     <div class="card-body p-4">
                         <div class="row g-4">
                             <!-- Paket Reguler B -->
                             <div class="col-lg-4">
-                                <div class="p-3 rounded-4 border bg-light h-100">
+                                <div id="card-wrapper-b" class="p-3 rounded-4 border {{ old('reguler_b_is_best', $pmb->reguler_b_is_best) ? 'border-warning shadow-sm' : '' }} bg-light h-100">
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                         <h6 class="fw-bold text-dark mb-0">Paket 1 (Pilihan Populer)</h6>
-                                        <span class="badge bg-warning text-dark">Best Choice</span>
+                                        <div class="form-check form-switch mb-0 d-inline-flex align-items-center gap-1">
+                                            <input class="form-check-input best-choice-switch" 
+                                                   type="checkbox" 
+                                                   role="switch" 
+                                                   name="reguler_b_is_best" 
+                                                   id="reguler_b_is_best" 
+                                                   value="1" 
+                                                   {{ old('reguler_b_is_best', $pmb->reguler_b_is_best) ? 'checked' : '' }}
+                                                   onchange="toggleBestChoice(this, 'badge-b', 'card-wrapper-b')">
+                                            <label class="form-check-label mb-0" for="reguler_b_is_best" style="cursor: pointer;" title="Klik untuk mengaktifkan/menonaktifkan Best Choice">
+                                                <span id="badge-b" class="badge {{ old('reguler_b_is_best', $pmb->reguler_b_is_best) ? 'bg-warning text-dark' : 'bg-light text-muted border' }} py-1 px-2">
+                                                    <i class="bi {{ old('reguler_b_is_best', $pmb->reguler_b_is_best) ? 'bi-star-fill text-dark' : 'bi-star text-muted' }} me-1"></i> Best Choice
+                                                </span>
+                                            </label>
+                                        </div>
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-label small fw-semibold">Nama Kelas</label>
@@ -222,8 +236,25 @@
 
                             <!-- Paket Reguler A -->
                             <div class="col-lg-4">
-                                <div class="p-3 rounded-4 border bg-light h-100">
-                                    <h6 class="fw-bold text-dark mb-2">Paket 2 (Reguler Pagi)</h6>
+                                <div id="card-wrapper-a" class="p-3 rounded-4 border {{ old('reguler_a_is_best', $pmb->reguler_a_is_best) ? 'border-warning shadow-sm' : '' }} bg-light h-100">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <h6 class="fw-bold text-dark mb-0">Paket 2 (Reguler Pagi)</h6>
+                                        <div class="form-check form-switch mb-0 d-inline-flex align-items-center gap-1">
+                                            <input class="form-check-input best-choice-switch" 
+                                                   type="checkbox" 
+                                                   role="switch" 
+                                                   name="reguler_a_is_best" 
+                                                   id="reguler_a_is_best" 
+                                                   value="1" 
+                                                   {{ old('reguler_a_is_best', $pmb->reguler_a_is_best) ? 'checked' : '' }}
+                                                   onchange="toggleBestChoice(this, 'badge-a', 'card-wrapper-a')">
+                                            <label class="form-check-label mb-0" for="reguler_a_is_best" style="cursor: pointer;" title="Klik untuk mengaktifkan/menonaktifkan Best Choice">
+                                                <span id="badge-a" class="badge {{ old('reguler_a_is_best', $pmb->reguler_a_is_best) ? 'bg-warning text-dark' : 'bg-light text-muted border' }} py-1 px-2">
+                                                    <i class="bi {{ old('reguler_a_is_best', $pmb->reguler_a_is_best) ? 'bi-star-fill text-dark' : 'bi-star text-muted' }} me-1"></i> Best Choice
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
                                     <div class="mb-2">
                                         <label class="form-label small fw-semibold">Nama Kelas</label>
                                         <input type="text" name="reguler_a_nama" class="form-control form-control-sm" value="{{ old('reguler_a_nama', $pmb->reguler_a_nama) }}">
@@ -241,8 +272,25 @@
 
                             <!-- Paket Reguler C -->
                             <div class="col-lg-4">
-                                <div class="p-3 rounded-4 border bg-light h-100">
-                                    <h6 class="fw-bold text-dark mb-2">Paket 3 (Karyawan / Eksekutif)</h6>
+                                <div id="card-wrapper-c" class="p-3 rounded-4 border {{ old('reguler_c_is_best', $pmb->reguler_c_is_best) ? 'border-warning shadow-sm' : '' }} bg-light h-100">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <h6 class="fw-bold text-dark mb-0">Paket 3 (Karyawan / Eksekutif)</h6>
+                                        <div class="form-check form-switch mb-0 d-inline-flex align-items-center gap-1">
+                                            <input class="form-check-input best-choice-switch" 
+                                                   type="checkbox" 
+                                                   role="switch" 
+                                                   name="reguler_c_is_best" 
+                                                   id="reguler_c_is_best" 
+                                                   value="1" 
+                                                   {{ old('reguler_c_is_best', $pmb->reguler_c_is_best) ? 'checked' : '' }}
+                                                   onchange="toggleBestChoice(this, 'badge-c', 'card-wrapper-c')">
+                                            <label class="form-check-label mb-0" for="reguler_c_is_best" style="cursor: pointer;" title="Klik untuk mengaktifkan/menonaktifkan Best Choice">
+                                                <span id="badge-c" class="badge {{ old('reguler_c_is_best', $pmb->reguler_c_is_best) ? 'bg-warning text-dark' : 'bg-light text-muted border' }} py-1 px-2">
+                                                    <i class="bi {{ old('reguler_c_is_best', $pmb->reguler_c_is_best) ? 'bi-star-fill text-dark' : 'bi-star text-muted' }} me-1"></i> Best Choice
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
                                     <div class="mb-2">
                                         <label class="form-label small fw-semibold">Nama Kelas</label>
                                         <input type="text" name="reguler_c_nama" class="form-control form-control-sm" value="{{ old('reguler_c_nama', $pmb->reguler_c_nama) }}">
@@ -329,5 +377,29 @@
         </div>
     </div>
 </section>
+
+<script>
+function toggleBestChoice(el, badgeId, cardWrapperId) {
+    const badge = document.getElementById(badgeId);
+    const cardWrapper = document.getElementById(cardWrapperId);
+    if (el.checked) {
+        if (badge) {
+            badge.className = 'badge bg-warning text-dark py-1 px-2';
+            badge.innerHTML = '<i class="bi bi-star-fill text-dark me-1"></i> Best Choice';
+        }
+        if (cardWrapper) {
+            cardWrapper.classList.add('border-warning', 'shadow-sm');
+        }
+    } else {
+        if (badge) {
+            badge.className = 'badge bg-light text-muted border py-1 px-2';
+            badge.innerHTML = '<i class="bi bi-star text-muted me-1"></i> Best Choice';
+        }
+        if (cardWrapper) {
+            cardWrapper.classList.remove('border-warning', 'shadow-sm');
+        }
+    }
+}
+</script>
 @endsection
 

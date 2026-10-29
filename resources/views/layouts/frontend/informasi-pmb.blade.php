@@ -6,17 +6,22 @@
 @section('content')
 
 <!-- ═══════════════════════════════════════════════════════════
-     HERO BANNER PMB FST UIS
+     HERO BANNER PMB FST UIS (FULL WIDTH)
 ═══════════════════════════════════════════════════════════ -->
-<section class="pmb-hero-section py-4 py-lg-5" style="background: #063122; color: #ffffff;">
-  <div class="container">
-    @if(!empty($pmb->banner_hero))
-      {{-- Custom Uploaded Banner Image --}}
-      <div class="rounded-4 overflow-hidden shadow-lg border border-success border-opacity-25 mb-3">
-        <img src="{{ asset('storage/' . $pmb->banner_hero) }}" alt="{{ $pmb->judul_hero }}" class="w-100 img-fluid" style="object-fit: cover; max-height: 520px;">
-      </div>
-    @else
-      {{-- Beautiful Default Hero matching Screenshot --}}
+@if(!empty($pmb->banner_hero))
+  {{-- Fullwidth Custom Uploaded Banner Image --}}
+  <section class="pmb-hero-section p-0 m-0 w-100 position-relative overflow-hidden" style="background: #063122;">
+    <div class="w-100 p-0 m-0">
+      <img src="{{ asset('storage/' . $pmb->banner_hero) }}" 
+           alt="{{ $pmb->judul_hero }}" 
+           class="w-100 d-block" 
+           style="width: 100%; height: auto; display: block; object-fit: contain;">
+    </div>
+  </section>
+@else
+  {{-- Beautiful Default Hero matching Screenshot --}}
+  <section class="pmb-hero-section py-4 py-lg-5" style="background: #063122; color: #ffffff;">
+    <div class="container">
       <div class="pmb-hero-card p-4 p-md-5 rounded-4 shadow-lg position-relative overflow-hidden" style="background: linear-gradient(135deg, #073826 0%, #0d5239 50%, #063122 100%); border: 1px solid rgba(249, 220, 75, 0.3);">
         <div class="row align-items-center g-4">
           <div class="col-lg-8">
@@ -70,9 +75,9 @@
           </div>
         </div>
       </div>
-    @endif
-  </div>
-</section>
+    </div>
+  </section>
+@endif
 
 <!-- ═══════════════════════════════════════════════════════════
      STICKY QUICK NAVIGATION BAR
@@ -320,15 +325,26 @@
       <p class="text-muted small">Pilihan kelas perkuliahan fleksibel sesuai kebutuhan Anda.</p>
     </div>
 
+    @php
+      $isBestB = (bool)($pmb->reguler_b_is_best ?? true);
+      $isBestA = (bool)($pmb->reguler_a_is_best ?? false);
+      $isBestC = (bool)($pmb->reguler_c_is_best ?? false);
+    @endphp
+
     <div class="row g-4 justify-content-center">
-      <!-- Reguler B (Tengah / Best Choice) -->
+      <!-- Reguler B -->
       <div class="col-lg-4 col-md-6 order-md-1 order-lg-1">
-        <div class="pmb-pricing-card rounded-4 p-4 text-white position-relative shadow-lg h-100 d-flex flex-column" style="background: linear-gradient(180deg, #360f0f 0%, #1f0606 100%); border: 2px solid #f9dc4b;">
-          <div class="badge-ribbon position-absolute top-0 end-0 mt-3 me-3">
-            <span class="badge px-3 py-1 rounded-pill fw-bold text-dark" style="background: #f9dc4b; font-size: 11px;">Best Choice</span>
-          </div>
+        <div class="pmb-pricing-card rounded-4 p-4 text-white position-relative {{ $isBestB ? 'shadow-lg' : 'shadow' }} h-100 d-flex flex-column" 
+             style="background: {{ $isBestB ? 'linear-gradient(180deg, #360f0f 0%, #1f0606 100%)' : 'linear-gradient(180deg, #2b0b0b 0%, #170404 100%)' }}; border: {{ $isBestB ? '2px solid #f9dc4b' : '1px solid rgba(255, 255, 255, 0.1)' }};">
+          @if($isBestB)
+            <div class="badge-ribbon position-absolute top-0 end-0 mt-3 me-3">
+              <span class="badge px-3 py-1 rounded-pill fw-bold text-dark" style="background: #f9dc4b; font-size: 11px;">
+                <i class="bi bi-star-fill text-dark me-1"></i> Best Choice
+              </span>
+            </div>
+          @endif
           <div class="mb-3">
-            <h5 class="fw-bold text-warning mb-1" style="color: #f9dc4b !important;">{{ $pmb->reguler_b_nama ?: 'Reguler B' }}</h5>
+            <h5 class="fw-bold mb-1" style="{{ $isBestB ? 'color: #f9dc4b !important;' : '' }}">{{ $pmb->reguler_b_nama ?: 'Reguler B' }}</h5>
             <div class="display-6 fw-bold text-white mb-0">{{ $pmb->reguler_b_biaya ?: 'Rp 625.000' }}</div>
             <small class="text-white-50">per bulan</small>
           </div>
@@ -346,17 +362,31 @@
               @endif
             @endforeach
           </ul>
-          <a href="{{ $pmb->link_pendaftaran ?: 'https://pmb.uis.ac.id' }}" target="_blank" class="btn w-100 fw-bold py-2 rounded-pill" style="background: #f9dc4b; color: #000000;">
-            Daftar Sekarang <i class="bi bi-arrow-right ms-1"></i>
-          </a>
+          @if($isBestB)
+            <a href="{{ $pmb->link_pendaftaran ?: 'https://pmb.uis.ac.id' }}" target="_blank" class="btn w-100 fw-bold py-2 rounded-pill shadow-sm" style="background: #f9dc4b; color: #000000;">
+              Daftar Sekarang <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          @else
+            <a href="{{ $pmb->link_pendaftaran ?: 'https://pmb.uis.ac.id' }}" target="_blank" class="btn btn-outline-warning w-100 fw-bold py-2 rounded-pill" style="color: #f9dc4b; border-color: #f9dc4b;">
+              Daftar Sekarang <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          @endif
         </div>
       </div>
 
       <!-- Reguler A -->
       <div class="col-lg-4 col-md-6 order-md-2 order-lg-2">
-        <div class="pmb-pricing-card rounded-4 p-4 text-white position-relative shadow h-100 d-flex flex-column" style="background: linear-gradient(180deg, #2b0b0b 0%, #170404 100%); border: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="pmb-pricing-card rounded-4 p-4 text-white position-relative {{ $isBestA ? 'shadow-lg' : 'shadow' }} h-100 d-flex flex-column" 
+             style="background: {{ $isBestA ? 'linear-gradient(180deg, #360f0f 0%, #1f0606 100%)' : 'linear-gradient(180deg, #2b0b0b 0%, #170404 100%)' }}; border: {{ $isBestA ? '2px solid #f9dc4b' : '1px solid rgba(255, 255, 255, 0.1)' }};">
+          @if($isBestA)
+            <div class="badge-ribbon position-absolute top-0 end-0 mt-3 me-3">
+              <span class="badge px-3 py-1 rounded-pill fw-bold text-dark" style="background: #f9dc4b; font-size: 11px;">
+                <i class="bi bi-star-fill text-dark me-1"></i> Best Choice
+              </span>
+            </div>
+          @endif
           <div class="mb-3">
-            <h5 class="fw-bold text-white mb-1">{{ $pmb->reguler_a_nama ?: 'Reguler A' }}</h5>
+            <h5 class="fw-bold mb-1" style="{{ $isBestA ? 'color: #f9dc4b !important;' : '' }}">{{ $pmb->reguler_a_nama ?: 'Reguler A' }}</h5>
             <div class="display-6 fw-bold text-white mb-0">{{ $pmb->reguler_a_biaya ?: 'Rp 825.000' }}</div>
             <small class="text-white-50">per bulan (Kelas Pagi Utama)</small>
           </div>
@@ -374,17 +404,31 @@
               @endif
             @endforeach
           </ul>
-          <a href="{{ $pmb->link_pendaftaran ?: 'https://pmb.uis.ac.id' }}" target="_blank" class="btn btn-outline-warning w-100 fw-bold py-2 rounded-pill" style="color: #f9dc4b; border-color: #f9dc4b;">
-            Daftar Sekarang <i class="bi bi-arrow-right ms-1"></i>
-          </a>
+          @if($isBestA)
+            <a href="{{ $pmb->link_pendaftaran ?: 'https://pmb.uis.ac.id' }}" target="_blank" class="btn w-100 fw-bold py-2 rounded-pill shadow-sm" style="background: #f9dc4b; color: #000000;">
+              Daftar Sekarang <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          @else
+            <a href="{{ $pmb->link_pendaftaran ?: 'https://pmb.uis.ac.id' }}" target="_blank" class="btn btn-outline-warning w-100 fw-bold py-2 rounded-pill" style="color: #f9dc4b; border-color: #f9dc4b;">
+              Daftar Sekarang <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          @endif
         </div>
       </div>
 
       <!-- Reguler C -->
       <div class="col-lg-4 col-md-6 order-md-3 order-lg-3">
-        <div class="pmb-pricing-card rounded-4 p-4 text-white position-relative shadow h-100 d-flex flex-column" style="background: linear-gradient(180deg, #2b0b0b 0%, #170404 100%); border: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="pmb-pricing-card rounded-4 p-4 text-white position-relative {{ $isBestC ? 'shadow-lg' : 'shadow' }} h-100 d-flex flex-column" 
+             style="background: {{ $isBestC ? 'linear-gradient(180deg, #360f0f 0%, #1f0606 100%)' : 'linear-gradient(180deg, #2b0b0b 0%, #170404 100%)' }}; border: {{ $isBestC ? '2px solid #f9dc4b' : '1px solid rgba(255, 255, 255, 0.1)' }};">
+          @if($isBestC)
+            <div class="badge-ribbon position-absolute top-0 end-0 mt-3 me-3">
+              <span class="badge px-3 py-1 rounded-pill fw-bold text-dark" style="background: #f9dc4b; font-size: 11px;">
+                <i class="bi bi-star-fill text-dark me-1"></i> Best Choice
+              </span>
+            </div>
+          @endif
           <div class="mb-3">
-            <h5 class="fw-bold text-white mb-1">{{ $pmb->reguler_c_nama ?: 'Reguler C' }}</h5>
+            <h5 class="fw-bold mb-1" style="{{ $isBestC ? 'color: #f9dc4b !important;' : '' }}">{{ $pmb->reguler_c_nama ?: 'Reguler C' }}</h5>
             <div class="display-6 fw-bold text-white mb-0">{{ $pmb->reguler_c_biaya ?: 'Rp 925.000' }}</div>
             <small class="text-white-50">per bulan (Karyawan / Eksekutif)</small>
           </div>
@@ -402,9 +446,15 @@
               @endif
             @endforeach
           </ul>
-          <a href="{{ $pmb->link_pendaftaran ?: 'https://pmb.uis.ac.id' }}" target="_blank" class="btn btn-outline-warning w-100 fw-bold py-2 rounded-pill" style="color: #f9dc4b; border-color: #f9dc4b;">
-            Daftar Sekarang <i class="bi bi-arrow-right ms-1"></i>
-          </a>
+          @if($isBestC)
+            <a href="{{ $pmb->link_pendaftaran ?: 'https://pmb.uis.ac.id' }}" target="_blank" class="btn w-100 fw-bold py-2 rounded-pill shadow-sm" style="background: #f9dc4b; color: #000000;">
+              Daftar Sekarang <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          @else
+            <a href="{{ $pmb->link_pendaftaran ?: 'https://pmb.uis.ac.id' }}" target="_blank" class="btn btn-outline-warning w-100 fw-bold py-2 rounded-pill" style="color: #f9dc4b; border-color: #f9dc4b;">
+              Daftar Sekarang <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+          @endif
         </div>
       </div>
     </div>

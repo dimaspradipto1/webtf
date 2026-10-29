@@ -28,12 +28,15 @@ class InformasiPmb extends Model
         'reguler_b_nama',
         'reguler_b_biaya',
         'reguler_b_keterangan',
+        'reguler_b_is_best',
         'reguler_a_nama',
         'reguler_a_biaya',
         'reguler_a_keterangan',
+        'reguler_a_is_best',
         'reguler_c_nama',
         'reguler_c_biaya',
         'reguler_c_keterangan',
+        'reguler_c_is_best',
         'banner_cta',
         'cta_judul',
         'cta_subjudul',
@@ -42,6 +45,9 @@ class InformasiPmb extends Model
 
     protected $casts = [
         'keunggulan_items' => 'array',
+        'reguler_b_is_best' => 'boolean',
+        'reguler_a_is_best' => 'boolean',
+        'reguler_c_is_best' => 'boolean',
         'is_active' => 'boolean',
     ];
 

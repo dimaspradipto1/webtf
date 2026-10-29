@@ -181,6 +181,9 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
         Route::post('akreditasi/item', [AkademikController::class, 'storeAkreditasiItem'])->name('akreditasi.item.store');
         Route::put('akreditasi/item/{id}', [AkademikController::class, 'updateAkreditasiItem'])->name('akreditasi.item.update');
         Route::delete('akreditasi/item/{id}', [AkademikController::class, 'destroyAkreditasiItem'])->name('akreditasi.item.destroy');
+        Route::post('pengumuman-pmb/item', [AkademikController::class, 'storePengumumanPmbItem'])->name('pengumuman-pmb.item.store');
+        Route::put('pengumuman-pmb/item/{id}', [AkademikController::class, 'updatePengumumanPmbItem'])->name('pengumuman-pmb.item.update');
+        Route::delete('pengumuman-pmb/item/{id}', [AkademikController::class, 'destroyPengumumanPmbItem'])->name('pengumuman-pmb.item.destroy');
         Route::get('pedoman', [AkademikController::class, 'pedoman'])->name('pedoman');
         Route::get('sistem', [AkademikController::class, 'sistem'])->name('sistem');
         Route::put('informasi-pmb-update', [AkademikController::class, 'updateInformasiPmb'])->name('informasi-pmb.update');
