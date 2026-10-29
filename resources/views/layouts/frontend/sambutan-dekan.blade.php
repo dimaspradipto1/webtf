@@ -36,21 +36,21 @@
   <div class="container py-3">
     <div class="row g-5">
 
-      {{-- Left Column: Kaprodi Portrait --}}
+      {{-- Left Column: Ka Prodi Portrait --}}
       <div class="col-lg-4" data-aos="fade-right">
-        <div class="rektor-portrait-box">
+        <div class="rektor-portrait-box" style="background: transparent !important; border: none !important; padding: 0 !important; box-shadow: none !important;">
           @if(!empty($sambutanDekan?->foto_dekan))
-            <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="{{ $sambutanDekan->nama_dekan ?? 'Kaprodi Teknik Informatika' }}" class="rektor-portrait-img">
+            <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="{{ $sambutanDekan->nama_dekan ?? 'Ka Prodi Teknik Informatika' }}" class="rektor-portrait-img" style="width: 100% !important; max-width: 100% !important; height: auto !important; max-height: none !important; object-fit: cover !important; border: none !important; background: transparent !important; box-shadow: none !important; border-radius: 16px;">
           @else
             <div class="rektor-avatar-fallback">
               <i class="bi bi-person-badge"></i>
-              <span style="font-size: 14px; font-weight: 600; margin-top: 10px;">Foto Kaprodi TF</span>
+              <span style="font-size: 14px; font-weight: 600; margin-top: 10px;">Foto Ka Prodi Teknik Informatika</span>
             </div>
           @endif
 
-          <h3 class="rektor-name-title">{{ $sambutanDekan->nama_dekan ?? 'Ketua Program Studi Teknik Informatika' }}</h3>
+          <h3 class="rektor-name-title">{{ $sambutanDekan->nama_dekan ?? 'Ka Prodi Teknik Informatika' }}</h3>
           <span class="rektor-role-badge">
-            <i class="bi bi-award-fill me-1"></i> {{ $sambutanDekan->jabatan_dekan ?? 'Kaprodi S1 Teknik Informatika — Fakultas Sains dan Teknologi' }}
+            <i class="bi bi-award-fill me-1"></i> {{ $sambutanDekan->jabatan_dekan ?? 'Ka Prodi Teknik Informatika' }}
           </span>
 
           <div class="pt-3 border-top mt-3 text-muted small text-start">
@@ -62,7 +62,7 @@
 
       {{-- Right Column: Full Message --}}
       <div class="col-lg-8" data-aos="fade-left">
-        <div class="section-label">Sambutan Ketua Program Studi</div>
+        <div class="section-label">Sambutan Ka Prodi Teknik Informatika</div>
         <h2 class="section-title mb-4">
           Mencetak Talenta Digital Unggul <em>Inovatif, Entrepreneur & Berkarakter Imtaq</em>
         </h2>

@@ -33,7 +33,42 @@ class MilestoneController extends Controller
             'sejarah_pilar_1' => ['nullable', 'string', 'max:100'],
             'sejarah_pilar_2' => ['nullable', 'string', 'max:100'],
             'sejarah_pilar_3' => ['nullable', 'string', 'max:100'],
+            'sejarah_link_url' => ['nullable', 'string', 'max:1000'],
+            'sejarah_link_label' => ['nullable', 'string', 'max:255'],
+            'sejarah_pimpinan_judul' => ['nullable', 'string', 'max:255'],
+            'eras' => ['nullable', 'array'],
+            'eras.*.era' => ['nullable', 'string', 'max:255'],
+            'eras.*.items' => ['nullable', 'array'],
+            'eras.*.items.*.periode' => ['nullable', 'string', 'max:255'],
+            'eras.*.items.*.pimpinan' => ['nullable', 'string', 'max:255'],
         ]);
+
+        // Process eras array if submitted
+        if ($request->has('eras')) {
+            $cleanEras = [];
+            foreach ($request->input('eras', []) as $eraData) {
+                $eraTitle = trim($eraData['era'] ?? '');
+                $cleanItems = [];
+                foreach ($eraData['items'] ?? [] as $row) {
+                    $periode = trim($row['periode'] ?? '');
+                    $pimpinan = trim($row['pimpinan'] ?? '');
+                    if ($periode !== '' || $pimpinan !== '') {
+                        $cleanItems[] = [
+                            'periode' => $periode,
+                            'pimpinan' => $pimpinan,
+                        ];
+                    }
+                }
+                if ($eraTitle !== '' || count($cleanItems) > 0) {
+                    $cleanEras[] = [
+                        'era' => $eraTitle ?: 'Era Kepemimpinan',
+                        'items' => $cleanItems,
+                    ];
+                }
+            }
+            $validated['sejarah_pimpinan'] = $cleanEras;
+        }
+        unset($validated['eras']);
 
         $about = About::first();
         if ($about) {
@@ -44,7 +79,7 @@ class MilestoneController extends Controller
 
         return redirect()
             ->route('milestone.index')
-            ->with('success', 'Pengaturan Narasi Sejarah berhasil diperbarui.');
+            ->with('success', 'Pengaturan Sejarah YAPISTA & Pimpinan dari Masa ke Masa berhasil diperbarui.');
     }
 
     public function create(): View

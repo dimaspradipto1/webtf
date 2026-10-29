@@ -53,6 +53,10 @@ class AboutSeeder extends Seeder
             'nilai_4_judul' => 'Inovatif',
             'nilai_4_deskripsi' => 'Adaptif terhadap perkembangan sains dan teknologi kesehatan terkini dalam pendidikan dan riset terapan.',
             'nilai_4_icon' => 'bi-lightning-charge-fill',
+
+            // Pimpinan dari Masa ke Masa (Sejarah YAPISTA)
+            'sejarah_pimpinan_judul' => 'Pimpinan dari Masa ke Masa',
+            'sejarah_pimpinan' => About::defaultSejarahPimpinan(),
         ]);
     }
 }

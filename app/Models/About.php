@@ -45,7 +45,114 @@ class About extends Model
         'sejarah_pilar_1',
         'sejarah_pilar_2',
         'sejarah_pilar_3',
+        'sejarah_link_url',
+        'sejarah_link_label',
+        'sejarah_pimpinan_judul',
+        'sejarah_pimpinan',
     ];
+
+    protected $casts = [
+        'sejarah_pimpinan' => 'array',
+    ];
+
+    /**
+     * Default data Pimpinan dari Masa ke Masa
+     */
+    public static function defaultSejarahPimpinan(): array
+    {
+        return [
+            [
+                'era' => 'Era Sekolah Tinggi Teknik (STT) Ibnu Sina',
+                'items' => [
+                    ['periode' => '2001–2005', 'pimpinan' => 'Ir. Zaenal'],
+                    ['periode' => '2005–2009', 'pimpinan' => 'Ir. Anwar Badruzaman, MT'],
+                    ['periode' => '2009–2013', 'pimpinan' => 'Assoc. Prof. Dr. Ir. Larisang, MT., IPU'],
+                    ['periode' => '2013–2018', 'pimpinan' => 'Assoc. Prof. Dr. Ir. Larisang, MT., IPU'],
+                ],
+            ],
+            [
+                'era' => 'Era Fakultas Teknik (FT) Universitas Ibnu Sina',
+                'items' => [
+                    ['periode' => '2019–2024', 'pimpinan' => 'Assoc. Prof. Dr. Ir. Larisang, MT., IPU'],
+                ],
+            ],
+            [
+                'era' => 'Era Fakultas Sains dan Teknologi (FST) Universitas Ibnu Sina',
+                'items' => [
+                    ['periode' => '2025–sekarang', 'pimpinan' => 'Ir. Sanusi, ST., M.Eng., Ph.D., IPM'],
+                ],
+            ],
+        ];
+    }
+
+    public function getSejarahPimpinanListAttribute(): array
+    {
+        $data = $this->sejarah_pimpinan;
+        if (is_array($data) && count($data) > 0) {
+            return $data;
+        }
+
+        return self::defaultSejarahPimpinan();
+    }
+
+    /**
+     * Ekstrak 11 digit video ID YouTube dari sejarah_link_url jika berupa link YouTube.
+     */
+    public function getSejarahYoutubeVideoIdAttribute(): ?string
+    {
+        if (empty($this->sejarah_link_url)) {
+            return null;
+        }
+
+        $input = trim($this->sejarah_link_url);
+
+        if (preg_match('/<iframe.*?src=["\']([^"\']+)["\']/i', $input, $frameMatch)) {
+            $input = $frameMatch[1];
+        }
+
+        if (preg_match('/^[a-zA-Z0-9_\-]{11}$/', $input)) {
+            return $input;
+        }
+
+        if (preg_match('/(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|live|shorts)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_\-]{11})/i', $input, $matches)) {
+            return $matches[1];
+        }
+
+        return null;
+    }
+
+    public function getSejarahYoutubeEmbedUrlAttribute(): ?string
+    {
+        $id = $this->sejarah_youtube_video_id;
+        if ($id) {
+            return 'https://www.youtube.com/embed/' . $id;
+        }
+
+        return null;
+    }
+
+    public function getSejarahExternalUrlAttribute(): ?string
+    {
+        if (empty($this->sejarah_link_url)) {
+            return null;
+        }
+
+        $id = $this->sejarah_youtube_video_id;
+        if ($id) {
+            return 'https://www.youtube.com/watch?v=' . $id;
+        }
+
+        $url = trim($this->sejarah_link_url);
+        if (preg_match('/<iframe.*?src=["\']([^"\']+)["\']/i', $url, $frameMatch)) {
+            return $frameMatch[1];
+        }
+
+        if (! str_starts_with($url, 'http://') && ! str_starts_with($url, 'https://') && ! str_starts_with($url, '/')) {
+            return 'https://' . $url;
+        }
+
+        return $url;
+    }
 
     /**
      * Cek apakah terdapat video (baik URL maupun file upload).

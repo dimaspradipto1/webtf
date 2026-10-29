@@ -13,9 +13,9 @@ class SambutanDekanController extends Controller
     public function index(): View
     {
         $sambutanDekan = SambutanDekan::firstOrCreate([], [
-            'nama_dekan' => 'Assoc. Prof. Dr. Ir. Larisang, S.T., M.T., IPU., ASEAN Eng.',
-            'jabatan_dekan' => 'Rektor Teknik Informatika (UIS) Batam',
-            'kutipan_singkat' => 'Selamat datang di Teknik Informatika (UIS) Batam — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, berjiwa entrepreneur, dan berkarakter Imtaq yang siap memimpin industri di kancah nasional maupun global.',
+            'nama_dekan' => 'Ka Prodi Teknik Informatika',
+            'jabatan_dekan' => 'Ka Prodi Teknik Informatika',
+            'kutipan_singkat' => 'Selamat datang di Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi. Kami bertekad membentuk sarjana komputer yang unggul, berjiwa technopreneur, dan berkarakter Imtaq yang siap memimpin industri di kancah nasional maupun global.',
         ]);
 
         return view('pages.sambutan-dekan.index', compact('sambutanDekan'));
@@ -39,6 +39,6 @@ class SambutanDekanController extends Controller
 
         return redirect()
             ->route('sambutan-rektor.index')
-            ->with('success', 'Data Sambutan Rektor & Foto berhasil diperbarui.');
+            ->with('success', 'Data Sambutan Ka Prodi Teknik Informatika & Foto berhasil diperbarui.');
     }
 }

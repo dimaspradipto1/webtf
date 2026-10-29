@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Sambutan & Foto Rektor</h1>
+    <h1>Sambutan & Foto Ka Prodi Teknik Informatika</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item">Profil & Konten UIS</li>
-            <li class="breadcrumb-item active">Sambutan Rektor</li>
+            <li class="breadcrumb-item">Profil</li>
+            <li class="breadcrumb-item active">Sambutan Ka Prodi Teknik Informatika</li>
         </ol>
     </nav>
 </div>
@@ -17,9 +17,9 @@
         <div class="card shadow-sm border-0 rounded-4">
             <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
                 <h5 class="mb-0 fw-bold" style="color: var(--uis-green, #000000);">
-                    <i class="bi bi-person-badge-fill me-2"></i>Kelola Sambutan & Foto Rektor
+                    <i class="bi bi-person-badge-fill me-2"></i>Kelola Sambutan & Foto Ka Prodi Teknik Informatika
                 </h5>
-                <span class="badge bg-light text-dark border">Halaman Khusus Sambutan Rektor</span>
+                <span class="badge bg-light text-dark border">Halaman Khusus Sambutan Ka Prodi Teknik Informatika</span>
             </div>
             <div class="card-body pt-4">
 
@@ -41,39 +41,39 @@
                     @method('PUT')
 
                     <div class="row g-4 mb-4">
-                        {{-- Nama Rektor --}}
+                        {{-- Nama Ka Prodi Teknik Informatika --}}
                         <div class="col-md-7">
                             <label for="nama_dekan" class="form-label fw-semibold text-dark">
-                                Nama Lengkap & Gelar Rektor <span class="text-danger">*</span>
+                                Nama Lengkap & Gelar Ka Prodi Teknik Informatika <span class="text-danger">*</span>
                             </label>
-                            <input type="text" id="nama_dekan" name="nama_dekan" class="form-control @error('nama_dekan') is-invalid @enderror" value="{{ old('nama_dekan', $sambutanDekan->nama_dekan) }}" placeholder="Contoh: Assoc. Prof. Dr. Ir. Larisang, S.T., M.T., IPU., ASEAN Eng." required>
+                            <input type="text" id="nama_dekan" name="nama_dekan" class="form-control @error('nama_dekan') is-invalid @enderror" value="{{ old('nama_dekan', $sambutanDekan->nama_dekan) }}" placeholder="Contoh: Nama Lengkap & Gelar Ka Prodi Teknik Informatika" required>
                             <div class="form-text small text-muted">Akan ditampilkan di bawah foto dan di kartu sambutan homepage.</div>
                             @error('nama_dekan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        {{-- Jabatan Rektor --}}
+                        {{-- Jabatan Ka Prodi Teknik Informatika --}}
                         <div class="col-md-5">
                             <label for="jabatan_dekan" class="form-label fw-semibold text-dark">
                                 Jabatan Resmi
                             </label>
-                            <input type="text" id="jabatan_dekan" name="jabatan_dekan" class="form-control @error('jabatan_dekan') is-invalid @enderror" value="{{ old('jabatan_dekan', $sambutanDekan->jabatan_dekan ?? 'Rektor Teknik Informatika (UIS) Batam') }}" placeholder="Rektor Teknik Informatika (UIS) Batam">
+                            <input type="text" id="jabatan_dekan" name="jabatan_dekan" class="form-control @error('jabatan_dekan') is-invalid @enderror" value="{{ old('jabatan_dekan', $sambutanDekan->jabatan_dekan ?? 'Ka Prodi Teknik Informatika') }}" placeholder="Ka Prodi Teknik Informatika">
                             @error('jabatan_dekan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
-                    {{-- Upload Foto Rektor --}}
+                    {{-- Upload Foto Ka Prodi Teknik Informatika --}}
                     <div class="mb-4 p-3 rounded-3" style="background: #f8faf9; border: 1px dashed #000000;">
                         <label for="foto_dekan" class="form-label fw-bold text-dark d-block">
-                            <i class="bi bi-camera-fill me-1" style="color: #000000;"></i> Foto Resmi Rektor
+                            <i class="bi bi-camera-fill me-1" style="color: #000000;"></i> Foto Resmi Ka Prodi Teknik Informatika
                         </label>
                         
                         @if($sambutanDekan->foto_dekan)
                             <div class="d-flex align-items-center gap-3 mb-3 p-2 bg-white rounded-3 border shadow-sm" style="max-width: 420px;">
-                                <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="Foto Rektor" class="rounded-3" style="width: 80px; height: 100px; object-fit: contain; background: #f8faf9; border: 2px solid #000000;">
+                                <img src="{{ asset('storage/' . $sambutanDekan->foto_dekan) }}" alt="Foto Ka Prodi Teknik Informatika" class="rounded-3" style="width: 90px; height: auto; object-fit: cover;">
                                 <div>
                                     <div class="fw-bold small text-dark">Foto Saat Ini Aktif</div>
                                     <div class="text-muted" style="font-size: 12px;">Pilih file baru di bawah jika ingin mengganti. Foto lama akan otomatis terhapus dari server.</div>
@@ -95,19 +95,19 @@
                         <label for="kutipan_singkat" class="form-label fw-semibold text-dark">
                             Kutipan Singkat Sambutan <span class="badge bg-warning text-dark ms-1">Tampil di Halaman Depan (Homepage)</span>
                         </label>
-                        <textarea id="kutipan_singkat" name="kutipan_singkat" rows="3" class="form-control @error('kutipan_singkat') is-invalid @enderror" placeholder="Contoh: Selamat datang di Teknik Informatika (UIS) Batam — Kampusnya Profesional Muda. Kami bertekad membentuk generasi intelektual yang unggul, berjiwa entrepreneur, dan berkarakter Imtaq...">{{ old('kutipan_singkat', $sambutanDekan->kutipan_singkat) }}</textarea>
-                        <div class="form-text small text-muted">Kutipan ringkas yang menarik perhatian pengunjung di section 3 halaman depan.</div>
+                        <textarea id="kutipan_singkat" name="kutipan_singkat" rows="3" class="form-control @error('kutipan_singkat') is-invalid @enderror" placeholder="Contoh: Selamat datang di Program Studi Teknik Informatika — Fakultas Sains dan Teknologi. Kami bertekad membentuk sarjana komputer yang unggul, berjiwa technopreneur, dan berkarakter Imtaq...">{{ old('kutipan_singkat', $sambutanDekan->kutipan_singkat) }}</textarea>
+                        <div class="form-text small text-muted">Kutipan ringkas yang menarik perhatian pengunjung di halaman sambutan.</div>
                         @error('kutipan_singkat')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    {{-- Naskah Lengkap Sambutan Rektor --}}
+                    {{-- Naskah Lengkap Sambutan Ka Prodi Teknik Informatika --}}
                     <div class="mb-4">
                         <label for="sambutan_dekan" class="form-label fw-semibold text-dark">
-                            Naskah Lengkap Sambutan Rektor <span class="badge bg-primary ms-1">Tampil di Halaman /sambutan-rektor</span>
+                            Naskah Lengkap Sambutan Ka Prodi Teknik Informatika <span class="badge bg-primary ms-1">Tampil di Halaman Sambutan Ka Prodi</span>
                         </label>
-                        <textarea id="sambutan_dekan" name="sambutan_dekan" rows="8" class="form-control tinymce-editor @error('sambutan_dekan') is-invalid @enderror" placeholder="Tuliskan amanat, visi pimpinan, dan sambutan lengkap Rektor kepada seluruh mahasiswa dan masyarakat...">{{ old('sambutan_dekan', $sambutanDekan->sambutan_dekan) }}</textarea>
+                        <textarea id="sambutan_dekan" name="sambutan_dekan" rows="8" class="form-control tinymce-editor @error('sambutan_dekan') is-invalid @enderror" placeholder="Tuliskan amanat, visi pimpinan, dan sambutan lengkap Ka Prodi Teknik Informatika kepada seluruh mahasiswa dan masyarakat...">{{ old('sambutan_dekan', $sambutanDekan->sambutan_dekan) }}</textarea>
                         <div class="form-text small text-muted">Mendukung format teks tebal, miring, list, tabel, dan gambar.</div>
                         @error('sambutan_dekan')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -116,7 +116,7 @@
 
                     <div class="d-flex align-items-center gap-2 pt-3 border-top">
                         <button type="submit" class="btn text-white px-4 py-2 fw-semibold" style="background-color: #000000;">
-                            <i class="bi bi-save me-1"></i> Simpan Perubahan Sambutan Rektor
+                            <i class="bi bi-save me-1"></i> Simpan Perubahan Sambutan Ka Prodi Teknik Informatika
                         </button>
                         <a href="{{ route('homepage.sambutan-rektor') }}" target="_blank" class="btn btn-outline-secondary px-3 py-2">
                             <i class="bi bi-box-arrow-up-right me-1"></i> Lihat Halaman Publik
