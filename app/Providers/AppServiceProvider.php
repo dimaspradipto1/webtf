@@ -75,6 +75,12 @@ class AppServiceProvider extends ServiceProvider
                 $defaultBahasa = null;
             }
 
+            try {
+                $themeSetting = \App\Models\ThemeSetting::current();
+            } catch (\Throwable $e) {
+                $themeSetting = null;
+            }
+
             $view->with([
                 'contact' => $contact,
                 'cleanWa' => $cleanWa,
@@ -83,6 +89,7 @@ class AppServiceProvider extends ServiceProvider
                 'navPublikasis' => $navPublikasis,
                 'navBeasiswas' => $navBeasiswas,
                 'topbarSetting' => $topbarSetting,
+                'themeSetting' => $themeSetting,
                 'bahasaList' => $bahasaList,
                 'defaultBahasa' => $defaultBahasa,
             ]);

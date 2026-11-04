@@ -1,0 +1,84 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\ThemeSetting;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+class ThemeSettingTest extends TestCase
+{
+    public function test_guest_cannot_access_theme_setting(): void
+    {
+        $response = $this->get(route('theme.index'));
+        $response->assertRedirect(route('login'));
+    }
+
+    public function test_admin_can_access_theme_setting(): void
+    {
+        $admin = User::first();
+        if (!$admin) {
+            $admin = User::factory()->create(['role' => 'admin']);
+        }
+
+        $response = $this->actingAs($admin)->get(route('theme.index'));
+        $response->assertStatus(200);
+        $response->assertSee('Warna Header');
+    }
+
+    public function test_admin_can_update_theme_and_sections(): void
+    {
+        $admin = User::first();
+        if (!$admin) {
+            $admin = User::factory()->create(['role' => 'admin']);
+        }
+
+        $payload = [
+            'header_bg_color' => '#000000',
+            'header_text_color' => '#ffffff',
+            'header_active_bg_color' => '#f9dc4b',
+            'header_active_text_color' => '#000000',
+            'header_login_bg_color' => '#f9dc4b',
+            'header_login_text_color' => '#000000',
+            'header_shadow_color' => '#000000',
+            'header_is_sticky' => '1',
+            'topbar_bg_color' => '#111827',
+            'topbar_text_color' => '#ffffff',
+            'accent_color' => '#f9dc4b',
+            'sections' => [
+                'berita' => ['order' => 1, 'is_active' => '1'],
+                'hero_banner' => ['order' => 2, 'is_active' => '1'],
+            ],
+        ];
+
+        $response = $this->actingAs($admin)->post(route('theme.update'), $payload);
+        $response->assertRedirect();
+
+        $setting = ThemeSetting::current();
+        $this->assertEquals('#000000', $setting->header_bg_color);
+        $this->assertEquals('#f9dc4b', $setting->header_active_bg_color);
+
+        // Test without header_shadow_color and accent_color (should not throw Undefined array key)
+        $payloadMinimal = [
+            'header_bg_color' => '#1e3a8a',
+            'header_text_color' => '#ffffff',
+            'header_active_bg_color' => '#3b82f6',
+            'header_active_text_color' => '#ffffff',
+            'header_login_bg_color' => '#3b82f6',
+            'header_login_text_color' => '#ffffff',
+            'topbar_bg_color' => '#0f172a',
+            'topbar_text_color' => '#ffffff',
+        ];
+        $responseMinimal = $this->actingAs($admin)->post(route('theme.update'), $payloadMinimal);
+        $responseMinimal->assertRedirect();
+        $setting->refresh();
+        $this->assertEquals('#1e3a8a', $setting->header_bg_color);
+        $this->assertEquals('#1e3a8a', $setting->header_shadow_color);
+
+        // Reset back to default
+        $this->actingAs($admin)->post(route('theme.reset'));
+        $setting->refresh();
+        $this->assertEquals('#f9dc4b', $setting->header_bg_color);
+    }
+}

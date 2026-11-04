@@ -41,6 +41,7 @@ use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\TemplateDokumenController;
 use App\Http\Controllers\TenagaPendidikController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\ThemeSettingController;
 use App\Http\Controllers\TopbarController;
 use App\Http\Controllers\TriDharmaController;
 use App\Http\Controllers\UnduhanController;
@@ -232,6 +233,11 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('admin-topbar', TopbarController::class)
         ->parameters(['admin-topbar' => 'topbar'])
         ->names('topbar');
+
+    // Pengaturan Tata Letak Beranda & Tema Header
+    Route::get('admin-theme', [ThemeSettingController::class, 'index'])->name('theme.index');
+    Route::post('admin-theme', [ThemeSettingController::class, 'update'])->name('theme.update');
+    Route::post('admin-theme/reset', [ThemeSettingController::class, 'reset'])->name('theme.reset');
     Route::resource('struktur-organisasi', StrukturOrganisasiController::class);
     Route::resource('partner', PartnerController::class);
     Route::resource('visimisi', VisiMisiController::class);

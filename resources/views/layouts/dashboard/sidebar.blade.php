@@ -26,7 +26,14 @@
               </a>
           </li>
 
-          <!-- 1b. Konten Beranda -->
+          <!-- 1b. Warna Header & Tata Letak Beranda -->
+          <li class="nav-item">
+              <a class="nav-link {{ Route::is('theme.*') ? '' : 'collapsed' }}" href="{{ route('theme.index') }}">
+                  <i class="bi bi-palette-fill"></i><span>Warna Header & Tata Letak</span>
+              </a>
+          </li>
+
+          <!-- 1c. Konten Beranda -->
           <li class="nav-item">
               <a class="nav-link {{ Route::is('banner.*') || Route::is('layanan-terkait.*') || Route::is('social-media.*') || Route::is('feature.*') || Route::is('tridharma.*') || Route::is('pmb-setting.*') || Route::is('partner.*') || Route::is('prestasi.*') || Route::is('organisasi-mahasiswa.*') ? '' : 'collapsed' }}" data-bs-target="#beranda-nav" data-bs-toggle="collapse" href="#">
                   <i class="bi bi-layout-text-window-reverse"></i><span>Konten Beranda</span><i class="bi bi-chevron-down ms-auto"></i>

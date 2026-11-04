@@ -68,14 +68,47 @@
 
   @stack('styles')
 
-  <style>
+  @php
+    $thHdrBg = $themeSetting?->header_bg_color ?: '#f9dc4b';
+    $thHdrTxt = $themeSetting?->header_text_color ?: '#ffffff';
+    $thHdrActBg = $themeSetting?->header_active_bg_color ?: '#000000';
+    $thHdrActTxt = $themeSetting?->header_active_text_color ?: '#ffffff';
+    $thHdrLogBg = $themeSetting?->header_login_bg_color ?: '#000000';
+    $thHdrLogTxt = $themeSetting?->header_login_text_color ?: '#ffffff';
+    $thHdrShadow = $themeSetting?->header_shadow_color ?: $thHdrBg;
+    $thHdrSticky = $themeSetting ? ($themeSetting->header_is_sticky ?? true) : true;
+    $thTopBg = $themeSetting?->topbar_bg_color ?: '#000000';
+    $thTopTxt = $themeSetting?->topbar_text_color ?: '#ffffff';
+    $thAccent = $themeSetting?->accent_color ?: '#f9dc4b';
+  @endphp
+  <style id="dynamic-theme-styles">
     html, body {
       margin: 0 !important;
       padding: 0 !important;
       border: none !important;
       outline: none !important;
     }
+    :root {
+      --hdr-bg: {{ $thHdrBg }};
+      --hdr-text: {{ $thHdrTxt }};
+      --hdr-act-bg: {{ $thHdrActBg }};
+      --hdr-act-text: {{ $thHdrActTxt }};
+      --hdr-log-bg: {{ $thHdrLogBg }};
+      --hdr-log-text: {{ $thHdrLogTxt }};
+      --hdr-shadow: {{ $thHdrShadow }};
+      --topbar-custom-bg: {{ $thTopBg }};
+      --topbar-custom-text: {{ $thTopTxt }};
+      --accent-custom: {{ $thAccent }};
+    }
+    .topbar-main {
+      background: var(--topbar-custom-bg) !important;
+      color: var(--topbar-custom-text) !important;
+    }
+    .topbar-main a, .topbar-main .topbar-marquee-text {
+      color: var(--topbar-custom-text) !important;
+    }
     .navbar-main {
+      background: var(--hdr-bg) !important;
       border: none !important;
       border-top: none !important;
       border-bottom: none !important;
@@ -83,7 +116,33 @@
       top: -2px !important;
       margin-top: -2px !important;
       padding-top: 22px !important;
-      box-shadow: 0 -8px 0 0 #f9dc4b, 0 4px 18px rgba(0, 0, 0, 0.12) !important;
+      box-shadow: 0 -8px 0 0 var(--hdr-shadow), 0 4px 18px rgba(0, 0, 0, 0.12) !important;
+      {{ $thHdrSticky ? 'position: sticky;' : 'position: relative;' }}
+    }
+    .brand-title-main {
+      color: var(--hdr-text) !important;
+    }
+    .brand-subtitle-main {
+      color: var(--hdr-text) !important;
+      opacity: 0.88 !important;
+    }
+    .nav-link-custom {
+      color: var(--hdr-text) !important;
+    }
+    .nav-link-custom:hover,
+    .nav-link-custom.active,
+    .show > .nav-link-custom {
+      background: var(--hdr-act-bg) !important;
+      color: var(--hdr-act-text) !important;
+    }
+    .btn-portal-nav {
+      background: var(--hdr-log-bg) !important;
+      color: var(--hdr-log-text) !important;
+    }
+    .btn-portal-nav:hover {
+      background: var(--hdr-log-bg) !important;
+      color: var(--hdr-log-text) !important;
+      opacity: 0.88 !important;
     }
   </style>
 </head>
