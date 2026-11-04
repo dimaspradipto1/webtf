@@ -595,6 +595,19 @@ class FrontendController extends Controller
         return view('layouts.frontend.agenda', compact('agendas', 'search'));
     }
 
+    public function agendaDetail($slug)
+    {
+        $agenda = Agenda::where('slug', $slug)->firstOrFail();
+        $recentAgendas = Agenda::where('is_active', true)
+            ->where('id', '!=', $agenda->id)
+            ->orderBy('urutan')
+            ->latest('id')
+            ->take(5)
+            ->get();
+
+        return view('layouts.frontend.agenda-detail', compact('agenda', 'recentAgendas'));
+    }
+
     public function faq()
     {
         $faqs = Faq::all();

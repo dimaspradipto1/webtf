@@ -19,19 +19,25 @@
     {{-- Filter / Search Bar --}}
     <div class="row justify-content-center mb-5" data-aos="fade-up">
       <div class="col-lg-7">
-        <form action="{{ route('homepage.pengumuman') }}" method="GET" class="d-flex align-items-center gap-2 p-2 bg-white rounded-pill shadow-sm border">
-          <input type="text"
-                 name="q"
-                 value="{{ $search ?? '' }}"
-                 placeholder="Cari judul atau isi pengumuman..."
-                 class="form-control border-0 rounded-pill ps-3 shadow-none">
+        <form action="{{ route('homepage.pengumuman') }}" method="GET" class="d-flex align-items-center gap-2 p-1 p-md-2 bg-white rounded-pill shadow-sm border">
+          <div class="d-flex align-items-center flex-grow-1 ps-3">
+            <i class="bi bi-search text-muted me-2" style="font-size: 15px;"></i>
+            <input type="text"
+                   name="q"
+                   value="{{ $search ?? '' }}"
+                   placeholder="Cari judul atau isi pengumuman..."
+                   class="form-control border-0 shadow-none p-0 bg-transparent"
+                   style="font-size: 14.5px;">
+          </div>
           @if(!empty($search))
-            <a href="{{ route('homepage.pengumuman') }}" class="btn btn-sm btn-light rounded-pill px-3 text-muted">
-              Reset
+            <a href="{{ route('homepage.pengumuman') }}" class="btn btn-sm btn-light rounded-pill px-3 text-muted flex-shrink-0 d-inline-flex align-items-center gap-1" style="height: 42px; font-size: 13.5px; white-space: nowrap;">
+              <i class="bi bi-x-circle"></i>
+              <span>Reset</span>
             </a>
           @endif
-          <button type="submit" class="btn btn-dark rounded-pill px-4 fw-semibold text-white">
-            <i class="bi bi-search me-1"></i> Cari
+          <button type="submit" class="btn btn-dark rounded-pill px-4 fw-semibold text-white flex-shrink-0 d-inline-flex align-items-center justify-content-center gap-2" style="height: 42px; font-size: 14px; white-space: nowrap;">
+            <i class="bi bi-search"></i>
+            <span>Cari</span>
           </button>
         </form>
       </div>
@@ -75,22 +81,23 @@
                   </div>
 
                   {{-- Action Buttons --}}
-                  <div class="d-flex flex-column align-items-end gap-2">
+                  <div class="d-flex flex-wrap align-items-center gap-2 align-self-start pt-1">
                     @if($ann->file_path)
-                      <a href="{{ asset('storage/' . $ann->file_path) }}" target="_blank" class="btn btn-sm btn-outline-danger rounded-pill px-3 fw-semibold">
-                        <i class="bi bi-download me-1"></i> Unduh Lampiran
+                      <a href="{{ asset('storage/' . $ann->file_path) }}" target="_blank" class="btn btn-sm btn-outline-danger rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-2" style="height: 38px; white-space: nowrap;">
+                        <i class="bi bi-download"></i>
+                        <span>Unduh Lampiran</span>
                       </a>
                     @endif
                     @if($ann->link_url)
-                      <a href="{{ $ann->link_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-semibold">
-                        <i class="bi bi-box-arrow-up-right me-1"></i> Buka Tautan
+                      <a href="{{ $ann->link_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-2" style="height: 38px; white-space: nowrap;">
+                        <i class="bi bi-box-arrow-up-right"></i>
+                        <span>Buka Tautan</span>
                       </a>
                     @endif
-                    @if(!$ann->link_url && !$ann->file_path)
-                      <a href="{{ route('homepage.pengumuman.detail', $ann->slug) }}" class="btn btn-sm btn-dark rounded-pill px-3 fw-semibold text-white">
-                        Baca Selengkapnya <i class="bi bi-arrow-right ms-1"></i>
-                      </a>
-                    @endif
+                    <a href="{{ route('homepage.pengumuman.detail', $ann->slug) }}" class="btn btn-sm btn-dark rounded-pill px-3 fw-semibold text-white d-inline-flex align-items-center gap-2" style="height: 38px; white-space: nowrap;">
+                      <i class="bi bi-arrow-right-circle"></i>
+                      <span>Selengkapnya</span>
+                    </a>
                   </div>
                 </div>
               </div>

@@ -144,6 +144,14 @@ class AnnouncementAndAgendaTest extends TestCase
             $responseDetail->assertStatus(200);
             $responseDetail->assertSee($firstAnn->title);
         }
+
+        // Public agenda detail
+        $firstAgenda = Agenda::first();
+        if ($firstAgenda) {
+            $responseAgendaDetail = $this->get(route('homepage.agenda.detail', $firstAgenda->slug));
+            $responseAgendaDetail->assertStatus(200);
+            $responseAgendaDetail->assertSee($firstAgenda->title);
+        }
     }
 
     public function test_admin_can_search_announcements_and_agenda_datatable(): void

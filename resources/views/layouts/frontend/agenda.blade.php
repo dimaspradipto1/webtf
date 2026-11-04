@@ -19,19 +19,25 @@
     {{-- Filter / Search Bar --}}
     <div class="row justify-content-center mb-5" data-aos="fade-up">
       <div class="col-lg-7">
-        <form action="{{ route('homepage.agenda') }}" method="GET" class="d-flex align-items-center gap-2 p-2 bg-white rounded-pill shadow-sm border">
-          <input type="text"
-                 name="q"
-                 value="{{ $search ?? '' }}"
-                 placeholder="Cari agenda kegiatan..."
-                 class="form-control border-0 rounded-pill ps-3 shadow-none">
+        <form action="{{ route('homepage.agenda') }}" method="GET" class="d-flex align-items-center gap-2 p-1 p-md-2 bg-white rounded-pill shadow-sm border">
+          <div class="d-flex align-items-center flex-grow-1 ps-3">
+            <i class="bi bi-search text-muted me-2" style="font-size: 15px;"></i>
+            <input type="text"
+                   name="q"
+                   value="{{ $search ?? '' }}"
+                   placeholder="Cari agenda kegiatan..."
+                   class="form-control border-0 shadow-none p-0 bg-transparent"
+                   style="font-size: 14.5px;">
+          </div>
           @if(!empty($search))
-            <a href="{{ route('homepage.agenda') }}" class="btn btn-sm btn-light rounded-pill px-3 text-muted">
-              Reset
+            <a href="{{ route('homepage.agenda') }}" class="btn btn-sm btn-light rounded-pill px-3 text-muted flex-shrink-0 d-inline-flex align-items-center gap-1" style="height: 42px; font-size: 13.5px; white-space: nowrap;">
+              <i class="bi bi-x-circle"></i>
+              <span>Reset</span>
             </a>
           @endif
-          <button type="submit" class="btn btn-dark rounded-pill px-4 fw-semibold text-white">
-            <i class="bi bi-search me-1"></i> Cari
+          <button type="submit" class="btn btn-dark rounded-pill px-4 fw-semibold text-white flex-shrink-0 d-inline-flex align-items-center justify-content-center gap-2" style="height: 42px; font-size: 14px; white-space: nowrap;">
+            <i class="bi bi-search"></i>
+            <span>Cari</span>
           </button>
         </form>
       </div>
@@ -54,7 +60,9 @@
 
                     {{-- Judul Agenda --}}
                     <h4 class="fw-bold text-dark mb-2" style="font-size: 19px; line-height: 1.4;">
-                      {{ $agenda->title }}
+                      <a href="{{ route('homepage.agenda.detail', $agenda->slug) }}" class="text-dark text-decoration-none hover-primary">
+                        {{ $agenda->title }}
+                      </a>
                     </h4>
 
                     {{-- Lokasi jika ada --}}
@@ -68,19 +76,24 @@
                     {{-- Deskripsi jika ada --}}
                     @if($agenda->description)
                       <p class="text-secondary small mb-0" style="line-height: 1.6;">
-                        {{ $agenda->description }}
+                        {{ \Illuminate\Support\Str::limit($agenda->description, 160) }}
                       </p>
                     @endif
                   </div>
 
-                  {{-- Tautan eksternal jika ada --}}
-                  @if($agenda->link_url)
-                    <div class="align-self-center">
-                      <a href="{{ $agenda->link_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-dark rounded-pill px-3 fw-semibold">
-                        Info Detail <i class="bi bi-box-arrow-up-right ms-1"></i>
+                  {{-- Tombol Aksi / Selengkapnya --}}
+                  <div class="d-flex flex-wrap align-items-center gap-2 align-self-start pt-1">
+                    @if($agenda->link_url)
+                      <a href="{{ $agenda->link_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-2" style="height: 38px; white-space: nowrap;">
+                        <i class="bi bi-box-arrow-up-right"></i>
+                        <span>Buka Tautan</span>
                       </a>
-                    </div>
-                  @endif
+                    @endif
+                    <a href="{{ route('homepage.agenda.detail', $agenda->slug) }}" class="btn btn-sm btn-dark rounded-pill px-3 fw-semibold text-white d-inline-flex align-items-center gap-2" style="height: 38px; white-space: nowrap;">
+                      <i class="bi bi-arrow-right-circle"></i>
+                      <span>Selengkapnya</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             @endforeach

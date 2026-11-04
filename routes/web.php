@@ -96,6 +96,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/pengumuman', 'pengumuman')->name('homepage.pengumuman');
     Route::get('/pengumuman/{slug}', 'pengumumanDetail')->name('homepage.pengumuman.detail');
     Route::get('/agenda', 'agenda')->name('homepage.agenda');
+    Route::get('/agenda/{slug}', 'agendaDetail')->name('homepage.agenda.detail');
     Route::get('/faq', 'faq')->name('homepage.faq');
     Route::get('/humas', 'humas')->name('homepage.humas');
     Route::get('/unduhan', 'unduhan')->name('homepage.unduhan');

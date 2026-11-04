@@ -105,9 +105,9 @@
                       {{ $agenda->title }} <i class="bi bi-box-arrow-up-right ms-1 text-muted" style="font-size:11px"></i>
                     </a>
                   @else
-                    <div class="agenda-badge-card">
+                    <a href="{{ route('homepage.agenda.detail', $agenda->slug) }}" class="agenda-badge-card d-block text-decoration-none" title="Lihat detail agenda">
                       {{ $agenda->title }}
-                    </div>
+                    </a>
                   @endif
                 </div>
               @endforeach
