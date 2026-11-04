@@ -103,20 +103,35 @@ class AgendaDataTable extends DataTable
             ->setTableId('agenda-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(1, 'asc')
+            ->orderBy(4, 'asc')
             ->selectStyleSingle()
             ->parameters([
-                'dom' => 'Bfrtip',
-                'buttons' => [
-                    Button::make('excel')->text('<i class="bi bi-file-earmark-excel me-1"></i> Excel'),
-                    Button::make('pdf')->text('<i class="bi bi-file-earmark-pdf me-1"></i> PDF'),
-                    Button::make('print')->text('<i class="bi bi-printer me-1"></i> Cetak'),
-                    Button::make('reset')->text('<i class="bi bi-arrow-clockwise me-1"></i> Reset'),
-                    Button::make('reload')->text('<i class="bi bi-arrow-repeat me-1"></i> Reload'),
-                ],
+                'pageLength' => 10,
+                'pagingType' => 'simple_numbers',
                 'language' => [
-                    'url' => '//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json',
+                    'search' => 'Cari:',
+                    'searchPlaceholder' => 'Cari agenda...',
+                    'lengthMenu' => '_MENU_ data per halaman',
+                    'info' => 'Menampilkan _START_ sampai _END_ dari _TOTAL_ entri',
+                    'infoEmpty' => 'Menampilkan 0 sampai 0 dari 0 entri',
+                    'infoFiltered' => '(disaring dari _MAX_ total entri)',
+                    'zeroRecords' => 'Tidak ditemukan data yang sesuai',
+                    'emptyTable' => 'Tidak ada data agenda tersedia',
+                    'paginate' => [
+                        'first' => '«',
+                        'last' => '»',
+                        'previous' => '‹',
+                        'next' => '›',
+                    ],
                 ],
+            ])
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload'),
             ]);
     }
 

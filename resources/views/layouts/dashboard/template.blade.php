@@ -173,6 +173,130 @@
         .back-to-top:hover {
             background: #f9dc4b;
         }
+
+        /* ─── Modern DataTables 2 & Bootstrap 5 Alignment & Styling ─── */
+        div.dt-container div.dt-layout-row {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            flex-wrap: wrap !important;
+            gap: 12px !important;
+            margin-bottom: 14px !important;
+        }
+        div.dt-container div.dt-layout-row:last-child {
+            margin-top: 14px !important;
+            margin-bottom: 0 !important;
+            padding-top: 12px !important;
+            border-top: 1px solid #f1f5f9 !important;
+        }
+        div.dt-container div.dt-layout-start {
+            display: flex !important;
+            align-items: center !important;
+            flex-wrap: wrap !important;
+            gap: 10px !important;
+        }
+        div.dt-container div.dt-layout-end {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            flex-wrap: wrap !important;
+            gap: 10px !important;
+        }
+        div.dt-container div.dt-info {
+            color: #64748b !important;
+            font-size: 13.5px !important;
+            font-weight: 500 !important;
+            padding: 0 !important;
+        }
+        div.dt-container div.dt-search {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+        }
+        div.dt-container div.dt-search input {
+            border-radius: 50px !important;
+            padding: 6px 16px !important;
+            border: 1.5px solid #e2e8f0 !important;
+            font-size: 13.5px !important;
+            outline: none !important;
+            transition: all 0.2s ease !important;
+        }
+        div.dt-container div.dt-search input:focus {
+            border-color: #000000 !important;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08) !important;
+        }
+        div.dt-container div.dt-length select {
+            border-radius: 8px !important;
+            border: 1.5px solid #e2e8f0 !important;
+            padding: 5px 12px !important;
+            font-size: 13px !important;
+        }
+        div.dt-container div.dt-paging ul.pagination {
+            margin: 0 !important;
+            display: flex !important;
+            gap: 4px !important;
+            align-items: center !important;
+        }
+        div.dt-container div.dt-paging .page-item .page-link {
+            border-radius: 8px !important;
+            padding: 6px 13px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            color: #334155 !important;
+            border: 1px solid #e2e8f0 !important;
+            background: #ffffff !important;
+            transition: all 0.2s ease !important;
+        }
+        div.dt-container div.dt-paging .page-item.active .page-link {
+            background-color: #000000 !important;
+            border-color: #000000 !important;
+            color: #f9dc4b !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+        }
+        div.dt-container div.dt-paging .page-item.disabled .page-link {
+            color: #94a3b8 !important;
+            background-color: #f8fafc !important;
+            border-color: #e2e8f0 !important;
+            opacity: 0.6 !important;
+        }
+        div.dt-container div.dt-paging .page-item .page-link:hover:not(.disabled) {
+            background-color: #f9dc4b !important;
+            color: #000000 !important;
+            border-color: #f9dc4b !important;
+        }
+        /* Buttons Styling */
+        div.dt-container div.dt-buttons .btn {
+            border-radius: 6px !important;
+            font-size: 12.5px !important;
+            font-weight: 600 !important;
+            padding: 5px 12px !important;
+            margin-right: 4px !important;
+            background: #ffffff !important;
+            color: #0f172a !important;
+            border: 1px solid #cbd5e1 !important;
+        }
+        div.dt-container div.dt-buttons .btn:hover {
+            background: #f1f5f9 !important;
+            color: #000000 !important;
+        }
+
+        /* Fallback for DataTables 1.x classes */
+        .dataTables_wrapper .dataTables_info {
+            float: left !important;
+            color: #64748b !important;
+            font-size: 13.5px !important;
+            padding-top: 8px !important;
+        }
+        .dataTables_wrapper .dataTables_paginate {
+            float: right !important;
+            text-align: right !important;
+            margin: 0 !important;
+        }
+        .dataTables_wrapper::after {
+            content: "" !important;
+            display: table !important;
+            clear: both !important;
+        }
     </style>
 </head>
 

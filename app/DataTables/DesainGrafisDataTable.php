@@ -104,7 +104,6 @@ class DesainGrafisDataTable extends DataTable
             ->setTableId('desaingrafis-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->dom('Bfrtip')
             ->orderBy(1, 'asc')
             ->selectStyleSingle()
             ->buttons([
