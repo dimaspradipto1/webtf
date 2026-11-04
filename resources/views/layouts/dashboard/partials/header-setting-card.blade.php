@@ -40,8 +40,8 @@
             </div>
         </div>
         <div class="card-footer bg-light py-3 text-end">
-            <button type="submit" class="btn px-4 rounded-3 fw-bold text-white shadow-sm" style="background: #000000; border: none !important;">
-                <i class="bi bi-check2-circle me-1" style="color: #f9dc4b;"></i> Simpan Header
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check2-circle me-1"></i> Simpan Header
             </button>
         </div>
     </div>

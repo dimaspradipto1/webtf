@@ -161,10 +161,10 @@
 
                     {{-- Tombol Aksi --}}
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary rounded-pill px-4 text-white fw-semibold" style="background: #000000; border: none !important;">
+                        <button type="submit" class="btn btn-primary">
                             <i class="bi bi-check-lg me-1"></i> Simpan Agenda
                         </button>
-                        <a href="{{ route('agenda.index') }}" class="btn btn-outline-secondary rounded-pill px-4">
+                        <a href="{{ route('agenda.index') }}" class="btn btn-secondary">
                             Batal
                         </a>
                     </div>

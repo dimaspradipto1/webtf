@@ -66,7 +66,7 @@
                         <a href="{{ route('homepage') }}" target="_blank" class="btn btn-sm btn-outline-secondary">
                             <i class="bi bi-box-arrow-up-right me-1"></i> Lihat di Navbar
                         </a>
-                        <button type="button" class="btn btn-sm fw-semibold shadow-sm text-white" id="btn-add-beasiswa" style="background: #000000; border: none !important;">
+                        <button type="button" class="btn btn-primary btn-sm" id="btn-add-beasiswa">
                             <i class="bi bi-plus-circle-fill me-1"></i> Tambah Menu Beasiswa
                         </button>
                     </div>
@@ -166,7 +166,7 @@
                     <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary px-3 rounded-2">
                         <i class="bi bi-arrow-left me-1"></i> Dashboard
                     </a>
-                    <button type="submit" class="btn fw-semibold px-4 py-2 text-white shadow-sm" style="background: #000000; border: none; border-radius: 8px;">
+                    <button type="submit" class="btn btn-primary">
                         <i class="bi bi-save me-1"></i> Simpan & Sinkronkan ke Navbar
                     </button>
                 </div>

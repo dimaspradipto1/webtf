@@ -22,11 +22,11 @@
 
 {{-- Tab Navigasi Antar Pengumuman & Agenda --}}
 <div class="d-flex gap-2 mb-3">
-    <a href="{{ route('announcements.index') }}" class="btn btn-outline-secondary rounded-pill px-3 py-2 fw-semibold bg-white shadow-sm">
+    <a href="{{ route('announcements.index') }}" class="btn btn-outline-secondary fw-semibold bg-white shadow-sm">
         <i class="bi bi-megaphone-fill me-1 text-warning"></i> Pengumuman
         <span class="badge bg-secondary ms-1">{{ $totalAnnouncements ?? 0 }}</span>
     </a>
-    <a href="{{ route('agenda.index') }}" class="btn btn-dark rounded-pill px-3 py-2 fw-semibold shadow-sm">
+    <a href="{{ route('agenda.index') }}" class="btn btn-dark fw-semibold shadow-sm">
         <i class="bi bi-calendar4-week me-1 text-warning"></i> Agenda
         <span class="badge bg-warning text-dark ms-1">{{ $totalAgendas ?? 0 }}</span>
     </a>
@@ -41,10 +41,10 @@
             <small class="text-muted">Kelola jadwal perkuliahan, semester antara, ujian, dan agenda kegiatan prodi yang tampil di beranda website.</small>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('homepage') }}#berita" target="_blank" class="btn btn-outline-secondary btn-sm">
+            <a href="{{ route('homepage') }}#berita" target="_blank" class="btn btn-outline-secondary">
                 <i class="bi bi-box-arrow-up-right me-1"></i> Preview di Website
             </a>
-            <a href="{{ route('agenda.create') }}" class="btn btn-primary btn-sm">
+            <a href="{{ route('agenda.create') }}" class="btn btn-primary">
                 <i class="bi bi-plus-lg me-1"></i> Tambah Agenda
             </a>
         </div>

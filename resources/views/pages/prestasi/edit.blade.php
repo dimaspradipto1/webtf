@@ -252,10 +252,10 @@
                         </div>
 
                         <div class="col-12 mt-4 pt-3 border-top d-flex justify-content-between">
-                            <a href="{{ route('prestasi.index') }}" class="btn btn-outline-secondary px-4">
+                            <a href="{{ route('prestasi.index') }}" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left me-1"></i> Kembali
                             </a>
-                            <button type="submit" class="btn btn-primary px-4 fw-bold" style="background: #000000; border: none !important;">
+                            <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-check2-circle me-1"></i> Perbarui Data Prestasi
                             </button>
                         </div>

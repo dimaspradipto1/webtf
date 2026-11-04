@@ -147,7 +147,7 @@
                         <a href="{{ route('homepage') }}" target="_blank" class="btn btn-sm btn-outline-secondary">
                             <i class="bi bi-box-arrow-up-right me-1"></i> Preview di Navbar
                         </a>
-                        <button type="button" class="btn btn-sm fw-semibold shadow-sm text-white" data-bs-toggle="modal" data-bs-target="#modalAddBahasa" style="background: #000000; border: none !important;">
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalAddBahasa">
                             <i class="bi bi-plus-circle-fill me-1"></i> Tambah Bahasa Baru
                         </button>
                     </div>
@@ -299,7 +299,7 @@
                     <div class="small text-muted">
                         <i class="bi bi-info-circle me-1"></i> Ubah urutan angka atau aktifkan switch, kemudian klik tombol <strong>Simpan Perubahan</strong>.
                     </div>
-                    <button type="submit" class="btn fw-semibold text-white px-4 shadow-sm" style="background: #000000; border: none !important;">
+                    <button type="submit" class="btn btn-primary">
                         <i class="bi bi-save me-1"></i> Simpan Perubahan Urutan & Status
                     </button>
                 </div>
@@ -365,7 +365,7 @@
                 </div>
                 <div class="modal-footer bg-light" style="border-radius: 0 0 12px 12px;">
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-sm text-white fw-semibold" style="background: #000000;">
+                    <button type="submit" class="btn btn-primary btn-sm">
                         <i class="bi bi-save me-1"></i> Simpan Bahasa
                     </button>
                 </div>

@@ -126,7 +126,7 @@
                         <a href="{{ route('template-dokumen.index') }}" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-1"></i> Batal
                         </a>
-                        <button type="submit" class="btn btn-primary" style="background: #000000; border: none !important;">
+                        <button type="submit" class="btn btn-primary">
                             <i class="bi bi-save me-1"></i> Perbarui SOP
                         </button>
                     </div>

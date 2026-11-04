@@ -176,10 +176,10 @@
                     </div>
 
                     <div class="card-footer bg-light py-3 d-flex justify-content-between align-items-center">
-                        <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary px-4 rounded-3">
+                        <a href="{{ route('dashboard') }}" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-1"></i> Kembali
                         </a>
-                        <button type="submit" class="btn btn-primary px-4 rounded-3 fw-bold" style="background: #000000; border: none !important;">
+                        <button type="submit" class="btn btn-primary">
                             <i class="bi bi-check2-circle me-1"></i> Simpan Perubahan Banner PMB
                         </button>
                     </div>
