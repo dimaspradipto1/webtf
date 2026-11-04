@@ -249,7 +249,7 @@
           @endif
 
           @if($isAdmin || $isPenulis)
-          <!-- 7. Informasi (Berita, Pengumuman, Undangan, Galeri) -->
+          <!-- 7. Informasi (Berita, Galeri, FAQ) -->
           <li class="nav-item">
               <a class="nav-link {{ Route::is('news.*') || Route::is('gallery.*') || Route::is('faq.*') ? '' : 'collapsed' }}" data-bs-target="#informasi-nav" data-bs-toggle="collapse" href="#">
                   <i class="bi bi-newspaper"></i><span>Informasi & Galeri</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -257,12 +257,12 @@
               <ul id="informasi-nav" class="nav-content collapse {{ Route::is('news.*') || Route::is('gallery.*') || Route::is('faq.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
                   <li>
                       <a href="{{ route('news.index') }}" class="{{ Route::is('news.index') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Berita, Pengumuman & Undangan</span>
+                          <i class="bi bi-circle"></i><span>Berita & Undangan</span>
                       </a>
                   </li>
                   <li>
                       <a href="{{ route('news.create') }}" class="{{ Route::is('news.create') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Tulis Berita / Pengumuman</span>
+                          <i class="bi bi-circle"></i><span>Tulis Berita</span>
                       </a>
                   </li>
                   @if($isAdmin)
@@ -277,6 +277,25 @@
                       </a>
                   </li>
                   @endif
+              </ul>
+          </li>
+
+          <!-- 8. Pengumuman & Agenda (Menu Khusus) -->
+          <li class="nav-item">
+              <a class="nav-link {{ Route::is('announcements.*') || Route::is('agenda.*') ? '' : 'collapsed' }}" data-bs-target="#pengumuman-agenda-nav" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-calendar-event"></i><span>Pengumuman & Agenda</span><i class="bi bi-chevron-down ms-auto"></i>
+              </a>
+              <ul id="pengumuman-agenda-nav" class="nav-content collapse {{ Route::is('announcements.*') || Route::is('agenda.*') ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
+                  <li>
+                      <a href="{{ route('announcements.index') }}" class="{{ Route::is('announcements.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Pengumuman</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('agenda.index') }}" class="{{ Route::is('agenda.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Agenda</span>
+                      </a>
+                  </li>
               </ul>
           </li>
           @endif

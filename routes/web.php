@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AkademikController;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\BahasaSettingController;
@@ -91,6 +93,9 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/berita', 'news')->name('homepage.news');
     Route::get('/berita/kategori/{categorySlug}', 'newsCategory')->name('homepage.news.category');
     Route::get('/berita/{slug}', 'newsDetail')->name('homepage.news.detail');
+    Route::get('/pengumuman', 'pengumuman')->name('homepage.pengumuman');
+    Route::get('/pengumuman/{slug}', 'pengumumanDetail')->name('homepage.pengumuman.detail');
+    Route::get('/agenda', 'agenda')->name('homepage.agenda');
     Route::get('/faq', 'faq')->name('homepage.faq');
     Route::get('/humas', 'humas')->name('homepage.humas');
     Route::get('/unduhan', 'unduhan')->name('homepage.unduhan');
@@ -140,6 +145,15 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::get('news/download-template', [NewsController::class, 'downloadTemplate'])->name('news.download-template');
     Route::post('news/import-excel', [NewsController::class, 'importExcel'])->name('news.import-excel');
     Route::resource('news', NewsController::class);
+
+    // Pengumuman & Agenda
+    Route::resource('admin-pengumuman', AnnouncementController::class)
+        ->parameters(['admin-pengumuman' => 'announcement'])
+        ->names('announcements');
+    Route::resource('admin-agenda', AgendaController::class)
+        ->parameters(['admin-agenda' => 'agenda'])
+        ->names('agenda');
+
     Route::resource('admin-faq', FaqController::class)
         ->parameters(['admin-faq' => 'faq'])
         ->names('faq');

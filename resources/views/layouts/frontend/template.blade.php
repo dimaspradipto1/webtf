@@ -79,6 +79,8 @@
     $thHdrSticky = $themeSetting ? ($themeSetting->header_is_sticky ?? true) : true;
     $thTopBg = $themeSetting?->topbar_bg_color ?: '#000000';
     $thTopTxt = $themeSetting?->topbar_text_color ?: '#ffffff';
+    $thTopSocBg = $themeSetting?->topbar_social_bg_color ?: '#ffffff';
+    $thTopSocTxt = $themeSetting?->topbar_social_text_color ?: '#000000';
     $thAccent = $themeSetting?->accent_color ?: '#f9dc4b';
     $thFtrBg = $themeSetting?->footer_bg_color ?: '#000000';
     $thFtrTxt = $themeSetting?->footer_text_color ?: '#ffffff';
@@ -106,6 +108,8 @@
       --hdr-shadow: {{ $thHdrShadow }};
       --topbar-custom-bg: {{ $thTopBg }};
       --topbar-custom-text: {{ $thTopTxt }};
+      --topbar-soc-bg: {{ $thTopSocBg }};
+      --topbar-soc-txt: {{ $thTopSocTxt }};
       --accent-custom: {{ $thAccent }};
       --ftr-bg: {{ $thFtrBg }};
       --ftr-text: {{ $thFtrTxt }};
@@ -122,6 +126,13 @@
     }
     .topbar-main a, .topbar-main .topbar-marquee-text {
       color: var(--topbar-custom-text) !important;
+    }
+    .topbar-main .topbar-sosmed-btn {
+      background: var(--topbar-soc-bg) !important;
+      color: var(--topbar-soc-txt) !important;
+    }
+    .topbar-main .topbar-search-btn {
+      color: var(--topbar-soc-txt) !important;
     }
     .navbar-main {
       background: var(--hdr-bg) !important;

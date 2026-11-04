@@ -32,6 +32,8 @@ class Checkrole
 
         if ($user->hasExactRole('penulis')) {
             $allowedPatterns[] = 'news.*';
+            $allowedPatterns[] = 'announcements.*';
+            $allowedPatterns[] = 'agenda.*';
         }
 
         if ($user->hasExactRole('organisasi')) {

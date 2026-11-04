@@ -45,6 +45,8 @@ class ThemeSettingTest extends TestCase
             'header_is_sticky' => '1',
             'topbar_bg_color' => '#111827',
             'topbar_text_color' => '#ffffff',
+            'topbar_social_bg_color' => '#f9dc4b',
+            'topbar_social_text_color' => '#000000',
             'accent_color' => '#f9dc4b',
             'footer_bg_color' => '#020617',
             'footer_text_color' => '#cbd5e1',
@@ -68,6 +70,8 @@ class ThemeSettingTest extends TestCase
         $setting = ThemeSetting::current();
         $this->assertEquals('#000000', $setting->header_bg_color);
         $this->assertEquals('#f9dc4b', $setting->header_active_bg_color);
+        $this->assertEquals('#f9dc4b', $setting->topbar_social_bg_color);
+        $this->assertEquals('#000000', $setting->topbar_social_text_color);
         $this->assertEquals('#020617', $setting->footer_bg_color);
         $this->assertEquals('#38bdf8', $setting->footer_heading_color);
         $this->assertEquals('© 2026 S1 Teknik Informatika UIS Batam', $setting->footer_copyright);
@@ -93,6 +97,8 @@ class ThemeSettingTest extends TestCase
         $this->actingAs($admin)->post(route('theme.reset'));
         $setting->refresh();
         $this->assertEquals('#f9dc4b', $setting->header_bg_color);
+        $this->assertEquals('#ffffff', $setting->topbar_social_bg_color);
+        $this->assertEquals('#000000', $setting->topbar_social_text_color);
         $this->assertEquals('#000000', $setting->footer_bg_color);
         $this->assertEquals('#f9dc4b', $setting->footer_heading_color);
     }
