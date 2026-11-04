@@ -145,4 +145,29 @@ class AnnouncementAndAgendaTest extends TestCase
             $responseDetail->assertSee($firstAnn->title);
         }
     }
+
+    public function test_admin_can_search_announcements_and_agenda_datatable(): void
+    {
+        $admin = $this->getAdminUser();
+
+        // Search Announcement for 'KRS'
+        $responseAnn = $this->actingAs($admin)->getJson(route('announcements.index', [
+            'search' => ['value' => 'KRS'],
+            'columns' => [
+                ['data' => 'title', 'name' => 'title', 'searchable' => 'true'],
+            ],
+        ]), ['X-Requested-With' => 'XMLHttpRequest']);
+        $responseAnn->assertStatus(200);
+        $responseAnn->assertJsonPath('recordsFiltered', 1);
+
+        // Search Agenda for 'Pendaftaran'
+        $responseAgenda = $this->actingAs($admin)->getJson(route('agenda.index', [
+            'search' => ['value' => 'Pendaftaran'],
+            'columns' => [
+                ['data' => 'title', 'name' => 'title', 'searchable' => 'true'],
+            ],
+        ]), ['X-Requested-With' => 'XMLHttpRequest']);
+        $responseAgenda->assertStatus(200);
+        $responseAgenda->assertJsonPath('recordsFiltered', 1);
+    }
 }

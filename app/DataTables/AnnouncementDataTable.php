@@ -23,7 +23,7 @@ class AnnouncementDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('DT_RowIndex', '')
-            ->addColumn('title', function ($item) {
+            ->editColumn('title', function ($item) {
                 $html = '<div class="fw-semibold text-dark">'.e($item->title).'</div>';
                 if ($item->content) {
                     $clean = trim(html_entity_decode(strip_tags($item->content), ENT_QUOTES, 'UTF-8'));
@@ -34,7 +34,13 @@ class AnnouncementDataTable extends DataTable
 
                 return $html;
             })
-            ->addColumn('date', function ($item) {
+            ->filterColumn('title', function ($query, $keyword) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('title', 'like', "%{$keyword}%")
+                      ->orWhere('content', 'like', "%{$keyword}%");
+                });
+            })
+            ->editColumn('date', function ($item) {
                 return $item->date ? '<span class="badge bg-light text-dark border px-2 py-1"><i class="bi bi-calendar3 me-1 text-primary"></i>'.e(Carbon::parse($item->date)->translatedFormat('d F Y')).'</span>' : '-';
             })
             ->addColumn('lampiran_link', function ($item) {
@@ -48,7 +54,7 @@ class AnnouncementDataTable extends DataTable
 
                 return ! empty($parts) ? implode(' ', $parts) : '<span class="text-muted small">-</span>';
             })
-            ->addColumn('urutan', function ($item) {
+            ->editColumn('urutan', function ($item) {
                 return '<span class="badge bg-secondary px-2 py-1">'.e($item->urutan).'</span>';
             })
             ->addColumn('status', function ($item) {
@@ -57,6 +63,14 @@ class AnnouncementDataTable extends DataTable
                 }
 
                 return '<span class="badge bg-secondary px-2 py-1">Nonaktif</span>';
+            })
+            ->filterColumn('status', function ($query, $keyword) {
+                $kw = strtolower($keyword);
+                if (str_contains($kw, 'aktif') && ! str_contains($kw, 'non')) {
+                    $query->where('is_active', true);
+                } elseif (str_contains($kw, 'non')) {
+                    $query->where('is_active', false);
+                }
             })
             ->addColumn('action', function ($item) {
                 $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';

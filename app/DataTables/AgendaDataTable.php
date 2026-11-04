@@ -22,7 +22,7 @@ class AgendaDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('DT_RowIndex', '')
-            ->addColumn('title', function ($agenda) {
+            ->editColumn('title', function ($agenda) {
                 $html = '<div class="fw-semibold text-dark">'.e($agenda->title).'</div>';
                 if ($agenda->description) {
                     $clean = trim(html_entity_decode(strip_tags($agenda->description), ENT_QUOTES, 'UTF-8'));
@@ -36,13 +36,19 @@ class AgendaDataTable extends DataTable
 
                 return $html;
             })
-            ->addColumn('date_text', function ($agenda) {
+            ->filterColumn('title', function ($query, $keyword) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('title', 'like', "%{$keyword}%")
+                      ->orWhere('description', 'like', "%{$keyword}%");
+                });
+            })
+            ->editColumn('date_text', function ($agenda) {
                 return '<div class="badge bg-warning text-dark fw-bold px-2 py-1"><i class="bi bi-calendar4-week me-1"></i>'.e($agenda->date_text).'</div>';
             })
-            ->addColumn('location', function ($agenda) {
+            ->editColumn('location', function ($agenda) {
                 return $agenda->location ? '<span class="text-dark small"><i class="bi bi-geo-alt-fill text-danger me-1"></i>'.e($agenda->location).'</span>' : '<span class="text-muted small">-</span>';
             })
-            ->addColumn('urutan', function ($agenda) {
+            ->editColumn('urutan', function ($agenda) {
                 return '<span class="badge bg-secondary px-2 py-1">'.e($agenda->urutan).'</span>';
             })
             ->addColumn('status', function ($agenda) {
@@ -51,6 +57,14 @@ class AgendaDataTable extends DataTable
                 }
 
                 return '<span class="badge bg-secondary px-2 py-1">Nonaktif</span>';
+            })
+            ->filterColumn('status', function ($query, $keyword) {
+                $kw = strtolower($keyword);
+                if (str_contains($kw, 'aktif') && ! str_contains($kw, 'non')) {
+                    $query->where('is_active', true);
+                } elseif (str_contains($kw, 'non')) {
+                    $query->where('is_active', false);
+                }
             })
             ->addColumn('action', function ($agenda) {
                 $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';
@@ -152,7 +166,7 @@ class AgendaDataTable extends DataTable
                 ->title('Waktu / Jadwal')
                 ->width(180)
                 ->addClass('text-center align-middle'),
-            Column::computed('location')
+            Column::make('location')
                 ->title('Lokasi')
                 ->width(160)
                 ->addClass('align-middle'),

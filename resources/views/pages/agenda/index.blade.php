@@ -41,10 +41,10 @@
             <small class="text-muted">Kelola jadwal perkuliahan, semester antara, ujian, dan agenda kegiatan prodi yang tampil di beranda website.</small>
         </div>
         <div class="d-flex gap-2">
-            <a href="{{ route('homepage') }}#berita" target="_blank" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                <i class="bi bi-box-arrow-up-right me-1"></i> Preview di Beranda
+            <a href="{{ route('homepage') }}#berita" target="_blank" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-box-arrow-up-right me-1"></i> Preview di Website
             </a>
-            <a href="{{ route('agenda.create') }}" class="btn btn-primary btn-sm rounded-pill px-3 text-white fw-semibold" style="background: #000000; border: none !important;">
+            <a href="{{ route('agenda.create') }}" class="btn btn-primary btn-sm">
                 <i class="bi bi-plus-lg me-1"></i> Tambah Agenda
             </a>
         </div>
