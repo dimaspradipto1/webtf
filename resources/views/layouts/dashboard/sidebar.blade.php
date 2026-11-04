@@ -45,16 +45,6 @@
                       </a>
                   </li>
                   <li>
-                      <a href="{{ route('layanan-terkait.index') }}" class="{{ Route::is('layanan-terkait.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Layanan Terkait</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('social-media.index', ['kategori' => 'universitas']) }}" class="{{ Route::is('social-media.*') && request('kategori') !== 'humas' ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Media Sosial Fakultas Sains dan Teknologi</span>
-                      </a>
-                  </li>
-                  <li>
                       <a href="{{ route('feature.index') }}" class="{{ Route::is('feature.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Keunggulan Program Studi</span>
                       </a>
@@ -70,11 +60,6 @@
                       </a>
                   </li>
                   <li>
-                      <a href="{{ route('partner.index') }}" class="{{ Route::is('partner.*') ? 'active' : '' }}">
-                          <i class="bi bi-circle"></i><span>Mitra Kerjasama Riset</span>
-                      </a>
-                  </li>
-                  <li>
                       <a href="{{ route('prestasi.index') }}" class="{{ Route::is('prestasi.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Prestasi Mahasiswa</span>
                       </a>
@@ -82,6 +67,21 @@
                   <li>
                       <a href="{{ route('organisasi-mahasiswa.index') }}" class="{{ Route::is('organisasi-mahasiswa.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Organisasi Mahasiswa</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('layanan-terkait.index') }}" class="{{ Route::is('layanan-terkait.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Layanan Terkait</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('social-media.index', ['kategori' => 'universitas']) }}" class="{{ Route::is('social-media.*') && request('kategori') !== 'humas' ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Media Sosial Fakultas Sains dan Teknologi</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('partner.index') }}" class="{{ Route::is('partner.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Mitra Kerjasama Riset</span>
                       </a>
                   </li>
               </ul>
