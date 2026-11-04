@@ -84,3 +84,4 @@ class AgendaController extends Controller
             ->with('success', 'Agenda berhasil dihapus.');
     }
 }
+

@@ -35,3 +35,4 @@ class AnnouncementRequest extends FormRequest
         ];
     }
 }
+

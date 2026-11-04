@@ -166,3 +166,4 @@ class AgendaDataTable extends DataTable
         return 'Agenda_'.date('YmdHis');
     }
 }
+

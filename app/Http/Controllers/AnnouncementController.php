@@ -109,3 +109,4 @@ class AnnouncementController extends Controller
             ->with('success', 'Pengumuman berhasil dihapus.');
     }
 }
+

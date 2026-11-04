@@ -34,3 +34,4 @@ class AgendaRequest extends FormRequest
         ];
     }
 }
+

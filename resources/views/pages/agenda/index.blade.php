@@ -64,3 +64,4 @@
         {!! $dataTable->scripts() !!}
     @endif
 @endpush
+

@@ -172,3 +172,4 @@ class AnnouncementDataTable extends DataTable
         return 'Announcement_'.date('YmdHis');
     }
 }
+
