@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AlumniTestimonialRequest;
 use App\Models\About;
+use App\Models\Agenda;
 use App\Models\Akademik;
+use App\Models\Announcement;
 use App\Models\Banner;
 use App\Models\Contact;
 use App\Models\DesainGrafis;
@@ -89,12 +91,14 @@ class FrontendController extends Controller
             ]);
         }
 
-        $announcements = News::where('status', 'published')
-            ->where(function ($q) {
-                $q->where('category', 'like', '%Pengumuman%')
-                    ->orWhere('title', 'like', '%Pengumuman%');
-            })
-            ->latest()
+        $announcements = Announcement::where('is_active', true)
+            ->orderBy('urutan')
+            ->latest('date')
+            ->take(5)
+            ->get();
+        $agendas = Agenda::where('is_active', true)
+            ->orderBy('urutan')
+            ->latest('id')
             ->take(5)
             ->get();
         $faqs = Faq::take(6)->get();
@@ -144,6 +148,7 @@ class FrontendController extends Controller
             'latestNews',
             'search',
             'announcements',
+            'agendas',
             'faqs',
             'galleries',
             'prestasis',
@@ -539,6 +544,55 @@ class FrontendController extends Controller
         $milestones = Milestone::orderBy('tahun')->get();
 
         return view('layouts.frontend.sejarah', compact('about', 'milestones'));
+    }
+
+    public function pengumuman(Request $request)
+    {
+        $search = trim($request->query('q') ?? '');
+        $query = Announcement::where('is_active', true);
+
+        if (! empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('content', 'like', "%{$search}%");
+            });
+        }
+
+        $announcements = $query->orderBy('urutan')->latest('date')->paginate(12)->withQueryString();
+
+        return view('layouts.frontend.pengumuman', compact('announcements', 'search'));
+    }
+
+    public function pengumumanDetail($slug)
+    {
+        $announcement = Announcement::where('slug', $slug)->firstOrFail();
+        $recentAnnouncements = Announcement::where('is_active', true)
+            ->where('id', '!=', $announcement->id)
+            ->orderBy('urutan')
+            ->latest('date')
+            ->take(5)
+            ->get();
+
+        return view('layouts.frontend.pengumuman-detail', compact('announcement', 'recentAnnouncements'));
+    }
+
+    public function agenda(Request $request)
+    {
+        $search = trim($request->query('q') ?? '');
+        $query = Agenda::where('is_active', true);
+
+        if (! empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('date_text', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('location', 'like', "%{$search}%");
+            });
+        }
+
+        $agendas = $query->orderBy('urutan')->latest('id')->paginate(15)->withQueryString();
+
+        return view('layouts.frontend.agenda', compact('agendas', 'search'));
     }
 
     public function faq()

@@ -52,17 +52,26 @@
         
         {{-- SECTION PENGUMUMAN --}}
         <div class="mb-4">
-          <div class="d-flex align-items-center gap-2 mb-3">
-            <i class="bi bi-megaphone-fill fs-3" style="color: var(--uis-purple, #000000);"></i>
-            <h3 class="section-heading-uis mb-0" style="font-size: 24px;">Pengumuman</h3>
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-megaphone-fill fs-3" style="color: var(--uis-purple, #000000);"></i>
+              <h3 class="section-heading-uis mb-0" style="font-size: 24px;">Pengumuman</h3>
+            </div>
+            <a href="{{ route('homepage.pengumuman') }}" class="small fw-semibold text-decoration-none" style="color: #64748b;">
+              Semua <i class="bi bi-arrow-right"></i>
+            </a>
           </div>
 
           <div class="announcement-list">
             @if(isset($announcements) && $announcements->count() > 0)
               @foreach($announcements as $ann)
-                <a href="{{ route('homepage.news.detail', $ann->slug ?? $ann->id) }}" class="announcement-card-box">
+                @php
+                  $annUrl = $ann->link_url ?: ($ann->file_path ? asset('storage/'.$ann->file_path) : route('homepage.pengumuman.detail', $ann->slug));
+                  $isExternal = !empty($ann->link_url) || !empty($ann->file_path);
+                @endphp
+                <a href="{{ $annUrl }}" class="announcement-card-box text-decoration-none" {{ $isExternal ? 'target="_blank" rel="noopener noreferrer"' : '' }}>
                   <div class="announcement-card-title">{{ $ann->title }}</div>
-                  <div class="announcement-card-date">{{ $ann->created_at ? $ann->created_at->format('d F Y') : '-' }}</div>
+                  <div class="announcement-card-date">{{ $ann->date ? \Carbon\Carbon::parse($ann->date)->translatedFormat('d F Y') : ($ann->created_at ? $ann->created_at->translatedFormat('d F Y') : '-') }}</div>
                 </a>
               @endforeach
             @else
@@ -87,29 +96,46 @@
           </div>
 
           <div class="agenda-list">
-            <div class="agenda-row mb-3">
-              <div class="agenda-time-text">20 - 31 Juli 2026:</div>
-              <div class="agenda-badge-card">
-                Pendaftaran Semester Antara
+            @if(isset($agendas) && $agendas->count() > 0)
+              @foreach($agendas as $agenda)
+                <div class="agenda-row mb-3">
+                  <div class="agenda-time-text">{{ $agenda->date_text }}:</div>
+                  @if($agenda->link_url)
+                    <a href="{{ $agenda->link_url }}" target="_blank" rel="noopener noreferrer" class="agenda-badge-card d-block text-decoration-none" title="Buka tautan agenda">
+                      {{ $agenda->title }} <i class="bi bi-box-arrow-up-right ms-1 text-muted" style="font-size:11px"></i>
+                    </a>
+                  @else
+                    <div class="agenda-badge-card">
+                      {{ $agenda->title }}
+                    </div>
+                  @endif
+                </div>
+              @endforeach
+            @else
+              <div class="agenda-row mb-3">
+                <div class="agenda-time-text">20 - 31 Juli 2026:</div>
+                <div class="agenda-badge-card">
+                  Pendaftaran Semester Antara
+                </div>
               </div>
-            </div>
 
-            <div class="agenda-row mb-3">
-              <div class="agenda-time-text">03 - 28 Agustus 2026:</div>
-              <div class="agenda-badge-card">
-                Perkuliahan Semester Antara
+              <div class="agenda-row mb-3">
+                <div class="agenda-time-text">03 - 28 Agustus 2026:</div>
+                <div class="agenda-badge-card">
+                  Perkuliahan Semester Antara
+                </div>
               </div>
-            </div>
 
-            <div class="agenda-row mb-3">
-              <div class="agenda-time-text">31 Agustus - 05 September 2026:</div>
-              <div class="agenda-badge-card">
-                Penyerahan Nilai Semester Antara
+              <div class="agenda-row mb-3">
+                <div class="agenda-time-text">31 Agustus - 05 September 2026:</div>
+                <div class="agenda-badge-card">
+                  Penyerahan Nilai Semester Antara
+                </div>
               </div>
-            </div>
+            @endif
 
             <div class="mt-3">
-              <a href="{{ route('homepage.news', ['category' => 'Pengumuman & Agenda']) }}" class="btn-agenda-pill">
+              <a href="{{ route('homepage.agenda') }}" class="btn-agenda-pill">
                 Lihat Seluruh Agenda
               </a>
             </div>
