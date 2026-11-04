@@ -26,10 +26,10 @@
               </a>
           </li>
 
-          <!-- 1b. Warna Header & Tata Letak Beranda -->
+          <!-- 1b. Warna Header, Footer & Tata Letak Beranda -->
           <li class="nav-item">
               <a class="nav-link {{ Route::is('theme.*') ? '' : 'collapsed' }}" href="{{ route('theme.index') }}">
-                  <i class="bi bi-palette-fill"></i><span>Warna Header & Tata Letak</span>
+                  <i class="bi bi-palette-fill"></i><span>Warna Header, Footer & Layout</span>
               </a>
           </li>
 

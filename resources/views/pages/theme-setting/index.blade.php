@@ -83,6 +83,25 @@
     text-decoration: none;
     transition: all 0.2s ease;
   }
+
+  /* Mockup Footer Preview */
+  .mockup-footer {
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    margin-top: 14px;
+  }
+  .mockup-footer-social-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    transition: all 0.2s ease;
+  }
   
   /* Color Presets Pill */
   .preset-palette-btn {
@@ -258,12 +277,12 @@
 
 @section('content')
 <div class="pagetitle">
-    <h1>Warna Header & Tata Letak Beranda</h1>
+    <h1>Warna Header, Footer & Tata Letak Beranda</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
             <li class="breadcrumb-item">Tampilan & Navigasi</li>
-            <li class="breadcrumb-item active">Warna Header & Tata Letak</li>
+            <li class="breadcrumb-item active">Warna Header, Footer & Tata Letak</li>
         </ol>
     </nav>
 </div>
@@ -282,12 +301,17 @@
 <div class="theme-preview-card">
   <div class="theme-preview-header">
     <div class="d-flex align-items-center gap-2">
-      <span class="preview-badge"><i class="bi bi-eye-fill me-1"></i> Live Preview Header</span>
-      <span class="text-white-50 small d-none d-sm-inline">Tampilan otomatis berubah saat memilih warna di bawah</span>
+      <span class="preview-badge"><i class="bi bi-eye-fill me-1"></i> Live Preview Interaktif</span>
+      <span class="text-white-50 small d-none d-sm-inline">Tampilan otomatis berubah saat memilih warna atau mengetik di bawah</span>
     </div>
     <a href="{{ url('/') }}" target="_blank" class="btn btn-sm btn-outline-light d-inline-flex align-items-center gap-1" style="font-size: 11.5px; border-radius: 8px;">
       <i class="bi bi-box-arrow-up-right"></i> Buka Website
     </a>
+  </div>
+
+  <!-- Sub-Header: Preview Header -->
+  <div class="d-flex align-items-center justify-content-between mb-2">
+    <span class="text-white fw-bold small"><i class="bi bi-window-dock me-1 text-warning"></i> Preview Header & Navbar</span>
   </div>
 
   <!-- Mockup Navbar -->
@@ -327,6 +351,59 @@
       </span>
     </div>
   </div>
+
+  <!-- Sub-Header: Preview Footer -->
+  <div class="d-flex align-items-center justify-content-between mt-3 mb-1">
+    <span class="text-white fw-bold small"><i class="bi bi-layout-sidebar-inset-reverse me-1 text-warning"></i> Preview Footer</span>
+  </div>
+
+  <!-- Mockup Footer -->
+  <div class="mockup-footer" id="mockupFooter" style="background-color: {{ $setting->footer_bg_color ?? '#000000' }}; border-top: 4px solid {{ $setting->footer_border_top_color ?? '#f9dc4b' }};">
+    <div class="row g-3">
+      <!-- Kolom Brand & Deskripsi -->
+      <div class="col-md-5">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo" style="height: 32px; width: auto; object-fit: contain;">
+          <div>
+            <div class="fw-bold" id="mockupFooterBrandTitle" style="font-size: 13px; color: {{ $setting->footer_heading_color ?? '#f9dc4b' }}; line-height: 1.1;">TEKNIK INFORMATIKA</div>
+            <div id="mockupFooterBrandSubtitle" style="font-size: 10.5px; color: {{ $setting->footer_text_color ?? '#ffffff' }}; opacity: 0.85;">Fakultas Sains dan Teknologi</div>
+          </div>
+        </div>
+        <p class="mb-2" id="mockupFooterDesc" style="font-size: 11.5px; line-height: 1.45; color: {{ $setting->footer_text_color ?? '#ffffff' }};">
+          {{ Str::limit($setting->footer_description ?: 'Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi. Berkomitmen menyelenggarakan pendidikan tinggi teknologi informasi yang unggul.', 140) }}
+        </p>
+        <div class="d-flex gap-2">
+          <span class="mockup-footer-social-icon" id="mockupFooterSocial1" style="background: {{ $setting->footer_social_bg_color ?? '#f9dc4b' }}; color: {{ $setting->footer_social_text_color ?? '#000000' }};"><i class="bi bi-instagram"></i></span>
+          <span class="mockup-footer-social-icon" id="mockupFooterSocial2" style="background: {{ $setting->footer_social_bg_color ?? '#f9dc4b' }}; color: {{ $setting->footer_social_text_color ?? '#000000' }};"><i class="bi bi-facebook"></i></span>
+          <span class="mockup-footer-social-icon" id="mockupFooterSocial3" style="background: {{ $setting->footer_social_bg_color ?? '#f9dc4b' }}; color: {{ $setting->footer_social_text_color ?? '#000000' }};"><i class="bi bi-youtube"></i></span>
+        </div>
+      </div>
+
+      <!-- Kolom Navigasi Cepat -->
+      <div class="col-md-3">
+        <div class="fw-bold mb-2" id="mockupFooterHeading1" style="font-size: 12.5px; color: {{ $setting->footer_heading_color ?? '#f9dc4b' }};">Profil & Navigasi</div>
+        <div class="d-flex flex-column gap-1" style="font-size: 11.5px;">
+          <span id="mockupFooterLink1" style="color: {{ $setting->footer_link_color ?? '#ffffff' }};"><i class="bi bi-chevron-right me-1" style="font-size: 9px;"></i> Beranda</span>
+          <span id="mockupFooterLink2" style="color: {{ $setting->footer_link_color ?? '#ffffff' }};"><i class="bi bi-chevron-right me-1" style="font-size: 9px;"></i> Profil Prodi</span>
+          <span id="mockupFooterLink3" style="color: {{ $setting->footer_link_color ?? '#ffffff' }};"><i class="bi bi-chevron-right me-1" style="font-size: 9px;"></i> Kurikulum TF</span>
+          <span id="mockupFooterLink4" style="color: {{ $setting->footer_link_color ?? '#ffffff' }};"><i class="bi bi-chevron-right me-1" style="font-size: 9px;"></i> PMB Pendaftaran</span>
+        </div>
+      </div>
+
+      <!-- Kolom Kontak & Hak Cipta -->
+      <div class="col-md-4">
+        <div class="fw-bold mb-2" id="mockupFooterHeading2" style="font-size: 12.5px; color: {{ $setting->footer_heading_color ?? '#f9dc4b' }};">Kontak Prodi</div>
+        <div style="font-size: 11.5px; color: {{ $setting->footer_text_color ?? '#ffffff' }};" id="mockupFooterContact">
+          <div class="mb-1"><i class="bi bi-geo-alt me-1 text-warning"></i> Batam, Kepulauan Riau</div>
+          <div class="mb-1"><i class="bi bi-envelope me-1 text-warning"></i> informatika@uis.ac.id</div>
+          <div><i class="bi bi-clock me-1 text-warning"></i> Senin – Sabtu: 08.00 – 17.00 WIB</div>
+        </div>
+        <div class="mt-2 pt-2 border-top border-secondary" style="font-size: 10.5px; color: {{ $setting->footer_text_color ?? '#ffffff' }}; opacity: 0.85;" id="mockupFooterCopyright">
+          {{ Str::limit($setting->footer_copyright ?: '© ' . date('Y') . ' Program Studi Teknik Informatika — Fakultas Sains dan Teknologi.', 65) }}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
@@ -339,7 +416,7 @@
 
   <div class="row g-4">
 
-    <!-- ── KOLOM KIRI: PENGATURAN WARNA HEADER & TOPBAR ────── -->
+    <!-- ── KOLOM KIRI: PENGATURAN WARNA HEADER, TOPBAR & FOOTER ────── -->
     <div class="col-lg-5">
       
       <!-- Card Palet Preset Cepat -->
@@ -354,31 +431,31 @@
           <div class="d-flex flex-wrap gap-2">
             
             <!-- Preset 1: Kuning Khas FST UIS (Default) -->
-            <button type="button" class="preset-palette-btn" onclick="applyPreset('#f9dc4b', '#ffffff', '#000000', '#ffffff', '#000000', '#ffffff', '#000000', '#ffffff')">
+            <button type="button" class="preset-palette-btn" onclick="applyPreset('#f9dc4b', '#ffffff', '#000000', '#ffffff', '#000000', '#ffffff', '#000000', '#ffffff', '#000000', '#ffffff', '#f9dc4b', '#f9dc4b', '#ffffff', '#f9dc4b', '#f9dc4b', '#000000')">
               <span class="preset-color-dot" style="background: #f9dc4b;"></span>
               <span>Kuning Khas UIS (Default)</span>
             </button>
 
             <!-- Preset 2: Hitam Elegan / Dark Modern -->
-            <button type="button" class="preset-palette-btn" onclick="applyPreset('#000000', '#ffffff', '#f9dc4b', '#000000', '#f9dc4b', '#000000', '#000000', '#ffffff')">
+            <button type="button" class="preset-palette-btn" onclick="applyPreset('#000000', '#ffffff', '#f9dc4b', '#000000', '#f9dc4b', '#000000', '#000000', '#ffffff', '#0b0f19', '#e2e8f0', '#f9dc4b', '#f9dc4b', '#e2e8f0', '#f9dc4b', '#f9dc4b', '#000000')">
               <span class="preset-color-dot" style="background: #000000;"></span>
               <span>Hitam Elegan (Dark Minimalist)</span>
             </button>
 
             <!-- Preset 3: Putih Bersih / Clean Light -->
-            <button type="button" class="preset-palette-btn" onclick="applyPreset('#ffffff', '#1e293b', '#000000', '#ffffff', '#000000', '#ffffff', '#000000', '#ffffff')">
+            <button type="button" class="preset-palette-btn" onclick="applyPreset('#ffffff', '#1e293b', '#000000', '#ffffff', '#000000', '#ffffff', '#000000', '#ffffff', '#1e293b', '#f8fafc', '#f9dc4b', '#f9dc4b', '#cbd5e1', '#ffffff', '#ffffff', '#1e293b')">
               <span class="preset-color-dot" style="background: #ffffff; border-color: #cbd5e1;"></span>
               <span>Putih Bersih (Clean Light)</span>
             </button>
 
             <!-- Preset 4: Biru Teknologi / Tech Slate -->
-            <button type="button" class="preset-palette-btn" onclick="applyPreset('#0f172a', '#f8fafc', '#38bdf8', '#0f172a', '#38bdf8', '#0f172a', '#020617', '#ffffff')">
+            <button type="button" class="preset-palette-btn" onclick="applyPreset('#0f172a', '#f8fafc', '#38bdf8', '#0f172a', '#38bdf8', '#0f172a', '#020617', '#ffffff', '#020617', '#cbd5e1', '#38bdf8', '#38bdf8', '#94a3b8', '#38bdf8', '#38bdf8', '#020617')">
               <span class="preset-color-dot" style="background: #0f172a;"></span>
               <span>Biru Teknologi (Tech Slate)</span>
             </button>
 
             <!-- Preset 5: Hijau Zamrud / Emerald UIS -->
-            <button type="button" class="preset-palette-btn" onclick="applyPreset('#064e3b', '#ffffff', '#10b981', '#ffffff', '#10b981', '#ffffff', '#022c22', '#ffffff')">
+            <button type="button" class="preset-palette-btn" onclick="applyPreset('#064e3b', '#ffffff', '#10b981', '#ffffff', '#10b981', '#ffffff', '#022c22', '#ffffff', '#022c22', '#d1fae5', '#34d399', '#10b981', '#a7f3d0', '#ffffff', '#10b981', '#022c22')">
               <span class="preset-color-dot" style="background: #064e3b;"></span>
               <span>Hijau Zamrud (Emerald)</span>
             </button>
@@ -476,7 +553,7 @@
           <p class="text-muted small mb-0">Pengaturan warna bilah teks berjalan (marquee) di atas header</p>
         </div>
         <div class="card-body pt-0">
-          <div class="row g-2 mb-3">
+          <div class="row g-2">
             <div class="col-6">
               <label class="form-label fw-semibold small text-dark mb-1">Background Topbar</label>
               <div class="color-picker-box">
@@ -492,6 +569,109 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Card Kustomisasi Warna & Konten Footer -->
+      <div class="card shadow-sm border-0 mb-4" style="border-radius: 16px;">
+        <div class="card-header bg-white py-3 border-0">
+          <h6 class="fw-bold text-dark mb-1 d-flex align-items-center gap-2">
+            <i class="bi bi-layout-sidebar-inset-reverse text-warning"></i> Kustomisasi Warna & Konten Footer
+          </h6>
+          <p class="text-muted small mb-0">Ubah warna latar, batas garis, teks, link, dan konten footer</p>
+        </div>
+        <div class="card-body pt-0">
+
+          <div class="row g-2 mb-3">
+            <!-- Background Footer -->
+            <div class="col-6">
+              <label class="form-label fw-semibold small text-dark mb-1">Background Footer</label>
+              <div class="color-picker-box">
+                <input type="color" class="color-input-native" id="input_footer_bg_color" name="footer_bg_color" value="{{ old('footer_bg_color', $setting->footer_bg_color ?? '#000000') }}" oninput="syncColor(this, 'text_footer_bg_color')">
+                <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_footer_bg_color" value="{{ old('footer_bg_color', $setting->footer_bg_color ?? '#000000') }}" oninput="syncColorFromText(this, 'input_footer_bg_color')">
+              </div>
+            </div>
+            <!-- Garis Batas Atas (Border Top) -->
+            <div class="col-6">
+              <label class="form-label fw-semibold small text-dark mb-1">Garis Batas Atas</label>
+              <div class="color-picker-box">
+                <input type="color" class="color-input-native" id="input_footer_border_top_color" name="footer_border_top_color" value="{{ old('footer_border_top_color', $setting->footer_border_top_color ?? '#f9dc4b') }}" oninput="syncColor(this, 'text_footer_border_top_color')">
+                <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_footer_border_top_color" value="{{ old('footer_border_top_color', $setting->footer_border_top_color ?? '#f9dc4b') }}" oninput="syncColorFromText(this, 'input_footer_border_top_color')">
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-2 mb-3">
+            <!-- Heading / Judul Kolom Footer -->
+            <div class="col-6">
+              <label class="form-label fw-semibold small text-dark mb-1">Judul Kolom / Heading</label>
+              <div class="color-picker-box">
+                <input type="color" class="color-input-native" id="input_footer_heading_color" name="footer_heading_color" value="{{ old('footer_heading_color', $setting->footer_heading_color ?? '#f9dc4b') }}" oninput="syncColor(this, 'text_footer_heading_color')">
+                <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_footer_heading_color" value="{{ old('footer_heading_color', $setting->footer_heading_color ?? '#f9dc4b') }}" oninput="syncColorFromText(this, 'input_footer_heading_color')">
+              </div>
+            </div>
+            <!-- Teks Normal Footer -->
+            <div class="col-6">
+              <label class="form-label fw-semibold small text-dark mb-1">Teks Normal & Kontak</label>
+              <div class="color-picker-box">
+                <input type="color" class="color-input-native" id="input_footer_text_color" name="footer_text_color" value="{{ old('footer_text_color', $setting->footer_text_color ?? '#ffffff') }}" oninput="syncColor(this, 'text_footer_text_color')">
+                <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_footer_text_color" value="{{ old('footer_text_color', $setting->footer_text_color ?? '#ffffff') }}" oninput="syncColorFromText(this, 'input_footer_text_color')">
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-2 mb-3">
+            <!-- Link Footer Normal -->
+            <div class="col-6">
+              <label class="form-label fw-semibold small text-dark mb-1">Tautan / Link</label>
+              <div class="color-picker-box">
+                <input type="color" class="color-input-native" id="input_footer_link_color" name="footer_link_color" value="{{ old('footer_link_color', $setting->footer_link_color ?? '#ffffff') }}" oninput="syncColor(this, 'text_footer_link_color')">
+                <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_footer_link_color" value="{{ old('footer_link_color', $setting->footer_link_color ?? '#ffffff') }}" oninput="syncColorFromText(this, 'input_footer_link_color')">
+              </div>
+            </div>
+            <!-- Link Hover Footer -->
+            <div class="col-6">
+              <label class="form-label fw-semibold small text-dark mb-1">Link Hover</label>
+              <div class="color-picker-box">
+                <input type="color" class="color-input-native" id="input_footer_link_hover_color" name="footer_link_hover_color" value="{{ old('footer_link_hover_color', $setting->footer_link_hover_color ?? '#f9dc4b') }}" oninput="syncColor(this, 'text_footer_link_hover_color')">
+                <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_footer_link_hover_color" value="{{ old('footer_link_hover_color', $setting->footer_link_hover_color ?? '#f9dc4b') }}" oninput="syncColorFromText(this, 'input_footer_link_hover_color')">
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-2 mb-3">
+            <!-- Sosmed Background -->
+            <div class="col-6">
+              <label class="form-label fw-semibold small text-dark mb-1">Bg Tombol Medsos</label>
+              <div class="color-picker-box">
+                <input type="color" class="color-input-native" id="input_footer_social_bg_color" name="footer_social_bg_color" value="{{ old('footer_social_bg_color', $setting->footer_social_bg_color ?? '#f9dc4b') }}" oninput="syncColor(this, 'text_footer_social_bg_color')">
+                <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_footer_social_bg_color" value="{{ old('footer_social_bg_color', $setting->footer_social_bg_color ?? '#f9dc4b') }}" oninput="syncColorFromText(this, 'input_footer_social_bg_color')">
+              </div>
+            </div>
+            <!-- Sosmed Icon Color -->
+            <div class="col-6">
+              <label class="form-label fw-semibold small text-dark mb-1">Icon Medsos</label>
+              <div class="color-picker-box">
+                <input type="color" class="color-input-native" id="input_footer_social_text_color" name="footer_social_text_color" value="{{ old('footer_social_text_color', $setting->footer_social_text_color ?? '#000000') }}" oninput="syncColor(this, 'text_footer_social_text_color')">
+                <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_footer_social_text_color" value="{{ old('footer_social_text_color', $setting->footer_social_text_color ?? '#000000') }}" oninput="syncColorFromText(this, 'input_footer_social_text_color')">
+              </div>
+            </div>
+          </div>
+
+          <!-- Deskripsi Footer -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold small text-dark mb-1">Deskripsi Singkat Footer</label>
+            <textarea class="form-control form-control-sm" name="footer_description" id="input_footer_description" rows="3" placeholder="Tuliskan deskripsi visi/profil singkat pada footer..." oninput="updateFooterTextPreview()">{{ old('footer_description', $setting->footer_description) }}</textarea>
+            <div class="form-text" style="font-size: 11px;">Deskripsi ini tampil di bawah logo prodi pada footer website.</div>
+          </div>
+
+          <!-- Copyright Footer -->
+          <div class="mb-2">
+            <label class="form-label fw-semibold small text-dark mb-1">Teks Hak Cipta (Copyright)</label>
+            <input type="text" class="form-control form-control-sm" name="footer_copyright" id="input_footer_copyright" value="{{ old('footer_copyright', $setting->footer_copyright) }}" placeholder="Contoh: © 2026 Program Studi Teknik Informatika — Fakultas Sains dan Teknologi" oninput="updateFooterTextPreview()">
+            <div class="form-text" style="font-size: 11px;">Teks hak cipta di bagian paling bawah footer.</div>
+          </div>
+
         </div>
       </div>
 
@@ -686,8 +866,8 @@ function syncColorFromText(textInput, colorInputId) {
   }
 }
 
-// Terapkan Palet Preset
-function applyPreset(bg, text, actBg, actText, logBg, logText, topBg, topText) {
+// Terapkan Palet Preset Lengkap (Header, Topbar, dan Footer)
+function applyPreset(bg, text, actBg, actText, logBg, logText, topBg, topText, ftrBg, ftrTxt, ftrHead, ftrBorder, ftrLink, ftrLinkHov, ftrSocBg, ftrSocTxt) {
   setFieldColor('header_bg_color', bg);
   setFieldColor('header_text_color', text);
   setFieldColor('header_active_bg_color', actBg);
@@ -696,6 +876,16 @@ function applyPreset(bg, text, actBg, actText, logBg, logText, topBg, topText) {
   setFieldColor('header_login_text_color', logText);
   setFieldColor('topbar_bg_color', topBg);
   setFieldColor('topbar_text_color', topText);
+
+  if (ftrBg) setFieldColor('footer_bg_color', ftrBg);
+  if (ftrTxt) setFieldColor('footer_text_color', ftrTxt);
+  if (ftrHead) setFieldColor('footer_heading_color', ftrHead);
+  if (ftrBorder) setFieldColor('footer_border_top_color', ftrBorder);
+  if (ftrLink) setFieldColor('footer_link_color', ftrLink);
+  if (ftrLinkHov) setFieldColor('footer_link_hover_color', ftrLinkHov);
+  if (ftrSocBg) setFieldColor('footer_social_bg_color', ftrSocBg);
+  if (ftrSocTxt) setFieldColor('footer_social_text_color', ftrSocTxt);
+
   const shadowInput = document.getElementById('input_header_shadow_color');
   if (shadowInput) shadowInput.value = bg;
   refreshPreview();
@@ -708,8 +898,24 @@ function setFieldColor(name, colorVal) {
   if (textInput) textInput.value = colorVal.toUpperCase();
 }
 
-// Refresh Live Interactive Preview Header Mockup
+// Update Teks Preview Footer saat mengetik di textarea / input
+function updateFooterTextPreview() {
+  const descInput = document.getElementById('input_footer_description');
+  const copyInput = document.getElementById('input_footer_copyright');
+  const descEl = document.getElementById('mockupFooterDesc');
+  const copyEl = document.getElementById('mockupFooterCopyright');
+
+  if (descInput && descEl) {
+    descEl.textContent = descInput.value.trim() || 'Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi.';
+  }
+  if (copyInput && copyEl) {
+    copyEl.textContent = copyInput.value.trim() || '© 2026 Program Studi Teknik Informatika. All rights reserved.';
+  }
+}
+
+// Refresh Live Interactive Preview Header & Footer Mockup
 function refreshPreview() {
+  // 1. Header Values
   const bg = document.getElementById('input_header_bg_color')?.value || '#f9dc4b';
   const text = document.getElementById('input_header_text_color')?.value || '#ffffff';
   const actBg = document.getElementById('input_header_active_bg_color')?.value || '#000000';
@@ -741,11 +947,54 @@ function refreshPreview() {
     mockupLogin.style.backgroundColor = logBg;
     mockupLogin.style.color = logText;
   }
+
+  // 2. Footer Values
+  const ftrBg = document.getElementById('input_footer_bg_color')?.value || '#000000';
+  const ftrTxt = document.getElementById('input_footer_text_color')?.value || '#ffffff';
+  const ftrHead = document.getElementById('input_footer_heading_color')?.value || '#f9dc4b';
+  const ftrBorder = document.getElementById('input_footer_border_top_color')?.value || '#f9dc4b';
+  const ftrLink = document.getElementById('input_footer_link_color')?.value || '#ffffff';
+  const ftrSocBg = document.getElementById('input_footer_social_bg_color')?.value || '#f9dc4b';
+  const ftrSocTxt = document.getElementById('input_footer_social_text_color')?.value || '#000000';
+
+  const mockupFooter = document.getElementById('mockupFooter');
+  const ftrBrandTitle = document.getElementById('mockupFooterBrandTitle');
+  const ftrBrandSubtitle = document.getElementById('mockupFooterBrandSubtitle');
+  const ftrDesc = document.getElementById('mockupFooterDesc');
+  const ftrHead1 = document.getElementById('mockupFooterHeading1');
+  const ftrHead2 = document.getElementById('mockupFooterHeading2');
+  const ftrContact = document.getElementById('mockupFooterContact');
+  const ftrCopyright = document.getElementById('mockupFooterCopyright');
+
+  if (mockupFooter) {
+    mockupFooter.style.backgroundColor = ftrBg;
+    mockupFooter.style.borderTop = `4px solid ${ftrBorder}`;
+  }
+  if (ftrBrandTitle) ftrBrandTitle.style.color = ftrHead;
+  if (ftrBrandSubtitle) ftrBrandSubtitle.style.color = ftrTxt;
+  if (ftrDesc) ftrDesc.style.color = ftrTxt;
+  if (ftrHead1) ftrHead1.style.color = ftrHead;
+  if (ftrHead2) ftrHead2.style.color = ftrHead;
+  if (ftrContact) ftrContact.style.color = ftrTxt;
+  if (ftrCopyright) ftrCopyright.style.color = ftrTxt;
+
+  for (let j = 1; j <= 4; j++) {
+    const flink = document.getElementById('mockupFooterLink' + j);
+    if (flink) flink.style.color = ftrLink;
+  }
+
+  for (let s = 1; s <= 3; s++) {
+    const soc = document.getElementById('mockupFooterSocial' + s);
+    if (soc) {
+      soc.style.backgroundColor = ftrSocBg;
+      soc.style.color = ftrSocTxt;
+    }
+  }
 }
 
 // Konfirmasi Reset ke Default
 function confirmReset() {
-  if (confirm('Apakah Anda yakin ingin mengembalikan seluruh warna header dan urutan section ke standar awal?')) {
+  if (confirm('Apakah Anda yakin ingin mengembalikan seluruh warna header, footer, dan urutan section ke standar awal?')) {
     document.getElementById('formResetTheme').submit();
   }
 }

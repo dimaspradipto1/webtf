@@ -22,6 +22,16 @@ class ThemeSetting extends Model
         'topbar_text_color',
         'accent_color',
         'sections_order',
+        'footer_bg_color',
+        'footer_text_color',
+        'footer_heading_color',
+        'footer_border_top_color',
+        'footer_link_color',
+        'footer_link_hover_color',
+        'footer_social_bg_color',
+        'footer_social_text_color',
+        'footer_description',
+        'footer_copyright',
     ];
 
     protected $casts = [
@@ -170,6 +180,16 @@ class ThemeSetting extends Model
                 'topbar_text_color' => '#ffffff',
                 'accent_color' => '#f9dc4b',
                 'sections_order' => static::defaultSections(),
+                'footer_bg_color' => '#000000',
+                'footer_text_color' => '#ffffff',
+                'footer_heading_color' => '#f9dc4b',
+                'footer_border_top_color' => '#f9dc4b',
+                'footer_link_color' => '#ffffff',
+                'footer_link_hover_color' => '#f9dc4b',
+                'footer_social_bg_color' => '#f9dc4b',
+                'footer_social_text_color' => '#000000',
+                'footer_description' => 'Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi. Berkomitmen menyelenggarakan pendidikan tinggi teknologi informasi yang unggul, bermartabat, bereputasi nasional dan internasional, serta berjiwa technopreneur berbasis Imtaq.',
+                'footer_copyright' => '© ' . date('Y') . ' Program Studi Teknik Informatika — Fakultas Sains dan Teknologi. All rights reserved.',
             ]);
         }
         return $setting;

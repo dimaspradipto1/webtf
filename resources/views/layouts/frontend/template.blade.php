@@ -80,6 +80,14 @@
     $thTopBg = $themeSetting?->topbar_bg_color ?: '#000000';
     $thTopTxt = $themeSetting?->topbar_text_color ?: '#ffffff';
     $thAccent = $themeSetting?->accent_color ?: '#f9dc4b';
+    $thFtrBg = $themeSetting?->footer_bg_color ?: '#000000';
+    $thFtrTxt = $themeSetting?->footer_text_color ?: '#ffffff';
+    $thFtrHead = $themeSetting?->footer_heading_color ?: '#f9dc4b';
+    $thFtrBorder = $themeSetting?->footer_border_top_color ?: '#f9dc4b';
+    $thFtrLink = $themeSetting?->footer_link_color ?: '#ffffff';
+    $thFtrLinkHov = $themeSetting?->footer_link_hover_color ?: '#f9dc4b';
+    $thFtrSocBg = $themeSetting?->footer_social_bg_color ?: '#f9dc4b';
+    $thFtrSocTxt = $themeSetting?->footer_social_text_color ?: '#000000';
   @endphp
   <style id="dynamic-theme-styles">
     html, body {
@@ -99,6 +107,14 @@
       --topbar-custom-bg: {{ $thTopBg }};
       --topbar-custom-text: {{ $thTopTxt }};
       --accent-custom: {{ $thAccent }};
+      --ftr-bg: {{ $thFtrBg }};
+      --ftr-text: {{ $thFtrTxt }};
+      --ftr-head: {{ $thFtrHead }};
+      --ftr-border: {{ $thFtrBorder }};
+      --ftr-link: {{ $thFtrLink }};
+      --ftr-link-hov: {{ $thFtrLinkHov }};
+      --ftr-soc-bg: {{ $thFtrSocBg }};
+      --ftr-soc-txt: {{ $thFtrSocTxt }};
     }
     .topbar-main {
       background: var(--topbar-custom-bg) !important;
@@ -143,6 +159,28 @@
       background: var(--hdr-log-bg) !important;
       color: var(--hdr-log-text) !important;
       opacity: 0.88 !important;
+    }
+    .footer-main {
+      background: var(--ftr-bg) !important;
+      color: var(--ftr-text) !important;
+      border-top: 4px solid var(--ftr-border) !important;
+    }
+    .footer-heading {
+      color: var(--ftr-head) !important;
+    }
+    .footer-desc, .footer-contact-text, .footer-contact-text strong, .footer-bottom, .footer-bottom span, .footer-bottom a {
+      color: var(--ftr-text) !important;
+    }
+    .footer-links a {
+      color: var(--ftr-link) !important;
+    }
+    .footer-links a:hover {
+      color: var(--ftr-link-hov) !important;
+    }
+    .footer-social a {
+      background: var(--ftr-soc-bg) !important;
+      color: var(--ftr-soc-txt) !important;
+      border-color: var(--ftr-soc-bg) !important;
     }
   </style>
 </head>
