@@ -50,13 +50,15 @@ class NewsController extends Controller
             ? Carbon::parse($request->published_at)
             : now();
 
+        $content = $this->fileUploadService->processEmbeddedContentImages($request->content, 'news/content');
+
         News::create([
             'user_id' => Auth::id(),
             'thumbnail' => $thumbnailPath,
             'gallery' => ! empty($galleryPaths) ? $galleryPaths : null,
             'title' => $request->title,
             'description' => $request->description,
-            'content' => $request->content,
+            'content' => $content,
             'status' => $request->status,
             'category' => $request->category,
             'is_featured' => $request->boolean('is_featured'),
@@ -108,12 +110,14 @@ class NewsController extends Controller
             ? Carbon::parse($request->published_at)
             : ($news->published_at ?? $news->created_at ?? now());
 
+        $content = $this->fileUploadService->processEmbeddedContentImages($request->content, 'news/content');
+
         $news->update([
             'thumbnail' => $thumbnailPath,
             'gallery' => ! empty($currentGallery) ? array_values($currentGallery) : null,
             'title' => $request->title,
             'description' => $request->description,
-            'content' => $request->content,
+            'content' => $content,
             'status' => $request->status,
             'category' => $request->category,
             'is_featured' => $request->boolean('is_featured'),

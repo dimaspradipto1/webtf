@@ -40,4 +40,22 @@ class FileUploadServiceTest extends TestCase
 
         Storage::disk('public')->assertMissing($path);
     }
+
+    public function test_can_process_and_extract_embedded_base64_images(): void
+    {
+        Storage::fake('public');
+
+        $service = new FileUploadService;
+        $base64Sample = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+        $html = '<p>Paragraf awal</p><img src="data:image/png;base64,'.$base64Sample.'" alt="Testing" /><p>Paragraf akhir</p>';
+
+        $processedHtml = $service->processEmbeddedContentImages($html, 'news/content');
+
+        $this->assertStringNotContainsString('data:image/png;base64', $processedHtml);
+        $this->assertStringContainsString('storage/news/content/', $processedHtml);
+
+        preg_match('/src="[^"]*\/storage\/([a-zA-Z0-9_\-\/]+\.[a-zA-Z0-9]+)"/i', $processedHtml, $matches);
+        $this->assertNotEmpty($matches[1]);
+        Storage::disk('public')->assertExists($matches[1]);
+    }
 }

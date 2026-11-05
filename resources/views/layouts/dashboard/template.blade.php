@@ -534,30 +534,126 @@
                                         return;
                                     }
 
-                                    const reader = new FileReader();
-                                    reader.addEventListener('load', () => {
-                                        const id = 'blobid' + (new Date()).getTime();
-                                        const blobCache = tinymce.activeEditor.editorUpload.blobCache;
-                                        const base64 = reader.result.split(',')[1];
-                                        const blobInfo = blobCache.create(id, file, base64);
-                                        blobCache.add(blobInfo);
+                                    const nameWithoutExt = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
+                                    const cleanTitle = nameWithoutExt.replace(/[-_]+/g, ' ').trim();
 
-                                        const nameWithoutExt = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
-                                        const cleanTitle = nameWithoutExt.replace(/[-_]+/g, ' ').trim();
+                                    // Upload langsung ke server melalui AJAX agar URL gambar langsung menjadi URL storage permanen
+                                    const formData = new FormData();
+                                    formData.append('file', file);
 
-                                        cb(blobInfo.blobUri(), {
-                                            title: cleanTitle,
-                                            alt: cleanTitle,
-                                            caption: true
+                                    let swalLoading = false;
+                                    if (typeof Swal !== 'undefined') {
+                                        swalLoading = true;
+                                        Swal.fire({
+                                            title: 'Mengunggah Gambar...',
+                                            text: 'Sedang memproses "' + file.name + '" ke server...',
+                                            allowOutsideClick: false,
+                                            didOpen: () => { Swal.showLoading(); }
                                         });
-                                    });
-                                    reader.readAsDataURL(file);
+                                    }
+
+                                    const xhr = new XMLHttpRequest();
+                                    xhr.open('POST', '{{ route("news.upload-image") }}');
+                                    xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+
+                                    xhr.onload = () => {
+                                        if (swalLoading && typeof Swal !== 'undefined') {
+                                            Swal.close();
+                                        }
+                                        if (xhr.status === 200) {
+                                            try {
+                                                const json = JSON.parse(xhr.responseText);
+                                                if (json && json.location) {
+                                                    cb(json.location, {
+                                                        title: cleanTitle,
+                                                        alt: cleanTitle,
+                                                        caption: true
+                                                    });
+                                                    return;
+                                                }
+                                            } catch (err) {}
+                                        }
+
+                                        let errMsg = 'Gagal mengunggah gambar ke server.';
+                                        try {
+                                            const json = JSON.parse(xhr.responseText);
+                                            if (json.message) errMsg = json.message;
+                                            else if (json.error) errMsg = json.error;
+                                            else if (json.errors) errMsg = Object.values(json.errors).flat().join(' ');
+                                        } catch (e) {}
+
+                                        if (typeof Swal !== 'undefined') {
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Upload Gagal',
+                                                text: errMsg,
+                                                confirmButtonColor: '#000000'
+                                            });
+                                        } else {
+                                            alert(errMsg);
+                                        }
+                                    };
+
+                                    xhr.onerror = () => {
+                                        if (swalLoading && typeof Swal !== 'undefined') Swal.close();
+                                        alert('Terjadi kesalahan koneksi saat mengunggah gambar.');
+                                    };
+
+                                    xhr.send(formData);
                                 });
 
                                 input.click();
                             }
                         });
                     }
+                });
+
+                // Pastikan seluruh gambar di TinyMCE terunggah ke server sebelum form dikirim
+                document.querySelectorAll('form').forEach(function (form) {
+                    form.addEventListener('submit', function (e) {
+                        if (typeof tinymce === 'undefined') return;
+
+                        const formEditors = tinymce.editors.filter(function (ed) {
+                            return form.contains(ed.getElement());
+                        });
+
+                        if (formEditors.length === 0) return;
+
+                        let hasPendingUploads = false;
+                        formEditors.forEach(function (ed) {
+                            const content = ed.getContent({ format: 'raw' });
+                            if (content.indexOf('data:image/') !== -1 || content.indexOf('blob:') !== -1) {
+                                hasPendingUploads = true;
+                            }
+                        });
+
+                        if (hasPendingUploads) {
+                            e.preventDefault();
+                            if (typeof Swal !== 'undefined') {
+                                Swal.fire({
+                                    title: 'Memproses Gambar...',
+                                    text: 'Sedang mengunggah gambar konten ke server...',
+                                    allowOutsideClick: false,
+                                    didOpen: () => { Swal.showLoading(); }
+                                });
+                            }
+
+                            Promise.all(formEditors.map(function (ed) {
+                                return ed.uploadImages();
+                            })).then(function () {
+                                if (typeof Swal !== 'undefined') Swal.close();
+                                tinymce.triggerSave();
+                                form.submit();
+                            }).catch(function (err) {
+                                if (typeof Swal !== 'undefined') Swal.close();
+                                console.error('Gagal mengunggah gambar:', err);
+                                tinymce.triggerSave();
+                                form.submit();
+                            });
+                        } else {
+                            tinymce.triggerSave();
+                        }
+                    });
                 });
             }
         });

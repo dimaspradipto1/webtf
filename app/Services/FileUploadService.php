@@ -113,6 +113,46 @@ class FileUploadService
     }
 
     /**
+     * Process embedded base64 images inside HTML content, saving them to disk
+     * and replacing the data URI with the permanent public storage URL.
+     */
+    public function processEmbeddedContentImages(?string $htmlContent, string $folder = 'news/content', string $disk = 'public'): ?string
+    {
+        if (empty($htmlContent)) {
+            return $htmlContent;
+        }
+
+        // Match all src="data:image/(png|jpeg|jpg|gif|webp|svg+xml);base64,..."
+        $pattern = '/src=["\'](data:image\/(?<type>[a-zA-Z0-9\+\-]+);base64,(?<data>[^"\']+))["\']/i';
+
+        return preg_replace_callback($pattern, function ($matches) use ($folder, $disk) {
+            $rawType = strtolower($matches['type']);
+            $extension = match ($rawType) {
+                'jpeg', 'jpg' => 'jpg',
+                'png' => 'png',
+                'gif' => 'gif',
+                'webp' => 'webp',
+                'svg+xml' => 'svg',
+                default => 'png',
+            };
+
+            $base64Data = base64_decode(str_replace(' ', '+', $matches['data']), true);
+            if ($base64Data === false) {
+                return $matches[0];
+            }
+
+            $filename = Str::random(40) . '.' . $extension;
+            $relativePath = trim($folder, '/') . '/' . $filename;
+
+            Storage::disk($disk)->put($relativePath, $base64Data);
+
+            $permanentUrl = asset('storage/' . $relativePath);
+
+            return 'src="' . $permanentUrl . '"';
+        }, $htmlContent);
+    }
+
+    /**
      * Extract and delete images embedded inside HTML content (e.g. TinyMCE uploads).
      */
     public function deleteEmbeddedContentImages(?string $htmlContent, string $disk = 'public'): void
