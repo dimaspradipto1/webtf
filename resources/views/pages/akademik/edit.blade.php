@@ -1082,7 +1082,7 @@
                                     <div class="mb-2">
                                         <label for="file_dokumen" class="form-label fw-semibold small text-dark">Upload File Dokumen Baru</label>
                                         <input type="file" id="file_dokumen" name="file_dokumen" class="form-control @error('file_dokumen') is-invalid @enderror" accept=".pdf,.doc,.docx,.xls,.xlsx,.zip,.rar">
-                                        <div class="form-text small">Format: PDF, DOC, DOCX, XLS (Maks. 20MB)</div>
+                                        <div class="form-text small">Format: PDF, DOC, DOCX, XLS (Maks. 50MB)</div>
                                     </div>
 
                                     @if($item->file_dokumen)
@@ -1109,7 +1109,7 @@
                                     <div class="mb-2">
                                         <label for="gambar" class="form-label fw-semibold small text-dark">Upload Gambar Baru</label>
                                         <input type="file" id="gambar" name="gambar" class="form-control @error('gambar') is-invalid @enderror" accept="image/*">
-                                        <div class="form-text small">Format: JPEG, PNG, JPG, WEBP (Maks. 5 MB)</div>
+                                        <div class="form-text small">Format: JPEG, PNG, JPG, WEBP (Maks. 20 MB)</div>
                                     </div>
 
                                     @if($item->gambar)

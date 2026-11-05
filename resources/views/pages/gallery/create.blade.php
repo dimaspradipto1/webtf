@@ -106,7 +106,7 @@
                                class="form-control @error('foto') is-invalid @enderror"
                                accept="image/jpg,image/jpeg,image/png,image/webp"
                                onchange="previewFoto(this)">
-                        <div class="form-text">Format: JPG, JPEG, PNG, WebP. Maks: 2 MB.</div>
+                        <div class="form-text">Format: JPG, JPEG, PNG, WebP. Maks: 20 MB.</div>
                         @error('foto')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

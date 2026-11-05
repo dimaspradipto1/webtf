@@ -595,7 +595,7 @@
                 </div>
                 <div class="flex-grow-1">
                   <input type="file" name="header_logo" id="input_header_logo" accept="image/png,image/jpeg,image/webp,image/svg+xml" class="form-control form-control-sm" onchange="previewHeaderLogo(this)">
-                  <div class="text-muted mt-1" style="font-size: 11px;">PNG, JPG, WEBP, SVG (Maks. 2MB). Rekomendasi transparan.</div>
+                  <div class="text-muted mt-1" style="font-size: 11px;">PNG, JPG, WEBP, SVG (Maks. 10MB). Rekomendasi transparan.</div>
                   @if($setting->hasCustomLogo())
                     <div class="form-check mt-2">
                       <input class="form-check-input" type="checkbox" name="remove_header_logo" value="1" id="remove_header_logo" onchange="toggleRemoveLogo(this)">

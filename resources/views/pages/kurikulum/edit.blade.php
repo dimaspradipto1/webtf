@@ -113,7 +113,7 @@
                                         </a>
                                     </div>
                                 @endif
-                                <small class="text-muted d-block mt-1">Format PDF/DOC (Maks. 10MB). Kosongkan jika tidak diubah.</small>
+                                <small class="text-muted d-block mt-1">Format PDF/DOC (Maks. 50MB). Kosongkan jika tidak diubah.</small>
                                 @error('file_rps')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

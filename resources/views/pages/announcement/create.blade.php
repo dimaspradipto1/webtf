@@ -91,7 +91,7 @@
                                    class="form-control @error('file') is-invalid @enderror"
                                    id="file"
                                    name="file">
-                            <small class="text-muted">Format: PDF, Word, Excel, Gambar (Maks. 10 MB).</small>
+                            <small class="text-muted">Format: PDF, Word, Excel, Gambar (Maks. 50 MB).</small>
                             @error('file')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

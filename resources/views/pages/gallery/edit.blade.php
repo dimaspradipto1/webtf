@@ -121,7 +121,7 @@
                                onchange="previewFoto(this)">
                         <div class="form-text">
                             <i class="bi bi-info-circle me-1"></i>
-                            Kosongkan jika tidak ingin mengganti foto. Format: JPG, JPEG, PNG, WebP. Maks: 2 MB.
+                            Kosongkan jika tidak ingin mengganti foto. Format: JPG, JPEG, PNG, WebP. Maks: 20 MB.
                         </div>
                         @error('foto')
                             <div class="invalid-feedback">{{ $message }}</div>

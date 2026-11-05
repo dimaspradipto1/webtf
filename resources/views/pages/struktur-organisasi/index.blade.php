@@ -33,7 +33,7 @@
                     <div class="mb-4">
                         <label for="url_struktur" class="form-label fw-bold">Pilih Gambar Struktur Organisasi</label>
                         <input class="form-control @error('url_struktur') is-invalid @enderror" type="file" id="url_struktur" name="url_struktur" accept="image/png,image/jpeg,image/jpg,image/webp">
-                        <div class="form-text text-muted">Format yang didukung: <strong>PNG, JPG, WEBP</strong>. Ukuran maksimal: <strong>5 MB</strong>.</div>
+                        <div class="form-text text-muted">Format yang didukung: <strong>PNG, JPG, WEBP</strong>. Ukuran maksimal: <strong>20 MB</strong>.</div>
                         @error('url_struktur')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

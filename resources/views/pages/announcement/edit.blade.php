@@ -103,7 +103,7 @@
                                    class="form-control @error('file') is-invalid @enderror"
                                    id="file"
                                    name="file">
-                            <small class="text-muted">Pilih file baru untuk mengganti. Format: PDF, Word, Gambar.</small>
+                            <small class="text-muted">Pilih file baru untuk mengganti. Format: PDF, Word, Gambar (Maks. 50 MB).</small>
                             @error('file')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

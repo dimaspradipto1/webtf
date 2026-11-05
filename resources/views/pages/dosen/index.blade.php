@@ -112,7 +112,7 @@
                         <ol class="small text-muted mb-2 ps-3">
                             <li>Unduh template resmi terlebih dahulu agar format kolom sesuai.</li>
                             <li>Isi data nama dosen, program studi, jabatan fungsional, NIDN, NUPTK, dan link profil.</li>
-                            <li>Simpan dalam format <code>.xlsx</code>, <code>.xls</code>, atau <code>.csv</code> (Maks. 10MB).</li>
+                            <li>Simpan dalam format <code>.xlsx</code>, <code>.xls</code>, atau <code>.csv</code> (Maks. 30MB).</li>
                         </ol>
                         <a href="{{ route('dosen.download-template') }}" class="btn btn-sm btn-outline-success fw-semibold">
                             <i class="bi bi-download me-1"></i> Download Format Template Excel (.xlsx)

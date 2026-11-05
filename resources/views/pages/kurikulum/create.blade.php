@@ -104,7 +104,7 @@
                             <div class="col-md-6">
                                 <label for="file_rps" class="form-label fw-semibold small text-secondary">Opsi 1: Upload File Dokumen (PDF / DOC)</label>
                                 <input type="file" name="file_rps" id="file_rps" class="form-control @error('file_rps') is-invalid @enderror" accept=".pdf,.doc,.docx">
-                                <small class="text-muted d-block mt-1">Format PDF/DOC (Maks. 10MB)</small>
+                                <small class="text-muted d-block mt-1">Format PDF/DOC (Maks. 50MB)</small>
                                 @error('file_rps')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
