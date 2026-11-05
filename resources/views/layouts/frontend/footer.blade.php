@@ -8,10 +8,10 @@
       <!-- Brand -->
       <div class="col-lg-4">
         <a href="{{ route('homepage') }}" class="footer-logo mb-3 d-inline-flex align-items-center gap-2 text-decoration-none">
-          <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo Teknik Informatika" style="height: 48px; width: auto; object-fit: contain;">
+          <img src="{{ $themeSetting?->logo_url ?? asset('assets/img/logouis.png') }}" alt="{{ $themeSetting?->header_title ?: 'Logo Teknik Informatika' }}" style="height: 48px; width: auto; object-fit: contain;">
           <div class="d-flex flex-column">
-            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: #f9dc4b; letter-spacing: 0.5px; line-height: 1.15;">TEKNIK INFORMATIKA</span>
-            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: #ffffff; letter-spacing: 0.3px;">Fakultas Sains dan Teknologi</span>
+            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 16px; color: {{ $themeSetting?->footer_heading_color ?: '#f9dc4b' }}; letter-spacing: 0.5px; line-height: 1.15;">{{ $themeSetting?->header_title ?: 'TEKNIK INFORMATIKA' }}</span>
+            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 12px; color: {{ $themeSetting?->footer_text_color ?: '#ffffff' }}; letter-spacing: 0.3px;">{{ $themeSetting?->header_subtitle ?: 'Fakultas Sains dan Teknologi' }}</span>
           </div>
         </a>
         <p class="footer-desc">

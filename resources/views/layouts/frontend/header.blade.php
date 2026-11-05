@@ -6,10 +6,10 @@
   <div class="container-fluid px-lg-4 px-xl-5">
     <!-- Logo & Nama Prodi + Fakultas -->
     <a class="navbar-brand navbar-brand-custom me-2 me-xl-3" href="{{ route('homepage') }}">
-      <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo Teknik Informatika" class="brand-logo-img">
+      <img src="{{ $themeSetting?->logo_url ?? asset('assets/img/logouis.png') }}" alt="{{ $themeSetting?->header_title ?: 'Logo Teknik Informatika' }}" class="brand-logo-img">
       <div class="d-flex flex-column ms-2 justify-content-center">
-        <span class="brand-title-main">TEKNIK INFORMATIKA</span>
-        <span class="brand-subtitle-main">Fakultas Sains dan Teknologi</span>
+        <span class="brand-title-main">{{ $themeSetting?->header_title ?: 'TEKNIK INFORMATIKA' }}</span>
+        <span class="brand-subtitle-main">{{ $themeSetting?->header_subtitle ?: 'Fakultas Sains dan Teknologi' }}</span>
       </div>
     </a>
 

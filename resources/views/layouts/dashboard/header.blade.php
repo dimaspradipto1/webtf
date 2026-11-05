@@ -3,10 +3,10 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center text-decoration-none">
-                <img src="{{ asset('frontend/img/logouis.png') }}" alt="Logo Teknik Informatika" style="height: 44px; max-height: 44px;">
+                <img src="{{ $themeSetting?->logo_url ?? asset('frontend/img/logouis.png') }}" alt="{{ $themeSetting?->header_title ?: 'Logo Teknik Informatika' }}" style="height: 44px; max-height: 44px; width: auto; object-fit: contain;">
                 <div class="d-none d-lg-flex flex-column ms-2">
-                    <span class="fw-bold" style="font-size: 14.5px; color: #ffffff; letter-spacing: 0.4px; line-height: 1.15;">TEKNIK INFORMATIKA</span>
-                    <span style="font-size: 10.5px; color: #ffffff; font-weight: 600; letter-spacing: 0.2px; line-height: 1.2;">Fakultas Sains dan Teknologi</span>
+                    <span class="fw-bold" style="font-size: 14.5px; color: #ffffff; letter-spacing: 0.4px; line-height: 1.15;">{{ $themeSetting?->header_title ?: 'TEKNIK INFORMATIKA' }}</span>
+                    <span style="font-size: 10.5px; color: #ffffff; font-weight: 600; letter-spacing: 0.2px; line-height: 1.2;">{{ $themeSetting?->header_subtitle ?: 'Fakultas Sains dan Teknologi' }}</span>
                 </div>
             </a>
             <i class="bi bi-list toggle-sidebar-btn ms-2" style="color: #ffffff; font-size: 26px; cursor: pointer;"></i>

@@ -4,7 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\ThemeSetting;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ThemeSettingTest extends TestCase
@@ -101,5 +102,65 @@ class ThemeSettingTest extends TestCase
         $this->assertEquals('#000000', $setting->topbar_social_text_color);
         $this->assertEquals('#000000', $setting->footer_bg_color);
         $this->assertEquals('#f9dc4b', $setting->footer_heading_color);
+    }
+
+    public function test_admin_can_update_header_brand_logo_and_titles(): void
+    {
+        Storage::fake('public');
+
+        $admin = User::first();
+        if (!$admin) {
+            $admin = User::factory()->create(['role' => 'admin']);
+        }
+
+        $logoFile = UploadedFile::fake()->image('custom_logo.png', 100, 100);
+
+        $payload = [
+            'header_title' => 'TEKNIK KOMPUTER & INFORMATIKA',
+            'header_subtitle' => 'Fakultas Sains, Teknologi & Desain',
+            'header_logo' => $logoFile,
+            'header_bg_color' => '#1e293b',
+            'header_text_color' => '#ffffff',
+            'header_active_bg_color' => '#f59e0b',
+            'header_active_text_color' => '#000000',
+            'header_login_bg_color' => '#f59e0b',
+            'header_login_text_color' => '#000000',
+            'topbar_bg_color' => '#0f172a',
+            'topbar_text_color' => '#ffffff',
+        ];
+
+        $response = $this->actingAs($admin)->post(route('theme.update'), $payload);
+        $response->assertRedirect();
+
+        $setting = ThemeSetting::current();
+        $this->assertEquals('TEKNIK KOMPUTER & INFORMATIKA', $setting->header_title);
+        $this->assertEquals('Fakultas Sains, Teknologi & Desain', $setting->header_subtitle);
+        $this->assertNotNull($setting->header_logo);
+        Storage::disk('public')->assertExists($setting->header_logo);
+        $this->assertStringContainsString('storage/' . $setting->header_logo, $setting->logo_url);
+
+        // Verify public homepage shows the custom title and subtitle
+        $homeResponse = $this->get(route('homepage'));
+        $homeResponse->assertStatus(200);
+        $homeResponse->assertSee('TEKNIK KOMPUTER & INFORMATIKA');
+        $homeResponse->assertSee('Fakultas Sains, Teknologi & Desain');
+
+        // Test remove custom logo via remove_header_logo flag
+        $removePayload = array_merge($payload, [
+            'remove_header_logo' => '1',
+            'header_logo' => null,
+        ]);
+        $removeResponse = $this->actingAs($admin)->post(route('theme.update'), $removePayload);
+        $removeResponse->assertRedirect();
+
+        $setting->refresh();
+        $this->assertNull($setting->header_logo);
+        $this->assertStringContainsString('assets/img/logouis.png', $setting->logo_url);
+
+        // Reset to default
+        $this->actingAs($admin)->post(route('theme.reset'));
+        $setting->refresh();
+        $this->assertEquals('TEKNIK INFORMATIKA', $setting->header_title);
+        $this->assertEquals('Fakultas Sains dan Teknologi', $setting->header_subtitle);
     }
 }

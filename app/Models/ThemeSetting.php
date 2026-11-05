@@ -18,6 +18,9 @@ class ThemeSetting extends Model
         'header_login_text_color',
         'header_shadow_color',
         'header_is_sticky',
+        'header_logo',
+        'header_title',
+        'header_subtitle',
         'topbar_bg_color',
         'topbar_text_color',
         'topbar_social_bg_color',
@@ -178,6 +181,9 @@ class ThemeSetting extends Model
                 'header_login_text_color' => '#ffffff',
                 'header_shadow_color' => '#f9dc4b',
                 'header_is_sticky' => true,
+                'header_logo' => null,
+                'header_title' => 'TEKNIK INFORMATIKA',
+                'header_subtitle' => 'Fakultas Sains dan Teknologi',
                 'topbar_bg_color' => '#000000',
                 'topbar_text_color' => '#ffffff',
                 'topbar_social_bg_color' => '#ffffff',
@@ -197,6 +203,46 @@ class ThemeSetting extends Model
             ]);
         }
         return $setting;
+    }
+
+    /**
+     * Dapatkan URL logo brand header dengan fallback aman ke logouis.png.
+     */
+    public function getLogoUrlAttribute(): string
+    {
+        if (!empty($this->header_logo)) {
+            if (\Illuminate\Support\Facades\Storage::disk('public')->exists($this->header_logo)) {
+                return asset('storage/' . $this->header_logo);
+            }
+            if (file_exists(public_path('storage/' . $this->header_logo))) {
+                return asset('storage/' . $this->header_logo);
+            }
+        }
+        return asset('assets/img/logouis.png');
+    }
+
+    /**
+     * Dapatkan teks judul utama header dengan fallback default.
+     */
+    public function getHeaderTitleAttribute($value): string
+    {
+        return !empty($value) ? $value : 'TEKNIK INFORMATIKA';
+    }
+
+    /**
+     * Dapatkan teks subjudul header dengan fallback default.
+     */
+    public function getHeaderSubtitleAttribute($value): string
+    {
+        return !empty($value) ? $value : 'Fakultas Sains dan Teknologi';
+    }
+
+    /**
+     * Cek apakah menggunakan logo kustom hasil upload.
+     */
+    public function hasCustomLogo(): bool
+    {
+        return !empty($this->header_logo) && \Illuminate\Support\Facades\Storage::disk('public')->exists($this->header_logo);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ThemeSetting;
 use App\Providers\AppServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ThemeSettingController extends Controller
@@ -26,6 +27,10 @@ class ThemeSettingController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
+            'header_logo' => 'nullable|image|mimes:png,jpg,jpeg,webp,svg|max:2048',
+            'header_title' => 'nullable|string|max:100',
+            'header_subtitle' => 'nullable|string|max:150',
+            'remove_header_logo' => 'nullable',
             'header_bg_color' => 'required|string|max:30',
             'header_text_color' => 'required|string|max:30',
             'header_active_bg_color' => 'required|string|max:30',
@@ -53,6 +58,22 @@ class ThemeSettingController extends Controller
         ]);
 
         $setting = ThemeSetting::current();
+
+        // Kelola file logo header jika diunggah atau dihapus
+        $logoPath = $setting->getRawOriginal('header_logo');
+        if ($request->boolean('remove_header_logo')) {
+            if ($logoPath && Storage::disk('public')->exists($logoPath)) {
+                Storage::disk('public')->delete($logoPath);
+            }
+            $logoPath = null;
+        }
+
+        if ($request->hasFile('header_logo')) {
+            if ($logoPath && Storage::disk('public')->exists($logoPath)) {
+                Storage::disk('public')->delete($logoPath);
+            }
+            $logoPath = $request->file('header_logo')->store('theme/logo', 'public');
+        }
 
         // Olah urutan dan status aktif setiap section
         $sectionsInput = $request->input('sections', []);
@@ -92,6 +113,9 @@ class ThemeSettingController extends Controller
         usort($processedSections, fn($a, $b) => $a['order'] <=> $b['order']);
 
         $setting->update([
+            'header_logo' => $logoPath,
+            'header_title' => $validated['header_title'] ?? 'TEKNIK INFORMATIKA',
+            'header_subtitle' => $validated['header_subtitle'] ?? 'Fakultas Sains dan Teknologi',
             'header_bg_color' => $validated['header_bg_color'],
             'header_text_color' => $validated['header_text_color'],
             'header_active_bg_color' => $validated['header_active_bg_color'],
@@ -130,7 +154,14 @@ class ThemeSettingController extends Controller
     public function reset()
     {
         $setting = ThemeSetting::current();
+        $logoPath = $setting->getRawOriginal('header_logo');
+        if ($logoPath && Storage::disk('public')->exists($logoPath)) {
+            Storage::disk('public')->delete($logoPath);
+        }
         $setting->update([
+            'header_logo' => null,
+            'header_title' => 'TEKNIK INFORMATIKA',
+            'header_subtitle' => 'Fakultas Sains dan Teknologi',
             'header_bg_color' => '#f9dc4b',
             'header_text_color' => '#ffffff',
             'header_active_bg_color' => '#000000',

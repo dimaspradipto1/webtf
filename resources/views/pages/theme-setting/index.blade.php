@@ -475,7 +475,7 @@
 <!-- ═══════════════════════════════════════════════════════════
      FORM UTAMA: MEMBUNGKUS SELURUH TAB
 ═══════════════════════════════════════════════════════════ -->
-<form action="{{ route('theme.update') }}" method="POST" id="themeSettingForm">
+<form action="{{ route('theme.update') }}" method="POST" id="themeSettingForm" enctype="multipart/form-data">
   @csrf
   <input type="hidden" name="header_shadow_color" id="input_header_shadow_color" value="{{ old('header_shadow_color', $setting->header_shadow_color ?? $setting->header_bg_color) }}">
   <input type="hidden" name="accent_color" id="input_accent_color" value="{{ old('accent_color', $setting->accent_color ?? '#f9dc4b') }}">
@@ -525,10 +525,10 @@
         <div class="mockup-navbar" id="mockupNavbar" style="background-color: {{ $setting->header_bg_color }};">
           <!-- Brand -->
           <div class="mockup-brand">
-            <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo" class="mockup-logo">
+            <img src="{{ $setting->logo_url }}" alt="Logo" class="mockup-logo" id="mockupLogo">
             <div>
-              <div class="mockup-title" id="mockupTitle" style="color: {{ $setting->header_text_color }};">TEKNIK INFORMATIKA</div>
-              <div class="mockup-subtitle" id="mockupSubtitle" style="color: {{ $setting->header_text_color }};">Fakultas Sains dan Teknologi</div>
+              <div class="mockup-title" id="mockupTitle" style="color: {{ $setting->header_text_color }};">{{ $setting->header_title ?: 'TEKNIK INFORMATIKA' }}</div>
+              <div class="mockup-subtitle" id="mockupSubtitle" style="color: {{ $setting->header_text_color }};">{{ $setting->header_subtitle ?: 'Fakultas Sains dan Teknologi' }}</div>
             </div>
           </div>
 
@@ -566,7 +566,95 @@
         </div>
       </div>
 
-      <!-- 2. PENGATURAN KONTROL HEADER & TOPBAR (2 Kolom) -->
+      <!-- 2. IDENTITAS BRAND & LOGO HEADER -->
+      <div class="card shadow-sm border-0 mb-4" style="border-radius: 16px;">
+        <div class="card-header bg-white py-3 border-0">
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <div>
+              <h6 class="fw-bold text-dark mb-1 d-flex align-items-center gap-2">
+                <i class="bi bi-shield-check text-warning"></i> Identitas Logo & Teks Brand Header
+              </h6>
+              <p class="text-muted small mb-0">Atur logo prodi/UIS, judul utama, dan subjudul fakultas yang tampil di header dan footer</p>
+            </div>
+            <span class="badge bg-light text-dark border px-3 py-2" style="font-size: 11.5px; border-radius: 8px;">
+              <i class="bi bi-arrow-repeat text-primary me-1"></i> Sinkron ke Header & Footer
+            </span>
+          </div>
+        </div>
+        <div class="card-body pt-0">
+          <div class="row g-4 align-items-center">
+            
+            <!-- Kolom Upload Logo Brand -->
+            <div class="col-lg-4 col-md-5">
+              <label class="form-label fw-semibold small text-dark mb-2 d-flex align-items-center gap-1">
+                <i class="bi bi-image text-warning"></i> Logo Brand Header
+              </label>
+              <div class="d-flex align-items-center gap-3 p-3 bg-light rounded-3 border">
+                <div class="logo-preview-box text-center p-2 bg-white rounded-3 shadow-sm border flex-shrink-0" style="width: 72px; height: 72px; display: flex; align-items: center; justify-content: center;">
+                  <img src="{{ $setting->logo_url }}" id="header_logo_preview" alt="Preview Logo" style="max-height: 56px; max-width: 56px; object-fit: contain;">
+                </div>
+                <div class="flex-grow-1">
+                  <input type="file" name="header_logo" id="input_header_logo" accept="image/png,image/jpeg,image/webp,image/svg+xml" class="form-control form-control-sm" onchange="previewHeaderLogo(this)">
+                  <div class="text-muted mt-1" style="font-size: 11px;">PNG, JPG, WEBP, SVG (Maks. 2MB). Rekomendasi transparan.</div>
+                  @if($setting->hasCustomLogo())
+                    <div class="form-check mt-2">
+                      <input class="form-check-input" type="checkbox" name="remove_header_logo" value="1" id="remove_header_logo" onchange="toggleRemoveLogo(this)">
+                      <label class="form-check-label text-danger small fw-semibold" for="remove_header_logo" style="font-size: 11px; cursor: pointer;">
+                        <i class="bi bi-arrow-counterclockwise"></i> Gunakan Logo Default UIS
+                      </label>
+                    </div>
+                  @endif
+                </div>
+              </div>
+            </div>
+
+            <!-- Kolom Judul Utama & Subjudul -->
+            <div class="col-lg-8 col-md-7">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold small text-dark mb-1 d-flex align-items-center gap-1" for="input_header_title">
+                    <i class="bi bi-type-h1 text-primary"></i> Judul Utama Header
+                  </label>
+                  <input type="text" 
+                         class="form-control" 
+                         id="input_header_title" 
+                         name="header_title" 
+                         value="{{ old('header_title', $setting->header_title) }}" 
+                         placeholder="TEKNIK INFORMATIKA" 
+                         maxlength="100"
+                         oninput="updateHeaderBrandPreview()"
+                         style="border-radius: 10px; font-weight: 700; font-size: 13.5px;">
+                  <div class="text-muted mt-1" style="font-size: 11px;">Contoh: <strong>TEKNIK INFORMATIKA</strong> (Teks baris atas tebal)</div>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold small text-dark mb-1 d-flex align-items-center gap-1" for="input_header_subtitle">
+                    <i class="bi bi-type text-info"></i> Subjudul Header
+                  </label>
+                  <input type="text" 
+                         class="form-control" 
+                         id="input_header_subtitle" 
+                         name="header_subtitle" 
+                         value="{{ old('header_subtitle', $setting->header_subtitle) }}" 
+                         placeholder="Fakultas Sains dan Teknologi" 
+                         maxlength="150"
+                         oninput="updateHeaderBrandPreview()"
+                         style="border-radius: 10px; font-size: 13.5px;">
+                  <div class="text-muted mt-1" style="font-size: 11px;">Contoh: <strong>Fakultas Sains dan Teknologi</strong> (Teks baris bawah)</div>
+                </div>
+              </div>
+
+              <div class="mt-3 p-2 px-3 bg-light rounded-3 d-flex align-items-center gap-2 text-muted" style="font-size: 11.5px;">
+                <i class="bi bi-info-circle-fill text-warning flex-shrink-0"></i>
+                <span>Teks judul dan subjudul ini akan langsung tampil di navbar header, footer situs, dan judul dashboard admin.</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. PENGATURAN KONTROL WARNA HEADER & TOPBAR (2 Kolom) -->
       <div class="row g-4">
         
         <!-- Kolom Kiri: Preset & Warna Topbar -->
@@ -774,10 +862,10 @@
             <!-- Kolom 1: Brand, Deskripsi & Medsos -->
             <div class="col-lg-4">
               <div class="d-flex align-items-center gap-2 mb-2">
-                <img src="{{ asset('assets/img/logouis.png') }}" alt="Logo" style="height: 38px; width: auto; object-fit: contain;">
+                <img src="{{ $setting->logo_url }}" id="mockupFooterLogo" alt="Logo" style="height: 38px; width: auto; object-fit: contain;">
                 <div>
-                  <div class="fw-bold" id="mockupFooterBrandTitle" style="font-size: 14px; color: {{ $setting->footer_heading_color ?? '#f9dc4b' }}; line-height: 1.15;">TEKNIK INFORMATIKA</div>
-                  <div id="mockupFooterBrandSubtitle" style="font-size: 11px; color: {{ $setting->footer_text_color ?? '#ffffff' }}; opacity: 0.85;">Fakultas Sains dan Teknologi</div>
+                  <div class="fw-bold" id="mockupFooterBrandTitle" style="font-size: 14px; color: {{ $setting->footer_heading_color ?? '#f9dc4b' }}; line-height: 1.15;">{{ $setting->header_title ?: 'TEKNIK INFORMATIKA' }}</div>
+                  <div id="mockupFooterBrandSubtitle" style="font-size: 11px; color: {{ $setting->footer_text_color ?? '#ffffff' }}; opacity: 0.85;">{{ $setting->header_subtitle ?: 'Fakultas Sains dan Teknologi' }}</div>
                 </div>
               </div>
               <p class="mb-3" id="mockupFooterDesc" style="font-size: 12px; line-height: 1.5; color: {{ $setting->footer_text_color ?? '#ffffff' }}; opacity: 0.9;">
@@ -1117,6 +1205,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Update urutan awal dan disable tombol edge
   updateSectionOrders();
   refreshPreview();
+  updateHeaderBrandPreview();
 
   // Pertahankan Tab Aktif dari localStorage atau URL hash
   const activeTabTarget = localStorage.getItem('themeSettingActiveTab') || window.location.hash;
@@ -1367,6 +1456,65 @@ function refreshPreview() {
 function confirmReset() {
   if (confirm('Apakah Anda yakin ingin mengembalikan seluruh warna header, footer, dan urutan section ke standar awal?')) {
     document.getElementById('formResetTheme').submit();
+  }
+}
+
+// Brand Header & Logo Preview Helper
+const defaultLogoUrl = "{{ asset('assets/img/logouis.png') }}";
+const currentLogoUrl = "{{ $setting->logo_url }}";
+
+function updateHeaderBrandPreview() {
+  const titleInput = document.getElementById('input_header_title');
+  const subtitleInput = document.getElementById('input_header_subtitle');
+  
+  const title = (titleInput && titleInput.value.trim()) ? titleInput.value.trim() : 'TEKNIK INFORMATIKA';
+  const subtitle = (subtitleInput && subtitleInput.value.trim()) ? subtitleInput.value.trim() : 'Fakultas Sains dan Teknologi';
+  
+  const mockupTitle = document.getElementById('mockupTitle');
+  const mockupSubtitle = document.getElementById('mockupSubtitle');
+  const mockupFooterBrandTitle = document.getElementById('mockupFooterBrandTitle');
+  const mockupFooterBrandSubtitle = document.getElementById('mockupFooterBrandSubtitle');
+  
+  if (mockupTitle) mockupTitle.textContent = title;
+  if (mockupSubtitle) mockupSubtitle.textContent = subtitle;
+  if (mockupFooterBrandTitle) mockupFooterBrandTitle.textContent = title;
+  if (mockupFooterBrandSubtitle) mockupFooterBrandSubtitle.textContent = subtitle;
+}
+
+function previewHeaderLogo(input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const result = e.target.result;
+      const mockupLogo = document.getElementById('mockupLogo');
+      const mockupFooterLogo = document.getElementById('mockupFooterLogo');
+      const previewImg = document.getElementById('header_logo_preview');
+      if (mockupLogo) mockupLogo.src = result;
+      if (mockupFooterLogo) mockupFooterLogo.src = result;
+      if (previewImg) previewImg.src = result;
+    };
+    reader.readAsDataURL(input.files[0]);
+
+    const removeCb = document.getElementById('remove_header_logo');
+    if (removeCb) removeCb.checked = false;
+  }
+}
+
+function toggleRemoveLogo(checkbox) {
+  const mockupLogo = document.getElementById('mockupLogo');
+  const mockupFooterLogo = document.getElementById('mockupFooterLogo');
+  const previewImg = document.getElementById('header_logo_preview');
+  const fileInput = document.getElementById('input_header_logo');
+
+  if (checkbox.checked) {
+    if (fileInput) fileInput.value = '';
+    if (mockupLogo) mockupLogo.src = defaultLogoUrl;
+    if (mockupFooterLogo) mockupFooterLogo.src = defaultLogoUrl;
+    if (previewImg) previewImg.src = defaultLogoUrl;
+  } else {
+    if (mockupLogo) mockupLogo.src = currentLogoUrl;
+    if (mockupFooterLogo) mockupFooterLogo.src = currentLogoUrl;
+    if (previewImg) previewImg.src = currentLogoUrl;
   }
 }
 </script>
