@@ -9177,3 +9177,88 @@ a.btn,
     font-weight: 700 !important;
     line-height: 1.2 !important;
 }
+
+
+/* ==========================================================================
+   TinyMCE Figures, Captions & Article Content Images
+   ========================================================================== */
+figure.image,
+.article-typography figure.image,
+.article-typography figure {
+    display: table;
+    margin: 24px auto;
+    max-width: 100%;
+    text-align: center;
+    clear: both;
+}
+
+figure.image img,
+.article-typography figure.image img,
+.article-typography figure img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease;
+}
+
+figure.image img:hover,
+.article-typography figure.image img:hover {
+    transform: scale(1.01);
+}
+
+figure.image figcaption,
+.article-typography figure.image figcaption,
+.article-typography figure figcaption,
+.content-image-caption {
+    display: block;
+    caption-side: bottom;
+    margin-top: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #64748b;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.5;
+    padding: 4px 12px;
+}
+
+figure.image.align-left,
+.article-typography figure.image.align-left {
+    float: left;
+    margin: 12px 24px 20px 0;
+    max-width: 50%;
+}
+
+figure.image.align-right,
+.article-typography figure.image.align-right {
+    float: right;
+    margin: 12px 0 20px 24px;
+    max-width: 50%;
+}
+
+figure.image.align-center,
+.article-typography figure.image.align-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content-image-caption-grid {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 12px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: #ffffff;
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+}

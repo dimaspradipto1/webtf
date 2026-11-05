@@ -257,6 +257,14 @@
     const typography = document.querySelector('.article-typography');
     if (!typography) return;
 
+    // Pastikan gambar di dalam figure (dari TinyMCE) juga bisa di-zoom
+    typography.querySelectorAll('figure.image img, figure img').forEach(img => {
+      img.style.cursor = 'zoom-in';
+      if (!img.getAttribute('onclick')) {
+        img.setAttribute('onclick', `showImageModal('${img.src}')`);
+      }
+    });
+
     const children = Array.from(typography.children);
     let currentGroup = [];
 
@@ -276,14 +284,28 @@
 
       if (imgs.length === 1) {
         // 1 Gambar: Tampil Penuh (100% Full Width)
-        const wrap = document.createElement('div');
+        const wrap = document.createElement('figure');
         wrap.className = 'content-image-single';
         const singleImg = document.createElement('img');
         singleImg.src = imgs[0].src;
         singleImg.alt = imgs[0].alt || 'Gambar Berita';
+        const titleText = imgs[0].getAttribute('title') || '';
+        if (titleText) {
+          singleImg.title = titleText;
+        }
         singleImg.setAttribute('onclick', `showImageModal('${imgs[0].src}')`);
         singleImg.style.cursor = 'zoom-in';
         wrap.appendChild(singleImg);
+
+        // Keterangan / Title Gambar
+        const captionText = titleText || (group[0].querySelector('figcaption') ? group[0].querySelector('figcaption').textContent.trim() : '');
+        if (captionText) {
+          const cap = document.createElement('figcaption');
+          cap.className = 'content-image-caption';
+          cap.innerHTML = `<i class="bi bi-camera me-1"></i> ${captionText}`;
+          wrap.appendChild(cap);
+        }
+
         group[0].replaceWith(wrap);
         for (let i = 1; i < group.length; i++) group[i].remove();
         return;
@@ -302,8 +324,20 @@
         const newImg = document.createElement('img');
         newImg.src = img.src;
         newImg.alt = img.alt || `Gambar Dokumentasi ${idx + 1}`;
+        const titleText = img.getAttribute('title') || '';
+        if (titleText) {
+          newImg.title = titleText;
+        }
         newImg.setAttribute('onclick', `showImageModal('${img.src}')`);
         item.appendChild(newImg);
+
+        if (titleText) {
+          const cap = document.createElement('div');
+          cap.className = 'content-image-caption-grid';
+          cap.textContent = titleText;
+          item.appendChild(cap);
+        }
+
         grid.appendChild(item);
       });
 
@@ -316,9 +350,10 @@
     children.forEach(el => {
       // Cek apakah elemen hanya berupa gambar atau paragraf kosong yang berisi gambar
       const hasImg = el.querySelector('img') || el.tagName === 'IMG';
+      const isFigure = el.tagName === 'FIGURE' || el.classList.contains('image');
       const textOnly = el.textContent.replace(/\u00a0/g, ' ').trim();
 
-      if (hasImg && textOnly === '') {
+      if (hasImg && !isFigure && textOnly === '') {
         currentGroup.push(el);
       } else {
         processGroup(currentGroup);

@@ -432,16 +432,29 @@
                             target: el,
                             height: 380,
                             menubar: false,
-                            plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table wordcount',
+                            plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table wordcount quickbars',
                             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table link image | removeformat | code fullscreen',
-                            content_style: 'body { font-family: Plus Jakarta Sans, Arial, sans-serif; font-size: 14px; line-height: 1.6; } img { max-width: 100%; height: auto; }',
+                            quickbars_selection_toolbar: 'bold italic underline | link',
+                            quickbars_image_toolbar: 'alignleft aligncenter alignright | imageoptions',
+                            contextmenu: 'link image table',
                             image_title: true,
+                            image_caption: true,
+                            image_description: true,
+                            image_dimensions: true,
+                            image_advtab: true,
+                            image_class_list: [
+                                { title: 'Responsive Penuh (Default)', value: 'img-fluid rounded' },
+                                { title: 'Dengan Bayangan (Shadow)', value: 'img-fluid rounded shadow-sm' },
+                                { title: 'Gambar Penuh / Lebar (100%)', value: 'img-fluid w-100 rounded' },
+                                { title: 'Normal / Asli', value: '' }
+                            ],
+                            content_style: 'body { font-family: Plus Jakarta Sans, Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #1e293b; padding: 12px; } img { max-width: 100%; height: auto; border-radius: 8px; } figure.image { display: inline-block; border: 1px dashed #cbd5e1; background: #f8fafc; padding: 8px; margin: 14px auto; border-radius: 10px; max-width: 100%; text-align: center; } figure.image img { display: block; margin: 0 auto 6px auto; max-width: 100%; height: auto; border-radius: 6px; } figure.image figcaption { font-size: 13px; color: #475569; font-weight: 500; font-style: italic; text-align: center; padding: 4px 8px; background: #ffffff; border-radius: 4px; border: 1px solid #e2e8f0; min-height: 22px; }',
                             automatic_uploads: true,
                             file_picker_types: 'image',
                             images_upload_handler: function (blobInfo, progress) {
                                 return new Promise((resolve, reject) => {
-                                    if (blobInfo.blob().size > 2 * 1024 * 1024) {
-                                        reject('Ukuran file gambar maksimal 2 MB.');
+                                    if (blobInfo.blob().size > 20 * 1024 * 1024) {
+                                        reject('Ukuran file gambar maksimal 20 MB.');
                                         return;
                                     }
 
@@ -451,12 +464,24 @@
                                     xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
 
                                     xhr.upload.onprogress = (e) => {
-                                        progress(e.loaded / e.total * 100);
+                                        if (e.lengthComputable) {
+                                            progress(e.loaded / e.total * 100);
+                                        }
                                     };
 
                                     xhr.onload = () => {
                                         if (xhr.status === 403 || xhr.status === 419) {
-                                            reject({ message: 'Sesi berakhir atau CSRF token invalid.', remove: true });
+                                            reject({ message: 'Sesi berakhir atau CSRF token invalid. Silakan muat ulang halaman.', remove: true });
+                                            return;
+                                        }
+                                        if (xhr.status === 422) {
+                                            try {
+                                                const json = JSON.parse(xhr.responseText);
+                                                const msg = json.message || (json.errors && Object.values(json.errors).flat().join(' ')) || 'Validasi gagal: Ukuran file melebihi 20 MB.';
+                                                reject(msg);
+                                            } catch (e) {
+                                                reject('Validasi upload gagal: Maksimal 20 MB.');
+                                            }
                                             return;
                                         }
                                         if (xhr.status < 200 || xhr.status >= 300) {
@@ -485,6 +510,8 @@
                                 });
                             },
                             file_picker_callback: function (cb, value, meta) {
+                                if (meta.filetype !== 'image') return;
+
                                 const input = document.createElement('input');
                                 input.setAttribute('type', 'file');
                                 input.setAttribute('accept', 'image/*');
@@ -493,16 +520,16 @@
                                     const file = e.target.files[0];
                                     if (!file) return;
 
-                                    if (file.size > 2 * 1024 * 1024) {
+                                    if (file.size > 20 * 1024 * 1024) {
                                         if (typeof Swal !== 'undefined') {
                                             Swal.fire({
                                                 icon: 'error',
                                                 title: 'Ukuran Gambar Terlalu Besar',
-                                                text: 'Ukuran file gambar "' + file.name + '" melebihi batas maksimal 2 MB.',
+                                                text: 'Ukuran file gambar "' + file.name + '" melebihi batas maksimal 20 MB.',
                                                 confirmButtonColor: '#000000'
                                             });
                                         } else {
-                                            alert('Ukuran file gambar maksimal 2 MB.');
+                                            alert('Ukuran file gambar maksimal 20 MB.');
                                         }
                                         return;
                                     }
@@ -515,7 +542,14 @@
                                         const blobInfo = blobCache.create(id, file, base64);
                                         blobCache.add(blobInfo);
 
-                                        cb(blobInfo.blobUri(), { title: file.name, alt: file.name });
+                                        const nameWithoutExt = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
+                                        const cleanTitle = nameWithoutExt.replace(/[-_]+/g, ' ').trim();
+
+                                        cb(blobInfo.blobUri(), {
+                                            title: cleanTitle,
+                                            alt: cleanTitle,
+                                            caption: true
+                                        });
                                     });
                                     reader.readAsDataURL(file);
                                 });
