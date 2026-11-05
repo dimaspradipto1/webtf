@@ -134,7 +134,7 @@
                                         <div class="flex-grow-1 w-100">
                                             <input name="avatar" type="file" class="form-control form-control-sm @error('avatar') is-invalid @enderror" id="avatarInput" accept="image/png,image/jpeg,image/jpg,image/webp" onchange="handleAvatarPreview(event)">
                                             <div class="form-text small mt-1 text-muted">
-                                                Format: <strong>PNG, JPG, JPEG, WEBP</strong> (Maksimal 5MB). Kosongkan jika tidak ingin mengubah foto.
+                                                Format: <strong>PNG, JPG, JPEG, WEBP</strong> (Maksimal 15MB). Kosongkan jika tidak ingin mengubah foto.
                                             </div>
                                             @error('avatar')
                                                 <div class="invalid-feedback d-block">{{ $message }}</div>
