@@ -14,7 +14,7 @@ class StrukturOrganisasiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'url_struktur' => ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:5120'],
+            'url_struktur' => ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:20480'],
         ];
     }
 
@@ -24,7 +24,7 @@ class StrukturOrganisasiRequest extends FormRequest
             'url_struktur.required' => 'File gambar struktur organisasi wajib diunggah.',
             'url_struktur.image' => 'File harus berupa gambar.',
             'url_struktur.mimes' => 'Gambar struktur organisasi harus dalam format PNG, JPG, JPEG, atau WEBP.',
-            'url_struktur.max' => 'Ukuran gambar maksimal 5 MB.',
+            'url_struktur.max' => 'Ukuran gambar maksimal 20 MB.',
         ];
     }
 }

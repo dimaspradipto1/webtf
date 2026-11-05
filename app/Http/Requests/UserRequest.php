@@ -33,7 +33,7 @@ class UserRequest extends FormRequest
             return [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.($this->user()?->id ?? '')],
-                'avatar' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:5120'],
+                'avatar' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:15360'],
                 'hapus_avatar' => ['nullable', 'boolean'],
             ];
         }

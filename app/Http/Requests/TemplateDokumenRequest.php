@@ -27,7 +27,7 @@ class TemplateDokumenRequest extends FormRequest
             'tipe_file' => ['nullable', 'string', 'max:50'],
             'link_drive' => ['required', 'string', 'max:1000'],
             'icon_preset' => ['nullable', 'string', 'max:50'],
-            'custom_icon' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg,webp', 'max:5120'],
+            'custom_icon' => ['nullable', 'image', 'mimes:png,jpg,jpeg,svg,webp', 'max:15360'],
             'urutan' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['nullable', 'boolean'],
         ];

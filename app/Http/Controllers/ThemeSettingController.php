@@ -27,7 +27,7 @@ class ThemeSettingController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
-            'header_logo' => 'nullable|image|mimes:png,jpg,jpeg,webp,svg|max:2048',
+            'header_logo' => 'nullable|image|mimes:png,jpg,jpeg,webp,svg|max:10240',
             'header_title' => 'nullable|string|max:100',
             'header_subtitle' => 'nullable|string|max:150',
             'remove_header_logo' => 'nullable',

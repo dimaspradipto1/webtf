@@ -24,7 +24,7 @@ class TenagaPendidikRequest extends FormRequest
             'nama' => ['required', 'string', 'max:255'],
             'bidang' => ['nullable', 'string', 'max:255'],
             'keterangan' => ['nullable', 'string', 'max:1000'],
-            'foto' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:5120'],
+            'foto' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:15360'],
             'icon' => ['nullable', 'string', 'max:100'],
             'link' => ['nullable', 'string', 'max:255'],
             'tombol_teks' => ['nullable', 'string', 'max:100'],

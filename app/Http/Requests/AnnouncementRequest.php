@@ -17,7 +17,7 @@ class AnnouncementRequest extends FormRequest
             'title' => 'required|string|max:255',
             'date' => 'required|date',
             'content' => 'nullable|string',
-            'file' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,webp|max:10240',
+            'file' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,webp|max:51200',
             'link_url' => 'nullable|string|max:500',
             'is_active' => 'nullable|boolean',
             'urutan' => 'nullable|integer',
@@ -30,7 +30,7 @@ class AnnouncementRequest extends FormRequest
             'title.required' => 'Judul pengumuman wajib diisi.',
             'date.required' => 'Tanggal pengumuman wajib diisi.',
             'date.date' => 'Format tanggal tidak valid.',
-            'file.max' => 'Ukuran file lampiran maksimal 10 MB.',
+            'file.max' => 'Ukuran file lampiran maksimal 50 MB.',
             'file.mimes' => 'Format lampiran yang didukung: PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, JPG, PNG, WEBP.',
         ];
     }
