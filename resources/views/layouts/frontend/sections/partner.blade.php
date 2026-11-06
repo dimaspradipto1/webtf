@@ -6,7 +6,7 @@
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
       <div class="section-label mx-auto">Jejaring Mitra</div>
-      <h2 class="section-title">Mitra Kerjasama <em>Industri</em></h2>
+      <h2 class="section-title">Mitra <em>Kerjasama</em></h2>
       <div class="divider-line centered"></div>
       <p class="section-desc mx-auto">
         Teknik Informatika bermitra dengan berbagai sektor industri dan teknologi terkemuka dalam penempatan magang industri, riset terapan, dan rekrutmen lulusan.
