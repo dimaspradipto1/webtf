@@ -39,28 +39,13 @@ class ContactController extends Controller
      */
     public function store(ContactRequest $request): RedirectResponse
     {
-        $contact = Contact::firstOrCreate([]);
-
-        $contact->update([
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-            'map' => $request->map,
-            'no_wa' => $request->no_wa,
-            'email' => $request->email,
-            'alamat' => $request->alamat,
-        ]);
-
-        AppServiceProvider::recordContentUpdate();
-
-        return redirect()
-            ->route('contact.index')
-            ->with('success', 'Informasi kontak berhasil diperbarui.');
+        return $this->update($request);
     }
 
     /**
      * Redirect route edit langsung ke halaman kontak utama.
      */
-    public function edit(Contact $contact): RedirectResponse
+    public function edit(?Contact $contact = null): RedirectResponse
     {
         return redirect()->route('contact.index');
     }
@@ -68,12 +53,26 @@ class ContactController extends Controller
     /**
      * Simpan pembaruan data kontak.
      */
-    public function update(ContactRequest $request, Contact $contact): RedirectResponse
+    public function update(ContactRequest $request, ?Contact $contact = null): RedirectResponse
     {
+        $contact = ($contact instanceof Contact && $contact->exists)
+            ? $contact
+            : Contact::firstOrCreate([]);
+
+        // Ekstrak URL embed jika input map berupa tag iframe untuk menghindari trigger ModSecurity WAF pada cPanel
+        $map = $request->map;
+        if (!empty($map)) {
+            if (preg_match('/src=["\']([^"\']+)["\']/i', $map, $matches)) {
+                $map = $matches[1];
+            } else {
+                $map = trim($map);
+            }
+        }
+
         $contact->update([
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
-            'map' => $request->map,
+            'map' => $map,
             'no_wa' => $request->no_wa,
             'email' => $request->email,
             'alamat' => $request->alamat,
@@ -89,8 +88,12 @@ class ContactController extends Controller
     /**
      * Reset / Hapus data kontak.
      */
-    public function destroy(Contact $contact): RedirectResponse
+    public function destroy(?Contact $contact = null): RedirectResponse
     {
+        $contact = ($contact instanceof Contact && $contact->exists)
+            ? $contact
+            : Contact::firstOrCreate([]);
+
         $contact->update([
             'latitude' => null,
             'longitude' => null,

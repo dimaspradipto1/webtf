@@ -141,7 +141,13 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('gallery', GalleryController::class);
     Route::resource('profil', ProfilController::class);
-    Route::resource('contact', ContactController::class);
+    // Pengaturan Kontak & Lokasi Admin (Singleton dengan slug-based URL tanpa ID di URL)
+    Route::get('admin-kontak', [ContactController::class, 'index'])->name('contact.index');
+    Route::match(['post', 'put'], 'admin-kontak', [ContactController::class, 'update'])->name('contact.update');
+    Route::match(['post', 'put'], 'admin-kontak/simpan', [ContactController::class, 'update'])->name('contact.store');
+    // Dukungan backward-compatibility URL lama
+    Route::get('contact', fn () => redirect()->route('contact.index'));
+    Route::match(['post', 'put'], 'contact/{contact?}', [ContactController::class, 'update']);
     Route::post('news/upload-image', [NewsController::class, 'uploadImage'])->name('news.upload-image');
     Route::get('news/download-template', [NewsController::class, 'downloadTemplate'])->name('news.download-template');
     Route::post('news/import-excel', [NewsController::class, 'importExcel'])->name('news.import-excel');

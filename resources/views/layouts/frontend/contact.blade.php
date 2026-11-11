@@ -80,7 +80,10 @@
     </div>
 
     <!-- PETA LOKASI -->
-    @if(isset($contact) && !empty($contact->map))
+    @php
+      $mapIframe = $contact->map_iframe ?? ($contact->map ?? '');
+    @endphp
+    @if(isset($contact) && !empty($mapIframe))
       <div class="card border-0 shadow-sm overflow-hidden" style="border-radius: 24px; border: 1px solid var(--border-light) !important;" data-aos="fade-up">
         <div class="p-3 bg-light border-bottom fw-bold text-dark d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center">
@@ -94,7 +97,7 @@
           @endif
         </div>
         <div class="map-responsive-container">
-          {!! $contact->map !!}
+          {!! $mapIframe !!}
         </div>
       </div>
     @endif

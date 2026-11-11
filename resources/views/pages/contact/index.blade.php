@@ -54,9 +54,8 @@
         </div>
     </div>
     <div class="card-body pt-2">
-        <form action="{{ route('contact.update', $contact->id) }}" method="POST">
+        <form action="{{ route('contact.update') }}" method="POST" id="contact-form">
             @csrf
-            @method('PUT')
 
             <div class="row g-3">
                 {{-- Nomor WhatsApp --}}
@@ -146,39 +145,41 @@
                     @enderror
                 </div>
 
-                {{-- Map Embed (Iframe Code) --}}
+                {{-- Map Embed (URL / Link Aman) --}}
                 <div class="col-12">
                     <label for="map" class="form-label fw-semibold text-dark">
-                        <i class="bi bi-map text-warning me-1"></i> Kode Embed Google Maps (Iframe)
+                        <i class="bi bi-map text-warning me-1"></i> Tautan / URL Embed Google Maps
                     </label>
                     <textarea id="map"
                               name="map"
                               class="form-control font-monospace @error('map') is-invalid @enderror"
-                              rows="4"
-                              placeholder="Contoh: <iframe src=&quot;https://www.google.com/maps/embed?...&quot; width=&quot;600&quot; height=&quot;450&quot; style=&quot;border:0;&quot; allowfullscreen=&quot;&quot; loading=&quot;lazy&quot;></iframe>">{{ old('map', $contact->map) }}</textarea>
+                              rows="3"
+                              placeholder="Contoh: https://www.google.com/maps/embed?pb=... atau tempel kode iframe (otomatis diekstrak aman)">{{ old('map', $contact->map_embed_url ?? $contact->map) }}</textarea>
                     <div class="form-text small text-muted">
-                        Buka Google Maps &rarr; cari lokasi &rarr; klik <strong>Bagikan</strong> &rarr; pilih tab <strong>Sematkan peta</strong> &rarr; klik <strong>Salin HTML</strong> lalu tempel di sini.
+                        <i class="bi bi-shield-check text-success me-1"></i>
+                        Anda dapat menempelkan URL Google Maps langsung atau kode <code>&lt;iframe&gt;</code>. Sistem otomatis mengekstrak tautan URL amannya agar tidak terblokir firewall hosting / cPanel.
                     </div>
                     @error('map')
                         <div class="text-danger small mt-1">{{ $message }}</div>
                     @enderror
 
-                    @if(!empty($contact->map))
-                        <div class="mt-3 p-3 bg-light rounded-3 border">
-                            <label class="form-label fw-semibold text-dark small mb-2 d-flex align-items-center gap-1">
-                                <i class="bi bi-eye"></i> Pratinjau Peta Saat Ini:
-                            </label>
-                            <div class="ratio ratio-21x9 rounded overflow-hidden shadow-sm" style="max-height: 280px;">
-                                {!! $contact->map !!}
-                            </div>
+                    @php
+                        $previewIframe = $contact->map_iframe;
+                    @endphp
+                    <div id="map-preview-wrapper" class="mt-3 p-3 bg-light rounded-3 border {{ empty($previewIframe) ? 'd-none' : '' }}">
+                        <label class="form-label fw-semibold text-dark small mb-2 d-flex align-items-center gap-1">
+                            <i class="bi bi-eye"></i> Pratinjau Peta Saat Ini:
+                        </label>
+                        <div id="map-preview-container" class="ratio ratio-21x9 rounded overflow-hidden shadow-sm" style="max-height: 280px;">
+                            {!! $previewIframe !!}
                         </div>
-                    @endif
+                    </div>
                 </div>
             </div>
 
             {{-- Tombol Aksi --}}
             <div class="d-flex align-items-center gap-2 mt-4 pt-3 border-top">
-                <button type="submit" class="btn btn-primary px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                <button type="submit" id="btn-submit-contact" class="btn btn-primary px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
                     <i class="bi bi-save"></i> Simpan Perubahan Kontak
                 </button>
             </div>
@@ -186,3 +187,68 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const mapInput = document.getElementById('map');
+    const form = document.getElementById('contact-form');
+    const previewWrapper = document.getElementById('map-preview-wrapper');
+    const previewContainer = document.getElementById('map-preview-container');
+    const latInput = document.getElementById('latitude');
+    const lngInput = document.getElementById('longitude');
+
+    function cleanMapValue(raw) {
+        if (!raw) return '';
+        var trimmed = raw.trim();
+        var match = trimmed.match(/src=["']([^"']+)["']/i);
+        if (match && match[1]) {
+            return match[1];
+        }
+        return trimmed.replace(/^[<"']+|[>"']+$/g, '');
+    }
+
+    function updatePreview() {
+        var url = cleanMapValue(mapInput ? mapInput.value : '');
+        if (!url && latInput && lngInput && latInput.value && lngInput.value) {
+            url = 'https://maps.google.com/maps?q=' + encodeURIComponent(latInput.value.trim() + ',' + lngInput.value.trim()) + '&hl=id&z=16&output=embed';
+        }
+
+        if (url && previewContainer && previewWrapper) {
+            previewContainer.innerHTML = '<iframe src="' + url + '" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
+            previewWrapper.classList.remove('d-none');
+        }
+    }
+
+    if (mapInput) {
+        mapInput.addEventListener('paste', function () {
+            setTimeout(function () {
+                var cleaned = cleanMapValue(mapInput.value);
+                if (cleaned !== mapInput.value) {
+                    mapInput.value = cleaned;
+                }
+                updatePreview();
+            }, 50);
+        });
+
+        mapInput.addEventListener('change', function () {
+            mapInput.value = cleanMapValue(mapInput.value);
+            updatePreview();
+        });
+    }
+
+    if (latInput && lngInput) {
+        latInput.addEventListener('change', updatePreview);
+        lngInput.addEventListener('change', updatePreview);
+    }
+
+    if (form) {
+        form.addEventListener('submit', function () {
+            if (mapInput) {
+                mapInput.value = cleanMapValue(mapInput.value);
+            }
+        });
+    }
+});
+</script>
+@endpush
