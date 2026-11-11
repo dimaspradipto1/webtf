@@ -231,3 +231,4 @@ class Category extends Model
         };
     }
 }
+

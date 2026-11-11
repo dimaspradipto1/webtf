@@ -136,3 +136,4 @@ class CategoryController extends Controller
             ->with('success', "Kategori '{$category->name}' berhasil {$statusText}.");
     }
 }
+

@@ -158,3 +158,4 @@ class CategoryFeatureTest extends TestCase
         $response->assertSee(route('contact.index'), false);
     }
 }
+
