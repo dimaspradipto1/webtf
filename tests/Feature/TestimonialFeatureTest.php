@@ -106,3 +106,4 @@ class TestimonialFeatureTest extends TestCase
         $this->assertEquals('Senior Product Designer', $testi->pekerjaan);
     }
 }
+
