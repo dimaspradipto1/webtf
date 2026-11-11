@@ -196,4 +196,19 @@ class ThemeSettingTest extends TestCase
         // Reset
         $this->actingAs($admin)->post(route('theme.reset'));
     }
+
+    public function test_hero_banner_renders_default_gray_image_when_no_banners_uploaded(): void
+    {
+        // Nonaktifkan semua banner sementara
+        \App\Models\Banner::query()->update(['aktif' => false]);
+
+        $homeResponse = $this->get(route('homepage'));
+        $homeResponse->assertStatus(200);
+        $homeResponse->assertSee('default-hero-banner.svg', false);
+        $homeResponse->assertSee('default-hero-banner.jpg', false);
+        $homeResponse->assertDontSee('Banner Promosi & Iklan Fakultas dapat diunggah', false);
+
+        // Kembalikan status aktif banner
+        \App\Models\Banner::query()->update(['aktif' => true]);
+    }
 }

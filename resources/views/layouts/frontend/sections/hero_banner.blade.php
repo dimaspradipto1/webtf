@@ -21,22 +21,21 @@
         @foreach($activeBanners as $index => $banner)
           @php $imgPath = $banner->url ?? $banner->gambar; @endphp
           <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-            <img src="{{ asset('storage/' . $imgPath) }}" alt="{{ $banner->judul ?? 'Banner Promosi Teknik Informatika' }}" class="hero-banner-img">
+            <img src="{{ asset('storage/' . $imgPath) }}" 
+                 alt="{{ $banner->judul ?? 'Banner Promosi Teknik Informatika' }}" 
+                 class="hero-banner-img"
+                 onerror="this.onerror=null;this.src='{{ asset('frontend/img/default-hero-banner.svg') }}';">
           </div>
         @endforeach
       @else
         <div class="carousel-item active">
-          <div class="hero-banner-img d-flex align-items-center justify-content-center" style="background: #000000; min-height: 360px; color: #ffffff;">
-            <div class="text-center p-4">
-              <div class="mb-3">
-                <i class="bi bi-megaphone fs-1" style="color: var(--uis-orange);"></i>
-              </div>
-              <h2 class="fw-bold mb-2" style="color: #ffffff; letter-spacing: -0.5px;">TEKNIK INFORMATIKA (UIS)</h2>
-              <p class="text-white-50 small mb-0" style="max-width: 540px; margin: 0 auto;">
-                Banner Promosi & Iklan Fakultas dapat diunggah melalui menu Admin (<strong>Profil & Konten UIS ➔ Banner Hero</strong>).
-              </p>
-            </div>
-          </div>
+          <picture>
+            <source srcset="{{ asset('frontend/img/default-hero-banner.svg') }}" type="image/svg+xml">
+            <img src="{{ asset('frontend/img/default-hero-banner.jpg') }}" 
+                 alt="Banner Default Teknik Informatika" 
+                 class="hero-banner-img"
+                 style="width: 100%; height: auto; display: block; object-fit: contain;">
+          </picture>
         </div>
       @endif
     </div>
