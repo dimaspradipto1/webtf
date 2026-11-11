@@ -256,7 +256,12 @@
           </ul>
         </li>
 
-        <!-- 7. PMB (Penerimaan Mahasiswa Baru) -->
+        <!-- 7. KONTAK -->
+        <li class="nav-item">
+          <a href="{{ route('homepage.kontak') }}" class="nav-link nav-link-custom {{ request()->routeIs('homepage.kontak*') ? 'active' : '' }}">Kontak</a>
+        </li>
+
+        <!-- 8. PMB (Penerimaan Mahasiswa Baru) -->
         <li class="nav-item dropdown">
           <a class="nav-link nav-link-custom dropdown-toggle {{ (request()->routeIs('homepage.portal.page*') && in_array(request()->route('slug'), ['pendaftaran-pmb', 'informasi-pmb', 'pengumuman-pmb'])) || request()->is('portal/pendaftaran-pmb') || request()->is('portal/informasi-pmb') || request()->is('portal/pengumuman-pmb') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             PMB <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>

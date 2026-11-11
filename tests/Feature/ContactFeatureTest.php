@@ -77,4 +77,18 @@ class ContactFeatureTest extends TestCase
         $response = $this->actingAs($admin)->get('/contact');
         $response->assertRedirect(route('contact.index'));
     }
+
+    public function test_frontend_navbar_shows_kontak_menu_beside_portal(): void
+    {
+        $response = $this->get(route('homepage'));
+        $response->assertStatus(200);
+        $response->assertSee(route('homepage.kontak'), false);
+        $response->assertSee('Kontak', false);
+
+        // Akses halaman kontak dan pastikan menu kontak aktif
+        $contactResponse = $this->get(route('homepage.kontak'));
+        $contactResponse->assertStatus(200);
+        $contactResponse->assertSee(route('homepage.kontak'), false);
+        $contactResponse->assertSee('Hubungi Kami', false);
+    }
 }
