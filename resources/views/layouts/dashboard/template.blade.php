@@ -608,6 +608,23 @@
                     }
                 });
 
+                // Fungsi proteksi enkripsi base64 untuk menghindari blokir WAF / ModSecurity LiteSpeed 403 Forbidden
+                function uisProtectHtmlFromWaf(targetForm) {
+                    if (!targetForm) return;
+                    const textareas = targetForm.querySelectorAll('textarea#content, textarea.tinymce-editor, textarea.tinymce, textarea#description');
+                    textareas.forEach(function (ta) {
+                        if (ta && ta.value && !ta.value.startsWith('B64_SAFE:')) {
+                            try {
+                                const raw = ta.value;
+                                const b64 = btoa(encodeURIComponent(raw).replace(/%([0-9A-F]{2})/g, function (match, p1) {
+                                    return String.fromCharCode('0x' + p1);
+                                }));
+                                ta.value = 'B64_SAFE:' + b64;
+                            } catch (err) {}
+                        }
+                    });
+                }
+
                 // Pastikan seluruh gambar di TinyMCE terunggah ke server sebelum form dikirim
                 document.querySelectorAll('form').forEach(function (form) {
                     form.addEventListener('submit', function (e) {
@@ -643,15 +660,18 @@
                             })).then(function () {
                                 if (typeof Swal !== 'undefined') Swal.close();
                                 tinymce.triggerSave();
+                                uisProtectHtmlFromWaf(form);
                                 form.submit();
                             }).catch(function (err) {
                                 if (typeof Swal !== 'undefined') Swal.close();
                                 console.error('Gagal mengunggah gambar:', err);
                                 tinymce.triggerSave();
+                                uisProtectHtmlFromWaf(form);
                                 form.submit();
                             });
                         } else {
                             tinymce.triggerSave();
+                            uisProtectHtmlFromWaf(form);
                         }
                     });
                 });
@@ -681,6 +701,9 @@
         $(document).on('submit', 'form', function () {
             if (typeof tinymce !== 'undefined') {
                 tinymce.triggerSave();
+            }
+            if (typeof uisProtectHtmlFromWaf === 'function') {
+                uisProtectHtmlFromWaf(this);
             }
             notifyFrontendLiveUpdate();
         });

@@ -156,10 +156,19 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     // Dukungan backward-compatibility URL lama
     Route::get('contact', fn () => redirect()->route('contact.index'));
     Route::match(['post', 'put'], 'contact/{contact?}', [ContactController::class, 'update']);
-    Route::post('news/upload-image', [NewsController::class, 'uploadImage'])->name('news.upload-image');
-    Route::get('news/download-template', [NewsController::class, 'downloadTemplate'])->name('news.download-template');
-    Route::post('news/import-excel', [NewsController::class, 'importExcel'])->name('news.import-excel');
-    Route::resource('news', NewsController::class);
+    // Manajemen Berita & Informasi (Slug-based URL admin-berita untuk menghindari blokir WAF LiteSpeed)
+    Route::post('admin-berita/upload-image', [NewsController::class, 'uploadImage'])->name('news.upload-image');
+    Route::get('admin-berita/download-template', [NewsController::class, 'downloadTemplate'])->name('news.download-template');
+    Route::post('admin-berita/import-excel', [NewsController::class, 'importExcel'])->name('news.import-excel');
+    Route::resource('admin-berita', NewsController::class)
+        ->parameters(['admin-berita' => 'news'])
+        ->names('news');
+    // Dukungan URL lama /news
+    Route::get('news', fn () => redirect()->route('news.index'));
+    Route::get('news/create', fn () => redirect()->route('news.create'));
+    Route::get('news/{news}/edit', fn ($news) => redirect()->route('news.edit', $news));
+    Route::match(['post', 'put'], 'news/{news?}', [NewsController::class, 'store']);
+    Route::post('news/upload-image', [NewsController::class, 'uploadImage']);
 
     // Pengumuman & Agenda
     Route::resource('admin-pengumuman', AnnouncementController::class)

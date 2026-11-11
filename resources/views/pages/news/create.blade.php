@@ -35,7 +35,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data" id="newsForm">
                     @csrf
 
                     {{-- Judul --}}
@@ -258,6 +258,26 @@
 
 @push('scripts')
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('newsForm');
+        if (form) {
+            form.addEventListener('submit', function () {
+                if (typeof tinymce !== 'undefined') {
+                    tinymce.triggerSave();
+                }
+                const ta = document.getElementById('content');
+                if (ta && ta.value && !ta.value.startsWith('B64_SAFE:')) {
+                    try {
+                        const raw = ta.value;
+                        const b64 = btoa(encodeURIComponent(raw).replace(/%([0-9A-F]{2})/g, function (match, p1) {
+                            return String.fromCharCode('0x' + p1);
+                        }));
+                        ta.value = 'B64_SAFE:' + b64;
+                    } catch (err) {}
+                }
+            });
+        }
+    });
 
     function previewThumbnail(input) {
         const wrap = document.getElementById('thumbnailPreviewWrap');

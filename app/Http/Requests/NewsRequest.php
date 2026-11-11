@@ -11,6 +11,23 @@ class NewsRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $rawContent = $this->input('content');
+        if ($rawContent && is_string($rawContent)) {
+            $decoded = \App\Models\News::decodeSafeContent($rawContent);
+            $this->merge([
+                'content' => $decoded,
+            ]);
+        }
+        $rawDesc = $this->input('description');
+        if ($rawDesc && is_string($rawDesc)) {
+            $this->merge([
+                'description' => \App\Models\News::decodeSafeContent($rawDesc),
+            ]);
+        }
+    }
+
     public function rules(): array
     {
         $rules = [

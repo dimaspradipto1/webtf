@@ -160,22 +160,20 @@ class Category extends Model
                 });
             }
 
-            // Seed defaults jika tabel kosong
-            if (static::count() === 0) {
-                foreach (static::defaultPresets() as $type => $items) {
-                    $order = 1;
-                    foreach ($items as $item) {
-                        static::firstOrCreate(
-                            ['type' => $type, 'slug' => $item['slug']],
-                            [
-                                'name' => $item['name'],
-                                'icon' => $item['icon'] ?? null,
-                                'color' => $item['color'] ?? null,
-                                'order' => $order++,
-                                'is_active' => true,
-                            ]
-                        );
-                    }
+            // Seed defaults dengan firstOrCreate agar preset selalu tersedia
+            foreach (static::defaultPresets() as $type => $items) {
+                $order = 1;
+                foreach ($items as $item) {
+                    static::firstOrCreate(
+                        ['type' => $type, 'slug' => $item['slug']],
+                        [
+                            'name' => $item['name'],
+                            'icon' => $item['icon'] ?? null,
+                            'color' => $item['color'] ?? null,
+                            'order' => $order++,
+                            'is_active' => true,
+                        ]
+                    );
                 }
             }
         } catch (\Throwable $e) {

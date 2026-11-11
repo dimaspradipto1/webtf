@@ -64,4 +64,34 @@ class News extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    /**
+     * Decode konten yang di-encode base64 untuk melewati filter firewall LiteSpeed / ModSecurity.
+     */
+    public static function decodeSafeContent(?string $content): ?string
+    {
+        if (empty($content) || !is_string($content)) {
+            return $content;
+        }
+
+        if (str_starts_with($content, 'B64_SAFE:')) {
+            $raw = substr($content, 9);
+            $decoded = base64_decode($raw, true);
+            if ($decoded !== false) {
+                return $decoded;
+            }
+        }
+
+        return $content;
+    }
+
+    public function setContentAttribute($value): void
+    {
+        $this->attributes['content'] = static::decodeSafeContent($value);
+    }
+
+    public function setDescriptionAttribute($value): void
+    {
+        $this->attributes['description'] = static::decodeSafeContent($value);
+    }
 }

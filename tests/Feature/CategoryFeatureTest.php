@@ -21,7 +21,7 @@ class CategoryFeatureTest extends TestCase
             $admin = User::factory()->create(['roles' => 'admin']);
         }
 
-        $response = $this->actingAs($admin)->get(route('category.index'));
+        $response = $this->actingAs($admin)->get(route('category.index', ['type' => 'berita']));
         $response->assertStatus(200);
         $response->assertSee('Master Kategori Konten', false);
         $response->assertSee('Berita & Informasi', false);
