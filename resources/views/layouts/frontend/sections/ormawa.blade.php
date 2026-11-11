@@ -1,7 +1,46 @@
 <!-- ═══════════════════════════════════════════════
      9.3 ORGANISASI & KEGIATAN MAHASISWA (ORMAWA DECK SHOWCASE)
 ═══════════════════════════════════════════════ -->
-@if(isset($organisasis) && $organisasis->count() > 0)
+@php
+  $defaultOrganisasis = collect([
+    (object)[
+      'nama_organisasi' => 'Himpunan Mahasiswa Teknik Informatika (HIMATIF)',
+      'singkatan' => 'HIMATIF',
+      'kategori' => 'Himpunan Mahasiswa Prodi',
+      'periode' => '2025/2026',
+      'deskripsi' => 'Wadah aspirasi, kreativitas, dan pengembangan soft-skills maupun hard-skills seluruh mahasiswa Teknik Informatika.',
+      'nama_ketua' => 'Ketua Umum HIMATIF',
+      'slug' => null,
+      'logo' => null,
+      'visi' => null
+    ],
+    (object)[
+      'nama_organisasi' => 'Unit Kegiatan Mahasiswa Cyber Security & Ethical Hacking',
+      'singkatan' => 'CYBER CLUB',
+      'kategori' => 'Unit Kegiatan Mahasiswa',
+      'periode' => '2025/2026',
+      'deskripsi' => 'Komunitas riset keamanan siber, bug hunting, CTF (Capture The Flag), dan pertahanan jaringan komputer.',
+      'nama_ketua' => 'Koordinator Cyber',
+      'slug' => null,
+      'logo' => null,
+      'visi' => null
+    ],
+    (object)[
+      'nama_organisasi' => 'Google Developer Student Clubs / Tech Community',
+      'singkatan' => 'DEV COMMUNITY',
+      'kategori' => 'Komunitas Teknologi',
+      'periode' => '2025/2026',
+      'deskripsi' => 'Komunitas belajar teknologi pengembangan web, cloud, artificial intelligence, dan mobile app development.',
+      'nama_ketua' => 'Lead Community',
+      'slug' => null,
+      'logo' => null,
+      'visi' => null
+    ],
+  ]);
+
+  $displayOrganisasis = (isset($organisasis) && $organisasis->count() > 0) ? $organisasis : $defaultOrganisasis;
+@endphp
+
 <section class="ormawa-deck-section" id="organisasi-mahasiswa">
   <div class="container position-relative">
     <div class="row align-items-center g-5">
@@ -71,7 +110,6 @@
           <!-- Stack Container -->
           <div class="ormawa-deck-viewport">
             <div class="ormawa-deck-stack" id="ormawaDeckStack">
-              @if(isset($organisasis) && $organisasis->count() > 0)
                 @php
                   $themes = [
                     'radial-gradient(circle at 85% 15%, rgba(249, 220, 75, 0.32) 0%, transparent 45%), linear-gradient(155deg, #000000 0%, #000000 48%, #000000 100%)', // Emerald Gold (UIS)
@@ -81,11 +119,12 @@
                     'radial-gradient(circle at 85% 15%, rgba(45, 212, 191, 0.35) 0%, transparent 45%), linear-gradient(155deg, #042f2e 0%, #0f766e 48%, #021a19 100%)', // Teal Lagoon
                   ];
                 @endphp
-                @foreach($organisasis as $index => $ormawa)
+                @foreach($displayOrganisasis as $index => $ormawa)
                   @php
                     $singkat = $ormawa->singkatan ?: $ormawa->nama_organisasi;
                     $cardTheme = $themes[$index % count($themes)];
                     $initial = strtoupper(substr($ormawa->singkatan ?: $ormawa->nama_organisasi, 0, 2));
+                    $ormawaUrl = !empty($ormawa->slug) ? route('homepage.organisasi.detail', $ormawa->slug) : route('homepage.organisasi');
                   @endphp
                   <div class="ormawa-deck-card" 
                        data-index="{{ $index }}"
@@ -110,7 +149,7 @@
                       <div class="card-counter-badge">
                         <span>{{ sprintf('%02d', $index + 1) }}</span>
                         <span class="mx-1">/</span>
-                        <span>{{ sprintf('%02d', $organisasis->count()) }}</span>
+                        <span>{{ sprintf('%02d', $displayOrganisasis->count()) }}</span>
                       </div>
                       <div class="card-cat-badge">
                         {{ strtoupper($ormawa->kategori) }}
@@ -136,7 +175,7 @@
                           <i class="bi bi-person-fill"></i>
                           <span>Ketua: {{ $ormawa->nama_ketua ?: 'Pengurus Ormawa' }}</span>
                         </div>
-                        <a href="{{ route('homepage.organisasi.detail', $ormawa->slug) }}" class="card-link-action">
+                        <a href="{{ $ormawaUrl }}" class="card-link-action">
                           <span>Profil Lengkap</span>
                           <i class="bi bi-arrow-up-right"></i>
                         </a>
@@ -145,30 +184,27 @@
 
                   </div>
                 @endforeach
-              @endif
             </div>
           </div>
 
           <!-- Vertical Tracker / Progress Timeline (Right side of stack) -->
-          @if(isset($organisasis) && $organisasis->count() > 0)
-            <div class="ormawa-deck-tracker" id="ormawaTracker">
-              <div class="tracker-counter-box">
-                <span class="tracker-current-num" id="deckTrackerNum">01</span>
-                <span class="tracker-slash">/</span>
-                <span class="tracker-total-num">{{ sprintf('%02d', $organisasis->count()) }}</span>
-              </div>
-              
-              <div class="tracker-rail-container" id="deckTrackerRail" title="Klik untuk berpindah">
-                <div class="tracker-rail-track">
-                  <div class="tracker-rail-thumb" id="deckTrackerThumb"></div>
-                </div>
-              </div>
-
-              <div class="tracker-active-label" id="deckTrackerLabel">
-                {{ $organisasis->first()->singkatan ?: $organisasis->first()->nama_organisasi }}
+          <div class="ormawa-deck-tracker" id="ormawaTracker">
+            <div class="tracker-counter-box">
+              <span class="tracker-current-num" id="deckTrackerNum">01</span>
+              <span class="tracker-slash">/</span>
+              <span class="tracker-total-num">{{ sprintf('%02d', $displayOrganisasis->count()) }}</span>
+            </div>
+            
+            <div class="tracker-rail-container" id="deckTrackerRail" title="Klik untuk berpindah">
+              <div class="tracker-rail-track">
+                <div class="tracker-rail-thumb" id="deckTrackerThumb"></div>
               </div>
             </div>
-          @endif
+
+            <div class="tracker-active-label" id="deckTrackerLabel">
+              {{ $displayOrganisasis->first()->singkatan ?: $displayOrganisasis->first()->nama_organisasi }}
+            </div>
+          </div>
 
         </div>
       </div>
@@ -176,4 +212,3 @@
     </div>
   </div>
 </section>
-@endif

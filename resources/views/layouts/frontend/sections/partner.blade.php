@@ -1,7 +1,21 @@
 <!-- ═══════════════════════════════════════════════
      13. PARTNER & KERJA SAMA (2-ROW INFINITE SLIDER)
 ═══════════════════════════════════════════════ -->
-@if(isset($partners) && $partners->count() > 0)
+@php
+  $defaultPartners = collect([
+    (object)['nama' => 'PT Telkom Indonesia (Persero) Tbk', 'logo' => null],
+    (object)['nama' => 'PT Schneider Electric Batam', 'logo' => null],
+    (object)['nama' => 'PT Pegatron Technology Indonesia', 'logo' => null],
+    (object)['nama' => 'APTIKOM (Asosiasi Pendidikan Tinggi Informatika)', 'logo' => null],
+    (object)['nama' => 'PT Infineon Technologies Batam', 'logo' => null],
+    (object)['nama' => 'Infinite Studios (Nongsa Digital Park)', 'logo' => null],
+    (object)['nama' => 'PT Batamindo Investment Cakrawala', 'logo' => null],
+    (object)['nama' => 'Kadin Kota Batam', 'logo' => null],
+  ]);
+
+  $displayPartners = (isset($partners) && $partners->count() > 0) ? $partners : $defaultPartners;
+@endphp
+
 <section class="section-bg-white py-5" id="mitra">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
@@ -15,10 +29,10 @@
   </div>
 
   @php
-    $totalPartners = $partners->count();
+    $totalPartners = $displayPartners->count();
     $half = ceil($totalPartners / 2);
-    $rawRow1 = $partners->slice(0, $half);
-    $rawRow2 = $partners->slice($half);
+    $rawRow1 = $displayPartners->slice(0, $half);
+    $rawRow2 = $displayPartners->slice($half);
 
     if ($rawRow2->isEmpty()) {
         $rawRow2 = $rawRow1;
@@ -87,4 +101,3 @@
     </div>
   </div>
 </section>
-@endif
