@@ -82,3 +82,4 @@ class NewsFeatureTest extends TestCase
         $createResponse->assertRedirect(route('news.create'));
     }
 }
+
