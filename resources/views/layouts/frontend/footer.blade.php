@@ -86,7 +86,7 @@
           <div class="footer-contact-icon"><i class="bi bi-clock"></i></div>
           <div class="footer-contact-text">
             <strong>Jam Operasional</strong>
-            Senin – Sabtu: 08.00 – 17.00 WIB
+            {{ $contact?->jam_operasional ?: ($topbarSetting?->jam_operasional ?: 'Senin – Sabtu: 08.00 – 17.00 WIB') }}
           </div>
         </div>
       </div>

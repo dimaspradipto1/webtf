@@ -25,6 +25,7 @@ class ContactFeatureTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Pengaturan Informasi Kontak', false);
         $response->assertSee('Simpan Perubahan Kontak');
+        $response->assertSee('name="jam_operasional"', false);
         $response->assertDontSee('entries per page');
         // Pastikan route URL menggunakan slug admin-kontak tanpa ID
         $this->assertStringContainsString('admin-kontak', route('contact.index'));
@@ -47,6 +48,7 @@ class ContactFeatureTest extends TestCase
             'no_wa' => '089876543210',
             'email' => 'informatika@uis.ac.id',
             'alamat' => 'Gedung FST Kampus UIS Batam, Jl. Teuku Umar No. 1',
+            'jam_operasional' => 'Senin – Sabtu: 08.00 – 17.00 WIB',
             'latitude' => '1.1444',
             'longitude' => '104.0156',
             'map' => '<iframe src="https://maps.google.com/embed/test"></iframe>',
@@ -60,11 +62,21 @@ class ContactFeatureTest extends TestCase
         $contact->refresh();
         $this->assertEquals('089876543210', $contact->no_wa);
         $this->assertEquals('informatika@uis.ac.id', $contact->email);
+        $this->assertEquals('Senin – Sabtu: 08.00 – 17.00 WIB', $contact->jam_operasional);
         $this->assertEquals('1.1444', $contact->latitude);
         // Tag iframe harus otomatis diekstrak menjadi URL aman untuk menghindari blokir ModSecurity cPanel
         $this->assertEquals('https://maps.google.com/embed/test', $contact->map);
         $this->assertEquals('https://maps.google.com/embed/test', $contact->map_embed_url);
         $this->assertStringContainsString('<iframe src="https://maps.google.com/embed/test"', $contact->map_iframe);
+
+        // Pastikan tampil di footer homepage dan halaman kontak
+        $homeResponse = $this->get(route('homepage'));
+        $homeResponse->assertStatus(200);
+        $homeResponse->assertSee('Senin – Sabtu: 08.00 – 17.00 WIB', false);
+
+        $contactPageResponse = $this->get(route('homepage.kontak'));
+        $contactPageResponse->assertStatus(200);
+        $contactPageResponse->assertSee('Senin – Sabtu: 08.00 – 17.00 WIB', false);
     }
 
     public function test_legacy_contact_url_redirects_to_slug_route(): void

@@ -46,7 +46,7 @@
                 <h5 class="mb-1 fw-bold text-dark d-flex align-items-center gap-2">
                     <i class="bi bi-telephone-fill text-primary"></i> Pengaturan Informasi Kontak & Lokasi
                 </h5>
-                <p class="text-muted small mb-0">Kelola nomor kontak resmi, email prodi, alamat kampus, serta embed peta Google Maps yang tampil di website</p>
+                <p class="text-muted small mb-0">Kelola nomor kontak resmi, email prodi, jam operasional, alamat kampus, serta embed peta Google Maps yang tampil di website</p>
             </div>
             <a href="{{ route('homepage.kontak') }}" target="_blank" class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1">
                 <i class="bi bi-box-arrow-up-right"></i> Lihat di Web
@@ -110,6 +110,26 @@
                               placeholder="Tuliskan nama gedung, fakultas, jalan, kelurahan, kecamatan, dan kode pos...">{{ old('alamat', $contact->alamat) }}</textarea>
                     <div class="form-text small text-muted">Alamat fisik yang ditampilkan pada kartu kontak dan footer website.</div>
                     @error('alamat')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- Jam Operasional --}}
+                <div class="col-12">
+                    <label for="jam_operasional" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-clock-history text-warning me-1"></i> Jam Operasional
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light text-muted"><i class="bi bi-clock"></i></span>
+                        <input type="text"
+                               id="jam_operasional"
+                               name="jam_operasional"
+                               class="form-control @error('jam_operasional') is-invalid @enderror"
+                               value="{{ old('jam_operasional', $contact->jam_operasional) }}"
+                               placeholder="Contoh: Senin – Sabtu: 08.00 – 17.00 WIB">
+                    </div>
+                    <div class="form-text small text-muted">Jadwal operasional layanan kampus yang ditampilkan pada kartu kontak dan footer website.</div>
+                    @error('jam_operasional')
                         <div class="text-danger small mt-1">{{ $message }}</div>
                     @enderror
                 </div>

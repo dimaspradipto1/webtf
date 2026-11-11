@@ -20,6 +20,7 @@ class ContactRequest extends FormRequest
             'no_wa' => ['nullable', 'string', 'max:20'],
             'email' => ['nullable', 'email', 'max:255'],
             'alamat' => ['nullable', 'string'],
+            'jam_operasional' => ['nullable', 'string', 'max:255'],
         ];
     }
 

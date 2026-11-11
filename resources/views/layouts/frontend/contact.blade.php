@@ -72,8 +72,7 @@
           <div class="contact-card-icon"><i class="bi bi-clock-fill"></i></div>
           <h4 class="contact-card-title">Jam Layanan</h4>
           <p class="contact-card-text">
-            Senin - Jumat: 08.00 - 16.00 WIB<br>
-            Sabtu: 08.00 - 13.00 WIB
+            {!! nl2br(e($contact?->jam_operasional ?: ($topbarSetting?->jam_operasional ?: "Senin – Sabtu: 08.00 – 17.00 WIB"))) !!}
           </p>
         </div>
       </div>
