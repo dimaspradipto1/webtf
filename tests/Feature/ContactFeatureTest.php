@@ -18,7 +18,7 @@ class ContactFeatureTest extends TestCase
     {
         $admin = User::first();
         if (!$admin) {
-            $admin = User::factory()->create(['role' => 'admin']);
+            $admin = User::factory()->create(['roles' => 'admin']);
         }
 
         $response = $this->actingAs($admin)->get(route('contact.index'));
@@ -26,13 +26,16 @@ class ContactFeatureTest extends TestCase
         $response->assertSee('Pengaturan Informasi Kontak', false);
         $response->assertSee('Simpan Perubahan Kontak');
         $response->assertDontSee('entries per page');
+        // Pastikan route URL menggunakan slug admin-kontak tanpa ID
+        $this->assertStringContainsString('admin-kontak', route('contact.index'));
+        $this->assertStringContainsString('admin-kontak', route('contact.update'));
     }
 
-    public function test_admin_can_update_contact_information(): void
+    public function test_admin_can_update_contact_information_using_slug_route_without_id(): void
     {
         $admin = User::first();
         if (!$admin) {
-            $admin = User::factory()->create(['role' => 'admin']);
+            $admin = User::factory()->create(['roles' => 'admin']);
         }
 
         $contact = Contact::firstOrCreate([], [
@@ -46,10 +49,11 @@ class ContactFeatureTest extends TestCase
             'alamat' => 'Gedung FST Kampus UIS Batam, Jl. Teuku Umar No. 1',
             'latitude' => '1.1444',
             'longitude' => '104.0156',
-            'map' => '<iframe src="https://maps.google.com"></iframe>',
+            'map' => '<iframe src="https://maps.google.com/embed/test"></iframe>',
         ];
 
-        $response = $this->actingAs($admin)->put(route('contact.update', $contact->id), $payload);
+        // Kirim via POST langsung ke route('contact.update') tanpa ID pada URL
+        $response = $this->actingAs($admin)->post(route('contact.update'), $payload);
         $response->assertRedirect(route('contact.index'));
         $response->assertSessionHas('success');
 
@@ -57,5 +61,20 @@ class ContactFeatureTest extends TestCase
         $this->assertEquals('089876543210', $contact->no_wa);
         $this->assertEquals('informatika@uis.ac.id', $contact->email);
         $this->assertEquals('1.1444', $contact->latitude);
+        // Tag iframe harus otomatis diekstrak menjadi URL aman untuk menghindari blokir ModSecurity cPanel
+        $this->assertEquals('https://maps.google.com/embed/test', $contact->map);
+        $this->assertEquals('https://maps.google.com/embed/test', $contact->map_embed_url);
+        $this->assertStringContainsString('<iframe src="https://maps.google.com/embed/test"', $contact->map_iframe);
+    }
+
+    public function test_legacy_contact_url_redirects_to_slug_route(): void
+    {
+        $admin = User::first();
+        if (!$admin) {
+            $admin = User::factory()->create(['roles' => 'admin']);
+        }
+
+        $response = $this->actingAs($admin)->get('/contact');
+        $response->assertRedirect(route('contact.index'));
     }
 }
