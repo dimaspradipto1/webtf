@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ThemeSetting;
 use App\Providers\AppServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -59,8 +60,12 @@ class ThemeSettingController extends Controller
 
         $setting = ThemeSetting::current();
 
+        $hasLogoCol = Schema::hasColumn('theme_settings', 'header_logo');
+        $hasTitleCol = Schema::hasColumn('theme_settings', 'header_title');
+        $hasSubtitleCol = Schema::hasColumn('theme_settings', 'header_subtitle');
+
         // Kelola file logo header jika diunggah atau dihapus
-        $logoPath = $setting->getRawOriginal('header_logo');
+        $logoPath = $hasLogoCol ? $setting->getRawOriginal('header_logo') : null;
         if ($request->boolean('remove_header_logo')) {
             if ($logoPath && Storage::disk('public')->exists($logoPath)) {
                 Storage::disk('public')->delete($logoPath);
@@ -112,10 +117,7 @@ class ThemeSettingController extends Controller
         // Urutkan berdasarkan kolom order
         usort($processedSections, fn($a, $b) => $a['order'] <=> $b['order']);
 
-        $setting->update([
-            'header_logo' => $logoPath,
-            'header_title' => $validated['header_title'] ?? 'TEKNIK INFORMATIKA',
-            'header_subtitle' => $validated['header_subtitle'] ?? 'Fakultas Sains dan Teknologi',
+        $updateData = [
             'header_bg_color' => $validated['header_bg_color'],
             'header_text_color' => $validated['header_text_color'],
             'header_active_bg_color' => $validated['header_active_bg_color'],
@@ -140,7 +142,20 @@ class ThemeSettingController extends Controller
             'footer_social_text_color' => !empty($validated['footer_social_text_color']) ? $validated['footer_social_text_color'] : '#000000',
             'footer_description' => $validated['footer_description'] ?? $setting->footer_description,
             'footer_copyright' => $validated['footer_copyright'] ?? $setting->footer_copyright,
-        ]);
+        ];
+
+        // Hanya sertakan kolom brand jika kolom tersedia di tabel database
+        if ($hasLogoCol) {
+            $updateData['header_logo'] = $logoPath;
+        }
+        if ($hasTitleCol) {
+            $updateData['header_title'] = $validated['header_title'] ?? 'TEKNIK INFORMATIKA';
+        }
+        if ($hasSubtitleCol) {
+            $updateData['header_subtitle'] = $validated['header_subtitle'] ?? 'Fakultas Sains dan Teknologi';
+        }
+
+        $setting->update($updateData);
 
         AppServiceProvider::recordContentUpdate();
 

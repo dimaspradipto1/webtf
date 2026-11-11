@@ -171,6 +171,19 @@
       color: var(--hdr-log-text) !important;
       opacity: 0.88 !important;
     }
+    /* Hero Header Dinamis mengikuti tema */
+    .akademik-hero {
+      border-bottom: 3px solid var(--accent-custom, #f9dc4b) !important;
+    }
+    .akademik-hero .badge {
+      background: var(--accent-custom, #f9dc4b) !important;
+      border-color: var(--accent-custom, #f9dc4b) !important;
+    }
+    .akademik-hero .breadcrumb-custom a:hover,
+    .akademik-hero .breadcrumb-custom .active,
+    .akademik-hero .breadcrumb-custom span.active {
+      color: var(--accent-custom, #f9dc4b) !important;
+    }
     .footer-main {
       background: var(--ftr-bg) !important;
       color: var(--ftr-text) !important;

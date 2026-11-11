@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 
 class ThemeSetting extends Model
 {
@@ -170,9 +173,32 @@ class ThemeSetting extends Model
      */
     public static function current(): self
     {
+        // Pastikan kolom baru otomatis dibuat jika database belum menjalankan migrasi
+        try {
+            if (Schema::hasTable('theme_settings') && !Schema::hasColumn('theme_settings', 'header_logo')) {
+                Schema::table('theme_settings', function (Blueprint $table) {
+                    if (!Schema::hasColumn('theme_settings', 'header_logo')) {
+                        $table->string('header_logo')->nullable()->after('header_is_sticky');
+                    }
+                    if (!Schema::hasColumn('theme_settings', 'header_title')) {
+                        $table->string('header_title')->nullable()->default('TEKNIK INFORMATIKA')->after('header_logo');
+                    }
+                    if (!Schema::hasColumn('theme_settings', 'header_subtitle')) {
+                        $table->string('header_subtitle')->nullable()->default('Fakultas Sains dan Teknologi')->after('header_title');
+                    }
+                });
+            }
+        } catch (\Throwable $e) {
+            // Lanjutkan jika koneksi DB tidak memiliki izin DDL
+        }
+
         $setting = static::first();
         if (!$setting) {
-            $setting = static::create([
+            $hasLogo = Schema::hasColumn('theme_settings', 'header_logo');
+            $hasTitle = Schema::hasColumn('theme_settings', 'header_title');
+            $hasSubtitle = Schema::hasColumn('theme_settings', 'header_subtitle');
+
+            $createData = [
                 'header_bg_color' => '#f9dc4b',
                 'header_text_color' => '#ffffff',
                 'header_active_bg_color' => '#000000',
@@ -181,9 +207,6 @@ class ThemeSetting extends Model
                 'header_login_text_color' => '#ffffff',
                 'header_shadow_color' => '#f9dc4b',
                 'header_is_sticky' => true,
-                'header_logo' => null,
-                'header_title' => 'TEKNIK INFORMATIKA',
-                'header_subtitle' => 'Fakultas Sains dan Teknologi',
                 'topbar_bg_color' => '#000000',
                 'topbar_text_color' => '#ffffff',
                 'topbar_social_bg_color' => '#ffffff',
@@ -200,7 +223,19 @@ class ThemeSetting extends Model
                 'footer_social_text_color' => '#000000',
                 'footer_description' => 'Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi. Berkomitmen menyelenggarakan pendidikan tinggi teknologi informasi yang unggul, bermartabat, bereputasi nasional dan internasional, serta berjiwa technopreneur berbasis Imtaq.',
                 'footer_copyright' => '© ' . date('Y') . ' Program Studi Teknik Informatika — Fakultas Sains dan Teknologi. All rights reserved.',
-            ]);
+            ];
+
+            if ($hasLogo) {
+                $createData['header_logo'] = null;
+            }
+            if ($hasTitle) {
+                $createData['header_title'] = 'TEKNIK INFORMATIKA';
+            }
+            if ($hasSubtitle) {
+                $createData['header_subtitle'] = 'Fakultas Sains dan Teknologi';
+            }
+
+            $setting = static::create($createData);
         }
         return $setting;
     }
@@ -210,12 +245,13 @@ class ThemeSetting extends Model
      */
     public function getLogoUrlAttribute(): string
     {
-        if (!empty($this->header_logo)) {
-            if (\Illuminate\Support\Facades\Storage::disk('public')->exists($this->header_logo)) {
-                return asset('storage/' . $this->header_logo);
+        $logo = $this->attributes['header_logo'] ?? null;
+        if (!empty($logo)) {
+            if (Storage::disk('public')->exists($logo)) {
+                return asset('storage/' . $logo);
             }
-            if (file_exists(public_path('storage/' . $this->header_logo))) {
-                return asset('storage/' . $this->header_logo);
+            if (file_exists(public_path('storage/' . $logo))) {
+                return asset('storage/' . $logo);
             }
         }
         return asset('assets/img/logouis.png');
@@ -242,7 +278,8 @@ class ThemeSetting extends Model
      */
     public function hasCustomLogo(): bool
     {
-        return !empty($this->header_logo) && \Illuminate\Support\Facades\Storage::disk('public')->exists($this->header_logo);
+        $logo = $this->attributes['header_logo'] ?? null;
+        return !empty($logo) && Storage::disk('public')->exists($logo);
     }
 
     /**

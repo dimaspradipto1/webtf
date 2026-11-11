@@ -163,4 +163,37 @@ class ThemeSettingTest extends TestCase
         $this->assertEquals('TEKNIK INFORMATIKA', $setting->header_title);
         $this->assertEquals('Fakultas Sains dan Teknologi', $setting->header_subtitle);
     }
+
+    public function test_can_update_header_bg_color_to_custom_green(): void
+    {
+        $admin = User::first();
+        if (!$admin) {
+            $admin = User::factory()->create(['role' => 'admin']);
+        }
+
+        $payload = [
+            'header_bg_color' => '#5d866c',
+            'header_text_color' => '#ffffff',
+            'header_active_bg_color' => '#000000',
+            'header_active_text_color' => '#ffffff',
+            'header_login_bg_color' => '#000000',
+            'header_login_text_color' => '#ffffff',
+            'header_shadow_color' => '#5d866c',
+            'topbar_bg_color' => '#000000',
+            'topbar_text_color' => '#ffffff',
+        ];
+
+        $response = $this->actingAs($admin)->post(route('theme.update'), $payload);
+        $response->assertRedirect();
+
+        $setting = ThemeSetting::current();
+        $this->assertEquals('#5d866c', $setting->header_bg_color);
+
+        $homeResponse = $this->get(route('homepage'));
+        $homeResponse->assertStatus(200);
+        $homeResponse->assertSee('--hdr-bg: #5d866c;', false);
+
+        // Reset
+        $this->actingAs($admin)->post(route('theme.reset'));
+    }
 }
