@@ -60,14 +60,14 @@
                         {{-- Pekerjaan / Asal Kota (wajib) --}}
                         <div class="col-md-6">
                             <label for="pekerjaan" class="form-label fw-semibold">
-                                Pekerjaan / Asal Kota <span class="text-danger">*</span>
+                                Pekerjaan / Jabatan / Asal Instansi <span class="text-danger">*</span>
                             </label>
                             <input type="text"
                                    id="pekerjaan"
                                    name="pekerjaan"
                                    class="form-control @error('pekerjaan') is-invalid @enderror"
                                    value="{{ old('pekerjaan') }}"
-                                   placeholder="Contoh: Kontraktor, Bandung"
+                                   placeholder="Contoh: Software Engineer PT Telkom / Alumni 2022"
                                    required>
                             @error('pekerjaan')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -81,14 +81,38 @@
                             <label for="kategori" class="form-label fw-semibold">
                                 Kategori Profil <span class="text-danger">*</span>
                             </label>
+                            @php
+                                $defaultPresets = ['Alumni', 'Mahasiswa', 'Dosen / Pengajar', 'Mitra Industri', 'Orang Tua Mahasiswa'];
+                                $categoriesList = array_unique(array_filter(array_merge($defaultPresets, $existingCategories ?? [])));
+                                $selectedKat = old('kategori');
+                                $isCustomSelected = !empty($selectedKat) && !in_array($selectedKat, $categoriesList);
+                            @endphp
                             <select id="kategori" name="kategori" class="form-select @error('kategori') is-invalid @enderror" required>
-                                <option value="" disabled selected>-- Pilih Kategori --</option>
-                                <option value="kontraktor" {{ old('kategori') === 'kontraktor' ? 'selected' : '' }}>Kontraktor</option>
-                                <option value="arsitek" {{ old('kategori') === 'arsitek' ? 'selected' : '' }}>Arsitek</option>
-                                <option value="pemilik" {{ old('kategori') === 'pemilik' ? 'selected' : '' }}>Pemilik Rumah</option>
+                                <option value="" disabled {{ empty($selectedKat) ? 'selected' : '' }}>-- Pilih Kategori --</option>
+                                @foreach($categoriesList as $cat)
+                                    <option value="{{ $cat }}" {{ $selectedKat === $cat ? 'selected' : '' }}>{{ $cat }}</option>
+                                @endforeach
+                                <option value="__custom__" {{ ($selectedKat === '__custom__' || $isCustomSelected) ? 'selected' : '' }}>
+                                    ✏️ + Tambah Kategori Kustom (Ketik Sendiri)...
+                                </option>
                             </select>
+
+                            {{-- Input teks jika memilih kategori kustom --}}
+                            <div id="kategori_custom_group" class="mt-2" style="{{ ($selectedKat === '__custom__' || $isCustomSelected) ? 'display:block;' : 'display:none;' }}">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-primary"><i class="bi bi-pencil-fill"></i></span>
+                                    <input type="text"
+                                           id="kategori_custom"
+                                           name="kategori_custom"
+                                           class="form-control"
+                                           value="{{ old('kategori_custom', $isCustomSelected ? $selectedKat : '') }}"
+                                           placeholder="Tulis nama kategori baru (contoh: Praktisi AI, Asosiasi Profesi, dll)">
+                                </div>
+                                <div class="form-text small text-muted">Ketik nama kategori yang Anda inginkan jika tidak ada di pilihan daftar.</div>
+                            </div>
+
                             @error('kategori')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
 
@@ -153,3 +177,29 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const kategoriSelect = document.getElementById('kategori');
+    const customGroup = document.getElementById('kategori_custom_group');
+    const customInput = document.getElementById('kategori_custom');
+
+    function checkCustom() {
+        if (!kategoriSelect || !customGroup || !customInput) return;
+        if (kategoriSelect.value === '__custom__') {
+            customGroup.style.display = 'block';
+            customInput.setAttribute('required', 'required');
+            customInput.focus();
+        } else {
+            customGroup.style.display = 'none';
+            customInput.removeAttribute('required');
+        }
+    }
+
+    if (kategoriSelect) {
+        kategoriSelect.addEventListener('change', checkCustom);
+    }
+});
+</script>
+@endpush

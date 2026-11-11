@@ -13,11 +13,25 @@ class TestimonialRequest extends FormRequest
 
     protected function prepareForValidation()
     {
+        $kategori = $this->input('kategori');
+        if ($kategori === '__custom__' || empty($kategori)) {
+            if ($this->filled('kategori_custom')) {
+                $kategori = trim($this->input('kategori_custom'));
+            }
+        }
+
+        $mergeData = [];
+        if (!empty($kategori)) {
+            $mergeData['kategori'] = $kategori;
+        }
+
         // Hanya merge aktif untuk edit/create dari admin panel, bukan form publik
         if ($this->has('aktif') || $this->routeIs('testimonial.store') || $this->routeIs('testimonial.update')) {
-            $this->merge([
-                'aktif' => $this->has('aktif') ? true : false,
-            ]);
+            $mergeData['aktif'] = $this->has('aktif') ? true : false;
+        }
+
+        if (!empty($mergeData)) {
+            $this->merge($mergeData);
         }
     }
 
@@ -26,7 +40,7 @@ class TestimonialRequest extends FormRequest
         return [
             'nama' => ['required', 'string', 'max:255'],
             'pekerjaan' => ['required', 'string', 'max:255'],
-            'kategori' => ['required', 'in:kontraktor,arsitek,pemilik'],
+            'kategori' => ['required', 'string', 'max:100'],
             'bintang' => ['required', 'integer', 'min:1', 'max:5'],
             'pesan' => ['required', 'string', 'min:5'],
             'aktif' => ['nullable', 'boolean'],
@@ -38,8 +52,8 @@ class TestimonialRequest extends FormRequest
         return [
             'nama.required' => 'Nama lengkap wajib diisi.',
             'pekerjaan.required' => 'Pekerjaan & Kota asal wajib diisi.',
-            'kategori.required' => 'Pilih salah satu kategori profil Anda.',
-            'kategori.in' => 'Kategori tidak valid.',
+            'kategori.required' => 'Kategori profil wajib dipilih atau diisi.',
+            'kategori.max' => 'Kategori profil maksimal 100 karakter.',
             'bintang.required' => 'Rating bintang wajib dipilih.',
             'bintang.integer' => 'Rating bintang tidak valid.',
             'bintang.min' => 'Rating bintang minimal 1.',

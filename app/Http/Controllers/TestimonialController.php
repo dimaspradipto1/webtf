@@ -23,7 +23,14 @@ class TestimonialController extends Controller
      */
     public function create(): View
     {
-        return view('pages.testimonial.create');
+        $existingCategories = Testimonial::whereNotNull('kategori')
+            ->where('kategori', '!=', '')
+            ->distinct()
+            ->orderBy('kategori')
+            ->pluck('kategori')
+            ->toArray();
+
+        return view('pages.testimonial.create', compact('existingCategories'));
     }
 
     /**
@@ -50,7 +57,14 @@ class TestimonialController extends Controller
      */
     public function edit(Testimonial $testimonial): View
     {
-        return view('pages.testimonial.edit', compact('testimonial'));
+        $existingCategories = Testimonial::whereNotNull('kategori')
+            ->where('kategori', '!=', '')
+            ->distinct()
+            ->orderBy('kategori')
+            ->pluck('kategori')
+            ->toArray();
+
+        return view('pages.testimonial.edit', compact('testimonial', 'existingCategories'));
     }
 
     /**
