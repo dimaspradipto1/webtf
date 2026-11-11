@@ -47,11 +47,15 @@ class GalleryDataTable extends DataTable
                 return '<span title="'.e($clean).'">'.e(Str::limit($clean, 60)).'</span>';
             })
             ->addColumn('kategori', function ($gallery) {
-                if ($gallery->kategori === 'humas') {
+                $kat = $gallery->kategori ?? 'universitas';
+                if ($kat === 'humas') {
                     return '<span class="badge bg-success px-2 py-1"><i class="bi bi-megaphone-fill me-1"></i>Humas</span>';
                 }
+                if ($kat === 'universitas') {
+                    return '<span class="badge bg-primary px-2 py-1"><i class="bi bi-building me-1"></i>Universitas</span>';
+                }
 
-                return '<span class="badge bg-primary px-2 py-1"><i class="bi bi-building me-1"></i>Universitas</span>';
+                return '<span class="badge bg-info text-dark px-2 py-1"><i class="bi bi-tag-fill me-1"></i>'.e(ucwords(str_replace('-', ' ', $kat))).'</span>';
             })
             ->addColumn('action', function ($gallery) {
                 $btn = '<div class="d-flex justify-content-center align-items-center" style="gap:5px">';

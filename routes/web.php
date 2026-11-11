@@ -140,7 +140,16 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
         ->name('user.updatePassword');
 
     Route::resource('user', UserController::class);
-    Route::resource('gallery', GalleryController::class);
+
+    // Manajemen Galeri Foto & Dokumentasi (Slug-based URL admin-galeri dengan backward compatibility /gallery)
+    Route::resource('admin-galeri', GalleryController::class)
+        ->parameters(['admin-galeri' => 'gallery'])
+        ->names('gallery');
+    Route::get('gallery', fn () => redirect()->route('gallery.index'));
+    Route::get('gallery/create', fn () => redirect()->route('gallery.create'));
+    Route::get('gallery/{gallery}/edit', fn ($gallery) => redirect()->route('gallery.edit', $gallery));
+    Route::match(['post', 'put'], 'gallery/{gallery?}', [GalleryController::class, 'store']);
+
     Route::resource('profil', ProfilController::class);
     // Manajemen Master Kategori (Slug-based URL)
     Route::get('admin-kategori', [CategoryController::class, 'index'])->name('category.index');
