@@ -79,12 +79,18 @@
                     <div class="row g-3 mb-3">
                         {{-- Kategori (wajib) --}}
                         <div class="col-md-6">
-                            <label for="kategori" class="form-label fw-semibold">
-                                Kategori Profil <span class="text-danger">*</span>
-                            </label>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <label for="kategori" class="form-label fw-semibold mb-0">
+                                    Kategori Profil <span class="text-danger">*</span>
+                                </label>
+                                <a href="{{ route('category.index', ['type' => 'testimoni']) }}" target="_blank" class="small text-primary text-decoration-none">
+                                    <i class="bi bi-gear-fill me-1"></i>Kelola Kategori
+                                </a>
+                            </div>
                             @php
+                                $dbCategories = \App\Models\Category::getOptions('testimoni')->pluck('name')->toArray();
                                 $defaultPresets = ['Alumni', 'Mahasiswa', 'Dosen / Pengajar', 'Mitra Industri', 'Orang Tua Mahasiswa'];
-                                $categoriesList = array_unique(array_filter(array_merge($defaultPresets, $existingCategories ?? [], [$testimonial->kategori ?? ''])));
+                                $categoriesList = array_unique(array_filter(array_merge($defaultPresets, $dbCategories, $existingCategories ?? [], [$testimonial->kategori ?? ''])));
                                 $currentKat = old('kategori', $testimonial->kategori);
                                 $isCustomSelected = !empty($currentKat) && !in_array($currentKat, $categoriesList);
                             @endphp

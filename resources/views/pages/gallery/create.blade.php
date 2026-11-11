@@ -59,19 +59,27 @@
 
                     {{-- Kategori Galeri --}}
                     <div class="mb-3">
-                        <label for="kategori" class="form-label fw-semibold">
-                            Kategori Galeri <span class="text-danger">*</span>
-                        </label>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label for="kategori" class="form-label fw-semibold mb-0">
+                                Kategori Galeri <span class="text-danger">*</span>
+                            </label>
+                            <a href="{{ route('category.index', ['type' => 'galeri']) }}" target="_blank" class="small text-primary text-decoration-none">
+                                <i class="bi bi-gear-fill me-1"></i>Kelola Kategori
+                            </a>
+                        </div>
+                        @php
+                            $selectedKat = old('kategori', 'universitas');
+                            $galleryCategories = \App\Models\Category::getOptions('galeri');
+                        @endphp
                         <select id="kategori"
                                 name="kategori"
                                 class="form-select @error('kategori') is-invalid @enderror"
                                 required>
-                            <option value="universitas" {{ old('kategori', 'universitas') === 'universitas' ? 'selected' : '' }}>
-                                Universitas (Galeri & Dokumentasi Universitas)
-                            </option>
-                            <option value="humas" {{ old('kategori') === 'humas' ? 'selected' : '' }}>
-                                Humas (Galeri & Kegiatan Humas)
-                            </option>
+                            @foreach($galleryCategories as $item)
+                                <option value="{{ $item->slug ?? strtolower($item->name) }}" {{ $selectedKat === ($item->slug ?? strtolower($item->name)) || $selectedKat === $item->name ? 'selected' : '' }}>
+                                    {{ $item->name }}
+                                </option>
+                            @endforeach
                         </select>
                         <div class="form-text">Foto dengan kategori <strong>Humas</strong> akan otomatis tampil pada halaman Home Humas.</div>
                         @error('kategori')

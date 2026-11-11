@@ -296,6 +296,14 @@
           @endif
 
           @if($isAdmin)
+          <!-- Kategori -->
+          <li class="nav-item">
+              <a class="nav-link {{ Route::is('category.*') ? '' : 'collapsed' }}" href="{{ route('category.index') }}">
+                  <i class="bi bi-tags"></i>
+                  <span>Kategori</span>
+              </a>
+          </li>
+
           <!-- 8. Kontak -->
           <li class="nav-item">
               <a class="nav-link {{ Route::is('contact.*') ? '' : 'collapsed' }}" href="{{ route('contact.index') }}">

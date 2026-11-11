@@ -9,6 +9,7 @@ use App\Http\Controllers\BackupController;
 use App\Http\Controllers\BahasaSettingController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BeasiswaController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DesainGrafisController;
@@ -141,6 +142,13 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('gallery', GalleryController::class);
     Route::resource('profil', ProfilController::class);
+    // Manajemen Master Kategori (Slug-based URL)
+    Route::get('admin-kategori', [CategoryController::class, 'index'])->name('category.index');
+    Route::post('admin-kategori', [CategoryController::class, 'store'])->name('category.store');
+    Route::put('admin-kategori/{category}', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('admin-kategori/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
+    Route::post('admin-kategori/{category}/toggle', [CategoryController::class, 'toggle'])->name('category.toggle');
+
     // Pengaturan Kontak & Lokasi Admin (Singleton dengan slug-based URL tanpa ID di URL)
     Route::get('admin-kontak', [ContactController::class, 'index'])->name('contact.index');
     Route::match(['post', 'put'], 'admin-kontak', [ContactController::class, 'update'])->name('contact.update');

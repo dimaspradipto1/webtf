@@ -53,14 +53,22 @@
 
                     <!-- Kategori -->
                     <div class="mb-3">
-                        <label for="kategori" class="form-label fw-semibold">Kategori Dokumen <span class="text-danger">*</span></label>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <label for="kategori" class="form-label fw-semibold mb-0">Kategori Dokumen <span class="text-danger">*</span></label>
+                            <a href="{{ route('category.index', ['type' => 'unduhan']) }}" target="_blank" class="small text-primary text-decoration-none">
+                                <i class="bi bi-gear-fill me-1"></i>Kelola Kategori
+                            </a>
+                        </div>
+                        @php
+                            $selectedKat = old('kategori', 'Dokumen');
+                            $unduhanCategories = \App\Models\Category::getOptions('unduhan');
+                        @endphp
                         <select id="kategori" name="kategori" class="form-select @error('kategori') is-invalid @enderror" required>
-                            <option value="Dokumen" {{ old('kategori', 'Dokumen') == 'Dokumen' ? 'selected' : '' }}>📄 Dokumen Resmi</option>
-                            <option value="Panduan" {{ old('kategori') == 'Panduan' ? 'selected' : '' }}>📘 Panduan Akademik & Praktikum</option>
-                            <option value="Pedoman" {{ old('kategori') == 'Pedoman' ? 'selected' : '' }}>📕 Buku Pedoman</option>
-                            <option value="SOP" {{ old('kategori') == 'SOP' ? 'selected' : '' }}>📋 Standar Operasional Prosedur (SOP)</option>
-                            <option value="Template" {{ old('kategori') == 'Template' ? 'selected' : '' }}>📑 Template & Formulir</option>
-                            <option value="Lainnya" {{ old('kategori') == 'Lainnya' ? 'selected' : '' }}>📁 Dokumen Lainnya</option>
+                            @foreach($unduhanCategories as $item)
+                                <option value="{{ $item->name }}" {{ $selectedKat == $item->name ? 'selected' : '' }}>
+                                    {{ $item->name }}
+                                </option>
+                            @endforeach
                         </select>
                         @error('kategori')
                             <div class="invalid-feedback">{{ $message }}</div>

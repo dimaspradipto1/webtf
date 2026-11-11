@@ -208,7 +208,8 @@ class NewsExcelService
             throw new \Exception('File Excel kosong atau tidak memiliki data.');
         }
 
-        $validCategories = [
+        $dbCategories = \App\Models\Category::getOptions('berita')->pluck('name')->toArray();
+        $validCategories = array_unique(array_merge([
             'Berita Universitas',
             'Berita Humas',
             'Akademik & Kemahasiswaan',
@@ -219,7 +220,7 @@ class NewsExcelService
             'Pengabdian Masyarakat',
             'Kerjasama Industri',
             'Pengumuman & Agenda',
-        ];
+        ], $dbCategories));
 
         return DB::transaction(function () use ($rows, $userId, $validCategories) {
             $importedCount = 0;
