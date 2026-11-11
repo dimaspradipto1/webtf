@@ -15,23 +15,44 @@
     <div class="row justify-content-center">
       <div class="col-lg-9" data-aos="fade-up">
         <div class="accordion" id="homeFaqAccordion">
-          @if(isset($faqs) && $faqs->count() > 0)
-            @foreach($faqs->take(5) as $index => $faq)
-              <div class="accordion-item shadow-sm">
-                <h2 class="accordion-header" id="headingH{{ $faq->id ?? $index }}">
-                  <button class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseH{{ $faq->id ?? $index }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
-                    <i class="bi bi-question-circle-fill me-2" style="color: var(--uis-purple);"></i>
-                    {{ $faq->question ?? $faq->pertanyaan }}
-                  </button>
-                </h2>
-                <div id="collapseH{{ $faq->id ?? $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" data-bs-parent="#homeFaqAccordion">
-                  <div class="accordion-body">
-                    {{ $faq->answer ?? $faq->jawaban }}
-                  </div>
+          @php
+            $defaultFaqs = collect([
+              (object)[
+                'question' => 'Apa saja keunggulan Program Studi S1 Teknik Informatika di UIS?',
+                'answer' => 'Program Studi S1 Teknik Informatika UIS memiliki kurikulum berbasis industri terkini (Software Engineering, Artificial Intelligence, Cyber Security, Cloud Computing), dosen bergelar S3 dan praktisi profesional, laboratorium modern, serta kerjasama penempatan magang industri di kawasan industri Batam dan internasional.'
+              ],
+              (object)[
+                'question' => 'Bagaimana prospek kerja dan peluang karir lulusan Teknik Informatika?',
+                'answer' => 'Lulusan memiliki prospek karir yang sangat luas dan dibutuhkan di semua sektor, antara lain sebagai Software Engineer, Fullstack Web/Mobile Developer, Data Scientist, Cybersecurity Specialist, Cloud & DevOps Engineer, Network Administrator, IT Consultant, hingga Digital Technopreneur.'
+              ],
+              (object)[
+                'question' => 'Apakah tersedia program beasiswa untuk mahasiswa baru?',
+                'answer' => 'Ya, Universitas Ibnu Sina menyediakan berbagai jalur beasiswa, seperti Beasiswa KIP-Kuliah Kemendikbudristek, Beasiswa Prestasi Akademik & Non-Akademik, Beasiswa Hafiz Al-Qur\'an, Beasiswa Mitra Industri, dan potongan biaya pendaftaran gelombang awal.'
+              ],
+              (object)[
+                'question' => 'Bagaimana prosedur pendaftaran mahasiswa baru (PMB)?',
+                'answer' => 'Pendaftaran dapat dilakukan secara online melalui portal PMB resmi atau langsung datang ke Sekretariat PMB Kampus UIS. Calon mahasiswa cukup mengisi formulir pendaftaran, melengkapi berkas ijazah/rapor, dan memilih jalur seleksi yang diinginkan.'
+              ]
+            ]);
+
+            $displayFaqs = (isset($faqs) && $faqs->count() > 0) ? $faqs->take(5) : $defaultFaqs;
+          @endphp
+
+          @foreach($displayFaqs as $index => $faq)
+            <div class="accordion-item shadow-sm">
+              <h2 class="accordion-header" id="headingH{{ $faq->id ?? $index }}">
+                <button class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseH{{ $faq->id ?? $index }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}">
+                  <i class="bi bi-question-circle-fill me-2" style="color: var(--uis-purple);"></i>
+                  {{ $faq->question ?? $faq->pertanyaan }}
+                </button>
+              </h2>
+              <div id="collapseH{{ $faq->id ?? $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" data-bs-parent="#homeFaqAccordion">
+                <div class="accordion-body">
+                  {{ $faq->answer ?? $faq->jawaban }}
                 </div>
               </div>
-            @endforeach
-          @endif
+            </div>
+          @endforeach
         </div>
 
         <div class="text-center mt-4">

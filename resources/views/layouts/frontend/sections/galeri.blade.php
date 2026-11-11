@@ -13,36 +13,60 @@
       </a>
     </div>
 
-    @if(isset($galleries) && $galleries->count() > 0)
-      <div class="row g-4">
-        @foreach($galleries->take(6) as $index => $gal)
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
-            <a href="{{ route('homepage.galeri.detail', $gal->slug ?? $gal->id) }}" class="gallery-card-item d-block text-decoration-none">
-              <div class="gallery-img-container">
-                @if(!empty($gal->url))
-                  <img src="{{ asset('storage/' . $gal->url) }}" alt="{{ $gal->judul }}" class="gallery-card-img" loading="lazy">
-                @else
-                  <div class="gallery-fallback-box">
-                    <i class="bi bi-camera-fill fs-1 text-white-50"></i>
-                  </div>
-                @endif
-                <div class="gallery-card-overlay">
-                  <span class="gallery-tag"><i class="bi bi-tag-fill me-1"></i>Dokumentasi</span>
-                  <h5 class="gallery-card-title">{{ $gal->judul }}</h5>
-                  @if(!empty($gal->deskripsi))
-                    <p class="gallery-card-desc mb-0">{!! Str::limit(strip_tags($gal->deskripsi), 90) !!}</p>
-                  @endif
+    @php
+      $defaultGalleries = collect([
+        (object)[
+          'judul' => 'Praktikum Komputasi Awan & Jaringan di Lab Cisco UIS',
+          'deskripsi' => 'Aktivitas mahasiswa dalam implementasi routing, switching, dan simulasi keamanan jaringan.',
+          'url' => null,
+          'slug' => null,
+          'id' => 1
+        ],
+        (object)[
+          'judul' => 'Workshop Technopreneurship & Pembuatan Startup Digital',
+          'deskripsi' => 'Pelatihan intensif pengembangan MVP aplikasi mobile bersama praktisi industri teknologi.',
+          'url' => null,
+          'slug' => null,
+          'id' => 2
+        ],
+        (object)[
+          'judul' => 'Kunjungan Industri ke Kawasan Manufaktur & Data Center Batam',
+          'deskripsi' => 'Pengenalan operasional infrastruktur server skala enterprise dan lini produksi otomatis.',
+          'url' => null,
+          'slug' => null,
+          'id' => 3
+        ]
+      ]);
+
+      $displayGalleries = (isset($galleries) && $galleries->count() > 0) ? $galleries->take(6) : $defaultGalleries;
+    @endphp
+
+    <div class="row g-4">
+      @foreach($displayGalleries as $index => $gal)
+        @php
+          $galUrl = !empty($gal->slug) ? route('homepage.galeri.detail', $gal->slug) : route('homepage.galeri.universitas');
+        @endphp
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
+          <a href="{{ $galUrl }}" class="gallery-card-item d-block text-decoration-none">
+            <div class="gallery-img-container">
+              @if(!empty($gal->url))
+                <img src="{{ asset('storage/' . $gal->url) }}" alt="{{ $gal->judul }}" class="gallery-card-img" loading="lazy">
+              @else
+                <div class="gallery-fallback-box">
+                  <i class="bi bi-camera-fill fs-1 text-white-50"></i>
                 </div>
+              @endif
+              <div class="gallery-card-overlay">
+                <span class="gallery-tag"><i class="bi bi-tag-fill me-1"></i>Dokumentasi</span>
+                <h5 class="gallery-card-title">{{ $gal->judul }}</h5>
+                @if(!empty($gal->deskripsi))
+                  <p class="gallery-card-desc mb-0">{!! Str::limit(strip_tags($gal->deskripsi), 90) !!}</p>
+                @endif
               </div>
-            </a>
-          </div>
-        @endforeach
-      </div>
-    @else
-      <div class="text-center py-5 bg-white rounded-4 border">
-        <i class="bi bi-images fs-1 text-muted d-block mb-2"></i>
-        <p class="text-muted mb-0">Belum ada dokumentasi foto yang diunggah.</p>
-      </div>
-    @endif
+            </div>
+          </a>
+        </div>
+      @endforeach
+    </div>
   </div>
 </section>
