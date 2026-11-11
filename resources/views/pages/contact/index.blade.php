@@ -13,9 +13,22 @@
 
 @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="bi bi-check-circle me-1"></i>
+        <i class="bi bi-check-circle-fill me-2"></i>
         {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <strong>Periksa kembali data Anda:</strong>
+        <ul class="mb-0 mt-1 ps-3">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 @endif
 
@@ -26,32 +39,150 @@
     'defaultSubjudul' => 'Informasi alamat kampus, kontak resmi, surel, dan saluran konsultasi Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi.'
 ])
 
-<div class="card shadow-sm">
-    <div class="card-header d-flex align-items-center justify-content-between py-3">
-        <h5 class="mb-0 fw-semibold">
-            <i class="bi bi-telephone-fill me-2 text-primary"></i>Daftar Kontak
-        </h5>
-        @if(!\App\Models\Contact::exists())
-        <a href="{{ route('contact.create') }}" class="btn btn-primary btn-sm">
-            <i class="bi bi-plus-lg me-1"></i> Tambah Kontak
-        </a>
-        @endif
-    </div>
-    <div class="card-body pt-3">
-        <div class="table-responsive">
-            {{ $dataTable->table([
-                'class' => 'table table-striped table-bordered align-middle',
-                'style' => 'width:100%',
-            ]) }}
+<div class="card shadow-sm border-0" style="border-radius: 14px;">
+    <div class="card-header bg-white py-3 border-0">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <div>
+                <h5 class="mb-1 fw-bold text-dark d-flex align-items-center gap-2">
+                    <i class="bi bi-telephone-fill text-primary"></i> Pengaturan Informasi Kontak & Lokasi
+                </h5>
+                <p class="text-muted small mb-0">Kelola nomor kontak resmi, email prodi, alamat kampus, serta embed peta Google Maps yang tampil di website</p>
+            </div>
+            <a href="{{ route('homepage.kontak') }}" target="_blank" class="btn btn-outline-primary btn-sm d-flex align-items-center gap-1">
+                <i class="bi bi-box-arrow-up-right"></i> Lihat di Web
+            </a>
         </div>
+    </div>
+    <div class="card-body pt-2">
+        <form action="{{ route('contact.update', $contact->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            <div class="row g-3">
+                {{-- Nomor WhatsApp --}}
+                <div class="col-md-6">
+                    <label for="no_wa" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-whatsapp text-success me-1"></i> Nomor WhatsApp
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light text-muted"><i class="bi bi-telephone"></i></span>
+                        <input type="text"
+                               id="no_wa"
+                               name="no_wa"
+                               class="form-control @error('no_wa') is-invalid @enderror"
+                               value="{{ old('no_wa', $contact->no_wa) }}"
+                               placeholder="Contoh: 081234567890 atau 6281234567890">
+                    </div>
+                    <div class="form-text small text-muted">Nomor ini terhubung ke tombol chat WhatsApp dan kontak cepat di seluruh website.</div>
+                    @error('no_wa')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- Email --}}
+                <div class="col-md-6">
+                    <label for="email" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-envelope-at text-danger me-1"></i> Alamat Email Resmi
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light text-muted"><i class="bi bi-envelope"></i></span>
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               class="form-control @error('email') is-invalid @enderror"
+                               value="{{ old('email', $contact->email) }}"
+                               placeholder="Contoh: informatika@uis.ac.id">
+                    </div>
+                    <div class="form-text small text-muted">Surel resmi untuk komunikasi sivitas akademika & mitra universitas.</div>
+                    @error('email')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- Alamat Lengkap --}}
+                <div class="col-12">
+                    <label for="alamat" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-geo-alt text-primary me-1"></i> Alamat Lengkap Kampus
+                    </label>
+                    <textarea id="alamat"
+                              name="alamat"
+                              class="form-control @error('alamat') is-invalid @enderror"
+                              rows="3"
+                              placeholder="Tuliskan nama gedung, fakultas, jalan, kelurahan, kecamatan, dan kode pos...">{{ old('alamat', $contact->alamat) }}</textarea>
+                    <div class="form-text small text-muted">Alamat fisik yang ditampilkan pada kartu kontak dan footer website.</div>
+                    @error('alamat')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- Koordinat Latitude & Longitude --}}
+                <div class="col-md-6">
+                    <label for="latitude" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-compass me-1"></i> Koordinat Latitude
+                    </label>
+                    <input type="text"
+                           id="latitude"
+                           name="latitude"
+                           class="form-control @error('latitude') is-invalid @enderror"
+                           value="{{ old('latitude', $contact->latitude) }}"
+                           placeholder="Contoh: 1.1444 atau -6.2088">
+                    @error('latitude')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="longitude" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-compass me-1"></i> Koordinat Longitude
+                    </label>
+                    <input type="text"
+                           id="longitude"
+                           name="longitude"
+                           class="form-control @error('longitude') is-invalid @enderror"
+                           value="{{ old('longitude', $contact->longitude) }}"
+                           placeholder="Contoh: 104.0156 atau 106.8456">
+                    @error('longitude')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- Map Embed (Iframe Code) --}}
+                <div class="col-12">
+                    <label for="map" class="form-label fw-semibold text-dark">
+                        <i class="bi bi-map text-warning me-1"></i> Kode Embed Google Maps (Iframe)
+                    </label>
+                    <textarea id="map"
+                              name="map"
+                              class="form-control font-monospace @error('map') is-invalid @enderror"
+                              rows="4"
+                              placeholder="Contoh: <iframe src=&quot;https://www.google.com/maps/embed?...&quot; width=&quot;600&quot; height=&quot;450&quot; style=&quot;border:0;&quot; allowfullscreen=&quot;&quot; loading=&quot;lazy&quot;></iframe>">{{ old('map', $contact->map) }}</textarea>
+                    <div class="form-text small text-muted">
+                        Buka Google Maps &rarr; cari lokasi &rarr; klik <strong>Bagikan</strong> &rarr; pilih tab <strong>Sematkan peta</strong> &rarr; klik <strong>Salin HTML</strong> lalu tempel di sini.
+                    </div>
+                    @error('map')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+
+                    @if(!empty($contact->map))
+                        <div class="mt-3 p-3 bg-light rounded-3 border">
+                            <label class="form-label fw-semibold text-dark small mb-2 d-flex align-items-center gap-1">
+                                <i class="bi bi-eye"></i> Pratinjau Peta Saat Ini:
+                            </label>
+                            <div class="ratio ratio-21x9 rounded overflow-hidden shadow-sm" style="max-height: 280px;">
+                                {!! $contact->map !!}
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+            {{-- Tombol Aksi --}}
+            <div class="d-flex align-items-center gap-2 mt-4 pt-3 border-top">
+                <button type="submit" class="btn btn-primary px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
+                    <i class="bi bi-save"></i> Simpan Perubahan Kontak
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 @endsection
-
-@push('scripts')
-    @if(app()->environment('production'))
-        {!! str_replace('http:', 'https:', $dataTable->scripts()) !!}
-    @else
-        {!! $dataTable->scripts() !!}
-    @endif
-@endpush
