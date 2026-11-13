@@ -19,6 +19,8 @@ class ThemeSetting extends Model
         'header_active_text_color',
         'header_login_bg_color',
         'header_login_text_color',
+        'header_lang_bg_color',
+        'header_lang_text_color',
         'header_shadow_color',
         'header_is_sticky',
         'header_logo',
@@ -175,18 +177,30 @@ class ThemeSetting extends Model
     {
         // Pastikan kolom baru otomatis dibuat jika database belum menjalankan migrasi
         try {
-            if (Schema::hasTable('theme_settings') && !Schema::hasColumn('theme_settings', 'header_logo')) {
-                Schema::table('theme_settings', function (Blueprint $table) {
-                    if (!Schema::hasColumn('theme_settings', 'header_logo')) {
-                        $table->string('header_logo')->nullable()->after('header_is_sticky');
-                    }
-                    if (!Schema::hasColumn('theme_settings', 'header_title')) {
-                        $table->string('header_title')->nullable()->default('TEKNIK INFORMATIKA')->after('header_logo');
-                    }
-                    if (!Schema::hasColumn('theme_settings', 'header_subtitle')) {
-                        $table->string('header_subtitle')->nullable()->default('Fakultas Sains dan Teknologi')->after('header_title');
-                    }
-                });
+            if (Schema::hasTable('theme_settings')) {
+                if (!Schema::hasColumn('theme_settings', 'header_logo')) {
+                    Schema::table('theme_settings', function (Blueprint $table) {
+                        if (!Schema::hasColumn('theme_settings', 'header_logo')) {
+                            $table->string('header_logo')->nullable()->after('header_is_sticky');
+                        }
+                        if (!Schema::hasColumn('theme_settings', 'header_title')) {
+                            $table->string('header_title')->nullable()->default('TEKNIK INFORMATIKA')->after('header_logo');
+                        }
+                        if (!Schema::hasColumn('theme_settings', 'header_subtitle')) {
+                            $table->string('header_subtitle')->nullable()->default('Fakultas Sains dan Teknologi')->after('header_title');
+                        }
+                    });
+                }
+                if (!Schema::hasColumn('theme_settings', 'header_lang_bg_color')) {
+                    Schema::table('theme_settings', function (Blueprint $table) {
+                        if (!Schema::hasColumn('theme_settings', 'header_lang_bg_color')) {
+                            $table->string('header_lang_bg_color')->nullable()->default('#000000')->after('header_login_text_color');
+                        }
+                        if (!Schema::hasColumn('theme_settings', 'header_lang_text_color')) {
+                            $table->string('header_lang_text_color')->nullable()->default('#ffffff')->after('header_lang_bg_color');
+                        }
+                    });
+                }
             }
         } catch (\Throwable $e) {
             // Lanjutkan jika koneksi DB tidak memiliki izin DDL
@@ -197,6 +211,8 @@ class ThemeSetting extends Model
             $hasLogo = Schema::hasColumn('theme_settings', 'header_logo');
             $hasTitle = Schema::hasColumn('theme_settings', 'header_title');
             $hasSubtitle = Schema::hasColumn('theme_settings', 'header_subtitle');
+            $hasLangBg = Schema::hasColumn('theme_settings', 'header_lang_bg_color');
+            $hasLangTxt = Schema::hasColumn('theme_settings', 'header_lang_text_color');
 
             $createData = [
                 'header_bg_color' => '#f9dc4b',
@@ -234,10 +250,26 @@ class ThemeSetting extends Model
             if ($hasSubtitle) {
                 $createData['header_subtitle'] = 'Fakultas Sains dan Teknologi';
             }
+            if ($hasLangBg) {
+                $createData['header_lang_bg_color'] = '#000000';
+            }
+            if ($hasLangTxt) {
+                $createData['header_lang_text_color'] = '#ffffff';
+            }
 
             $setting = static::create($createData);
         }
         return $setting;
+    }
+
+    public function getHeaderLangBgColorAttribute($value): string
+    {
+        return !empty($value) ? $value : '#000000';
+    }
+
+    public function getHeaderLangTextColorAttribute($value): string
+    {
+        return !empty($value) ? $value : '#ffffff';
     }
 
     /**

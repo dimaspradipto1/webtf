@@ -75,6 +75,8 @@
     $thHdrActTxt = $themeSetting?->header_active_text_color ?: '#ffffff';
     $thHdrLogBg = $themeSetting?->header_login_bg_color ?: '#000000';
     $thHdrLogTxt = $themeSetting?->header_login_text_color ?: '#ffffff';
+    $thHdrLangBg = $themeSetting?->header_lang_bg_color ?: '#000000';
+    $thHdrLangTxt = $themeSetting?->header_lang_text_color ?: '#ffffff';
     $thHdrShadow = $themeSetting?->header_shadow_color ?: $thHdrBg;
     $thHdrSticky = $themeSetting ? ($themeSetting->header_is_sticky ?? true) : true;
     $thTopBg = $themeSetting?->topbar_bg_color ?: '#000000';
@@ -105,6 +107,8 @@
       --hdr-act-text: {{ $thHdrActTxt }};
       --hdr-log-bg: {{ $thHdrLogBg }};
       --hdr-log-text: {{ $thHdrLogTxt }};
+      --hdr-lang-bg: {{ $thHdrLangBg }};
+      --hdr-lang-text: {{ $thHdrLangTxt }};
       --hdr-shadow: {{ $thHdrShadow }};
       --topbar-custom-bg: {{ $thTopBg }};
       --topbar-custom-text: {{ $thTopTxt }};
@@ -170,6 +174,27 @@
       background: var(--hdr-log-bg) !important;
       color: var(--hdr-log-text) !important;
       opacity: 0.88 !important;
+    }
+    .uis-lang-toggle {
+      background: var(--hdr-lang-bg) !important;
+      color: var(--hdr-lang-text) !important;
+    }
+    .uis-lang-toggle i,
+    .uis-lang-toggle .uis-lang-name {
+      color: var(--hdr-lang-text) !important;
+    }
+    .uis-lang-toggle:hover,
+    .uis-lang-toggle:focus,
+    .show > .uis-lang-toggle {
+      background: var(--hdr-lang-bg) !important;
+      color: var(--hdr-lang-text) !important;
+      opacity: 0.88 !important;
+    }
+    .uis-lang-toggle:hover i,
+    .show > .uis-lang-toggle i,
+    .uis-lang-toggle:hover .uis-lang-name,
+    .show > .uis-lang-toggle .uis-lang-name {
+      color: var(--hdr-lang-text) !important;
     }
     /* Hero Header Dinamis mengikuti tema */
     .akademik-hero {

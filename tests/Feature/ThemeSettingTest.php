@@ -26,6 +26,8 @@ class ThemeSettingTest extends TestCase
         $response = $this->actingAs($admin)->get(route('theme.index'));
         $response->assertStatus(200);
         $response->assertSee('Warna Header');
+        $response->assertSee('Bg Tombol Bahasa');
+        $response->assertSee('Teks Tombol Bahasa');
         $response->assertSeeInOrder([
             'Topbar & Marquee',
             'Warna Header, Footer & Layout',
@@ -47,6 +49,8 @@ class ThemeSettingTest extends TestCase
             'header_active_text_color' => '#000000',
             'header_login_bg_color' => '#f9dc4b',
             'header_login_text_color' => '#000000',
+            'header_lang_bg_color' => '#1e293b',
+            'header_lang_text_color' => '#f8fafc',
             'header_shadow_color' => '#000000',
             'header_is_sticky' => '1',
             'topbar_bg_color' => '#111827',
@@ -76,6 +80,8 @@ class ThemeSettingTest extends TestCase
         $setting = ThemeSetting::current();
         $this->assertEquals('#000000', $setting->header_bg_color);
         $this->assertEquals('#f9dc4b', $setting->header_active_bg_color);
+        $this->assertEquals('#1e293b', $setting->header_lang_bg_color);
+        $this->assertEquals('#f8fafc', $setting->header_lang_text_color);
         $this->assertEquals('#f9dc4b', $setting->topbar_social_bg_color);
         $this->assertEquals('#000000', $setting->topbar_social_text_color);
         $this->assertEquals('#020617', $setting->footer_bg_color);

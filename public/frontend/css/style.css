@@ -1066,7 +1066,7 @@ a {
 }
 
 .uis-lang-toggle {
-    background: #000000 !important;
+    background: var(--hdr-lang-bg, #000000) !important;
 
     border: none !important;
 
@@ -1080,7 +1080,7 @@ a {
 
     font-size: 13px !important;
 
-    color: #ffffff !important;
+    color: var(--hdr-lang-text, #ffffff) !important;
 
     display: inline-flex !important;
 
@@ -1094,13 +1094,13 @@ a {
 .uis-lang-toggle:hover,
 .uis-lang-toggle:focus,
 .show > .uis-lang-toggle {
-    background: #ffffff !important;
+    background: var(--hdr-lang-bg, #000000) !important;
 
-    border-color: #000000 !important;
+    border-color: var(--hdr-lang-bg, #000000) !important;
 
-    color: #000000 !important;
+    color: var(--hdr-lang-text, #ffffff) !important;
 
-    opacity: 1 !important;
+    opacity: 0.88 !important;
 
     transform: translateY(-1px);
 
@@ -1109,7 +1109,7 @@ a {
 
 .uis-lang-toggle:hover i,
 .show > .uis-lang-toggle i {
-    color: #000000 !important;
+    color: var(--hdr-lang-text, #ffffff) !important;
 }
 
 .uis-flag-img-main {

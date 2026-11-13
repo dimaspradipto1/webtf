@@ -38,6 +38,8 @@ class ThemeSettingController extends Controller
             'header_active_text_color' => 'required|string|max:30',
             'header_login_bg_color' => 'required|string|max:30',
             'header_login_text_color' => 'required|string|max:30',
+            'header_lang_bg_color' => 'nullable|string|max:30',
+            'header_lang_text_color' => 'nullable|string|max:30',
             'header_shadow_color' => 'nullable|string|max:30',
             'header_is_sticky' => 'nullable',
             'topbar_bg_color' => 'required|string|max:30',
@@ -63,6 +65,8 @@ class ThemeSettingController extends Controller
         $hasLogoCol = Schema::hasColumn('theme_settings', 'header_logo');
         $hasTitleCol = Schema::hasColumn('theme_settings', 'header_title');
         $hasSubtitleCol = Schema::hasColumn('theme_settings', 'header_subtitle');
+        $hasLangBgCol = Schema::hasColumn('theme_settings', 'header_lang_bg_color');
+        $hasLangTxtCol = Schema::hasColumn('theme_settings', 'header_lang_text_color');
 
         // Kelola file logo header jika diunggah atau dihapus
         $logoPath = $hasLogoCol ? $setting->getRawOriginal('header_logo') : null;
@@ -154,6 +158,12 @@ class ThemeSettingController extends Controller
         if ($hasSubtitleCol) {
             $updateData['header_subtitle'] = $validated['header_subtitle'] ?? 'Fakultas Sains dan Teknologi';
         }
+        if ($hasLangBgCol) {
+            $updateData['header_lang_bg_color'] = !empty($validated['header_lang_bg_color']) ? $validated['header_lang_bg_color'] : '#000000';
+        }
+        if ($hasLangTxtCol) {
+            $updateData['header_lang_text_color'] = !empty($validated['header_lang_text_color']) ? $validated['header_lang_text_color'] : '#ffffff';
+        }
 
         $setting->update($updateData);
 
@@ -173,7 +183,7 @@ class ThemeSettingController extends Controller
         if ($logoPath && Storage::disk('public')->exists($logoPath)) {
             Storage::disk('public')->delete($logoPath);
         }
-        $setting->update([
+        $resetData = [
             'header_logo' => null,
             'header_title' => 'TEKNIK INFORMATIKA',
             'header_subtitle' => 'Fakultas Sains dan Teknologi',
@@ -201,7 +211,14 @@ class ThemeSettingController extends Controller
             'footer_social_text_color' => '#000000',
             'footer_description' => 'Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi. Berkomitmen menyelenggarakan pendidikan tinggi teknologi informasi yang unggul, bermartabat, bereputasi nasional dan internasional, serta berjiwa technopreneur berbasis Imtaq.',
             'footer_copyright' => '© ' . date('Y') . ' Program Studi Teknik Informatika — Fakultas Sains dan Teknologi. All rights reserved.',
-        ]);
+        ];
+        if (Schema::hasColumn('theme_settings', 'header_lang_bg_color')) {
+            $resetData['header_lang_bg_color'] = '#000000';
+        }
+        if (Schema::hasColumn('theme_settings', 'header_lang_text_color')) {
+            $resetData['header_lang_text_color'] = '#ffffff';
+        }
+        $setting->update($resetData);
 
         AppServiceProvider::recordContentUpdate();
 

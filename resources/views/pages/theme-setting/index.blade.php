@@ -187,6 +187,19 @@
     transition: all 0.2s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
+  .mockup-btn-lang {
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+  }
 
   /* ── Footer Mockup ── */
   .mockup-footer {
@@ -553,7 +566,15 @@
               Portal <i class="bi bi-chevron-down" style="font-size: 9px;"></i>
             </span>
             <span class="mockup-link" id="mockupLinkNormal6" style="color: {{ $setting->header_text_color }};">
-              PMB
+              Kontak
+            </span>
+            <span class="mockup-link" id="mockupLinkNormal7" style="color: {{ $setting->header_text_color }};">
+              PMB <i class="bi bi-chevron-down" style="font-size: 9px;"></i>
+            </span>
+            <span class="mockup-btn-lang" id="mockupBtnLang" style="background-color: {{ $setting->header_lang_bg_color }}; color: {{ $setting->header_lang_text_color }};">
+              <img src="{{ asset('assets/img/flags/id.png') }}" alt="ID" style="width: 18px; height: 12px; object-fit: cover; border-radius: 2px;">
+              <span>Bahasa Indonesia</span>
+              <i class="bi bi-chevron-down" style="font-size: 9px;"></i>
             </span>
           </div>
 
@@ -812,7 +833,26 @@
                 </div>
               </div>
 
-              <!-- 7. Sticky Header Toggle -->
+              <div class="row g-2 mb-3">
+                <!-- 7. Background Tombol Bahasa -->
+                <div class="col-6">
+                  <label class="form-label fw-semibold small text-dark mb-1">Bg Tombol Bahasa</label>
+                  <div class="color-picker-box">
+                    <input type="color" class="color-input-native" id="input_header_lang_bg_color" name="header_lang_bg_color" value="{{ old('header_lang_bg_color', $setting->header_lang_bg_color) }}" oninput="syncColor(this, 'text_header_lang_bg_color')">
+                    <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_header_lang_bg_color" value="{{ old('header_lang_bg_color', $setting->header_lang_bg_color) }}" oninput="syncColorFromText(this, 'input_header_lang_bg_color')">
+                  </div>
+                </div>
+                <!-- 8. Teks Tombol Bahasa -->
+                <div class="col-6">
+                  <label class="form-label fw-semibold small text-dark mb-1">Teks Tombol Bahasa</label>
+                  <div class="color-picker-box">
+                    <input type="color" class="color-input-native" id="input_header_lang_text_color" name="header_lang_text_color" value="{{ old('header_lang_text_color', $setting->header_lang_text_color) }}" oninput="syncColor(this, 'text_header_lang_text_color')">
+                    <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_header_lang_text_color" value="{{ old('header_lang_text_color', $setting->header_lang_text_color) }}" oninput="syncColorFromText(this, 'input_header_lang_text_color')">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 9. Sticky Header Toggle -->
               <div class="p-3 bg-light rounded-3 d-flex align-items-center justify-content-between">
                 <div>
                   <div class="fw-bold small text-dark">Sticky Header (Melayang saat di-scroll)</div>
@@ -1295,13 +1335,15 @@ function syncColorFromText(textInput, colorInputId) {
 }
 
 // Terapkan Palet Preset Lengkap (Header, Topbar, dan Footer)
-function applyPreset(bg, text, actBg, actText, logBg, logText, topBg, topText, ftrBg, ftrTxt, ftrHead, ftrBorder, ftrLink, ftrLinkHov, ftrSocBg, ftrSocTxt, topSocBg, topSocTxt) {
+function applyPreset(bg, text, actBg, actText, logBg, logText, topBg, topText, ftrBg, ftrTxt, ftrHead, ftrBorder, ftrLink, ftrLinkHov, ftrSocBg, ftrSocTxt, topSocBg, topSocTxt, langBg, langText) {
   setFieldColor('header_bg_color', bg);
   setFieldColor('header_text_color', text);
   setFieldColor('header_active_bg_color', actBg);
   setFieldColor('header_active_text_color', actText);
   setFieldColor('header_login_bg_color', logBg);
   setFieldColor('header_login_text_color', logText);
+  setFieldColor('header_lang_bg_color', langBg || logBg);
+  setFieldColor('header_lang_text_color', langText || logText);
   setFieldColor('topbar_bg_color', topBg);
   setFieldColor('topbar_text_color', topText);
 
@@ -1353,6 +1395,8 @@ function refreshPreview() {
   const actText = document.getElementById('input_header_active_text_color')?.value || '#ffffff';
   const logBg = document.getElementById('input_header_login_bg_color')?.value || '#000000';
   const logText = document.getElementById('input_header_login_text_color')?.value || '#ffffff';
+  const langBg = document.getElementById('input_header_lang_bg_color')?.value || '#000000';
+  const langText = document.getElementById('input_header_lang_text_color')?.value || '#ffffff';
 
   // 1b. Topbar Values
   const topBg = document.getElementById('input_topbar_bg_color')?.value || '#000000';
@@ -1382,6 +1426,7 @@ function refreshPreview() {
   const mockupSubtitle = document.getElementById('mockupSubtitle');
   const mockupActive = document.getElementById('mockupLinkActive');
   const mockupLogin = document.getElementById('mockupBtnLogin');
+  const mockupLang = document.getElementById('mockupBtnLang');
 
   if (mockupNav) mockupNav.style.backgroundColor = bg;
   if (mockupTitle) mockupTitle.style.color = text;
@@ -1392,7 +1437,7 @@ function refreshPreview() {
     mockupActive.style.color = actText;
   }
 
-  for (let i = 1; i <= 6; i++) {
+  for (let i = 1; i <= 7; i++) {
     const el = document.getElementById('mockupLinkNormal' + i);
     if (el) el.style.color = text;
   }
@@ -1400,6 +1445,11 @@ function refreshPreview() {
   if (mockupLogin) {
     mockupLogin.style.backgroundColor = logBg;
     mockupLogin.style.color = logText;
+  }
+
+  if (mockupLang) {
+    mockupLang.style.backgroundColor = langBg;
+    mockupLang.style.color = langText;
   }
 
   // 2. Footer Values
