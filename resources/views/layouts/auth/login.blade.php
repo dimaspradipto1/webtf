@@ -1524,7 +1524,7 @@
       { text: '> [SECURITY] Zero-trust gateway verified | TLS handshake OK', tag: 'yellow' },
       { text: '> [AI_MONITOR] Inference latency: 4.8ms | GPU Memory: Normal', tag: 'white' },
       { text: '> [DATABASE] SIAKAD connection pool active (64 idle, 2 active)', tag: 'yellow' },
-      { text: '> [NETWORK] Packet checksum verified for prodi-ti.uis.ac.id', tag: 'white' },
+      { text: '> [NETWORK] Packet checksum verified for prodi-tf.uis.ac.id', tag: 'white' },
       { text: '> [SYSTEM] Memory: 1.4GB/16GB | CPU: 3.8% | IO: Normal', tag: 'yellow' },
       { text: '> [STATUS] Core services online. Awaiting user handshake...', tag: 'white', hasCursor: true }
     ];
