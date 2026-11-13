@@ -26,6 +26,11 @@ class ThemeSettingTest extends TestCase
         $response = $this->actingAs($admin)->get(route('theme.index'));
         $response->assertStatus(200);
         $response->assertSee('Warna Header');
+        $response->assertSeeInOrder([
+            'Topbar & Marquee',
+            'Warna Header, Footer & Layout',
+            'Pengaturan Bahasa',
+        ], false);
     }
 
     public function test_admin_can_update_theme_and_sections(): void
