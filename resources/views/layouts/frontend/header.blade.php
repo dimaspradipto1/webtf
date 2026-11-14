@@ -287,14 +287,19 @@
 
         <!-- Pilih Bahasa Dropdown -->
         @if(isset($bahasaList) && $bahasaList->count() > 0)
+        @php
+          $langBtnBg = $themeSetting?->header_lang_bg_color ?: '#000000';
+          $langBtnTxt = $themeSetting?->header_lang_text_color ?: '#ffffff';
+        @endphp
         <li class="nav-item dropdown uis-lang-nav-item">
-          <a class="nav-link nav-link-custom dropdown-toggle uis-lang-toggle" 
+          <a class="nav-link dropdown-toggle uis-lang-toggle" 
              href="#" 
              role="button" 
              data-bs-toggle="dropdown" 
              aria-expanded="false" 
              id="dropdownLangSelect" 
-             title="Pilih Bahasa / Select Language">
+             title="Pilih Bahasa / Select Language"
+             style="background: {{ $langBtnBg }} !important; color: {{ $langBtnTxt }} !important;">
             <img src="{{ $defaultBahasa?->flag_url ?? asset('assets/img/flags/id.png') }}" 
                  id="uisCurrentFlagImg" 
                  alt="Bendera" 
@@ -302,9 +307,9 @@
                  width="22" 
                  height="15"
                  onerror="this.onerror=null; this.src='{{ asset('assets/img/flags/id.png') }}';">
-            <span class="uis-lang-name d-none d-xxl-inline" id="uisCurrentName">{{ $defaultBahasa->nama ?? 'Bahasa Indonesia' }}</span>
-            <span class="uis-lang-name d-inline d-xxl-none" id="uisCurrentShort">{{ $defaultBahasa ? (str_contains($defaultBahasa->nama, ' ') ? explode(' ', $defaultBahasa->nama)[1] ?? $defaultBahasa->nama : $defaultBahasa->nama) : 'Indonesia' }}</span>
-            <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+            <span class="uis-lang-name d-none d-xxl-inline" id="uisCurrentName" style="color: {{ $langBtnTxt }} !important;">{{ $defaultBahasa->nama ?? 'Bahasa Indonesia' }}</span>
+            <span class="uis-lang-name d-inline d-xxl-none" id="uisCurrentShort" style="color: {{ $langBtnTxt }} !important;">{{ $defaultBahasa ? (str_contains($defaultBahasa->nama, ' ') ? explode(' ', $defaultBahasa->nama)[1] ?? $defaultBahasa->nama : $defaultBahasa->nama) : 'Indonesia' }}</span>
+            <i class="bi bi-chevron-down ms-1" style="font-size: 10px; color: {{ $langBtnTxt }} !important;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom dropdown-menu-end uis-lang-menu shadow-lg" aria-labelledby="dropdownLangSelect">
             <li class="px-3 py-1 dropdown-header text-muted text-uppercase fw-bold" style="font-size: 10px; letter-spacing: 0.5px;">

@@ -168,6 +168,10 @@ class ThemeSettingController extends Controller
         $setting->update($updateData);
 
         AppServiceProvider::recordContentUpdate();
+        try {
+            \Illuminate\Support\Facades\Artisan::call('view:clear');
+        } catch (\Throwable $e) {
+        }
 
         Alert::success('Berhasil Disimpan', 'Warna header dan urutan section beranda berhasil diperbarui secara realtime!');
         return redirect()->back();

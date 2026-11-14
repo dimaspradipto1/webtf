@@ -573,8 +573,8 @@
             </span>
             <span class="mockup-btn-lang" id="mockupBtnLang" style="background-color: {{ $setting->header_lang_bg_color }}; color: {{ $setting->header_lang_text_color }};">
               <img src="{{ asset('assets/img/flags/id.png') }}" alt="ID" style="width: 18px; height: 12px; object-fit: cover; border-radius: 2px;">
-              <span>Bahasa Indonesia</span>
-              <i class="bi bi-chevron-down" style="font-size: 9px;"></i>
+              <span id="mockupBtnLangText" style="color: {{ $setting->header_lang_text_color }};">Bahasa Indonesia</span>
+              <i class="bi bi-chevron-down" id="mockupBtnLangIcon" style="font-size: 9px; color: {{ $setting->header_lang_text_color }};"></i>
             </span>
           </div>
 
@@ -777,21 +777,23 @@
             </div>
             <div class="card-body pt-0">
               
-              <!-- 1. Background Header -->
-              <div class="mb-3">
-                <label class="form-label fw-semibold small text-dark mb-1">Warna Background Navbar Header</label>
-                <div class="color-picker-box">
-                  <input type="color" class="color-input-native" id="input_header_bg_color" name="header_bg_color" value="{{ old('header_bg_color', $setting->header_bg_color) }}" oninput="syncColor(this, 'text_header_bg_color')">
-                  <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_header_bg_color" value="{{ old('header_bg_color', $setting->header_bg_color) }}" oninput="syncColorFromText(this, 'input_header_bg_color')">
+              <div class="row g-2 mb-3">
+                <!-- 1. Background Header -->
+                <div class="col-6">
+                  <label class="form-label fw-semibold small text-dark mb-1">Warna Background Navbar Header</label>
+                  <div class="color-picker-box">
+                    <input type="color" class="color-input-native" id="input_header_bg_color" name="header_bg_color" value="{{ old('header_bg_color', $setting->header_bg_color) }}" oninput="syncColor(this, 'text_header_bg_color')">
+                    <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_header_bg_color" value="{{ old('header_bg_color', $setting->header_bg_color) }}" oninput="syncColorFromText(this, 'input_header_bg_color')">
+                  </div>
                 </div>
-              </div>
 
-              <!-- 2. Teks Judul & Menu Normal -->
-              <div class="mb-3">
-                <label class="form-label fw-semibold small text-dark mb-1">Warna Teks Judul Prodi & Menu Normal</label>
-                <div class="color-picker-box">
-                  <input type="color" class="color-input-native" id="input_header_text_color" name="header_text_color" value="{{ old('header_text_color', $setting->header_text_color) }}" oninput="syncColor(this, 'text_header_text_color')">
-                  <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_header_text_color" value="{{ old('header_text_color', $setting->header_text_color) }}" oninput="syncColorFromText(this, 'input_header_text_color')">
+                <!-- 2. Teks Judul & Menu Normal -->
+                <div class="col-6">
+                  <label class="form-label fw-semibold small text-dark mb-1">Warna Teks Judul Prodi & Menu Normal</label>
+                  <div class="color-picker-box">
+                    <input type="color" class="color-input-native" id="input_header_text_color" name="header_text_color" value="{{ old('header_text_color', $setting->header_text_color) }}" oninput="syncColor(this, 'text_header_text_color')">
+                    <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_header_text_color" value="{{ old('header_text_color', $setting->header_text_color) }}" oninput="syncColorFromText(this, 'input_header_text_color')">
+                  </div>
                 </div>
               </div>
 
@@ -815,7 +817,26 @@
               </div>
 
               <div class="row g-2 mb-3">
-                <!-- 5. Background Tombol Login -->
+                <!-- 5. Background Tombol Bahasa -->
+                <div class="col-6">
+                  <label class="form-label fw-semibold small text-dark mb-1">Bg Tombol Bahasa (🇮🇩 Bahasa Indonesia)</label>
+                  <div class="color-picker-box">
+                    <input type="color" class="color-input-native" id="input_header_lang_bg_color" name="header_lang_bg_color" value="{{ old('header_lang_bg_color', $setting->header_lang_bg_color) }}" oninput="syncColor(this, 'text_header_lang_bg_color')">
+                    <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_header_lang_bg_color" value="{{ old('header_lang_bg_color', $setting->header_lang_bg_color) }}" oninput="syncColorFromText(this, 'input_header_lang_bg_color')">
+                  </div>
+                </div>
+                <!-- 6. Teks Tombol Bahasa -->
+                <div class="col-6">
+                  <label class="form-label fw-semibold small text-dark mb-1">Teks Tombol Bahasa</label>
+                  <div class="color-picker-box">
+                    <input type="color" class="color-input-native" id="input_header_lang_text_color" name="header_lang_text_color" value="{{ old('header_lang_text_color', $setting->header_lang_text_color) }}" oninput="syncColor(this, 'text_header_lang_text_color')">
+                    <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_header_lang_text_color" value="{{ old('header_lang_text_color', $setting->header_lang_text_color) }}" oninput="syncColorFromText(this, 'input_header_lang_text_color')">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row g-2 mb-3">
+                <!-- 7. Background Tombol Login -->
                 <div class="col-6">
                   <label class="form-label fw-semibold small text-dark mb-1">Bg Tombol Login</label>
                   <div class="color-picker-box">
@@ -823,31 +844,12 @@
                     <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_header_login_bg_color" value="{{ old('header_login_bg_color', $setting->header_login_bg_color) }}" oninput="syncColorFromText(this, 'input_header_login_bg_color')">
                   </div>
                 </div>
-                <!-- 6. Teks Tombol Login -->
+                <!-- 8. Teks Tombol Login -->
                 <div class="col-6">
                   <label class="form-label fw-semibold small text-dark mb-1">Teks Tombol Login</label>
                   <div class="color-picker-box">
                     <input type="color" class="color-input-native" id="input_header_login_text_color" name="header_login_text_color" value="{{ old('header_login_text_color', $setting->header_login_text_color) }}" oninput="syncColor(this, 'text_header_login_text_color')">
                     <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_header_login_text_color" value="{{ old('header_login_text_color', $setting->header_login_text_color) }}" oninput="syncColorFromText(this, 'input_header_login_text_color')">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row g-2 mb-3">
-                <!-- 7. Background Tombol Bahasa -->
-                <div class="col-6">
-                  <label class="form-label fw-semibold small text-dark mb-1">Bg Tombol Bahasa</label>
-                  <div class="color-picker-box">
-                    <input type="color" class="color-input-native" id="input_header_lang_bg_color" name="header_lang_bg_color" value="{{ old('header_lang_bg_color', $setting->header_lang_bg_color) }}" oninput="syncColor(this, 'text_header_lang_bg_color')">
-                    <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_header_lang_bg_color" value="{{ old('header_lang_bg_color', $setting->header_lang_bg_color) }}" oninput="syncColorFromText(this, 'input_header_lang_bg_color')">
-                  </div>
-                </div>
-                <!-- 8. Teks Tombol Bahasa -->
-                <div class="col-6">
-                  <label class="form-label fw-semibold small text-dark mb-1">Teks Tombol Bahasa</label>
-                  <div class="color-picker-box">
-                    <input type="color" class="color-input-native" id="input_header_lang_text_color" name="header_lang_text_color" value="{{ old('header_lang_text_color', $setting->header_lang_text_color) }}" oninput="syncColor(this, 'text_header_lang_text_color')">
-                    <input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" id="text_header_lang_text_color" value="{{ old('header_lang_text_color', $setting->header_lang_text_color) }}" oninput="syncColorFromText(this, 'input_header_lang_text_color')">
                   </div>
                 </div>
               </div>
@@ -1450,6 +1452,10 @@ function refreshPreview() {
   if (mockupLang) {
     mockupLang.style.backgroundColor = langBg;
     mockupLang.style.color = langText;
+    const langTxtEl = document.getElementById('mockupBtnLangText');
+    const langIcEl = document.getElementById('mockupBtnLangIcon');
+    if (langTxtEl) langTxtEl.style.color = langText;
+    if (langIcEl) langIcEl.style.color = langText;
   }
 
   // 2. Footer Values

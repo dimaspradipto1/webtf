@@ -157,12 +157,12 @@
       color: var(--hdr-text) !important;
       opacity: 0.88 !important;
     }
-    .nav-link-custom {
+    .nav-link-custom:not(.uis-lang-toggle) {
       color: var(--hdr-text) !important;
     }
-    .nav-link-custom:hover,
-    .nav-link-custom.active,
-    .show > .nav-link-custom {
+    .nav-link-custom:not(.uis-lang-toggle):hover,
+    .nav-link-custom:not(.uis-lang-toggle).active,
+    .show > .nav-link-custom:not(.uis-lang-toggle) {
       background: var(--hdr-act-bg) !important;
       color: var(--hdr-act-text) !important;
     }
@@ -175,14 +175,25 @@
       color: var(--hdr-log-text) !important;
       opacity: 0.88 !important;
     }
+    #dropdownLangSelect.uis-lang-toggle,
     .uis-lang-toggle {
       background: var(--hdr-lang-bg) !important;
       color: var(--hdr-lang-text) !important;
+      text-shadow: none !important;
     }
+    #dropdownLangSelect.uis-lang-toggle span,
+    #dropdownLangSelect.uis-lang-toggle font,
+    #dropdownLangSelect.uis-lang-toggle i,
     .uis-lang-toggle i,
+    .uis-lang-toggle span,
+    .uis-lang-toggle font,
     .uis-lang-toggle .uis-lang-name {
       color: var(--hdr-lang-text) !important;
+      text-shadow: none !important;
     }
+    #dropdownLangSelect.uis-lang-toggle:hover,
+    #dropdownLangSelect.uis-lang-toggle:focus,
+    .show > #dropdownLangSelect.uis-lang-toggle,
     .uis-lang-toggle:hover,
     .uis-lang-toggle:focus,
     .show > .uis-lang-toggle {
@@ -190,6 +201,12 @@
       color: var(--hdr-lang-text) !important;
       opacity: 0.88 !important;
     }
+    #dropdownLangSelect.uis-lang-toggle:hover span,
+    #dropdownLangSelect.uis-lang-toggle:hover font,
+    #dropdownLangSelect.uis-lang-toggle:hover i,
+    .show > #dropdownLangSelect.uis-lang-toggle span,
+    .show > #dropdownLangSelect.uis-lang-toggle font,
+    .show > #dropdownLangSelect.uis-lang-toggle i,
     .uis-lang-toggle:hover i,
     .show > .uis-lang-toggle i,
     .uis-lang-toggle:hover .uis-lang-name,
