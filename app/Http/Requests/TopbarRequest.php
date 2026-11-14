@@ -11,11 +11,18 @@ class TopbarRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        if (! $this->filled('badge_text')) {
+            $this->merge(['badge_text' => 'TEKNIK INFORMATIKA']);
+        }
+    }
+
     public function rules(): array
     {
         return [
-            'badge_text' => ['required', 'string', 'max:100'],
-            'marquee_text' => ['nullable', 'string', 'max:1000'],
+            'badge_text' => ['nullable', 'string', 'max:100'],
+            'marquee_text' => ['required', 'string', 'max:1000'],
             'badge_icon' => ['nullable', 'string', 'max:50'],
             'alamat' => ['nullable', 'string', 'max:255'],
             'jam_operasional' => ['nullable', 'string', 'max:100'],
@@ -32,7 +39,7 @@ class TopbarRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'badge_text.required' => 'Label badge topbar wajib diisi.',
+            'marquee_text.required' => 'Teks marquee (berjalan) wajib diisi.',
             'email.email' => 'Format email tidak valid.',
         ];
     }

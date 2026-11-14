@@ -277,9 +277,13 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('admin-dosen', DosenController::class)
         ->parameters(['admin-dosen' => 'dosen'])
         ->names('dosen');
-    Route::resource('admin-topbar', TopbarController::class)
-        ->parameters(['admin-topbar' => 'topbar'])
-        ->names('topbar');
+    // Pengaturan Topbar & Marquee (Singleton dengan slug-based URL tanpa ID di URL)
+    Route::get('admin-topbar', [TopbarController::class, 'index'])->name('topbar.index');
+    Route::match(['post', 'put'], 'admin-topbar', [TopbarController::class, 'update'])->name('topbar.update');
+    Route::match(['post', 'put'], 'admin-topbar/simpan', [TopbarController::class, 'update'])->name('topbar.store');
+    Route::get('admin-topbar/create', fn () => redirect()->route('topbar.index'))->name('topbar.create');
+    Route::get('admin-topbar/{topbar}/edit', fn () => redirect()->route('topbar.index'))->name('topbar.edit');
+    Route::match(['post', 'put'], 'admin-topbar/{topbar}', [TopbarController::class, 'update']);
 
     // Pengaturan Tata Letak Beranda & Tema Header
     Route::get('admin-theme', [ThemeSettingController::class, 'index'])->name('theme.index');
