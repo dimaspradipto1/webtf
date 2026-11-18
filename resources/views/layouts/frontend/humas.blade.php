@@ -718,7 +718,7 @@
         <div class="section-label mb-2">Dokumentasi Visual</div>
         <h2 class="section-title mb-0">Galeri & <em>Kegiatan Humas</em></h2>
       </div>
-      <a href="{{ route('homepage.galeri.humas') }}" class="btn-outline-hero" style="color: var(--uis-green); border-color: var(--uis-green); font-size: 13.5px; padding: 10px 22px;">
+      <a href="{{ route('homepage.galeri.humas') }}" class="btn-outline-hero" style="font-size: 13.5px; padding: 10px 22px;">
         <i class="bi bi-images me-1"></i> Lihat Semua Galeri
       </a>
     </div>

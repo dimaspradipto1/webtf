@@ -161,7 +161,7 @@
                         <a href="{{ route('layanan-terkait.index') }}" class="btn btn-secondary px-4">
                             <i class="bi bi-arrow-left me-1"></i> Batal
                         </a>
-                        <button type="submit" class="btn fw-semibold px-4 shadow-sm" style="background-color: #f9dc4b; color: #ffffff; border: none; border-radius: 8px;">
+                        <button type="submit" class="btn btn-primary fw-semibold px-4 shadow-sm" style="border-radius: 8px;">
                             <i class="bi bi-check-lg me-1"></i> Simpan Layanan
                         </button>
                     </div>

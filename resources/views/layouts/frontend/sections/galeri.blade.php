@@ -8,7 +8,7 @@
         <div class="section-label mb-2">Dokumentasi Visual</div>
         <h2 class="section-title mb-0">Galeri & <em>Kegiatan Teknik Informatika</em></h2>
       </div>
-      <a href="{{ route('homepage.galeri.universitas') }}" class="btn-outline-hero" style="color: var(--uis-purple); border-color: var(--uis-purple); font-size: 13.5px; padding: 10px 22px;">
+      <a href="{{ route('homepage.galeri.universitas') }}" class="btn-outline-hero" style="font-size: 13.5px; padding: 10px 22px;">
         <i class="bi bi-images me-1"></i> Lihat Semua Galeri
       </a>
     </div>

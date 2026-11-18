@@ -124,7 +124,7 @@
 
           {{-- Share & Back --}}
           <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 pt-4 mt-4 border-top">
-            <a href="{{ route('homepage.news') }}" class="btn-outline-hero" style="color:var(--uis-purple); border-color:var(--uis-purple); font-size:13px; padding:8px 18px;">
+            <a href="{{ route('homepage.news') }}" class="btn-outline-hero" style="font-size:13px; padding:8px 18px;">
               <i class="bi bi-arrow-left"></i> Kembali ke Daftar Berita
             </a>
             <div class="d-flex align-items-center gap-2">

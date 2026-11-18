@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="col-12 text-end pt-2">
-                    <button type="submit" class="btn fw-semibold shadow-sm" style="background-color: #f9dc4b; color: #ffffff; border: none; padding: 8px 20px; border-radius: 8px;">
+                    <button type="submit" class="btn btn-primary fw-semibold shadow-sm" style="padding: 8px 20px; border-radius: 8px;">
                         <i class="bi bi-floppy me-1"></i> Simpan Perubahan Teks
                     </button>
                 </div>
@@ -72,7 +72,7 @@
         <h5 class="mb-0 fw-bold" style="color: #2b2f32; font-size: 16px;">
             <i class="bi bi-grid-fill me-2" style="color: #000000;"></i>Daftar Link & Kartu Layanan
         </h5>
-        <a href="{{ route('layanan-terkait.create') }}" class="btn fw-semibold shadow-sm" style="background-color: #f9dc4b; color: #ffffff; border: none; padding: 7px 18px; border-radius: 8px;">
+        <a href="{{ route('layanan-terkait.create') }}" class="btn btn-primary fw-semibold shadow-sm" style="padding: 7px 18px; border-radius: 8px;">
             <i class="bi bi-plus-lg me-1"></i> Tambah Layanan
         </a>
     </div>

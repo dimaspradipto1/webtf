@@ -97,7 +97,7 @@
     </div>
 
     <div class="text-center mt-3" data-aos="fade-up">
-      <a href="{{ route('homepage.testimoni') }}" class="btn-outline-hero px-4 py-2" style="color: var(--uis-purple); border-color: var(--uis-purple); border-radius: 25px; font-weight: 600;">
+      <a href="{{ route('homepage.testimoni') }}" class="btn-outline-hero px-4 py-2" style="border-radius: 25px; font-weight: 600;">
         <i class="bi bi-chat-heart me-1"></i> Lihat Semua Ulasan Alumni
       </a>
     </div>

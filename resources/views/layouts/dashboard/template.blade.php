@@ -128,14 +128,38 @@
         .sidebar-nav .nav-link:hover i {
             color: #f9dc4b;
         }
-        .btn-primary {
+        .btn-primary,
+        .btn-primary.text-white,
+        .btn-primary.text-dark {
+            background: #000000 !important;
             background-color: #000000 !important;
             border-color: #000000 !important;
             color: #f9dc4b !important;
         }
-        .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+        .btn-primary i,
+        .btn-primary span:not(.badge),
+        .btn-primary font {
+            color: #f9dc4b !important;
+        }
+        .btn-primary:hover,
+        .btn-primary:focus,
+        .btn-primary:active,
+        .btn-primary.text-white:hover,
+        .btn-primary.text-dark:hover {
+            background: #f9dc4b !important;
             background-color: #f9dc4b !important;
             border-color: #f9dc4b !important;
+            color: #000000 !important;
+        }
+        .btn-primary:hover i,
+        .btn-primary:hover span:not(.badge),
+        .btn-primary:hover font,
+        .btn-primary:focus i,
+        .btn-primary:focus span:not(.badge),
+        .btn-primary:focus font,
+        .btn-primary:active i,
+        .btn-primary:active span:not(.badge),
+        .btn-primary:active font {
             color: #000000 !important;
         }
         .btn-outline-primary {
@@ -143,19 +167,118 @@
             border-color: #000000 !important;
             background-color: transparent !important;
         }
-        .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
+        .btn-outline-primary:hover,
+        .btn-outline-primary:focus,
+        .btn-outline-primary:active {
+            background: #000000 !important;
             background-color: #000000 !important;
             border-color: #000000 !important;
             color: #f9dc4b !important;
         }
-        .btn-warning {
+        .btn-outline-primary:hover i,
+        .btn-outline-primary:hover span:not(.badge),
+        .btn-outline-primary:hover font,
+        .btn-outline-primary:focus i,
+        .btn-outline-primary:focus span:not(.badge),
+        .btn-outline-primary:focus font {
+            color: #f9dc4b !important;
+        }
+        .btn-warning,
+        .btn-warning.text-dark,
+        .btn-warning.text-white {
+            background: #f9dc4b !important;
             background-color: #f9dc4b !important;
             border-color: #f9dc4b !important;
             color: #000000 !important;
         }
-        .btn-warning:hover, .btn-warning:focus, .btn-warning:active {
+        .btn-warning i,
+        .btn-warning span:not(.badge),
+        .btn-warning font {
+            color: #000000 !important;
+        }
+        .btn-warning:hover,
+        .btn-warning:focus,
+        .btn-warning:active,
+        .btn-warning.text-dark:hover,
+        .btn-warning.text-dark:focus,
+        .btn-warning.text-white:hover,
+        .btn-warning.text-white:focus {
+            background: #000000 !important;
             background-color: #000000 !important;
             border-color: #000000 !important;
+            color: #f9dc4b !important;
+        }
+        .btn-warning:hover i,
+        .btn-warning:hover span:not(.badge),
+        .btn-warning:hover font,
+        .btn-warning:focus i,
+        .btn-warning:focus span:not(.badge),
+        .btn-warning:focus font,
+        .btn-warning:active i,
+        .btn-warning:active span:not(.badge),
+        .btn-warning:active font {
+            color: #f9dc4b !important;
+        }
+        .btn-outline-warning:hover,
+        .btn-outline-warning:focus,
+        .btn-outline-warning:active {
+            background: #f9dc4b !important;
+            background-color: #f9dc4b !important;
+            border-color: #f9dc4b !important;
+            color: #000000 !important;
+        }
+        .btn-outline-warning:hover i,
+        .btn-outline-warning:hover span:not(.badge),
+        .btn-outline-warning:hover font {
+            color: #000000 !important;
+        }
+        .btn-dark:hover,
+        .btn-dark:focus,
+        .btn-dark:active {
+            background: #000000 !important;
+            background-color: #000000 !important;
+            border-color: #000000 !important;
+            color: #f9dc4b !important;
+        }
+        .btn-dark:hover i,
+        .btn-dark:hover span:not(.badge),
+        .btn-dark:hover font {
+            color: #f9dc4b !important;
+        }
+        .btn[style*="background: #000000"]:hover,
+        .btn[style*="background:#000000"]:hover,
+        .btn[style*="background-color: #000000"]:hover,
+        .btn[style*="background-color:#000000"]:hover {
+            background: #f9dc4b !important;
+            background-color: #f9dc4b !important;
+            color: #000000 !important;
+        }
+        .btn[style*="background: #000000"]:hover i,
+        .btn[style*="background:#000000"]:hover i,
+        .btn[style*="background-color: #000000"]:hover i,
+        .btn[style*="background-color:#000000"]:hover i,
+        .btn[style*="background: #000000"]:hover span:not(.badge),
+        .btn[style*="background:#000000"]:hover span:not(.badge),
+        .btn[style*="background-color: #000000"]:hover span:not(.badge),
+        .btn[style*="background-color:#000000"]:hover span:not(.badge) {
+            color: #000000 !important;
+        }
+        .btn[style*="background: #f9dc4b"]:hover,
+        .btn[style*="background:#f9dc4b"]:hover,
+        .btn[style*="background-color: #f9dc4b"]:hover,
+        .btn[style*="background-color:#f9dc4b"]:hover {
+            background: #000000 !important;
+            background-color: #000000 !important;
+            color: #f9dc4b !important;
+        }
+        .btn[style*="background: #f9dc4b"]:hover i,
+        .btn[style*="background:#f9dc4b"]:hover i,
+        .btn[style*="background-color: #f9dc4b"]:hover i,
+        .btn[style*="background-color:#f9dc4b"]:hover i,
+        .btn[style*="background: #f9dc4b"]:hover span:not(.badge),
+        .btn[style*="background:#f9dc4b"]:hover span:not(.badge),
+        .btn[style*="background-color: #f9dc4b"]:hover span:not(.badge),
+        .btn[style*="background-color:#f9dc4b"]:hover span:not(.badge) {
             color: #f9dc4b !important;
         }
         .pagetitle h1 {
@@ -763,7 +886,6 @@
     </script>
 
     @stack('scripts')
-    @stack('styles')
 
 </body>
 

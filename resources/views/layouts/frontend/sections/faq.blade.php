@@ -56,7 +56,7 @@
         </div>
 
         <div class="text-center mt-4">
-          <a href="{{ route('homepage.faq') }}" class="btn-outline-hero" style="color: var(--uis-purple); border-color: var(--uis-purple);">
+          <a href="{{ route('homepage.faq') }}" class="btn-outline-hero">
             <i class="bi bi-question-circle"></i> Lihat Semua FAQ & Bantuan
           </a>
         </div>

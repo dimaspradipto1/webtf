@@ -1605,16 +1605,28 @@ a.btn,
     gap: 9px;
 }
 
-.btn-primary-hero:hover {
-    background: #000000;
+.btn-primary-hero:hover,
+.btn-primary-hero:focus,
+.btn-primary-hero:active {
+    background: #000000 !important;
+    background-color: #000000 !important;
 
-    color: #f9dc4b;
+    color: #f9dc4b !important;
 
     border: none !important;
 
     opacity: 1 !important;
 
     transform: translateY(-2px);
+}
+
+.btn-primary-hero:hover i,
+.btn-primary-hero:hover span,
+.btn-primary-hero:hover font,
+.btn-primary-hero:focus i,
+.btn-primary-hero:focus span,
+.btn-primary-hero:focus font {
+    color: #f9dc4b !important;
 }
 
 .btn-outline-hero {
@@ -1643,16 +1655,28 @@ a.btn,
     gap: 9px;
 }
 
-.btn-outline-hero:hover {
-    background: #000000;
+.btn-outline-hero:hover,
+.btn-outline-hero:focus,
+.btn-outline-hero:active {
+    background: #000000 !important;
+    background-color: #000000 !important;
 
-    color: #f9dc4b;
+    color: #f9dc4b !important;
 
     border: none !important;
 
     opacity: 1 !important;
 
     transform: translateY(-2px);
+}
+
+.btn-outline-hero:hover i,
+.btn-outline-hero:hover span,
+.btn-outline-hero:hover font,
+.btn-outline-hero:focus i,
+.btn-outline-hero:focus span,
+.btn-outline-hero:focus font {
+    color: #f9dc4b !important;
 }
 
 /* ═══════════════════════════════════════════════
@@ -8106,11 +8130,17 @@ section {
 }
 
 .btn-ormawa-detail:hover {
-    background: #f9dc4b;
+    background: #f9dc4b !important;
 
-    color: #ffffff;
+    color: #000000 !important;
 
     box-shadow: 0 4px 12px rgba(249, 220, 75, 0.35);
+}
+
+.btn-ormawa-detail:hover i,
+.btn-ormawa-detail:hover span,
+.btn-ormawa-detail:hover font {
+    color: #000000 !important;
 }
 
 /* Pagination */
@@ -9262,3 +9292,138 @@ figure.image.align-center,
     text-overflow: ellipsis;
     pointer-events: none;
 }
+
+/* ==========================================================================
+   Universal Button Hover Contrast Protection (Pastikan Semua Tulisan Tampil)
+   ========================================================================== */
+.btn-primary-hero:hover,
+.btn-primary-hero:focus,
+.btn-primary-hero:active,
+.btn-outline-hero:hover,
+.btn-outline-hero:focus,
+.btn-outline-hero:active,
+.btn-uis-pill:hover,
+.btn-uis-pill:focus,
+.btn-uis-pill:active,
+.btn-agenda-pill:hover,
+.btn-agenda-pill:focus,
+.btn-agenda-pill:active,
+.layanan-detail-btn:hover,
+.layanan-detail-btn:focus,
+.layanan-detail-btn:active,
+.btn-lihat-dosen:hover,
+.btn-lihat-dosen:focus,
+.btn-rps-download:hover,
+.btn-rps-download:focus,
+.btn-deck-arrow:hover,
+.btn-deck-arrow:focus,
+.btn-deck-main:hover,
+.btn-deck-main:focus {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: #f9dc4b !important;
+}
+
+.btn-primary-hero:hover *,
+.btn-outline-hero:hover *,
+.btn-uis-pill:hover *,
+.btn-agenda-pill:hover *,
+.layanan-detail-btn:hover *,
+.btn-lihat-dosen:hover *,
+.btn-rps-download:hover *,
+.btn-deck-arrow:hover * {
+    color: #f9dc4b !important;
+}
+
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active,
+.btn-warning.text-dark:hover,
+.btn-warning.text-dark:focus,
+.btn-warning.text-white:hover,
+.btn-warning.text-white:focus {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: #f9dc4b !important;
+}
+
+.btn-warning:hover *,
+.btn-warning:focus *,
+.btn-warning.text-dark:hover *,
+.btn-warning.text-white:hover * {
+    color: #f9dc4b !important;
+}
+
+.btn-outline-warning:hover,
+.btn-outline-warning:focus,
+.btn-outline-warning:active {
+    background: #f9dc4b !important;
+    background-color: #f9dc4b !important;
+    color: #000000 !important;
+}
+
+.btn-outline-warning:hover *,
+.btn-outline-warning:focus * {
+    color: #000000 !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active,
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-dark:hover,
+.btn-outline-dark:focus,
+.btn-outline-dark:active,
+.btn-outline-success:hover,
+.btn-outline-success:focus,
+.btn-outline-success:active {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: #f9dc4b !important;
+}
+
+.btn-primary:hover *,
+.btn-dark:hover *,
+.btn-outline-primary:hover *,
+.btn-outline-dark:hover *,
+.btn-outline-success:hover * {
+    color: #f9dc4b !important;
+}
+
+.btn[style*="background: #f9dc4b"]:hover,
+.btn[style*="background:#f9dc4b"]:hover,
+.btn[style*="background-color: #f9dc4b"]:hover,
+.btn[style*="background-color:#f9dc4b"]:hover {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: #f9dc4b !important;
+}
+
+.btn[style*="background: #f9dc4b"]:hover *,
+.btn[style*="background:#f9dc4b"]:hover *,
+.btn[style*="background-color: #f9dc4b"]:hover *,
+.btn[style*="background-color:#f9dc4b"]:hover * {
+    color: #f9dc4b !important;
+}
+
+.btn[style*="background: #000000"]:hover,
+.btn[style*="background:#000000"]:hover,
+.btn[style*="background-color: #000000"]:hover,
+.btn[style*="background-color:#000000"]:hover {
+    background: #f9dc4b !important;
+    background-color: #f9dc4b !important;
+    color: #000000 !important;
+}
+
+.btn[style*="background: #000000"]:hover *,
+.btn[style*="background:#000000"]:hover *,
+.btn[style*="background-color: #000000"]:hover *,
+.btn[style*="background-color:#000000"]:hover * {
+    color: #000000 !important;
+}
+
