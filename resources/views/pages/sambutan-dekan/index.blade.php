@@ -121,6 +121,48 @@
                         @enderror
                     </div>
 
+                    {{-- Video Profil Program Studi (A8) --}}
+                    <div id="video-profil" class="mb-4 p-4 rounded-4" style="background: #f8fafc; border: 1px solid #e2e8f0;">
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3 pb-2 border-bottom">
+                            <div>
+                                <h6 class="fw-bold text-dark mb-1">
+                                    <i class="bi bi-youtube text-danger me-2"></i>Video Profil Program Studi (Beranda)
+                                </h6>
+                                <small class="text-muted">Disematkan tepat di bawah Sambutan Kaprodi pada halaman beranda.</small>
+                            </div>
+                            <div class="form-check form-switch mb-0">
+                                <input class="form-check-input" type="checkbox" role="switch" id="video_aktif" name="video_aktif" value="1" {{ old('video_aktif', $sambutanDekan->video_aktif ?? true) ? 'checked' : '' }}>
+                                <label class="form-check-label fw-semibold small" for="video_aktif">Tampilkan di Beranda</label>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="video_judul" class="form-label fw-semibold text-dark">Judul Video Profil</label>
+                                <input type="text" id="video_judul" name="video_judul" class="form-control @error('video_judul') is-invalid @enderror" value="{{ old('video_judul', $sambutanDekan->video_judul ?? 'Video Profil Program Studi Teknik Informatika') }}" placeholder="Contoh: Video Profil Program Studi Teknik Informatika">
+                                @error('video_judul')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label for="video_subjudul" class="form-label fw-semibold text-dark">Subjudul / Keterangan Singkat</label>
+                                <input type="text" id="video_subjudul" name="video_subjudul" class="form-control @error('video_subjudul') is-invalid @enderror" value="{{ old('video_subjudul', $sambutanDekan->video_subjudul ?? 'Sematan YouTube • 2–3 menit') }}" placeholder="Contoh: Sematan YouTube • 2–3 menit">
+                                @error('video_subjudul')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                            </div>
+                            <div class="col-12">
+                                <label for="video_url" class="form-label fw-semibold text-dark">Tautan Video YouTube</label>
+                                <input type="url" id="video_url" name="video_url" class="form-control @error('video_url') is-invalid @enderror" value="{{ old('video_url', $sambutanDekan->video_url) }}" placeholder="https://www.youtube.com/watch?v=... atau https://youtu.be/...">
+                                <div class="form-text small text-muted">Tempelkan link YouTube biasa (`watch?v=...`, `youtu.be/...`, atau `embed/...`). Sistem akan otomatis mengubahnya menjadi pemutar video responsif 16:9.</div>
+                                @error('video_url')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                            </div>
+                        </div>
+
+                        <div id="videoPreviewWrap" class="{{ $sambutanDekan->youtube_embed_url ? '' : 'd-none' }} mt-3">
+                            <div class="small fw-semibold text-muted mb-2"><i class="bi bi-play-circle me-1"></i>Pratinjau Sematan YouTube:</div>
+                            <div class="ratio ratio-16x9 rounded-3 overflow-hidden border shadow-sm" style="max-width: 560px; background: #0f172a;">
+                                <iframe id="videoPreviewIframe" src="{{ $sambutanDekan->youtube_embed_url ?? 'about:blank' }}" title="Pratinjau Video Profil" allowfullscreen loading="lazy"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="d-flex align-items-center gap-2 pt-3 border-top">
                         <button type="submit" class="btn text-white px-4 py-2 fw-semibold" style="background-color: #000000;">
                             <i class="bi bi-save me-1"></i> Simpan Perubahan Sambutan Ka Prodi Teknik Informatika
@@ -137,3 +179,32 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const input = document.getElementById('video_url');
+    const wrap = document.getElementById('videoPreviewWrap');
+    const iframe = document.getElementById('videoPreviewIframe');
+
+    function extractYoutubeId(url) {
+        if (!url) return null;
+        const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/|[?&]v=)([A-Za-z0-9_-]{11})/i);
+        return m ? m[1] : null;
+    }
+
+    if (input && wrap && iframe) {
+        input.addEventListener('input', function () {
+            const id = extractYoutubeId(this.value.trim());
+            if (id) {
+                iframe.src = 'https://www.youtube.com/embed/' + id + '?rel=0';
+                wrap.classList.remove('d-none');
+            } else {
+                iframe.src = 'about:blank';
+                wrap.classList.add('d-none');
+            }
+        });
+    }
+});
+</script>
+@endpush

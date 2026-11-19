@@ -120,5 +120,55 @@
 
     </div>
 
+    {{-- Video Profil Program Studi (A8) --}}
+    @php
+      $videoAktif = $sambutanDekan ? (bool) ($sambutanDekan->video_aktif ?? true) : true;
+      $videoJudul = $sambutanDekan?->video_judul ?: 'Video Profil Program Studi Teknik Informatika';
+      $videoSubjudul = $sambutanDekan?->video_subjudul ?: 'Sematan YouTube • 2–3 menit';
+      $videoEmbedUrl = $sambutanDekan?->youtube_embed_url;
+      $videoWatchUrl = $sambutanDekan?->video_url ?: 'https://www.youtube.com/@universitasibnusina';
+    @endphp
+    @if($videoAktif)
+      <div class="row justify-content-center mt-5" id="video-profil-prodi" data-aos="fade-up" data-aos-delay="180">
+        <div class="col-lg-10">
+          <div class="rounded-4 overflow-hidden shadow-lg" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border: 1px solid rgba(255,255,255,0.08);">
+            @if($videoEmbedUrl)
+              <div class="ratio ratio-16x9">
+                <iframe
+                  src="{{ $videoEmbedUrl }}"
+                  title="{{ $videoJudul }}"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                  loading="lazy"></iframe>
+              </div>
+              <div class="px-4 py-3 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2" style="background: rgba(15, 23, 42, 0.96); border-top: 1px solid rgba(255,255,255,0.08);">
+                <div>
+                  <div class="fw-bold text-white" style="font-size: 15px;">{{ $videoJudul }}</div>
+                  <div class="small" style="color: #94a3b8;">{{ $videoSubjudul }}</div>
+                </div>
+                <a href="{{ $videoWatchUrl }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-2" style="background: #f9dc4b; color: #000000;">
+                  <i class="bi bi-youtube text-danger"></i>
+                  <span>Tonton di YouTube</span>
+                </a>
+              </div>
+            @else
+              <a href="{{ $videoWatchUrl }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none d-block position-relative" style="aspect-ratio: 16/9; max-height: 460px; width: 100%;">
+                <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center text-center p-4">
+                  <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3 shadow-lg" style="width: 74px; height: 74px; background: #ef4444; color: #ffffff; transition: transform 0.2s ease;">
+                    <i class="bi bi-play-fill" style="font-size: 36px; margin-left: 4px;"></i>
+                  </div>
+                  <h3 class="fw-bold text-white mb-1" style="font-size: clamp(1.1rem, 2.2vw, 1.5rem);">{{ $videoJudul }}</h3>
+                  <p class="mb-3" style="color: #cbd5e1; font-size: 14px;">{{ $videoSubjudul }}</p>
+                  <span class="badge rounded-pill px-3 py-2 fw-semibold" style="background: rgba(249, 220, 75, 0.16); color: #f9dc4b; border: 1px solid rgba(249, 220, 75, 0.4);">
+                    <i class="bi bi-youtube me-1"></i> Kunjungi Kanal YouTube Kampus
+                  </span>
+                </div>
+              </a>
+            @endif
+          </div>
+        </div>
+      </div>
+    @endif
+
   </div>
 </section>

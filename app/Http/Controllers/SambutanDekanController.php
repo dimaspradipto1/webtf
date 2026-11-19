@@ -12,10 +12,15 @@ class SambutanDekanController extends Controller
 {
     public function index(): View
     {
+        SambutanDekan::ensureVideoColumns();
+
         $sambutanDekan = SambutanDekan::firstOrCreate([], [
             'nama_dekan' => 'Ka Prodi Teknik Informatika',
             'jabatan_dekan' => 'Ka Prodi Teknik Informatika',
             'kutipan_singkat' => 'Selamat datang di Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi. Kami bertekad membentuk sarjana komputer yang unggul, berjiwa technopreneur, dan berkarakter Imtaq yang siap memimpin industri di kancah nasional maupun global.',
+            'video_judul' => 'Video Profil Program Studi Teknik Informatika',
+            'video_subjudul' => 'Sematan YouTube • 2–3 menit',
+            'video_aktif' => true,
         ]);
 
         return view('pages.sambutan-dekan.index', compact('sambutanDekan'));
@@ -23,7 +28,10 @@ class SambutanDekanController extends Controller
 
     public function update(SambutanDekanRequest $request): RedirectResponse
     {
+        SambutanDekan::ensureVideoColumns();
+
         $validated = $request->validated();
+        $validated['video_aktif'] = $request->has('video_aktif');
 
         $sambutanDekan = SambutanDekan::firstOrCreate([]);
 
@@ -39,6 +47,6 @@ class SambutanDekanController extends Controller
 
         return redirect()
             ->route('sambutan-rektor.index')
-            ->with('success', 'Data Sambutan Ka Prodi Teknik Informatika & Foto berhasil diperbarui.');
+            ->with('success', 'Data Sambutan Ka Prodi & Video Profil Program Studi berhasil diperbarui.');
     }
 }

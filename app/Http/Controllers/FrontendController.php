@@ -113,6 +113,7 @@ class FrontendController extends Controller
         $organisasis = OrganisasiMahasiswa::where('is_active', true)->orderBy('urutan')->get();
         $organisasiSetting = OrganisasiMahasiswaSetting::first();
         $about = About::first();
+        SambutanDekan::ensureVideoColumns();
         $sambutanDekan = SambutanDekan::first();
         $struktur = StrukturOrganisasi::first();
         $pmbSetting = PmbSetting::first();

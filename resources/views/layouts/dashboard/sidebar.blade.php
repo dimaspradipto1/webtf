@@ -36,6 +36,11 @@
                       </a>
                   </li>
                   <li>
+                      <a href="{{ route('sambutan-rektor.index') }}#video-profil" class="{{ Route::is('sambutan-rektor.*') ? 'active' : '' }}">
+                          <i class="bi bi-circle"></i><span>Video Profil Prodi</span>
+                      </a>
+                  </li>
+                  <li>
                       <a href="{{ route('feature.index') }}" class="{{ Route::is('feature.*') ? 'active' : '' }}">
                           <i class="bi bi-circle"></i><span>Keunggulan Program Studi</span>
                       </a>
