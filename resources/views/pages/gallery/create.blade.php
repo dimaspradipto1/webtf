@@ -123,7 +123,7 @@
                         <div id="previewWrap" class="mt-3 d-none">
                             <p class="small text-muted mb-1">Preview:</p>
                             <img id="previewImg"
-                                 src=""
+                                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                                  alt="Preview"
                                  style="max-width:200px;max-height:200px;object-fit:cover;border-radius:8px;border:1px solid #dee2e6">
                         </div>

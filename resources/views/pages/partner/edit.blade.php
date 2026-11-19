@@ -81,7 +81,7 @@
 
                         <div id="previewWrap" class="mt-3 d-none">
                             <p class="small text-muted mb-1">Preview logo baru:</p>
-                            <img id="previewImg" src="" alt="Preview"
+                            <img id="previewImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Preview"
                                  style="max-width:200px;max-height:120px;object-fit:contain;border-radius:8px;border:2px solid #0d6efd">
                         </div>
                     </div>

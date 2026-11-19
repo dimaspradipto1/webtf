@@ -125,7 +125,7 @@
                                                     {{ $user->initials ?? 'AD' }}
                                                 </div>
                                             @else
-                                                <img id="avatarPreviewImg" src="" alt="Preview" class="rounded-circle shadow-sm d-none" style="width: 76px; height: 76px; object-fit: cover; border: 3px solid #f9dc4b;">
+                                                <img id="avatarPreviewImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Preview" class="rounded-circle shadow-sm d-none" style="width: 76px; height: 76px; object-fit: cover; border: 3px solid #f9dc4b;">
                                                 <div id="avatarPreviewFallback" class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 76px; height: 76px; background: #000000; color: #ffffff; font-size: 26px;">
                                                     {{ $user->initials ?? 'AD' }}
                                                 </div>

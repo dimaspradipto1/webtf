@@ -194,7 +194,7 @@
                         <div id="thumbnailPreviewWrap" class="mt-3 d-none">
                             <p class="small text-muted mb-1 fw-semibold">Preview Thumbnail:</p>
                             <img id="thumbnailPreview"
-                                 src=""
+                                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                                  alt="Preview Thumbnail"
                                  class="img-thumbnail rounded"
                                  style="max-height: 180px; object-fit: cover;">

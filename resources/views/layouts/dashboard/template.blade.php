@@ -461,6 +461,34 @@
     <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.print.min.js"></script>
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+    <script>
+        // Konsistensi Bahasa Indonesia untuk seluruh DataTables di Dashboard Admin
+        (function () {
+            const dtIndonesian = {
+                emptyTable: "Tidak ada data yang tersedia pada tabel ini",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                infoEmpty: "Menampilkan 0 sampai 0 dari 0 entri",
+                infoFiltered: "(disaring dari _MAX_ total entri)",
+                lengthMenu: "Tampilkan _MENU_ entri",
+                loadingRecords: "Memuat...",
+                processing: "Memproses...",
+                search: "Cari:",
+                zeroRecords: "Tidak ditemukan data yang sesuai",
+                paginate: {
+                    first: "Pertama",
+                    last: "Terakhir",
+                    next: "Berikutnya",
+                    previous: "Sebelumnya"
+                }
+            };
+            if (typeof DataTable !== 'undefined' && DataTable.defaults) {
+                Object.assign(DataTable.defaults.language, dtIndonesian);
+            }
+            if (typeof jQuery !== 'undefined' && jQuery.fn && jQuery.fn.dataTable) {
+                jQuery.extend(true, jQuery.fn.dataTable.defaults, { language: dtIndonesian });
+            }
+        })();
+    </script>
 
     {{-- SweetAlert2 --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">

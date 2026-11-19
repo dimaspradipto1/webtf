@@ -221,7 +221,7 @@
                                 <div id="thumbnailPreviewWrap" class="mt-2 d-none">
                                     <p class="small text-muted mb-1 fw-semibold">Preview Baru:</p>
                                     <img id="thumbnailPreview"
-                                         src=""
+                                         src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                                          alt="Preview Thumbnail"
                                          class="img-thumbnail rounded"
                                          style="max-height: 120px; object-fit: cover;">

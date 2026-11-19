@@ -129,8 +129,24 @@
                     {{ $dosen->nuptk ?: '-' }}
                   </td>
                   <td class="text-center">
-                    @if(!empty($dosen->link))
-                      <a href="{{ $dosen->link }}" target="_blank" class="btn-lihat-dosen">
+                    @php
+                      $rawLink = trim($dosen->link ?? '');
+                      $isBarePddikti = false;
+                      if ($rawLink !== '') {
+                          $parsedLink = parse_url($rawLink);
+                          $linkHost = strtolower($parsedLink['host'] ?? '');
+                          $linkPath = trim($parsedLink['path'] ?? '', '/');
+                          if (str_contains($linkHost, 'pddikti.') && $linkPath === '' && empty($parsedLink['query'])) {
+                              $isBarePddikti = true;
+                          }
+                      }
+                      $searchKeyword = trim($dosen->nidn ?: $dosen->nama_dosen);
+                      $profileUrl = (!$isBarePddikti && $rawLink !== '')
+                          ? $rawLink
+                          : ($searchKeyword !== '' ? 'https://pddikti.kemdiktisaintek.go.id/search/' . rawurlencode($searchKeyword) : '');
+                    @endphp
+                    @if(!empty($profileUrl))
+                      <a href="{{ $profileUrl }}" target="_blank" rel="noopener noreferrer" class="btn-lihat-dosen">
                         <i class="bi bi-box-arrow-up-right"></i> Lihat
                       </a>
                     @else

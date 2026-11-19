@@ -109,7 +109,7 @@
                                 {{-- Box Preview Logo Langsung (Tanpa Background Hijau) --}}
                                 <div id="preview-container" class="d-flex align-items-center justify-content-center rounded-3 border bg-white p-1"
                                      style="width: 58px; height: 58px; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
-                                    <img id="preview-img" src="" alt="Preview Logo" class="d-none"
+                                    <img id="preview-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Preview Logo" class="d-none"
                                          style="max-width: 48px; max-height: 48px; object-fit: contain; border-radius: 6px;">
                                     <div id="preview-placeholder" class="text-muted text-center" style="font-size: 11px; line-height: 1.2;">
                                         <i class="bi bi-image d-block fs-5 mb-1 text-secondary"></i>Preview

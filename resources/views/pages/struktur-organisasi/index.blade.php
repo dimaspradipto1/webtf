@@ -88,7 +88,7 @@
                 @else
                     <div class="bg-light p-3 rounded border text-center d-none w-100 position-relative" id="strukturPreviewBox" style="overflow: visible !important;">
                         <div class="position-relative d-inline-block w-100" id="adminStrukturStage" style="overflow: visible !important;">
-                            <img id="strukturPreviewImg" src="" alt="Struktur Organisasi" class="img-fluid rounded border shadow-sm w-100" crossorigin="anonymous">
+                            <img id="strukturPreviewImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Struktur Organisasi" class="img-fluid rounded border shadow-sm w-100" crossorigin="anonymous">
                             <div id="adminStrukturHotspots" class="position-absolute top-0 start-0 w-100 h-100" style="pointer-events: none;"></div>
                             <canvas id="adminStrukturZoomCanvas" class="admin-struktur-zoom-popup"></canvas>
                         </div>

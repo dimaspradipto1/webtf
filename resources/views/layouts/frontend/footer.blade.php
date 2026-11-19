@@ -31,7 +31,7 @@
         <ul class="footer-links">
           <li><a href="{{ route('homepage') }}"><i class="bi bi-chevron-right"></i> Beranda</a></li>
           <li><a href="{{ route('homepage.sejarah') }}"><i class="bi bi-chevron-right"></i> Sejarah YAPISTA</a></li>
-          <li><a href="{{ route('homepage.sambutan-rektor') }}"><i class="bi bi-chevron-right"></i> Sambutan Kaprodi TF</a></li>
+          <li><a href="{{ route('homepage.sambutan-kaprodi') }}"><i class="bi bi-chevron-right"></i> Sambutan Kaprodi TF</a></li>
           <li><a href="{{ route('homepage.tentang') }}"><i class="bi bi-chevron-right"></i> Profil Pimpinan</a></li>
           <li><a href="{{ route('homepage.struktur-organisasi') }}"><i class="bi bi-chevron-right"></i> Struktur Organisasi</a></li>
           <li><a href="{{ route('homepage.visi-misi') }}"><i class="bi bi-chevron-right"></i> Visi Misi & Tujuan TF</a></li>
@@ -97,8 +97,8 @@
     <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 footer-bottom">
       <span>{{ $themeSetting?->footer_copyright ?: '© ' . date('Y') . ' Program Studi Teknik Informatika — Fakultas Sains dan Teknologi. All rights reserved.' }}</span>
       <div class="d-flex gap-3">
-        <a href="#">Kebijakan Privasi</a>
-        <a href="#">Syarat & Ketentuan</a>
+        <a href="{{ route('homepage.kebijakan-privasi') }}">Kebijakan Privasi</a>
+        <a href="{{ route('homepage.syarat-ketentuan') }}">Syarat & Ketentuan</a>
         <a href="{{ route('login') }}" style="color:var(--uis-yellow);">Portal Admin</a>
       </div>
     </div>

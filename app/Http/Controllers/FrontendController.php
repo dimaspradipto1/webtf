@@ -1547,4 +1547,105 @@ class FrontendController extends Controller
             'totalResults'
         ));
     }
+
+    public function kebijakanPrivasi()
+    {
+        return view('layouts.frontend.kebijakan-privasi');
+    }
+
+    public function syaratKetentuan()
+    {
+        return view('layouts.frontend.syarat-ketentuan');
+    }
+
+    public function sitemap()
+    {
+        $staticUrls = [
+            ['loc' => route('homepage'), 'priority' => '1.0', 'changefreq' => 'daily'],
+            ['loc' => route('homepage.tentang'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.sambutan-kaprodi'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.visi-misi'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.sejarah'), 'priority' => '0.7', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.struktur-organisasi'), 'priority' => '0.7', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.fasilitas'), 'priority' => '0.7', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.kurikulum'), 'priority' => '0.9', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.kalender-akademik'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.pedoman-akademik'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.sistem-akademik'), 'priority' => '0.7', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.dosen'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.news'), 'priority' => '0.9', 'changefreq' => 'daily'],
+            ['loc' => route('homepage.pengumuman'), 'priority' => '0.9', 'changefreq' => 'daily'],
+            ['loc' => route('homepage.agenda'), 'priority' => '0.8', 'changefreq' => 'weekly'],
+            ['loc' => route('homepage.galeri'), 'priority' => '0.7', 'changefreq' => 'weekly'],
+            ['loc' => route('homepage.prestasi'), 'priority' => '0.7', 'changefreq' => 'weekly'],
+            ['loc' => route('homepage.organisasi'), 'priority' => '0.7', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.unduhan'), 'priority' => '0.7', 'changefreq' => 'weekly'],
+            ['loc' => route('homepage.testimoni'), 'priority' => '0.7', 'changefreq' => 'weekly'],
+            ['loc' => route('homepage.faq'), 'priority' => '0.7', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.kontak'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.kebijakan-privasi'), 'priority' => '0.4', 'changefreq' => 'yearly'],
+            ['loc' => route('homepage.syarat-ketentuan'), 'priority' => '0.4', 'changefreq' => 'yearly'],
+        ];
+
+        $urls = collect($staticUrls)->map(fn ($u) => array_merge($u, ['lastmod' => now()->toAtomString()]));
+
+        News::where('status', 'published')->latest()->take(200)->get()->each(function ($item) use (&$urls) {
+            $urls->push([
+                'loc' => route('homepage.news.detail', $item->slug ?? $item->id),
+                'lastmod' => optional($item->updated_at ?? $item->created_at)->toAtomString() ?? now()->toAtomString(),
+                'changefreq' => 'weekly',
+                'priority' => '0.8',
+            ]);
+        });
+
+        Announcement::where('is_active', true)->latest('date')->take(100)->get()->each(function ($item) use (&$urls) {
+            $urls->push([
+                'loc' => route('homepage.pengumuman.detail', $item->slug),
+                'lastmod' => optional($item->updated_at ?? $item->created_at)->toAtomString() ?? now()->toAtomString(),
+                'changefreq' => 'weekly',
+                'priority' => '0.8',
+            ]);
+        });
+
+        Agenda::where('is_active', true)->latest('id')->take(100)->get()->each(function ($item) use (&$urls) {
+            $urls->push([
+                'loc' => route('homepage.agenda.detail', $item->slug),
+                'lastmod' => optional($item->updated_at ?? $item->created_at)->toAtomString() ?? now()->toAtomString(),
+                'changefreq' => 'weekly',
+                'priority' => '0.7',
+            ]);
+        });
+
+        Prestasi::where('is_active', true)->latest('id')->take(100)->get()->each(function ($item) use (&$urls) {
+            $urls->push([
+                'loc' => route('homepage.prestasi.detail', $item->slug),
+                'lastmod' => optional($item->updated_at ?? $item->created_at)->toAtomString() ?? now()->toAtomString(),
+                'changefreq' => 'monthly',
+                'priority' => '0.7',
+            ]);
+        });
+
+        OrganisasiMahasiswa::where('is_active', true)->orderBy('urutan')->get()->each(function ($item) use (&$urls) {
+            $urls->push([
+                'loc' => route('homepage.organisasi.detail', $item->slug),
+                'lastmod' => optional($item->updated_at ?? $item->created_at)->toAtomString() ?? now()->toAtomString(),
+                'changefreq' => 'monthly',
+                'priority' => '0.6',
+            ]);
+        });
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
+        foreach ($urls as $u) {
+            $xml .= "  <url>\n";
+            $xml .= '    <loc>'.htmlspecialchars($u['loc'], ENT_XML1, 'UTF-8')."</loc>\n";
+            $xml .= '    <lastmod>'.$u['lastmod']."</lastmod>\n";
+            $xml .= '    <changefreq>'.$u['changefreq']."</changefreq>\n";
+            $xml .= '    <priority>'.$u['priority']."</priority>\n";
+            $xml .= "  </url>\n";
+        }
+        $xml .= '</urlset>';
+
+        return response($xml, 200)->header('Content-Type', 'application/xml; charset=UTF-8');
+    }
 }

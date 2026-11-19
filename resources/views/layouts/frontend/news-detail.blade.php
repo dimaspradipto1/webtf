@@ -227,7 +227,7 @@
     <div class="modal-content bg-transparent border-0">
       <div class="modal-body p-0 text-center position-relative">
         <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-        <img id="modalImg" src="" class="img-fluid rounded shadow-lg" style="max-height:85vh; object-fit:contain;">
+        <img id="modalImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="img-fluid rounded shadow-lg" style="max-height:85vh; object-fit:contain;">
       </div>
     </div>
   </div>

@@ -116,7 +116,7 @@
                                             <i class="bi bi-image d-block fs-5 mb-1 text-secondary"></i>Preview
                                         </div>
                                     @else
-                                        <img id="preview-img" src="" alt="Preview Logo" class="d-none"
+                                        <img id="preview-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Preview Logo" class="d-none"
                                              style="max-width: 48px; max-height: 48px; object-fit: contain; border-radius: 6px;">
                                         <div id="preview-placeholder" class="text-muted text-center" style="font-size: 11px; line-height: 1.2;">
                                             <i class="bi bi-image d-block fs-5 mb-1 text-secondary"></i>Preview

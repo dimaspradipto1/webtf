@@ -57,6 +57,8 @@ class NewsRequest extends FormRequest
             'content.required' => 'Konten berita wajib diisi.',
             'status.required' => 'Status wajib dipilih.',
             'status.in' => 'Status tidak valid.',
+            'category.required' => 'Kategori berita wajib dipilih.',
+            'category.max' => 'Nama kategori maksimal 100 karakter.',
             'thumbnail.required' => 'Thumbnail utama wajib diunggah.',
             'thumbnail.image' => 'File thumbnail harus berupa gambar.',
             'thumbnail.mimes' => 'Format gambar harus jpeg, png, jpg, gif, svg, atau webp.',

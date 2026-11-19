@@ -1159,11 +1159,14 @@
 
           <!-- Password Field -->
           <div class="form-group">
-            <div class="form-label-row">
-              <label for="password" class="form-label">
+            <div class="form-label-row d-flex align-items-center justify-content-between">
+              <label for="password" class="form-label mb-0">
                 <span>Kata Sandi</span>
                 <span class="code-tag">[KEY]</span>
               </label>
+              <a href="{{ route('password.request') }}" style="font-size: 12px; color: #f9dc4b; text-decoration: none; font-weight: 600;">
+                Lupa Password?
+              </a>
             </div>
             <div class="input-box">
               <i class="bi bi-shield-lock input-icon-lead"></i>
@@ -1221,7 +1224,7 @@
       <div class="auth-bottom-info">
         <div class="security-badge">
           <i class="bi bi-lock-fill"></i>
-          <span>TERENKRIPSI END-TO-END • PUSAT TEKNOLOGI INFORMASI UIS</span>
+          <span>KONEKSI AMAN (HTTPS) • PUSAT TEKNOLOGI INFORMASI UIS</span>
         </div>
         <div class="auth-copyright">
           &copy; {{ date('Y') }} Program Studi S1 Teknik Informatika (FST UIS). Hak cipta dilindungi.

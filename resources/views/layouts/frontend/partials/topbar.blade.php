@@ -2,14 +2,31 @@
   $topbar = $topbarSetting ?? \App\Models\Topbar::where('is_active', true)->latest('id')->first();
   $marqueeText = $topbar?->marquee_text ?: 'Fakultas Sains & Teknologi Universitas Ibnu Sina Fakultasnya Teknokrat Unggul — Program Studi S1 Teknik Informatika (UIS)';
 
+  $officialFallbackMap = [
+      'facebook.com' => 'https://www.facebook.com/universitasibnusina/',
+      'www.facebook.com' => 'https://www.facebook.com/universitasibnusina/',
+      'instagram.com' => 'https://www.instagram.com/universitasibnusina/',
+      'www.instagram.com' => 'https://www.instagram.com/universitasibnusina/',
+      'youtube.com' => 'https://www.youtube.com/@universitasibnusinabatam',
+      'www.youtube.com' => 'https://www.youtube.com/@universitasibnusinabatam',
+  ];
+
   $sosmedList = [];
   if ($topbar && is_array($topbar->social_media) && count($topbar->social_media) > 0) {
       foreach ($topbar->social_media as $item) {
           if (!empty($item['url'])) {
+              $url = trim($item['url']);
+              $parsed = parse_url($url);
+              $host = strtolower($parsed['host'] ?? '');
+              $path = trim($parsed['path'] ?? '', '/');
+              // Jika URL hanya mengarah ke beranda platform generik, arahkan ke akun resmi kampus
+              if ($path === '' && isset($officialFallbackMap[$host])) {
+                  $url = $officialFallbackMap[$host];
+              }
               $sosmedList[] = [
                   'platform' => $item['platform'] ?? 'Media Sosial',
                   'icon' => !empty($item['icon']) ? $item['icon'] : 'bi-globe',
-                  'url' => $item['url']
+                  'url' => $url
               ];
           }
       }
@@ -17,9 +34,9 @@
 
   if (empty($sosmedList)) {
       $sosmedList = [
-          ['platform' => 'Facebook', 'icon' => 'bi-facebook', 'url' => $topbar?->facebook_url ?: 'https://facebook.com'],
-          ['platform' => 'Instagram', 'icon' => 'bi-instagram', 'url' => $topbar?->instagram_url ?: 'https://instagram.com'],
-          ['platform' => 'YouTube', 'icon' => 'bi-youtube', 'url' => $topbar?->youtube_url ?: 'https://youtube.com'],
+          ['platform' => 'Facebook', 'icon' => 'bi-facebook', 'url' => $topbar?->facebook_url ?: 'https://www.facebook.com/universitasibnusina/'],
+          ['platform' => 'Instagram', 'icon' => 'bi-instagram', 'url' => $topbar?->instagram_url ?: 'https://www.instagram.com/universitasibnusina/'],
+          ['platform' => 'YouTube', 'icon' => 'bi-youtube', 'url' => $topbar?->youtube_url ?: 'https://www.youtube.com/@universitasibnusinabatam'],
       ];
   }
 @endphp

@@ -11,6 +11,14 @@
     </nav>
 </div>
 
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center mb-3" role="alert">
+        <i class="bi bi-check-circle-fill me-2 fs-5"></i>
+        <div>{{ session('success') }}</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 @include('layouts.dashboard.partials.header-setting-card', [
     'pageKey' => 'galeri',
     'pageTitle' => 'Galeri Foto & Dokumentasi',

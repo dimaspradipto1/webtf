@@ -48,7 +48,7 @@ class GalleryController extends Controller
 
         alert()->success('Berhasil!', 'Foto galeri berhasil ditambahkan.');
 
-        return redirect()->route('gallery.index');
+        return redirect()->route('gallery.index')->with('success', 'Foto galeri berhasil ditambahkan.');
     }
 
     /**
@@ -85,7 +85,7 @@ class GalleryController extends Controller
 
         alert()->success('Berhasil!', 'Data galeri berhasil diperbarui.');
 
-        return redirect()->route('gallery.index');
+        return redirect()->route('gallery.index')->with('success', 'Data galeri berhasil diperbarui.');
     }
 
     /**
@@ -102,6 +102,6 @@ class GalleryController extends Controller
 
         alert()->success('Berhasil!', 'Foto galeri berhasil dihapus.');
 
-        return redirect()->route('gallery.index');
+        return redirect()->route('gallery.index')->with('success', 'Foto galeri berhasil dihapus.');
     }
 }

@@ -108,7 +108,7 @@
 
           {{-- CTA Buttons --}}
           <div class="d-flex flex-wrap align-items-center gap-3">
-            <a href="{{ route('homepage.sambutan-rektor') }}" class="btn-primary-hero d-inline-flex align-items-center gap-2">
+            <a href="{{ route('homepage.sambutan-kaprodi') }}" class="btn-primary-hero d-inline-flex align-items-center gap-2">
               <i class="bi bi-chat-quote-fill"></i>
               <span>Baca Sambutan Selengkapnya</span>
               <i class="bi bi-arrow-right"></i>

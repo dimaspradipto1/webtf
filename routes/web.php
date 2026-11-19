@@ -63,9 +63,9 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/tentang', 'tentang')->name('homepage.tentang');
     Route::get('/profil-pimpinan', 'tentang')->name('homepage.profil-pimpinan');
     Route::get('/profil-pimpinan/{slug}', 'pimpinanDetail')->name('homepage.pimpinan.detail');
-    Route::get('/sambutan-rektor', 'sambutanDekan')->name('homepage.sambutan-rektor');
     Route::get('/sambutan-kaprodi', 'sambutanDekan')->name('homepage.sambutan-kaprodi');
-    Route::get('/sambutan-dekan', fn () => redirect()->route('homepage.sambutan-rektor', [], 301))->name('homepage.sambutan-dekan');
+    Route::get('/sambutan-rektor', fn () => redirect()->route('homepage.sambutan-kaprodi', [], 301))->name('homepage.sambutan-rektor');
+    Route::get('/sambutan-dekan', fn () => redirect()->route('homepage.sambutan-kaprodi', [], 301))->name('homepage.sambutan-dekan');
     Route::get('/visi-misi', 'visiMisi')->name('homepage.visi-misi');
     Route::get('/sejarah', 'sejarah')->name('homepage.sejarah');
     Route::get('/organisasi', 'strukturOrganisasi')->name('homepage.struktur-organisasi');
@@ -111,6 +111,9 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/pendampingan-acara', 'pendampinganAcara')->name('homepage.pendampingan-acara');
     Route::get('/survey-layanan', 'surveyLayanan')->name('homepage.survey-layanan');
     Route::get('/kontak', 'kontak')->name('homepage.kontak');
+    Route::get('/kebijakan-privasi', 'kebijakanPrivasi')->name('homepage.kebijakan-privasi');
+    Route::get('/syarat-ketentuan', 'syaratKetentuan')->name('homepage.syarat-ketentuan');
+    Route::get('/sitemap.xml', 'sitemap')->name('homepage.sitemap');
 });
 
 /*
@@ -122,6 +125,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'login')->name('login');
     Route::post('/loginproses', 'loginproses')->name('loginproses');
     Route::get('/logout', 'logout')->name('logout');
+    Route::get('/lupa-password', 'showForgotPasswordForm')->name('password.request');
+    Route::post('/lupa-password', 'sendResetLinkEmail')->middleware('throttle:5,10')->name('password.email');
+    Route::get('/reset-password/{token}', 'showResetPasswordForm')->name('password.reset');
+    Route::post('/reset-password', 'resetPassword')->middleware('throttle:5,10')->name('password.update');
 });
 
 /*

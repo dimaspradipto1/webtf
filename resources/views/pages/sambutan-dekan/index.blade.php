@@ -125,7 +125,7 @@
                         <button type="submit" class="btn text-white px-4 py-2 fw-semibold" style="background-color: #000000;">
                             <i class="bi bi-save me-1"></i> Simpan Perubahan Sambutan Ka Prodi Teknik Informatika
                         </button>
-                        <a href="{{ route('homepage.sambutan-rektor') }}" target="_blank" class="btn btn-outline-secondary px-3 py-2">
+                        <a href="{{ route('homepage.sambutan-kaprodi') }}" target="_blank" class="btn btn-outline-secondary px-3 py-2">
                             <i class="bi bi-box-arrow-up-right me-1"></i> Lihat Halaman Publik
                         </a>
                     </div>

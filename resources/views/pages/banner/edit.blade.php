@@ -94,7 +94,7 @@
                         <div id="previewWrap" class="mt-3 d-none">
                             <p class="small text-muted mb-1">Preview gambar baru:</p>
                             <img id="previewImg"
-                                 src=""
+                                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                                  alt="Preview"
                                  style="max-width:100%;max-height:200px;object-fit:cover;border-radius:8px;border:2px solid #0d6efd">
                             <div id="previewDim" class="small text-muted mt-1"></div>

@@ -36,7 +36,7 @@
               </a>
             </li>
             <li>
-              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sambutan*') ? 'active' : '' }}" href="{{ route('homepage.sambutan-rektor') }}">
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.sambutan*') ? 'active' : '' }}" href="{{ route('homepage.sambutan-kaprodi') }}">
                 <i class="bi bi-person-badge"></i> Sambutan Kaprodi TF
               </a>
             </li>

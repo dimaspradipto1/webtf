@@ -126,7 +126,7 @@
                         <div id="previewWrap" class="mt-3 d-none">
                             <p class="small text-muted mb-1">Preview Logo:</p>
                             <img id="previewImg"
-                                 src=""
+                                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                                  alt="Preview Logo"
                                  style="max-width:150px;max-height:150px;object-fit:contain;border-radius:4px;border:1px solid #dee2e6;background:#f8f9fa;padding:5px">
                         </div>
