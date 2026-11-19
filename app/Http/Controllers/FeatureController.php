@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\FeatureDataTable;
 use App\Http\Requests\FeatureRequest;
 use App\Models\Feature;
+use App\Providers\AppServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -38,6 +39,7 @@ class FeatureController extends Controller
             'urutan' => $request->urutan ?? 0,
         ]);
 
+        AppServiceProvider::recordContentUpdate();
         alert()->success('Berhasil!', 'Keunggulan berhasil ditambahkan.');
 
         return redirect()->route('feature.index');
@@ -63,6 +65,7 @@ class FeatureController extends Controller
             'urutan' => $request->urutan ?? 0,
         ]);
 
+        AppServiceProvider::recordContentUpdate();
         alert()->success('Berhasil!', 'Keunggulan berhasil diperbarui.');
 
         return redirect()->route('feature.index');
@@ -75,6 +78,7 @@ class FeatureController extends Controller
     {
         $feature->delete();
 
+        AppServiceProvider::recordContentUpdate();
         alert()->success('Berhasil!', 'Keunggulan berhasil dihapus.');
 
         return redirect()->route('feature.index');

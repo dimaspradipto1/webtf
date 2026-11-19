@@ -1,6 +1,7 @@
 <!-- ═══════════════════════════════════════════════
      5. MENGAPA MEMILIH Teknik Informatika
 ═══════════════════════════════════════════════ -->
+@if(isset($features) && $features->count() > 0)
 <section class="section-bg-white" id="keunggulan">
   <div class="container">
     <div class="text-center mb-5" data-aos="fade-up">
@@ -12,54 +13,28 @@
       </p>
     </div>
 
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-        <div class="value-card">
-          <div class="value-icon-wrap"><i class="bi bi-book-half"></i></div>
-          <div class="value-title">Kurikulum Berbasis Industri</div>
-          <p class="value-desc">Materi kuliah diselaraskan dengan kebutuhan kompetensi industri, Permenaker, dan standar sertifikasi internasional.</p>
+    <div class="row g-4 justify-content-center">
+      @foreach($features as $index => $feature)
+        @php
+          $rawIcon = trim($feature->icon ?? '');
+          if (empty($rawIcon)) {
+              $iconClass = 'bi bi-star-fill';
+          } elseif (str_starts_with($rawIcon, 'bi ') || str_contains($rawIcon, ' bi-')) {
+              $iconClass = $rawIcon;
+          } else {
+              $iconClass = 'bi ' . $rawIcon;
+          }
+          $delay = (($index % 6) + 1) * 100;
+        @endphp
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $delay }}">
+          <div class="value-card">
+            <div class="value-icon-wrap"><i class="{{ $iconClass }}"></i></div>
+            <div class="value-title">{{ $feature->judul }}</div>
+            <p class="value-desc">{{ trim(strip_tags(html_entity_decode($feature->deskripsi ?? '', ENT_QUOTES, 'UTF-8'))) }}</p>
+          </div>
         </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-        <div class="value-card">
-          <div class="value-icon-wrap"><i class="bi bi-person-video3"></i></div>
-          <div class="value-title">Dosen Ahli & Praktisi</div>
-          <p class="value-desc">Diajar langsung oleh akademisi bergelar doktor (S3) dan praktisi industri berpengalaman di bidang IT, manufaktur, bisnis, dan K3.</p>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-        <div class="value-card">
-          <div class="value-icon-wrap"><i class="bi bi-cpu-fill"></i></div>
-          <div class="value-title">Laboratorium Mutakhir</div>
-          <p class="value-desc">Peralatan komputasi AI, laboratorium jaringan Cisco, studio teknik industri, perancangan logistik, dan pengujian K3 lingkungan.</p>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
-        <div class="value-card">
-          <div class="value-icon-wrap"><i class="bi bi-buildings-fill"></i></div>
-          <div class="value-title">100+ Mitra Industri & Korporasi</div>
-          <p class="value-desc">Kerjasama magang dan penempatan kerja luas di kawasan industri Batamindo, Panbil, BUMN, galangan kapal, dan instansi perbankan.</p>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
-        <div class="value-card">
-          <div class="value-icon-wrap"><i class="bi bi-stars"></i></div>
-          <div class="value-title">Karakter Imtaq & Entrepreneur</div>
-          <p class="value-desc">Pembinaan karakter profesional muda yang jujur, amanah, berjiwa wirausaha mandiri, dan berlandaskan keimanan dan ketaqwaan.</p>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
-        <div class="value-card">
-          <div class="value-icon-wrap"><i class="bi bi-award-fill"></i></div>
-          <div class="value-title">Sertifikasi Kompetensi SKPI</div>
-          <p class="value-desc">Kesempatan memperoleh Surat Keterangan Pendamping Ijazah (SKPI) dan sertifikasi kompetensi keahlian BNSP berstandar internasional.</p>
-        </div>
-      </div>
+      @endforeach
     </div>
   </div>
 </section>
+@endif
