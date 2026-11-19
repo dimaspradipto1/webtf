@@ -1161,4 +1161,366 @@ class FrontendController extends Controller
             ->route('homepage.alumni.create')
             ->with('success', 'Terima kasih atas kontribusi Anda! Testimoni & kisah sukses Anda telah berhasil kami terima dan akan segera ditinjau oleh admin.');
     }
+
+    /**
+     * Pencarian global website (Berita, Pengumuman, Agenda, Dosen, dan Halaman Statis / Informasi).
+     */
+    public function search(Request $request)
+    {
+        $query = trim((string) ($request->query('q') ?? $request->query('search') ?? ''));
+        $tab = $request->query('tab', 'semua');
+
+        $newsResults = collect();
+        $announcementResults = collect();
+        $agendaResults = collect();
+        $dosenResults = collect();
+        $pageResults = collect();
+
+        if ($query !== '') {
+            $like = "%{$query}%";
+
+            $newsResults = News::where('status', 'published')
+                ->where(function ($q) use ($like) {
+                    $q->where('title', 'like', $like)
+                        ->orWhere('description', 'like', $like)
+                        ->orWhere('content', 'like', $like)
+                        ->orWhere('category', 'like', $like);
+                })
+                ->latest()
+                ->take(20)
+                ->get();
+
+            $announcementResults = Announcement::where('is_active', true)
+                ->where(function ($q) use ($like) {
+                    $q->where('title', 'like', $like)
+                        ->orWhere('content', 'like', $like);
+                })
+                ->orderBy('urutan')
+                ->latest('date')
+                ->take(20)
+                ->get();
+
+            $agendaResults = Agenda::where('is_active', true)
+                ->where(function ($q) use ($like) {
+                    $q->where('title', 'like', $like)
+                        ->orWhere('description', 'like', $like)
+                        ->orWhere('location', 'like', $like)
+                        ->orWhere('date_text', 'like', $like);
+                })
+                ->orderBy('urutan')
+                ->latest('id')
+                ->take(20)
+                ->get();
+
+            $dosenResults = Dosen::where('is_active', true)
+                ->where(function ($q) use ($like) {
+                    $q->where('nama_dosen', 'like', $like)
+                        ->orWhere('jabatan_fungsional', 'like', $like)
+                        ->orWhere('nidn', 'like', $like)
+                        ->orWhere('nuptk', 'like', $like)
+                        ->orWhere('prodi_nama', 'like', $like);
+                })
+                ->orderBy('urutan')
+                ->take(20)
+                ->get();
+
+            // Katalog Halaman Statis Website
+            $staticCatalog = [
+                [
+                    'title' => 'Profil & Pimpinan Program Studi',
+                    'type' => 'Halaman Statis',
+                    'icon' => 'bi-building',
+                    'url' => route('homepage.tentang'),
+                    'excerpt' => 'Informasi profil program studi, struktur pimpinan, dan identitas Program Studi S1 Teknik Informatika UIS.',
+                    'keywords' => 'profil tentang pimpinan kaprodi dekan fakultas teknik informatika',
+                ],
+                [
+                    'title' => 'Sambutan Ketua Program Studi',
+                    'type' => 'Halaman Statis',
+                    'icon' => 'bi-person-badge',
+                    'url' => route('homepage.sambutan-kaprodi'),
+                    'excerpt' => 'Kata sambutan resmi Ketua Program Studi S1 Teknik Informatika Fakultas Sains dan Teknologi UIS.',
+                    'keywords' => 'sambutan kaprodi ketua prodi dekan rektor pengantar',
+                ],
+                [
+                    'title' => 'Visi, Misi, Tujuan & Sasaran (VMTS)',
+                    'type' => 'Halaman Statis',
+                    'icon' => 'bi-bullseye',
+                    'url' => route('homepage.visi-misi'),
+                    'excerpt' => 'Visi, misi, tujuan, dan sasaran strategis Program Studi Teknik Informatika.',
+                    'keywords' => 'visi misi tujuan sasaran vmts arah kebijakan',
+                ],
+                [
+                    'title' => 'Sejarah Program Studi',
+                    'type' => 'Halaman Statis',
+                    'icon' => 'bi-clock-history',
+                    'url' => route('homepage.sejarah'),
+                    'excerpt' => 'Perjalanan sejarah dan perkembangan Program Studi Teknik Informatika Universitas Ibnu Sina.',
+                    'keywords' => 'sejarah milestone perkembangan berdirinya prodi',
+                ],
+                [
+                    'title' => 'Struktur Organisasi',
+                    'type' => 'Halaman Statis',
+                    'icon' => 'bi-diagram-3',
+                    'url' => route('homepage.struktur-organisasi'),
+                    'excerpt' => 'Bagan struktur organisasi dan tata kelola Program Studi Teknik Informatika.',
+                    'keywords' => 'struktur organisasi bagan tata kelola manajemen',
+                ],
+                [
+                    'title' => 'Fasilitas & Sarana Kampus',
+                    'type' => 'Halaman Statis',
+                    'icon' => 'bi-pc-display',
+                    'url' => route('homepage.fasilitas'),
+                    'excerpt' => 'Daftar fasilitas laboratorium komputer, ruang kuliah, perpustakaan, dan sarana pendukung pembelajaran.',
+                    'keywords' => 'fasilitas sarana prasarana laboratorium lab komputer ruang kuliah',
+                ],
+                [
+                    'title' => 'Kurikulum & Daftar Mata Kuliah (OBE)',
+                    'type' => 'Akademik',
+                    'icon' => 'bi-journal-bookmark',
+                    'url' => route('homepage.kurikulum'),
+                    'excerpt' => 'Struktur kurikulum OBE, daftar mata kuliah per semester, SKS, dan dokumen RPS.',
+                    'keywords' => 'kurikulum obe mata kuliah sks rps semester silabus',
+                ],
+                [
+                    'title' => 'Kalender Akademik',
+                    'type' => 'Akademik',
+                    'icon' => 'bi-calendar3',
+                    'url' => route('homepage.kalender-akademik'),
+                    'excerpt' => 'Jadwal kalender akademik semester ganjil dan genap, pengisian KRS, UTS, UAS, dan wisuda.',
+                    'keywords' => 'kalender akademik jadwal kuliah krs uts uas libur semester',
+                ],
+                [
+                    'title' => 'Pedoman Akademik',
+                    'type' => 'Akademik',
+                    'icon' => 'bi-book',
+                    'url' => route('homepage.pedoman-akademik'),
+                    'excerpt' => 'Buku pedoman akademik, peraturan perkuliahan, evaluasi studi, dan tugas akhir/skripsi.',
+                    'keywords' => 'pedoman akademik panduan peraturan skripsi tugas akhir krs',
+                ],
+                [
+                    'title' => 'Sistem Informasi Akademik (SIAKAD)',
+                    'type' => 'Akademik',
+                    'icon' => 'bi-laptop',
+                    'url' => route('homepage.sistem-akademik'),
+                    'excerpt' => 'Akses layanan sistem informasi akademik online untuk mahasiswa dan dosen (KRS, KHS, absensi).',
+                    'keywords' => 'sistem akademik siakad portal mahasiswa krs khs nilai',
+                ],
+                [
+                    'title' => 'Pendaftaran PMB (Penerimaan Mahasiswa Baru)',
+                    'type' => 'PMB',
+                    'icon' => 'bi-pencil-square',
+                    'url' => route('homepage.portal.page', 'pendaftaran-pmb'),
+                    'excerpt' => 'Informasi pendaftaran mahasiswa baru, jalur masuk, jadwal gelombang, dan persyaratan PMB.',
+                    'keywords' => 'pmb pendaftaran mahasiswa baru daftar kuliah beasiswa gelombang',
+                ],
+                [
+                    'title' => 'Informasi PMB',
+                    'type' => 'PMB',
+                    'icon' => 'bi-info-circle',
+                    'url' => route('homepage.portal.page', 'informasi-pmb'),
+                    'excerpt' => 'Rincian informasi penerimaan mahasiswa baru Program Studi Teknik Informatika UIS.',
+                    'keywords' => 'informasi pmb biaya kuliah syarat pendaftaran prodi',
+                ],
+                [
+                    'title' => 'Prestasi Mahasiswa',
+                    'type' => 'Kemahasiswaan',
+                    'icon' => 'bi-trophy',
+                    'url' => route('homepage.prestasi'),
+                    'excerpt' => 'Daftar capaian dan prestasi akademik maupun non-akademik mahasiswa Teknik Informatika.',
+                    'keywords' => 'prestasi mahasiswa juara lomba kompetisi penghargaan',
+                ],
+                [
+                    'title' => 'Organisasi Mahasiswa (Ormawa)',
+                    'type' => 'Kemahasiswaan',
+                    'icon' => 'bi-people',
+                    'url' => route('homepage.organisasi'),
+                    'excerpt' => 'Himpunan mahasiswa dan organisasi kemahasiswaan di lingkungan Program Studi Teknik Informatika.',
+                    'keywords' => 'organisasi mahasiswa ormawa himpunan himati bem ukm',
+                ],
+                [
+                    'title' => 'Galeri Foto & Dokumentasi',
+                    'type' => 'Publikasi',
+                    'icon' => 'bi-images',
+                    'url' => route('homepage.galeri'),
+                    'excerpt' => 'Dokumentasi visual kegiatan perkuliahan, praktikum, seminar, dan pengabdian masyarakat.',
+                    'keywords' => 'galeri foto dokumentasi kegiatan kampus',
+                ],
+                [
+                    'title' => 'Unduhan & E-Dokumen',
+                    'type' => 'Dokumen',
+                    'icon' => 'bi-download',
+                    'url' => route('homepage.unduhan'),
+                    'excerpt' => 'Pusat unduhan formulir akademik, SOP, template dokumen, dan berkas resmi program studi.',
+                    'keywords' => 'unduhan download dokumen formulir sop template berkas',
+                ],
+                [
+                    'title' => 'Testimoni Alumni & Tracer Study',
+                    'type' => 'Alumni',
+                    'icon' => 'bi-chat-quote',
+                    'url' => route('homepage.testimoni'),
+                    'excerpt' => 'Kisah sukses alumni, ulasan lulusan, dan informasi tracer study Program Studi Teknik Informatika.',
+                    'keywords' => 'testimoni alumni tracer study lulusan karir',
+                ],
+                [
+                    'title' => 'FAQ & Pusat Bantuan',
+                    'type' => 'Bantuan',
+                    'icon' => 'bi-question-circle',
+                    'url' => route('homepage.faq'),
+                    'excerpt' => 'Pertanyaan yang sering diajukan seputar perkuliahan, pendaftaran, dan layanan program studi.',
+                    'keywords' => 'faq pertanyaan bantuan tanya jawab informasi',
+                ],
+                [
+                    'title' => 'Kontak & Lokasi Kampus',
+                    'type' => 'Kontak',
+                    'icon' => 'bi-telephone',
+                    'url' => route('homepage.kontak'),
+                    'excerpt' => 'Alamat kampus, nomor WhatsApp/telepon, email resmi, jam operasional, dan peta lokasi.',
+                    'keywords' => 'kontak hubungi kami alamat telepon whatsapp email jam operasional peta lokasi',
+                ],
+            ];
+
+            $qLower = mb_strtolower($query);
+            foreach ($staticCatalog as $page) {
+                $haystack = mb_strtolower($page['title'].' '.$page['excerpt'].' '.$page['keywords']);
+                if (str_contains($haystack, $qLower)) {
+                    $pageResults->push((object) $page);
+                }
+            }
+
+            // Halaman Akademik dari database
+            $akademikRouteMap = [
+                'kalender_akademik' => route('homepage.kalender-akademik'),
+                'kalender-akademik' => route('homepage.kalender-akademik'),
+                'pedoman_akademik' => route('homepage.pedoman-akademik'),
+                'pedoman-akademik' => route('homepage.pedoman-akademik'),
+                'sistem_akademik' => route('homepage.sistem-akademik'),
+                'sistem-akademik' => route('homepage.sistem-akademik'),
+                'kurikulum' => route('homepage.kurikulum'),
+            ];
+
+            $akademikItems = Akademik::where('is_active', true)
+                ->where(function ($q) use ($like) {
+                    $q->where('judul', 'like', $like)
+                        ->orWhere('subjudul', 'like', $like)
+                        ->orWhere('deskripsi', 'like', $like);
+                })
+                ->take(10)
+                ->get();
+
+            foreach ($akademikItems as $ak) {
+                $url = $akademikRouteMap[$ak->tipe] ?? route('homepage.portal.page', Str::slug($ak->tipe ?? 'akademik'));
+                $pageResults->push((object) [
+                    'title' => $ak->judul,
+                    'type' => 'Akademik',
+                    'icon' => 'bi-mortarboard',
+                    'url' => $url,
+                    'excerpt' => Str::limit(trim(strip_tags((string) ($ak->deskripsi ?: $ak->subjudul))), 160),
+                ]);
+            }
+
+            // Prestasi Mahasiswa
+            $prestasiItems = Prestasi::where('is_active', true)
+                ->where(function ($q) use ($like) {
+                    $q->where('judul_prestasi', 'like', $like)
+                        ->orWhere('nama_mahasiswa', 'like', $like)
+                        ->orWhere('penyelenggara', 'like', $like)
+                        ->orWhere('deskripsi', 'like', $like);
+                })
+                ->take(10)
+                ->get();
+
+            foreach ($prestasiItems as $pr) {
+                $pageResults->push((object) [
+                    'title' => $pr->judul_prestasi,
+                    'type' => 'Prestasi',
+                    'icon' => 'bi-trophy-fill',
+                    'url' => route('homepage.prestasi.detail', $pr->slug),
+                    'excerpt' => Str::limit(trim(strip_tags((string) ($pr->deskripsi ?: ($pr->nama_mahasiswa.' — '.$pr->penyelenggara)))), 160),
+                ]);
+            }
+
+            // Organisasi Mahasiswa
+            $ormawaItems = OrganisasiMahasiswa::where('is_active', true)
+                ->where(function ($q) use ($like) {
+                    $q->where('nama_organisasi', 'like', $like)
+                        ->orWhere('singkatan', 'like', $like)
+                        ->orWhere('deskripsi', 'like', $like);
+                })
+                ->take(10)
+                ->get();
+
+            foreach ($ormawaItems as $orm) {
+                $pageResults->push((object) [
+                    'title' => $orm->nama_organisasi.($orm->singkatan ? " ({$orm->singkatan})" : ''),
+                    'type' => 'Organisasi',
+                    'icon' => 'bi-people-fill',
+                    'url' => route('homepage.organisasi.detail', $orm->slug),
+                    'excerpt' => Str::limit(trim(strip_tags((string) $orm->deskripsi)), 160),
+                ]);
+            }
+
+            // Unduhan / E-Dokumen
+            $unduhanItems = Unduhan::where('is_active', true)
+                ->where(function ($q) use ($like) {
+                    $q->where('judul', 'like', $like)
+                        ->orWhere('deskripsi', 'like', $like)
+                        ->orWhere('kategori', 'like', $like);
+                })
+                ->take(10)
+                ->get();
+
+            foreach ($unduhanItems as $und) {
+                $pageResults->push((object) [
+                    'title' => $und->judul,
+                    'type' => 'E-Dokumen',
+                    'icon' => 'bi-file-earmark-arrow-down',
+                    'url' => route('homepage.unduhan'),
+                    'excerpt' => Str::limit(trim(strip_tags((string) $und->deskripsi)), 160),
+                ]);
+            }
+
+            // FAQ
+            $faqItems = Faq::where(function ($q) use ($like) {
+                $q->where('question', 'like', $like)
+                    ->orWhere('answer', 'like', $like);
+            })
+                ->take(10)
+                ->get();
+
+            foreach ($faqItems as $faq) {
+                $pageResults->push((object) [
+                    'title' => $faq->question,
+                    'type' => 'FAQ',
+                    'icon' => 'bi-question-circle-fill',
+                    'url' => route('homepage.faq'),
+                    'excerpt' => Str::limit(trim(strip_tags((string) $faq->answer)), 160),
+                ]);
+            }
+
+            // Hindari duplikasi URL halaman statis yang sama persis dengan judul sama
+            $pageResults = $pageResults->unique(fn ($item) => mb_strtolower($item->title.'|'.$item->url))->values();
+        }
+
+        $counts = [
+            'berita' => $newsResults->count(),
+            'pengumuman' => $announcementResults->count(),
+            'agenda' => $agendaResults->count(),
+            'dosen' => $dosenResults->count(),
+            'halaman' => $pageResults->count(),
+        ];
+        $totalResults = array_sum($counts);
+
+        return view('layouts.frontend.search', compact(
+            'query',
+            'tab',
+            'newsResults',
+            'announcementResults',
+            'agendaResults',
+            'dosenResults',
+            'pageResults',
+            'counts',
+            'totalResults'
+        ));
+    }
 }

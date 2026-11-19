@@ -80,7 +80,7 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body p-4 bg-light">
-        <form action="{{ route('homepage.news.category', 'berita-dan-peristiwa') }}" method="GET">
+        <form action="{{ route('homepage.search') }}" method="GET">
           <div class="input-group input-group-lg shadow-sm">
             <span class="input-group-text bg-white border-end-0">
               <i class="bi bi-search text-muted"></i>
@@ -88,7 +88,7 @@
             <input type="text" 
                    name="q" 
                    class="form-control border-start-0 ps-0" 
-                   placeholder="Cari berita, pengumuman, artikel..." 
+                   placeholder="Cari berita, pengumuman, agenda, dosen, halaman..." 
                    autofocus 
                    required>
             <button class="btn btn-warning fw-bold px-4 text-dark" type="submit" style="background: #f9dc4b; border: none;">
