@@ -1,6 +1,13 @@
 @extends('layouts.dashboard.template')
 
 @section('content')
+<style>
+    .inbox-table { font-size: 11px !important; }
+    .inbox-table th, .inbox-table td { font-size: 11px !important; padding: 8px 10px !important; vertical-align: middle; }
+    .inbox-table .badge { font-size: 11px !important; }
+    .inbox-action-wrap { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+    .inbox-action-btn { width: 28px !important; height: 28px !important; padding: 0 !important; border-radius: 7px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; font-size: 12px !important; }
+</style>
 <div class="pagetitle">
     <h1>Kontak</h1>
     <nav>
@@ -38,6 +45,150 @@
     'defaultJudul' => 'Hubungi Kami',
     'defaultSubjudul' => 'Informasi alamat kampus, kontak resmi, surel, dan saluran konsultasi Program Studi S1 Teknik Informatika — Fakultas Sains dan Teknologi.'
 ])
+
+{{-- PESAN MASUK PENGUNJUNG (A9) --}}
+<div id="pesan-masuk" class="card shadow-sm border-0 mb-4" style="border-radius: 14px;">
+    <div class="card-header bg-white py-3 border-bottom d-flex flex-wrap align-items-center justify-content-between gap-2">
+        <div>
+            <h5 class="mb-1 fw-bold text-dark d-flex align-items-center gap-2">
+                <i class="bi bi-inbox-fill text-primary"></i> Pesan Masuk Pengunjung
+                @if(($unreadCount ?? 0) > 0)
+                    <span class="badge bg-danger rounded-pill" style="font-size: 11px;">{{ $unreadCount }} Baru</span>
+                @endif
+            </h5>
+            <p class="text-muted small mb-0">Daftar pesan dari formulir halaman Kontak publik. Pesan juga otomatis diteruskan ke email resmi prodi bila SMTP aktif.</p>
+        </div>
+    </div>
+    <div class="card-body p-3 p-md-4">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle inbox-table mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 38px;" class="text-center">No</th>
+                        <th style="width: 115px;">Tanggal</th>
+                        <th style="width: 190px;">Pengirim</th>
+                        <th style="width: 95px;">Kategori</th>
+                        <th>Isi Pesan</th>
+                        <th style="width: 90px;" class="text-center">Status</th>
+                        <th style="width: 110px;" class="text-center">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($messages as $idx => $msg)
+                        <tr class="{{ $msg->status === 'baru' ? 'table-warning bg-opacity-10' : '' }}">
+                            <td class="text-center text-muted">{{ method_exists($messages, 'firstItem') ? $messages->firstItem() + $idx : $idx + 1 }}</td>
+                            <td class="text-muted text-nowrap">{{ optional($msg->created_at)->format('d/m/Y H:i') }}</td>
+                            <td>
+                                <div class="fw-bold text-dark">{{ $msg->nama }}</div>
+                                <div class="text-muted">{{ $msg->email }}</div>
+                            </td>
+                            <td><span class="badge bg-primary-subtle text-primary border border-primary-subtle">{{ $msg->kategori }}</span></td>
+                            <td>
+                                <div class="text-dark">{{ \Illuminate\Support\Str::limit($msg->pesan, 95) }}</div>
+                                @if($msg->email_forwarded)
+                                    <span class="text-success" style="font-size: 10.5px;"><i class="bi bi-envelope-check me-1"></i>Terkirim ke email prodi</span>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                @if($msg->status === 'dibalas')
+                                    <span class="badge bg-success-subtle text-success">Dibalas</span>
+                                @elseif($msg->status === 'dibaca')
+                                    <span class="badge bg-info-subtle text-info">Dibaca</span>
+                                @else
+                                    <span class="badge bg-warning text-dark">Baru</span>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                <div class="inbox-action-wrap">
+                                    <button type="button"
+                                        class="btn btn-outline-primary inbox-action-btn btn-view-msg"
+                                        title="Lihat & Balas"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalViewContactMsg"
+                                        data-id="{{ $msg->id }}"
+                                        data-nama="{{ $msg->nama }}"
+                                        data-email="{{ $msg->email }}"
+                                        data-kategori="{{ $msg->kategori }}"
+                                        data-pesan="{{ $msg->pesan }}"
+                                        data-tanggal="{{ optional($msg->created_at)->format('d M Y, H:i') }} WIB"
+                                        data-status="{{ $msg->status }}"
+                                        data-status-url="{{ route('contact.messages.status', $msg->id) }}">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <a href="mailto:{{ $msg->email }}?subject={{ rawurlencode('Re: [' . $msg->kategori . '] Pesan Website TI UIS') }}"
+                                       class="btn btn-outline-success inbox-action-btn"
+                                       title="Balas via Email">
+                                        <i class="bi bi-reply-fill"></i>
+                                    </a>
+                                    <form action="{{ route('contact.messages.destroy', $msg->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus pesan ini?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-outline-danger inbox-action-btn" title="Hapus">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center py-4 text-muted">
+                                <i class="bi bi-envelope-open d-block fs-3 mb-1 opacity-50"></i>
+                                Belum ada pesan masuk dari pengunjung website.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        @if(method_exists($messages, 'hasPages') && $messages->hasPages())
+            <div class="d-flex justify-content-end mt-3">
+                {{ $messages->links() }}
+            </div>
+        @endif
+    </div>
+</div>
+
+{{-- Modal Detail Pesan Masuk --}}
+<div class="modal fade" id="modalViewContactMsg" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-dark text-white">
+                <h6 class="modal-title fw-bold"><i class="bi bi-envelope-open me-2 text-warning"></i>Detail Pesan Pengunjung</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <div id="msgModalNama" class="fw-bold text-dark fs-6"></div>
+                        <div id="msgModalEmail" class="text-muted small"></div>
+                    </div>
+                    <span id="msgModalKategori" class="badge bg-primary-subtle text-primary border border-primary-subtle"></span>
+                </div>
+                <div class="small text-muted mb-2"><i class="bi bi-clock me-1"></i><span id="msgModalTanggal"></span></div>
+                <div id="msgModalPesan" class="p-3 rounded-3 bg-light border text-dark small mb-3" style="white-space: pre-wrap; line-height: 1.65;"></div>
+
+                <form id="msgStatusForm" method="POST" class="d-flex flex-wrap align-items-center justify-content-between gap-2 pt-2 border-top">
+                    @csrf
+                    @method('PATCH')
+                    <div class="d-flex align-items-center gap-2">
+                        <label for="msgModalStatusSelect" class="small fw-semibold mb-0">Status:</label>
+                        <select name="status" id="msgModalStatusSelect" class="form-select form-select-sm" style="width: 120px;">
+                            <option value="baru">Baru</option>
+                            <option value="dibaca">Dibaca</option>
+                            <option value="dibalas">Dibalas</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-dark text-warning fw-semibold">Simpan Status</button>
+                    </div>
+                    <a id="msgModalReplyLink" href="#" class="btn btn-sm btn-success fw-semibold">
+                        <i class="bi bi-reply-fill me-1"></i> Balas Email
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="card shadow-sm border-0" style="border-radius: 14px;">
     <div class="card-header bg-white py-3 border-0">
@@ -298,6 +449,21 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    // Populate modal detail pesan masuk
+    document.querySelectorAll('.btn-view-msg').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            document.getElementById('msgModalNama').textContent = this.dataset.nama || '';
+            document.getElementById('msgModalEmail').textContent = this.dataset.email || '';
+            document.getElementById('msgModalKategori').textContent = this.dataset.kategori || '';
+            document.getElementById('msgModalTanggal').textContent = this.dataset.tanggal || '';
+            document.getElementById('msgModalPesan').textContent = this.dataset.pesan || '';
+            document.getElementById('msgModalStatusSelect').value = this.dataset.status || 'baru';
+            document.getElementById('msgStatusForm').action = this.dataset.statusUrl || '#';
+            const subject = encodeURIComponent('Re: [' + (this.dataset.kategori || 'Kontak') + '] Pesan Website TI UIS');
+            document.getElementById('msgModalReplyLink').href = 'mailto:' + (this.dataset.email || '') + '?subject=' + subject;
+        });
+    });
 });
 </script>
 @endpush

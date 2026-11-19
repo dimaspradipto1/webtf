@@ -115,6 +115,9 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/pendampingan-acara', 'pendampinganAcara')->name('homepage.pendampingan-acara');
     Route::get('/survey-layanan', 'surveyLayanan')->name('homepage.survey-layanan');
     Route::get('/kontak', 'kontak')->name('homepage.kontak');
+    Route::post('/kontak/kirim-pesan', 'submitKontakMessage')
+        ->middleware('throttle:5,10')
+        ->name('homepage.kontak.submit');
     Route::get('/kebijakan-privasi', 'kebijakanPrivasi')->name('homepage.kebijakan-privasi');
     Route::get('/syarat-ketentuan', 'syaratKetentuan')->name('homepage.syarat-ketentuan');
     Route::get('/sitemap.xml', 'sitemap')->name('homepage.sitemap');
@@ -176,6 +179,8 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::get('admin-kontak', [ContactController::class, 'index'])->name('contact.index');
     Route::match(['post', 'put'], 'admin-kontak', [ContactController::class, 'update'])->name('contact.update');
     Route::match(['post', 'put'], 'admin-kontak/simpan', [ContactController::class, 'update'])->name('contact.store');
+    Route::patch('admin-kontak/pesan/{contactMessage}/status', [ContactController::class, 'updateMessageStatus'])->name('contact.messages.status');
+    Route::delete('admin-kontak/pesan/{contactMessage}', [ContactController::class, 'destroyMessage'])->name('contact.messages.destroy');
     // Dukungan backward-compatibility URL lama
     Route::get('contact', fn () => redirect()->route('contact.index'));
     Route::match(['post', 'put'], 'contact/{contact?}', [ContactController::class, 'update']);

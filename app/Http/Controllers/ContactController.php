@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
+use App\Models\ContactMessage;
 use App\Models\Topbar;
 use App\Providers\AppServiceProvider;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 
@@ -36,7 +38,15 @@ class ContactController extends Controller
             }
         }
 
-        return view('pages.contact.index', compact('contact'));
+        ContactMessage::ensureTable();
+        $messages = Schema::hasTable('contact_messages')
+            ? ContactMessage::latest()->paginate(10, ['*'], 'page_pesan')
+            : collect();
+        $unreadCount = Schema::hasTable('contact_messages')
+            ? ContactMessage::where('status', 'baru')->count()
+            : 0;
+
+        return view('pages.contact.index', compact('contact', 'messages', 'unreadCount'));
     }
 
     /**
@@ -159,5 +169,34 @@ class ContactController extends Controller
         return redirect()
             ->route('contact.index')
             ->with('success', 'Data kontak berhasil dikosongkan.');
+    }
+
+    /**
+     * Perbarui status pesan masuk (baru / dibaca / dibalas).
+     */
+    public function updateMessageStatus(Request $request, ContactMessage $contactMessage): RedirectResponse
+    {
+        $validated = $request->validate([
+            'status' => ['required', 'in:baru,dibaca,dibalas'],
+        ]);
+
+        $contactMessage->update([
+            'status' => $validated['status'],
+            'read_at' => $validated['status'] === 'baru' ? null : ($contactMessage->read_at ?? now()),
+        ]);
+
+        return redirect(route('contact.index') . '#pesan-masuk')
+            ->with('success', 'Status pesan pengunjung berhasil diperbarui.');
+    }
+
+    /**
+     * Hapus pesan masuk dari pengunjung.
+     */
+    public function destroyMessage(ContactMessage $contactMessage): RedirectResponse
+    {
+        $contactMessage->delete();
+
+        return redirect(route('contact.index') . '#pesan-masuk')
+            ->with('success', 'Pesan pengunjung berhasil dihapus.');
     }
 }

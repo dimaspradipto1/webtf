@@ -9,6 +9,7 @@ use App\Models\Akademik;
 use App\Models\Announcement;
 use App\Models\Banner;
 use App\Models\Contact;
+use App\Models\ContactMessage;
 use App\Models\DesainGrafis;
 use App\Models\DesainGrafisSetting;
 use App\Models\Dosen;
@@ -54,6 +55,7 @@ use App\Models\Unduhan;
 use App\Models\VisiMisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
@@ -634,7 +636,92 @@ class FrontendController extends Controller
 
     public function kontak()
     {
-        return view('layouts.frontend.contact');
+        $a = random_int(1, 9);
+        $b = random_int(1, 9);
+        session([
+            'contact_captcha_a' => $a,
+            'contact_captcha_b' => $b,
+            'contact_captcha_answer' => $a + $b,
+        ]);
+
+        return view('layouts.frontend.contact', [
+            'captchaQuestion' => "{$a} + {$b}",
+        ]);
+    }
+
+    public function submitKontakMessage(Request $request)
+    {
+        ContactMessage::ensureTable();
+
+        // Honeypot anti-bot
+        if ($request->filled('website')) {
+            return redirect(route('homepage.kontak') . '#kirim-pesan')
+                ->with('contact_success', 'Pesan Anda berhasil dikirim! Tim Program Studi akan membalas melalui email dalam 1–2 hari kerja.');
+        }
+
+        $validated = $request->validate([
+            'nama' => ['required', 'string', 'max:150'],
+            'email' => ['required', 'email', 'max:150'],
+            'kategori' => ['required', 'in:PMB,Akademik,Kerja Sama,Lainnya'],
+            'pesan' => ['required', 'string', 'min:10', 'max:3000'],
+            'captcha_answer' => ['required', 'integer'],
+        ], [
+            'nama.required' => 'Nama lengkap wajib diisi.',
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format alamat email tidak valid.',
+            'kategori.required' => 'Kategori pesan wajib dipilih.',
+            'kategori.in' => 'Kategori pesan tidak valid.',
+            'pesan.required' => 'Isi pesan wajib ditulis.',
+            'pesan.min' => 'Isi pesan minimal 10 karakter.',
+            'captcha_answer.required' => 'Jawaban verifikasi keamanan (CAPTCHA) wajib diisi.',
+            'captcha_answer.integer' => 'Jawaban verifikasi keamanan harus berupa angka.',
+        ]);
+
+        $expectedAnswer = session('contact_captcha_answer');
+        if ($expectedAnswer === null || (int) $validated['captcha_answer'] !== (int) $expectedAnswer) {
+            return redirect(route('homepage.kontak') . '#kirim-pesan')
+                ->withInput($request->except('captcha_answer'))
+                ->withErrors(['captcha_answer' => 'Jawaban verifikasi keamanan (CAPTCHA) salah. Silakan coba lagi.']);
+        }
+
+        // Hapus jawaban lama agar tidak bisa dipakai ulang
+        session()->forget(['contact_captcha_a', 'contact_captcha_b', 'contact_captcha_answer']);
+
+        $message = ContactMessage::create([
+            'nama' => trim($validated['nama']),
+            'email' => trim($validated['email']),
+            'kategori' => $validated['kategori'],
+            'pesan' => trim($validated['pesan']),
+            'status' => 'baru',
+            'ip_address' => $request->ip(),
+            'email_forwarded' => false,
+        ]);
+
+        // Teruskan ke email resmi prodi bila konfigurasi mail tersedia (non-blocking)
+        $prodiEmail = Contact::value('email');
+        if (!empty($prodiEmail) && filter_var($prodiEmail, FILTER_VALIDATE_EMAIL)) {
+            try {
+                $body = "Pesan baru masuk dari halaman Kontak Website S1 Teknik Informatika:\n\n"
+                    . "Nama     : {$message->nama}\n"
+                    . "Email    : {$message->email}\n"
+                    . "Kategori : {$message->kategori}\n"
+                    . "Waktu    : " . now()->format('d/m/Y H:i') . " WIB\n\n"
+                    . "Isi Pesan:\n{$message->pesan}\n";
+
+                Mail::raw($body, function ($mail) use ($prodiEmail, $message) {
+                    $mail->to($prodiEmail)
+                        ->replyTo($message->email, $message->nama)
+                        ->subject("[Kontak Web TI - {$message->kategori}] Pesan dari {$message->nama}");
+                });
+
+                $message->update(['email_forwarded' => true]);
+            } catch (\Throwable $e) {
+                // Tetap simpan pesan di menu admin Kontak walau SMTP belum aktif
+            }
+        }
+
+        return redirect(route('homepage.kontak') . '#kirim-pesan')
+            ->with('contact_success', 'Pesan Anda berhasil dikirim! Tim Program Studi akan membalas melalui email dalam 1–2 hari kerja.');
     }
 
     public function humas()
