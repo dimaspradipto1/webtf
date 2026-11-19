@@ -65,7 +65,7 @@
 
         <!-- 3. AKADEMIK -->
         <li class="nav-item dropdown">
-          <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.kalender-akademik') || request()->routeIs('homepage.kurikulum') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.kalender-akademik') || request()->routeIs('homepage.kurikulum') || request()->routeIs('homepage.unduhan*') || request()->routeIs('homepage.template-dokumen*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Akademik <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
@@ -79,6 +79,16 @@
                 <i class="bi bi-journal-bookmark-fill"></i> Kurikulum Teknik Informatika
               </a>
             </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.unduhan*') ? 'active' : '' }}" href="{{ route('homepage.unduhan') }}">
+                <i class="bi bi-folder2-open"></i> E-Dokumen
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.template-dokumen*') ? 'active' : '' }}" href="{{ route('homepage.template-dokumen') }}">
+                <i class="bi bi-file-earmark-check"></i> SOP
+              </a>
+            </li>
           </ul>
         </li>
 
@@ -89,7 +99,7 @@
 
         <!-- 5. KEMAHASISWAAN -->
         <li class="nav-item dropdown">
-          <a class="nav-link nav-link-custom dropdown-toggle {{ (request()->routeIs('homepage.prestasi*') || request()->routeIs('homepage.organisasi*') || request()->routeIs('homepage.testimoni*') || request()->routeIs('homepage.alumni*') || request()->routeIs('homepage.tracer-study*') || request()->routeIs('homepage.faq*')) ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+          <a class="nav-link nav-link-custom dropdown-toggle {{ (request()->routeIs('homepage.prestasi*') || request()->routeIs('homepage.organisasi*') || request()->routeIs('homepage.testimoni*') || request()->routeIs('homepage.alumni*') || request()->routeIs('homepage.tracer-study*')) ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
             Kemahasiswaan <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
@@ -144,11 +154,6 @@
                 <i class="bi bi-chat-quote-fill"></i> Testimoni Alumni
               </a>
             </li>
-            <li>
-              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.faq*') ? 'active' : '' }}" href="{{ route('homepage.faq') }}">
-                <i class="bi bi-question-circle-fill"></i> FAQ &amp; Bantuan
-              </a>
-            </li>
           </ul>
         </li>
 
@@ -192,99 +197,71 @@
           </ul>
         </li>
 
-        <!-- 7. PORTAL -->
+        <!-- 7. AKREDITASI -->
         <li class="nav-item dropdown">
-          <a class="nav-link nav-link-custom dropdown-toggle {{ (request()->routeIs('homepage.unduhan*') || request()->routeIs('homepage.template-dokumen*') || (request()->routeIs('homepage.portal.page*') && !in_array(request()->route('slug'), ['pendaftaran-pmb', 'informasi-pmb', 'pengumuman-pmb'])) || request()->routeIs('homepage.news*') || request()->routeIs('homepage.pengumuman*') || request()->routeIs('homepage.agenda*') || request()->routeIs('homepage.galeri*')) ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-            Portal <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+          <a class="nav-link nav-link-custom dropdown-toggle {{ (request()->routeIs('homepage.portal.page*') && in_array(request()->route('slug'), ['dokumen-akreditasi-tf', 'sertifikat-akreditasi'])) ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Akreditasi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
-            <!-- A. TRACER STUDY -->
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->route('slug') === 'dokumen-akreditasi-tf' ? 'active' : '' }}" href="{{ route('homepage.portal.page', 'dokumen-akreditasi-tf') }}">
+                <i class="bi bi-file-earmark-pdf"></i> Dokumen Akreditasi TF
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->route('slug') === 'sertifikat-akreditasi' ? 'active' : '' }}" href="{{ route('homepage.portal.page', 'sertifikat-akreditasi') }}">
+                <i class="bi bi-file-earmark-check"></i> Sertifikat Akreditasi
+              </a>
+            </li>
             @php
-              $tracerStudyItem = \App\Http\Controllers\AkademikController::getOrCreateItem('tracer-study');
-              $tracerGdriveUrl = !empty($tracerStudyItem->link_url) ? $tracerStudyItem->link_url : 'https://drive.google.com';
+              $laminfokomItem = \App\Http\Controllers\AkademikController::getOrCreateItem('laminfokom');
+              $laminfokomUrl = !empty($laminfokomItem->link_url) ? $laminfokomItem->link_url : 'https://laminfokom.or.id';
+              $banPtItem = \App\Http\Controllers\AkademikController::getOrCreateItem('ban-pt');
+              $banPtUrl = !empty($banPtItem->link_url) ? $banPtItem->link_url : 'https://www.banpt.or.id';
             @endphp
             <li>
-              <a class="dropdown-item dropdown-item-custom" href="{{ $tracerGdriveUrl }}" target="_blank" rel="noopener noreferrer">
-                <i class="bi bi-mortarboard-fill"></i> Tracer Study
+              <a class="dropdown-item dropdown-item-custom" href="{{ $laminfokomUrl }}" target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-award"></i> LAMINFOKOM
               </a>
             </li>
-            <!-- B. E-DOKUMEN -->
             <li>
-              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.unduhan*') ? 'active' : '' }}" href="{{ route('homepage.unduhan') }}">
-                <i class="bi bi-folder2-open"></i> E-Dokumen
+              <a class="dropdown-item dropdown-item-custom" href="{{ $banPtUrl }}" target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-shield-check"></i> BAN-PT
               </a>
             </li>
-            <!-- C. SOP -->
+          </ul>
+        </li>
+
+        <!-- 8. INFORMASI -->
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-link-custom dropdown-toggle {{ (request()->routeIs('homepage.news*') || request()->routeIs('homepage.pengumuman*') || request()->routeIs('homepage.agenda*') || request()->routeIs('homepage.galeri*') || request()->routeIs('homepage.faq*')) ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Informasi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-custom">
             <li>
-              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.template-dokumen*') ? 'active' : '' }}" href="{{ route('homepage.template-dokumen') }}">
-                <i class="bi bi-file-earmark-check"></i> SOP
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.news*') ? 'active' : '' }}" href="{{ route('homepage.news') }}">
+                <i class="bi bi-newspaper"></i> Berita &amp; Artikel
               </a>
             </li>
-
-            <!-- D. AKREDITASI (Submenu) -->
-            <li class="dropdown-submenu">
-              <a class="dropdown-item dropdown-item-custom dropdown-submenu-toggle d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                <span class="d-flex align-items-center gap-2"><i class="bi bi-patch-check-fill"></i> Akreditasi</span>
-                <i class="bi bi-chevron-right submenu-arrow" style="font-size: 10px;"></i>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.pengumuman*') ? 'active' : '' }}" href="{{ route('homepage.pengumuman') }}">
+                <i class="bi bi-megaphone"></i> Pengumuman
               </a>
-              <ul class="dropdown-menu dropdown-menu-custom dropdown-submenu-list">
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.portal.page', 'dokumen-akreditasi-tf') }}">
-                    <i class="bi bi-file-earmark-pdf"></i> Dokumen Akreditasi TF
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.portal.page', 'sertifikat-akreditasi') }}">
-                    <i class="bi bi-file-earmark-check"></i> Sertifikat Akreditasi
-                  </a>
-                </li>
-                @php
-                  $laminfokomItem = \App\Http\Controllers\AkademikController::getOrCreateItem('laminfokom');
-                  $laminfokomUrl = !empty($laminfokomItem->link_url) ? $laminfokomItem->link_url : 'https://laminfokom.or.id';
-                  $banPtItem = \App\Http\Controllers\AkademikController::getOrCreateItem('ban-pt');
-                  $banPtUrl = !empty($banPtItem->link_url) ? $banPtItem->link_url : 'https://www.banpt.or.id';
-                @endphp
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ $laminfokomUrl }}" target="_blank" rel="noopener noreferrer">
-                    <i class="bi bi-award"></i> LAMINFOKOM
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ $banPtUrl }}" target="_blank" rel="noopener noreferrer">
-                    <i class="bi bi-shield-check"></i> BAN-PT
-                  </a>
-                </li>
-              </ul>
             </li>
-
-            <!-- E. INFORMASI (Submenu) -->
-            <li class="dropdown-submenu">
-              <a class="dropdown-item dropdown-item-custom dropdown-submenu-toggle d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                <span class="d-flex align-items-center gap-2"><i class="bi bi-newspaper"></i> Informasi</span>
-                <i class="bi bi-chevron-right submenu-arrow" style="font-size: 10px;"></i>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.agenda*') ? 'active' : '' }}" href="{{ route('homepage.agenda') }}">
+                <i class="bi bi-calendar-event"></i> Agenda
               </a>
-              <ul class="dropdown-menu dropdown-menu-custom dropdown-submenu-list">
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news') }}">
-                    <i class="bi bi-newspaper"></i> Berita & Artikel
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.pengumuman') }}">
-                    <i class="bi bi-megaphone"></i> Pengumuman
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.agenda') }}">
-                    <i class="bi bi-calendar-event"></i> Agenda
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.galeri') }}">
-                    <i class="bi bi-images"></i> Galeri
-                  </a>
-                </li>
-              </ul>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.galeri*') ? 'active' : '' }}" href="{{ route('homepage.galeri') }}">
+                <i class="bi bi-images"></i> Galeri
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.faq*') ? 'active' : '' }}" href="{{ route('homepage.faq') }}">
+                <i class="bi bi-question-circle"></i> FAQ
+              </a>
             </li>
           </ul>
         </li>
