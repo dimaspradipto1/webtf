@@ -81,5 +81,41 @@ class NewsFeatureTest extends TestCase
         $createResponse = $this->actingAs($admin)->get('/news/create');
         $createResponse->assertRedirect(route('news.create'));
     }
+
+    public function test_frontend_news_category_filter_uses_exact_match(): void
+    {
+        $admin = User::first() ?? User::factory()->create(['roles' => 'admin']);
+        $uniqueTitle = 'Berita Khusus Universitas ' . uniqid();
+
+        $news = News::create([
+            'user_id' => $admin->id,
+            'title' => $uniqueTitle,
+            'slug' => 'berita-khusus-universitas-' . uniqid(),
+            'category' => 'Berita Universitas',
+            'description' => 'Ringkasan berita universitas.',
+            'content' => '<p>Konten berita universitas.</p>',
+            'status' => 'published',
+        ]);
+
+        try {
+            // Kategori Berita Humas tidak boleh menampilkan berita dari Berita Universitas
+            $humasRes = $this->get(route('homepage.news.category', 'berita-humas'));
+            $humasRes->assertStatus(200);
+            $humasRes->assertSee('Berita Humas');
+            $humasRes->assertDontSee($uniqueTitle);
+
+            // Kategori Berita Universitas harus menampilkan berita tersebut
+            $univRes = $this->get(route('homepage.news.category', 'berita-universitas'));
+            $univRes->assertStatus(200);
+            $univRes->assertSee('Berita Universitas');
+            $univRes->assertSee($uniqueTitle);
+
+            // Slug lama berita-dan-peristiwa redirect bersih ke /berita
+            $legacyRes = $this->get(route('homepage.news.category', 'berita-dan-peristiwa'));
+            $legacyRes->assertRedirect(route('homepage.news'));
+        } finally {
+            $news->delete();
+        }
+    }
 }
 

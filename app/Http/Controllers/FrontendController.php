@@ -887,30 +887,43 @@ class FrontendController extends Controller
             });
         }
 
-        // Resolving category slug
+        // Ambil daftar kategori berita resmi dari Master Kategori
+        $newsCategories = \App\Models\Category::getOptions('berita');
+
+        // Resolving category slug dengan pencocokan persis (exact match)
         $selectedCat = null;
         if (! empty($categorySlug)) {
-            $knownCategories = News::whereNotNull('category')->pluck('category')->unique();
-            foreach ($knownCategories as $cat) {
-                if (Str::slug($cat) === $categorySlug) {
-                    $selectedCat = $cat;
+            // Backward compatibility: slug lama 'berita-dan-peristiwa' diarahkan ke semua berita
+            if ($categorySlug === 'berita-dan-peristiwa') {
+                return redirect()->route('homepage.news', $search ? ['q' => $search] : [], 301);
+            }
+
+            // 1. Cocokkan dengan Master Kategori Berita (slug atau slug dari nama)
+            foreach ($newsCategories as $catItem) {
+                if (($catItem->slug ?? '') === $categorySlug || Str::slug($catItem->name) === $categorySlug) {
+                    $selectedCat = $catItem->name;
                     break;
                 }
             }
+
+            // 2. Fallback: cocokkan dengan kategori yang ada di tabel news
             if (! $selectedCat) {
-                if (str_contains($categorySlug, 'pengumuman') || str_contains($categorySlug, 'agenda')) {
-                    $selectedCat = 'Pengumuman';
-                } elseif (str_contains($categorySlug, 'undangan')) {
-                    $selectedCat = 'Undangan';
-                } elseif (str_contains($categorySlug, 'berita') || str_contains($categorySlug, 'peristiwa') || str_contains($categorySlug, 'kampus')) {
-                    $selectedCat = 'Berita';
-                } elseif (str_contains($categorySlug, 'humas')) {
-                    $selectedCat = 'Berita Humas';
-                } else {
-                    $selectedCat = str_replace('-', ' ', $categorySlug);
+                $knownCategories = News::whereNotNull('category')->pluck('category')->unique();
+                foreach ($knownCategories as $cat) {
+                    if (Str::slug($cat) === $categorySlug) {
+                        $selectedCat = $cat;
+                        break;
+                    }
                 }
             }
-            $query->where('category', 'like', "%{$selectedCat}%");
+
+            // 3. Jika belum ada di DB, tampilkan nama kategori yang rapi dari slug
+            if (! $selectedCat) {
+                $selectedCat = Str::title(str_replace('-', ' ', $categorySlug));
+            }
+
+            // Gunakan pencocokan persis agar "Berita Humas" tidak tercampur dengan "Berita Universitas"
+            $query->where('category', $selectedCat);
         }
 
         $featured = null;
@@ -941,7 +954,7 @@ class FrontendController extends Controller
             ->orderBy('category')
             ->get();
 
-        return view('layouts.frontend.news', compact('featured', 'newsList', 'search', 'categories', 'selectedCat', 'categorySlug'));
+        return view('layouts.frontend.news', compact('featured', 'newsList', 'search', 'categories', 'newsCategories', 'selectedCat', 'categorySlug'));
     }
 
     public function newsCategory(Request $request, $categorySlug)

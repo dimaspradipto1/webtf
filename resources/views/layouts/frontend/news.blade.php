@@ -79,18 +79,17 @@
           </a>
 
           @php
-            $portalCategories = [
-              'Berita Universitas'      => 'bi-newspaper',
-              'Berita Humas'            => 'bi-megaphone-fill',
-              'Akademik & Mahasiswa'    => 'bi-mortarboard',
-              'Penelitian & Riset'      => 'bi-journal-code',
-              'Pengabdian Masyarakat'   => 'bi-people',
-              'Pengumuman & Agenda'     => 'bi-megaphone',
-            ];
+            $portalCategories = $newsCategories ?? \App\Models\Category::getOptions('berita');
           @endphp
 
-          @foreach($portalCategories as $cName => $cIcon)
-            <a href="{{ route('homepage.news', ['category' => $cName]) }}" class="cat-pill-item {{ ($selectedCat ?? '') === $cName ? 'active' : '' }}">
+          @foreach($portalCategories as $catItem)
+            @php
+              $cName = $catItem->name;
+              $cSlug = $catItem->slug ?? \Illuminate\Support\Str::slug($cName);
+              $cIcon = !empty($catItem->icon) ? $catItem->icon : 'bi-tag';
+              $isActiveCat = ($selectedCat ?? '') === $cName || ($categorySlug ?? '') === $cSlug;
+            @endphp
+            <a href="{{ route('homepage.news.category', $cSlug) }}" class="cat-pill-item {{ $isActiveCat ? 'active' : '' }}">
               <i class="bi {{ $cIcon }}"></i> {{ $cName }}
             </a>
           @endforeach

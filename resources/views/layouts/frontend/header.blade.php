@@ -232,18 +232,18 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-custom dropdown-submenu-list">
                 <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'berita-dan-peristiwa') }}">
-                    <i class="bi bi-newspaper"></i> Berita dan Peristiwa
+                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news') }}">
+                    <i class="bi bi-newspaper"></i> Berita & Artikel
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'pengumuman') }}">
+                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.pengumuman') }}">
                     <i class="bi bi-megaphone"></i> Pengumuman
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.news.category', 'undangan') }}">
-                    <i class="bi bi-envelope-paper"></i> Undangan
+                  <a class="dropdown-item dropdown-item-custom" href="{{ route('homepage.agenda') }}">
+                    <i class="bi bi-calendar-event"></i> Agenda
                   </a>
                 </li>
                 <li>

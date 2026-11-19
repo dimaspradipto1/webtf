@@ -183,20 +183,18 @@
           </h5>
           <div class="category-widget-list">
             @php
-              $allCategories = [
-                'Berita Universitas'      => 'bi-newspaper',
-                'Berita Humas'            => 'bi-megaphone-fill',
-                'Akademik & Mahasiswa'    => 'bi-mortarboard',
-                'Penelitian & Riset'      => 'bi-journal-code',
-                'Pengabdian Masyarakat'   => 'bi-people',
-                'Pengumuman & Agenda'     => 'bi-megaphone',
-              ];
+              $allCategories = \App\Models\Category::getOptions('berita');
               $counts = isset($categories) ? $categories->pluck('total', 'category')->toArray() : [];
             @endphp
 
-            @foreach($allCategories as $catName => $icon)
-              @php $count = $counts[$catName] ?? 0; @endphp
-              <a href="{{ route('homepage.news', ['category' => $catName]) }}" class="category-widget-link {{ ($news->category ?? '') === $catName ? 'active' : '' }}">
+            @foreach($allCategories as $catItem)
+              @php
+                $catName = $catItem->name;
+                $catSlug = $catItem->slug ?? \Illuminate\Support\Str::slug($catName);
+                $icon = !empty($catItem->icon) ? $catItem->icon : 'bi-tag';
+                $count = $counts[$catName] ?? 0;
+              @endphp
+              <a href="{{ route('homepage.news.category', $catSlug) }}" class="category-widget-link {{ ($news->category ?? '') === $catName ? 'active' : '' }}">
                 <div class="d-flex align-items-center gap-2">
                   <i class="bi {{ $icon }} cat-icon"></i>
                   <span>{{ $catName }}</span>
