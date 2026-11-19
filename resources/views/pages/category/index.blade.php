@@ -35,6 +35,38 @@
         line-height: 1 !important;
         transition: all 0.18s ease;
     }
+    .category-pagination-wrap nav {
+        display: flex;
+        align-items: center;
+    }
+    .category-pagination-wrap nav > div:first-child,
+    .category-pagination-wrap nav p.small {
+        display: none !important;
+    }
+    .category-pagination-wrap .pagination {
+        margin: 0 !important;
+        display: flex !important;
+        gap: 4px !important;
+    }
+    .category-pagination-wrap .page-link {
+        border-radius: 7px !important;
+        padding: 4px 10px !important;
+        font-size: 11.5px !important;
+        font-weight: 600 !important;
+        color: #334155 !important;
+        border: 1px solid #e2e8f0 !important;
+        background: #ffffff !important;
+    }
+    .category-pagination-wrap .page-item.active .page-link {
+        background-color: #000000 !important;
+        border-color: #000000 !important;
+        color: #f9dc4b !important;
+    }
+    .category-pagination-wrap .page-item:not(.disabled) .page-link:hover {
+        background-color: #f9dc4b !important;
+        border-color: #f9dc4b !important;
+        color: #000000 !important;
+    }
 </style>
 @endpush
 
@@ -239,11 +271,11 @@
 
         @if($categories->hasPages())
             <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top flex-wrap gap-2">
-                <small class="text-muted">
+                <small class="text-muted" style="font-size: 11.5px;">
                     Menampilkan {{ $categories->firstItem() }} s/d {{ $categories->lastItem() }} dari {{ $categories->total() }} kategori
                 </small>
-                <div>
-                    {{ $categories->links() }}
+                <div class="category-pagination-wrap">
+                    {{ $categories->onEachSide(1)->links('pagination::bootstrap-5') }}
                 </div>
             </div>
         @endif
