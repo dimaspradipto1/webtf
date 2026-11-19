@@ -28,7 +28,7 @@ class SaranaController extends Controller
     }
 
     /**
-     * Simpan data sarana baru.
+     * Simpan data sarana baru (mendukung multi-upload foto ruangan hingga 20 MB per file).
      */
     public function store(SaranaRequest $request): RedirectResponse
     {
@@ -48,8 +48,20 @@ class SaranaController extends Controller
             'is_active' => $request->boolean('is_active', true),
         ];
 
+        $uploadedPaths = [];
         if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('sarana', 'public');
+            $files = $request->file('foto');
+            $files = is_array($files) ? $files : [$files];
+            foreach ($files as $file) {
+                if ($file && $file->isValid()) {
+                    $uploadedPaths[] = $file->store('sarana', 'public');
+                }
+            }
+        }
+
+        if (!empty($uploadedPaths)) {
+            $data['foto'] = $uploadedPaths[0];
+            $data['foto_galeri'] = $uploadedPaths;
         }
 
         Sarana::create($data);
@@ -64,11 +76,13 @@ class SaranaController extends Controller
      */
     public function edit(Sarana $sarana): View
     {
+        Sarana::ensureColumns();
+
         return view('pages.sarana.edit', compact('sarana'));
     }
 
     /**
-     * Update data sarana.
+     * Update data sarana (mendukung tambah multi-foto & hapus foto tertentu).
      */
     public function update(SaranaRequest $request, Sarana $sarana): RedirectResponse
     {
@@ -88,12 +102,34 @@ class SaranaController extends Controller
             'is_active' => $request->boolean('is_active', true),
         ];
 
-        if ($request->hasFile('foto')) {
-            if ($sarana->foto && Storage::disk('public')->exists($sarana->foto)) {
-                Storage::disk('public')->delete($sarana->foto);
+        $currentPaths = $sarana->all_foto_paths;
+
+        // Hapus foto yang dicentang admin
+        $toDelete = $request->input('hapus_foto', []);
+        if (is_array($toDelete) && !empty($toDelete)) {
+            foreach ($toDelete as $delPath) {
+                if (in_array($delPath, $currentPaths, true)) {
+                    if (Storage::disk('public')->exists($delPath)) {
+                        Storage::disk('public')->delete($delPath);
+                    }
+                    $currentPaths = array_values(array_filter($currentPaths, fn ($p) => $p !== $delPath));
+                }
             }
-            $data['foto'] = $request->file('foto')->store('sarana', 'public');
         }
+
+        // Tambah foto-foto baru
+        if ($request->hasFile('foto')) {
+            $files = $request->file('foto');
+            $files = is_array($files) ? $files : [$files];
+            foreach ($files as $file) {
+                if ($file && $file->isValid()) {
+                    $currentPaths[] = $file->store('sarana', 'public');
+                }
+            }
+        }
+
+        $data['foto'] = $currentPaths[0] ?? null;
+        $data['foto_galeri'] = !empty($currentPaths) ? $currentPaths : null;
 
         $sarana->update($data);
 
@@ -103,12 +139,14 @@ class SaranaController extends Controller
     }
 
     /**
-     * Hapus data sarana.
+     * Hapus data sarana beserta seluruh fotonya.
      */
     public function destroy(Sarana $sarana): RedirectResponse
     {
-        if ($sarana->foto && Storage::disk('public')->exists($sarana->foto)) {
-            Storage::disk('public')->delete($sarana->foto);
+        foreach ($sarana->all_foto_paths as $path) {
+            if ($path && Storage::disk('public')->exists($path)) {
+                Storage::disk('public')->delete($path);
+            }
         }
 
         $sarana->delete();

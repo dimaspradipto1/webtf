@@ -17,7 +17,7 @@ class SocialMediaRequest extends FormRequest
             'nama' => ['required', 'string', 'max:255'],
             'kategori' => ['required', 'string', 'in:universitas,humas'],
             'handle' => ['nullable', 'string', 'max:255'],
-            'logo' => ['nullable', 'file', 'mimes:png,webp,svg,jpg,jpeg', 'max:15360'],
+            'logo' => ['nullable', 'file', 'mimes:png,webp,svg,jpg,jpeg', 'max:20480'],
             'url' => ['required', 'string', 'max:500'],
             'video_url' => ['nullable', 'string', 'max:500'],
             'thumbnail_video' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp,mp4,webm', 'max:51200'],
@@ -33,7 +33,7 @@ class SocialMediaRequest extends FormRequest
             'nama.required' => 'Nama media sosial wajib diisi.',
             'kategori.required' => 'Kategori (Universitas/Humas) wajib dipilih.',
             'logo.mimes' => 'Logo harus berformat gambar PNG (atau webp/svg).',
-            'logo.max' => 'Ukuran file logo maksimal 15 MB.',
+            'logo.max' => 'Ukuran file logo maksimal 20 MB.',
             'url.required' => 'URL / Link media sosial wajib diisi.',
             'thumbnail_video.max' => 'Ukuran thumbnail / video maksimal 50MB.',
         ];

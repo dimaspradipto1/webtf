@@ -95,21 +95,40 @@
                     <h6 class="fw-bold text-dark mb-3"><i class="bi bi-pc-display-horizontal me-2 text-primary"></i>Informasi Detail Laboratorium / Fasilitas</h6>
 
                     <div class="mb-3">
-                        <label for="foto" class="form-label fw-semibold">Foto Ruangan (Opsional)</label>
-                        @if($sarana->foto_url)
-                            <div class="mb-2">
-                                <img src="{{ $sarana->foto_url }}" alt="{{ $sarana->nama }}" class="rounded-3 border" style="max-height: 150px; object-fit: cover;">
+                        <label for="foto" class="form-label fw-semibold">Foto Ruangan (Opsional — Bisa Multi Foto)</label>
+                        @php
+                            $existingPaths = $sarana->all_foto_paths;
+                            $existingUrls = $sarana->all_foto_urls;
+                        @endphp
+                        @if(count($existingPaths) > 0)
+                            <div class="d-flex flex-wrap gap-3 mb-2">
+                                @foreach($existingPaths as $idx => $path)
+                                    <div class="border rounded-3 p-2 bg-light text-center" style="width: 130px;">
+                                        <img src="{{ $existingUrls[$idx] ?? asset('storage/' . $path) }}" alt="{{ $sarana->nama }}" class="rounded-2 mb-1 w-100" style="height: 82px; object-fit: cover;">
+                                        <div class="form-check d-flex justify-content-center align-items-center gap-1 mb-0">
+                                            <input class="form-check-input" type="checkbox" name="hapus_foto[]" value="{{ $path }}" id="hapusFoto{{ $idx }}">
+                                            <label class="form-check-label small text-danger" for="hapusFoto{{ $idx }}">Hapus</label>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         @endif
                         <input type="file"
                                id="foto"
-                               name="foto"
+                               name="foto[]"
+                               multiple
+                               data-max-mb="20"
                                accept="image/jpeg,image/png,image/webp"
-                               class="form-control @error('foto') is-invalid @enderror">
-                        <div class="form-text">Kosongkan jika tidak ingin mengganti foto. Format JPG/PNG/WEBP, maksimal 2 MB.</div>
+                               class="form-control @error('foto') is-invalid @enderror @error('foto.*') is-invalid @enderror"
+                               onchange="previewSaranaPhotos(this)">
+                        <div class="form-text">Kosongkan jika tidak ingin menambah foto. Format JPG/PNG/WEBP, bisa pilih lebih dari satu foto sekaligus, maksimal 20 MB per file.</div>
                         @error('foto')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
+                        @error('foto.*')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                        <div id="saranaFotoPreview" class="d-flex flex-wrap gap-2 mt-2"></div>
                     </div>
 
                     <div class="row">
@@ -227,6 +246,27 @@ function updateIconPreview(val) {
     prevIcon.className = 'bi ' + cls;
     prevIcon.style.fontSize = '24px';
     prevIcon.style.color = '#000000';
+}
+
+function previewSaranaPhotos(input) {
+    const container = document.getElementById('saranaFotoPreview');
+    if (!container) return;
+    container.innerHTML = '';
+    if (!input.files || input.files.length === 0) return;
+    Array.from(input.files).forEach(function (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.alt = file.name;
+            img.className = 'rounded-2 border';
+            img.style.width = '92px';
+            img.style.height = '68px';
+            img.style.objectFit = 'cover';
+            container.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', function () {

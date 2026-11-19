@@ -144,10 +144,38 @@
 
         <div class="row g-4">
             <div class="col-lg-8">
-                {{-- Foto Ruangan --}}
+                {{-- Foto Ruangan (Single atau Multi-Carousel) --}}
+                @php
+                    $fotoUrls = $sarana->all_foto_urls;
+                @endphp
                 <div class="lab-photo-wrap">
-                    @if($sarana->foto_url)
-                        <img src="{{ $sarana->foto_url }}" alt="{{ $sarana->nama }}">
+                    @if(count($fotoUrls) > 1)
+                        <div id="labPhotoCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                @foreach($fotoUrls as $idx => $url)
+                                    <div class="carousel-item {{ $idx === 0 ? 'active' : '' }}">
+                                        <img src="{{ $url }}" alt="{{ $sarana->nama }} — Foto {{ $idx + 1 }}">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#labPhotoCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Sebelumnya</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#labPhotoCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Berikutnya</span>
+                            </button>
+                        </div>
+                        <div class="d-flex flex-wrap gap-2 p-2 bg-white border-top">
+                            @foreach($fotoUrls as $idx => $url)
+                                <button type="button" data-bs-target="#labPhotoCarousel" data-bs-slide-to="{{ $idx }}" class="p-0 border rounded-2 overflow-hidden bg-transparent" style="width: 78px; height: 54px;">
+                                    <img src="{{ $url }}" alt="Thumb {{ $idx + 1 }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                </button>
+                            @endforeach
+                        </div>
+                    @elseif(count($fotoUrls) === 1)
+                        <img src="{{ $fotoUrls[0] }}" alt="{{ $sarana->nama }}">
                     @else
                         <div class="lab-photo-placeholder">
                             <div class="icon-circle">

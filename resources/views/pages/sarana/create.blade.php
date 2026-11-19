@@ -96,18 +96,25 @@
                     <hr class="my-4">
                     <h6 class="fw-bold text-dark mb-3"><i class="bi bi-pc-display-horizontal me-2 text-primary"></i>Informasi Detail Laboratorium / Fasilitas</h6>
 
-                    {{-- Foto Ruangan --}}
+                    {{-- Foto Ruangan (Multi Upload) --}}
                     <div class="mb-3">
-                        <label for="foto" class="form-label fw-semibold">Foto Ruangan (Opsional)</label>
+                        <label for="foto" class="form-label fw-semibold">Foto Ruangan (Opsional — Bisa Multi Foto)</label>
                         <input type="file"
                                id="foto"
-                               name="foto"
+                               name="foto[]"
+                               multiple
+                               data-max-mb="20"
                                accept="image/jpeg,image/png,image/webp"
-                               class="form-control @error('foto') is-invalid @enderror">
-                        <div class="form-text">Format JPG/PNG/WEBP, maksimal 2 MB.</div>
+                               class="form-control @error('foto') is-invalid @enderror @error('foto.*') is-invalid @enderror"
+                               onchange="previewSaranaPhotos(this)">
+                        <div class="form-text">Format JPG/PNG/WEBP, bisa pilih lebih dari satu foto sekaligus, maksimal 20 MB per file.</div>
                         @error('foto')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
+                        @error('foto.*')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                        <div id="saranaFotoPreview" class="d-flex flex-wrap gap-2 mt-2"></div>
                     </div>
 
                     <div class="row">
@@ -229,6 +236,27 @@ function updateIconPreview(val) {
     prevIcon.className = 'bi ' + cls;
     prevIcon.style.fontSize = '24px';
     prevIcon.style.color = '#000000';
+}
+
+function previewSaranaPhotos(input) {
+    const container = document.getElementById('saranaFotoPreview');
+    if (!container) return;
+    container.innerHTML = '';
+    if (!input.files || input.files.length === 0) return;
+    Array.from(input.files).forEach(function (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.alt = file.name;
+            img.className = 'rounded-2 border';
+            img.style.width = '92px';
+            img.style.height = '68px';
+            img.style.objectFit = 'cover';
+            container.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', function () {

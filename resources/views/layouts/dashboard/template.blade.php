@@ -866,26 +866,25 @@
             }
         });
 
-        // Validasi client-side global: Maksimal 2 MB untuk upload file gambar di semua form
+        // Validasi client-side global: Maksimal 20 MB (default) untuk upload file & gambar di semua form
         $(document).on('change', 'input[type="file"]', function () {
             const files = this.files;
             if (!files || files.length === 0) return;
 
-            const acceptAttr = (this.getAttribute('accept') || '').toLowerCase();
-            const isImageInput = acceptAttr.includes('image') || acceptAttr.includes('png') || acceptAttr.includes('jpg') || acceptAttr.includes('jpeg') || acceptAttr.includes('webp') || acceptAttr.includes('svg');
-            const maxBytes = 2 * 1024 * 1024; // 2 MB
+            const customMaxMb = parseFloat(this.getAttribute('data-max-mb') || '20');
+            const maxMb = (!isNaN(customMaxMb) && customMaxMb > 0) ? customMaxMb : 20;
+            const maxBytes = maxMb * 1024 * 1024;
 
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
-                const isImageFile = (file.type && file.type.startsWith('image/')) || /\.(jpe?g|png|webp|svg|gif)$/i.test(file.name);
 
-                if ((isImageInput || isImageFile) && file.size > maxBytes) {
+                if (file.size > maxBytes) {
                     const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
                     if (typeof Swal !== 'undefined') {
                         Swal.fire({
                             icon: 'error',
                             title: 'Ukuran File Terlalu Besar',
-                            html: `File <strong>${file.name}</strong> berukuran <strong>${fileSizeMB} MB</strong>.<br>Maksimal ukuran file gambar yang diperbolehkan adalah <strong>2 MB</strong>.`,
+                            html: `File <strong>${file.name}</strong> berukuran <strong>${fileSizeMB} MB</strong>.<br>Maksimal ukuran file yang diperbolehkan adalah <strong>${maxMb} MB</strong>.`,
                             confirmButtonColor: '#000000',
                             customClass: {
                                 popup: 'rounded-4 shadow-lg border-0',
@@ -893,7 +892,7 @@
                             }
                         });
                     } else {
-                        alert(`File "${file.name}" berukuran ${fileSizeMB} MB. Maksimal ukuran gambar adalah 2 MB.`);
+                        alert(`File "${file.name}" berukuran ${fileSizeMB} MB. Maksimal ukuran file adalah ${maxMb} MB.`);
                     }
 
                     // Reset input file

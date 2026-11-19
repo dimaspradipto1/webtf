@@ -19,10 +19,22 @@ class GalleryRequest extends FormRequest
             'deskripsi' => ['nullable', 'string'],
         ];
 
+        $isArrayFoto = is_array($this->file('foto'));
+
         if ($this->isMethod('POST')) {
-            $rules['foto'] = ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:20480'];
+            if ($isArrayFoto) {
+                $rules['foto'] = ['required', 'array', 'min:1'];
+                $rules['foto.*'] = ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:20480'];
+            } else {
+                $rules['foto'] = ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:20480'];
+            }
         } else {
-            $rules['foto'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:20480'];
+            if ($isArrayFoto) {
+                $rules['foto'] = ['nullable', 'array'];
+                $rules['foto.*'] = ['image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:20480'];
+            } else {
+                $rules['foto'] = ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:20480'];
+            }
         }
 
         return $rules;
@@ -35,6 +47,9 @@ class GalleryRequest extends FormRequest
             'foto.image' => 'File harus berupa gambar.',
             'foto.mimes' => 'Format gambar harus jpeg, png, jpg, gif, svg, atau webp.',
             'foto.max' => 'Ukuran gambar maksimal 20 MB.',
+            'foto.*.image' => 'Setiap file harus berupa gambar.',
+            'foto.*.mimes' => 'Format gambar harus jpeg, png, jpg, gif, svg, atau webp.',
+            'foto.*.max' => 'Ukuran setiap gambar maksimal 20 MB.',
             'judul.max' => 'Judul maksimal 255 karakter.',
             'kategori.required' => 'Kategori galeri wajib dipilih.',
         ];

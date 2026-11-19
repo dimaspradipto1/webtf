@@ -22,6 +22,7 @@ class Sarana extends Model
         'slug',
         'deskripsi',
         'foto',
+        'foto_galeri',
         'kepala_lab',
         'lokasi',
         'kapasitas',
@@ -35,6 +36,7 @@ class Sarana extends Model
     protected $casts = [
         'is_active' => 'boolean',
         'urutan' => 'integer',
+        'foto_galeri' => 'array',
     ];
 
     protected static function booted(): void
@@ -79,6 +81,7 @@ class Sarana extends Model
 
             $missing = !Schema::hasColumn('saranas', 'slug')
                 || !Schema::hasColumn('saranas', 'foto')
+                || !Schema::hasColumn('saranas', 'foto_galeri')
                 || !Schema::hasColumn('saranas', 'kepala_lab')
                 || !Schema::hasColumn('saranas', 'lokasi')
                 || !Schema::hasColumn('saranas', 'kapasitas')
@@ -93,6 +96,9 @@ class Sarana extends Model
                     }
                     if (!Schema::hasColumn('saranas', 'foto')) {
                         $table->string('foto', 255)->nullable()->after('deskripsi');
+                    }
+                    if (!Schema::hasColumn('saranas', 'foto_galeri')) {
+                        $table->json('foto_galeri')->nullable()->after('foto');
                     }
                     if (!Schema::hasColumn('saranas', 'kepala_lab')) {
                         $table->string('kepala_lab', 200)->nullable()->after('foto');
@@ -163,6 +169,46 @@ class Sarana extends Model
         }
 
         return asset('storage/' . $this->foto);
+    }
+
+    /**
+     * Daftar seluruh path foto ruangan (foto utama + foto galeri).
+     */
+    public function getAllFotoPathsAttribute(): array
+    {
+        $paths = [];
+        if (!empty($this->foto)) {
+            $paths[] = $this->foto;
+        }
+        if (is_array($this->foto_galeri)) {
+            foreach ($this->foto_galeri as $p) {
+                if (is_string($p) && trim($p) !== '' && !in_array($p, $paths, true)) {
+                    $paths[] = $p;
+                }
+            }
+        }
+
+        return $paths;
+    }
+
+    /**
+     * Daftar seluruh URL foto ruangan untuk ditampilkan di frontend.
+     */
+    public function getAllFotoUrlsAttribute(): array
+    {
+        return array_values(array_filter(array_map(function (string $path) {
+            if (Str::startsWith($path, ['http://', 'https://'])) {
+                return $path;
+            }
+            if (Storage::disk('public')->exists($path) || file_exists(public_path('storage/' . $path))) {
+                return asset('storage/' . $path);
+            }
+            if (file_exists(public_path($path))) {
+                return asset($path);
+            }
+
+            return asset('storage/' . $path);
+        }, $this->all_foto_paths)));
     }
 
     /**

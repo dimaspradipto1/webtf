@@ -102,7 +102,7 @@
                                class="form-control"
                                accept=".xlsx,.xls,.csv"
                                required>
-                        <div class="form-text text-muted small">Mendukung file ekstensi .xlsx, .xls, atau .csv hingga ukuran 10 MB.</div>
+                        <div class="form-text text-muted small">Mendukung file ekstensi .xlsx, .xls, atau .csv hingga ukuran 20 MB.</div>
                     </div>
                 </div>
                 <div class="modal-footer bg-light">

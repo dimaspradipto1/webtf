@@ -103,29 +103,31 @@
                         @enderror
                     </div>
 
-                    {{-- Upload Foto (wajib) --}}
+                    {{-- Upload Foto (wajib, bisa multi) --}}
                     <div class="mb-4">
                         <label for="foto" class="form-label fw-semibold">
-                            Foto <span class="text-danger">*</span>
+                            Foto (Bisa Pilih Lebih dari Satu) <span class="text-danger">*</span>
                         </label>
                         <input type="file"
                                id="foto"
-                               name="foto"
-                               class="form-control @error('foto') is-invalid @enderror"
+                               name="foto[]"
+                               multiple
+                               data-max-mb="20"
+                               class="form-control @error('foto') is-invalid @enderror @error('foto.*') is-invalid @enderror"
                                accept="image/jpg,image/jpeg,image/png,image/webp"
                                onchange="previewFoto(this)">
-                        <div class="form-text">Format: JPG, JPEG, PNG, WebP. Maks: 20 MB.</div>
+                        <div class="form-text">Format: JPG, JPEG, PNG, WebP. Bisa pilih banyak foto sekaligus, maks. 20 MB per file.</div>
                         @error('foto')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                        @error('foto.*')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
 
-                        {{-- Preview foto --}}
+                        {{-- Preview multi foto --}}
                         <div id="previewWrap" class="mt-3 d-none">
-                            <p class="small text-muted mb-1">Preview:</p>
-                            <img id="previewImg"
-                                 src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                                 alt="Preview"
-                                 style="max-width:200px;max-height:200px;object-fit:cover;border-radius:8px;border:1px solid #dee2e6">
+                            <p class="small text-muted mb-1">Preview (<span id="previewCount">0</span> foto dipilih):</p>
+                            <div id="previewGrid" class="d-flex flex-wrap gap-2"></div>
                         </div>
                     </div>
 
@@ -150,14 +152,28 @@
 <script>
     function previewFoto(input) {
         const wrap = document.getElementById('previewWrap');
-        const img  = document.getElementById('previewImg');
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                img.src = e.target.result;
-                wrap.classList.remove('d-none');
-            };
-            reader.readAsDataURL(input.files[0]);
+        const grid = document.getElementById('previewGrid');
+        const count = document.getElementById('previewCount');
+        if (!grid) return;
+        grid.innerHTML = '';
+        if (input.files && input.files.length > 0) {
+            if (count) count.textContent = input.files.length;
+            Array.from(input.files).forEach(function (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = file.name;
+                    img.style.width = '110px';
+                    img.style.height = '110px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '8px';
+                    img.style.border = '1px solid #dee2e6';
+                    grid.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            });
+            wrap.classList.remove('d-none');
         } else {
             wrap.classList.add('d-none');
         }

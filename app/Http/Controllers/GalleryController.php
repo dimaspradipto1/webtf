@@ -32,23 +32,38 @@ class GalleryController extends Controller
      */
     public function store(GalleryRequest $request): RedirectResponse
     {
-        $path = null;
+        $files = $request->file('foto');
+        $files = is_array($files) ? $files : ($files ? [$files] : []);
 
-        if ($request->hasFile('foto')) {
-            // Simpan ke storage/app/public/gallery
-            $path = $request->file('foto')->store('gallery', 'public');
+        $savedCount = 0;
+        $baseJudul = trim((string) ($request->judul ?? ''));
+        $totalFiles = count($files);
+
+        foreach ($files as $idx => $file) {
+            if ($file && $file->isValid()) {
+                $path = $file->store('gallery', 'public');
+                $judul = $baseJudul;
+                if ($totalFiles > 1 && $baseJudul !== '') {
+                    $judul = $baseJudul . ' (' . ($idx + 1) . ')';
+                }
+
+                Gallery::create([
+                    'judul' => $judul !== '' ? $judul : null,
+                    'kategori' => $request->kategori ?? 'universitas',
+                    'deskripsi' => $request->deskripsi,
+                    'url' => $path,
+                ]);
+                $savedCount++;
+            }
         }
 
-        Gallery::create([
-            'judul' => $request->judul,
-            'kategori' => $request->kategori ?? 'universitas',
-            'deskripsi' => $request->deskripsi,
-            'url' => $path,
-        ]);
+        $msg = $savedCount > 1
+            ? "{$savedCount} foto galeri berhasil ditambahkan."
+            : 'Foto galeri berhasil ditambahkan.';
 
-        alert()->success('Berhasil!', 'Foto galeri berhasil ditambahkan.');
+        alert()->success('Berhasil!', $msg);
 
-        return redirect()->route('gallery.index')->with('success', 'Foto galeri berhasil ditambahkan.');
+        return redirect()->route('gallery.index')->with('success', $msg);
     }
 
     /**
