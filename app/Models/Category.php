@@ -102,8 +102,6 @@ class Category extends Model
                 ['name' => 'Berita Humas', 'slug' => 'berita-humas', 'icon' => 'bi-megaphone', 'color' => '#198754'],
                 ['name' => 'Akademik & Kemahasiswaan', 'slug' => 'akademik-kemahasiswaan', 'icon' => 'bi-book', 'color' => '#0dcaf0'],
                 ['name' => 'Teknologi & Rekayasa', 'slug' => 'teknologi-rekayasa', 'icon' => 'bi-cpu', 'color' => '#6610f2'],
-                ['name' => 'Bisnis & Manajemen', 'slug' => 'bisnis-manajemen', 'icon' => 'bi-briefcase', 'color' => '#fd7e14'],
-                ['name' => 'K3 & Lingkungan Industri', 'slug' => 'k3-lingkungan-industri', 'icon' => 'bi-shield-check', 'color' => '#ffc107'],
                 ['name' => 'Penelitian & Riset', 'slug' => 'penelitian-riset', 'icon' => 'bi-lightbulb', 'color' => '#20c997'],
                 ['name' => 'Pengabdian Masyarakat', 'slug' => 'pengabdian-masyarakat', 'icon' => 'bi-people', 'color' => '#d63384'],
                 ['name' => 'Kerjasama Industri', 'slug' => 'kerjasama-industri', 'icon' => 'bi-handshake', 'color' => '#6f42c1'],
