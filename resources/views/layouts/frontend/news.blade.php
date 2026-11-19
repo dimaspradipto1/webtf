@@ -83,8 +83,7 @@
               'Berita Universitas'      => 'bi-newspaper',
               'Berita Humas'            => 'bi-megaphone-fill',
               'Akademik & Mahasiswa'    => 'bi-mortarboard',
-              'Kesehatan Lingkungan'    => 'bi-tree',
-              'Penelitian & Riset'      => 'bi-journal-medical',
+              'Penelitian & Riset'      => 'bi-journal-code',
               'Pengabdian Masyarakat'   => 'bi-people',
               'Pengumuman & Agenda'     => 'bi-megaphone',
             ];
