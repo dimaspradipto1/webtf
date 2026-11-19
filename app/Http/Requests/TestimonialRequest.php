@@ -37,12 +37,43 @@ class TestimonialRequest extends FormRequest
 
     public function rules(): array
     {
+        $routeTestimonial = $this->route('testimonial');
+        $ignoreId = is_object($routeTestimonial) ? $routeTestimonial->id : $routeTestimonial;
+
         return [
-            'nama' => ['required', 'string', 'max:255'],
+            'nama' => [
+                'required',
+                'string',
+                'max:255',
+                function (string $attribute, mixed $value, \Closure $fail) use ($ignoreId) {
+                    $normalized = mb_strtolower(trim((string) $value));
+                    $query = \App\Models\Testimonial::whereRaw('LOWER(TRIM(nama)) = ?', [$normalized]);
+                    if ($ignoreId) {
+                        $query->where('id', '!=', $ignoreId);
+                    }
+                    if ($normalized !== '' && $query->exists()) {
+                        $fail('Nama pemberi testimoni tersebut sudah terdaftar.');
+                    }
+                },
+            ],
             'pekerjaan' => ['required', 'string', 'max:255'],
             'kategori' => ['required', 'string', 'max:100'],
             'bintang' => ['required', 'integer', 'min:1', 'max:5'],
-            'pesan' => ['required', 'string', 'min:5'],
+            'pesan' => [
+                'required',
+                'string',
+                'min:5',
+                function (string $attribute, mixed $value, \Closure $fail) use ($ignoreId) {
+                    $normalized = mb_strtolower(trim((string) $value));
+                    $query = \App\Models\Testimonial::whereRaw('LOWER(TRIM(pesan)) = ?', [$normalized]);
+                    if ($ignoreId) {
+                        $query->where('id', '!=', $ignoreId);
+                    }
+                    if ($normalized !== '' && $query->exists()) {
+                        $fail('Isi ulasan testimoni yang sama sudah terdaftar.');
+                    }
+                },
+            ],
             'aktif' => ['nullable', 'boolean'],
         ];
     }

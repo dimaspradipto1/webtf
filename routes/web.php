@@ -91,7 +91,9 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/tracer-study', 'tracerStudy')->name('homepage.tracer-study');
     Route::get('/alumni', 'testimoni')->name('homepage.alumni');
     Route::get('/alumni/kirim-testimoni', 'alumniCreateTestimoni')->name('homepage.alumni.create');
-    Route::post('/alumni/kirim-testimoni', 'storeTestimonial')->name('homepage.alumni.store');
+    Route::post('/alumni/kirim-testimoni', 'storeTestimonial')
+        ->middleware('throttle:3,10')
+        ->name('homepage.alumni.store');
     Route::get('/berita', 'news')->name('homepage.news');
     Route::get('/berita/kategori/{categorySlug}', 'newsCategory')->name('homepage.news.category');
     Route::get('/berita/{slug}', 'newsDetail')->name('homepage.news.detail');
