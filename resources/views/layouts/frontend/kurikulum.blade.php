@@ -134,41 +134,4 @@
 
   </div>
 </section>
-
-{{-- Real-Time Synchronization Listener: Frontend otomatis terupdate saat admin melakukan perubahan --}}
-<script>
-  (function() {
-    let currentChecksum = "{{ $checksum ?? '' }}";
-    const checkUrl = "{{ route('homepage.kurikulum.check-updated', ['prodi' => $currentProdi->id ?? '']) }}";
-
-    function checkKurikulumUpdate() {
-      fetch(checkUrl, { cache: 'no-store' })
-        .then(response => response.json())
-        .then(data => {
-          if (data && data.checksum && data.checksum !== currentChecksum) {
-            currentChecksum = data.checksum;
-            // Reload halaman secara otomatis jika ada perubahan data dari admin
-            window.location.reload();
-          }
-        })
-        .catch(() => {});
-    }
-
-    // Periksa saat pengguna kembali aktif ke tab browser ini
-    document.addEventListener('visibilitychange', function() {
-      if (document.visibilityState === 'visible') {
-        checkKurikulumUpdate();
-      }
-    });
-
-    window.addEventListener('focus', checkKurikulumUpdate);
-
-    // Polling berkala setiap 6 detik ketika halaman aktif
-    setInterval(function() {
-      if (document.visibilityState === 'visible') {
-        checkKurikulumUpdate();
-      }
-    }, 6000);
-  })();
-</script>
 @endsection
