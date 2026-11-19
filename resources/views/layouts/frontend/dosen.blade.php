@@ -84,12 +84,13 @@
         <table class="table table-dosen">
           <thead>
             <tr>
-              <th style="width: 6%;">No</th>
+              <th style="width: 5%;">No</th>
               <th>Nama Dosen & Gelar</th>
-              <th style="width: 20%;">Jabatan Fungsional</th>
-              <th style="width: 18%;">NIDN</th>
-              <th style="width: 18%;">NUPTK</th>
-              <th style="width: 14%;">Profil</th>
+              <th style="width: 15%;">Jabatan Fungsional</th>
+              <th style="width: 13%;">NIDN</th>
+              <th style="width: 18%;">Bidang Keahlian</th>
+              <th style="width: 16%;">SINTA / Scholar</th>
+              <th style="width: 12%;">Profil</th>
             </tr>
           </thead>
           <tbody>
@@ -115,18 +116,44 @@
                   </td>
                   <td class="text-center">
                     @if(!empty($dosen->jabatan_fungsional))
-                      <span class="badge" style="background:#000000; color:#fff; font-size:12px; font-weight:600; padding:6px 12px; border-radius:20px;">
+                      <span class="badge" style="background:#000000; color:#fff; font-size:11.5px; font-weight:600; padding:6px 11px; border-radius:20px;">
                         {{ $dosen->jabatan_fungsional }}
                       </span>
                     @else
                       <span class="text-muted small">-</span>
                     @endif
                   </td>
-                  <td class="text-center font-monospace fw-bold text-dark">
+                  <td class="text-center font-monospace fw-bold text-dark" style="font-size: 12.5px;">
                     {{ $dosen->nidn ?: '-' }}
+                    @if(!empty($dosen->nuptk))
+                      <div class="text-muted fw-normal" style="font-size: 10.5px;">NUPTK: {{ $dosen->nuptk }}</div>
+                    @endif
                   </td>
-                  <td class="text-center font-monospace fw-semibold text-secondary">
-                    {{ $dosen->nuptk ?: '-' }}
+                  <td class="text-center">
+                    @if(!empty($dosen->bidang_keahlian))
+                      <span class="badge bg-light text-dark border fw-semibold" style="font-size: 11.5px; white-space: normal; line-height: 1.35; padding: 5px 10px;">
+                        {{ $dosen->bidang_keahlian }}
+                      </span>
+                    @else
+                      <span class="text-muted small">-</span>
+                    @endif
+                  </td>
+                  <td class="text-center">
+                    <div class="d-inline-flex align-items-center justify-content-center gap-1 flex-wrap">
+                      @if(!empty($dosen->link_sinta))
+                        <a href="{{ $dosen->link_sinta }}" target="_blank" rel="noopener noreferrer" class="badge text-decoration-none fw-bold" style="background: #1d4ed8; color: #ffffff; padding: 5px 9px; border-radius: 6px; font-size: 11px;" title="Profil SINTA">
+                          SINTA
+                        </a>
+                      @endif
+                      @if(!empty($dosen->link_scholar))
+                        <a href="{{ $dosen->link_scholar }}" target="_blank" rel="noopener noreferrer" class="badge text-decoration-none fw-bold" style="background: #4285f4; color: #ffffff; padding: 5px 9px; border-radius: 6px; font-size: 11px;" title="Profil Google Scholar">
+                          Scholar
+                        </a>
+                      @endif
+                      @if(empty($dosen->link_sinta) && empty($dosen->link_scholar))
+                        <span class="text-muted small">-</span>
+                      @endif
+                    </div>
                   </td>
                   <td class="text-center">
                     @php
@@ -157,7 +184,7 @@
               @endforeach
             @else
               <tr>
-                <td colspan="6" class="text-center py-5">
+                <td colspan="7" class="text-center py-5">
                   <i class="bi bi-person-x fs-1 text-muted d-block mb-2"></i>
                   <h6 class="fw-bold text-dark">Data Dosen Belum Tersedia</h6>
                   <p class="text-muted small mb-0">

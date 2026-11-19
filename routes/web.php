@@ -31,6 +31,7 @@ use App\Http\Controllers\NilaiPerusahaanController;
 use App\Http\Controllers\OrganisasiMahasiswaController;
 use App\Http\Controllers\PageHeaderController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\PenelitianController;
 use App\Http\Controllers\PimpinanController;
 use App\Http\Controllers\PmbSettingController;
 use App\Http\Controllers\PrestasiController;
@@ -87,6 +88,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/organisasi-mahasiswa', 'organisasiMahasiswa')->name('homepage.organisasi');
     Route::get('/organisasi-mahasiswa/{slug}', 'organisasiMahasiswaDetail')->name('homepage.organisasi.detail');
     Route::get('/dosen', 'dosen')->name('homepage.dosen');
+    Route::get('/penelitian-pengabdian', 'penelitian')->name('homepage.penelitian');
     Route::get('/testimoni', 'testimoni')->name('homepage.testimoni');
     Route::get('/tracer-study', 'tracerStudy')->name('homepage.tracer-study');
     Route::get('/alumni', 'testimoni')->name('homepage.alumni');
@@ -276,6 +278,10 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::post('admin-program-studi', [LayananController::class, 'updateAll'])->name('layanan.update-all');
     Route::get('admin-publikasi', [PublikasiController::class, 'index'])->name('publikasi.index');
     Route::post('admin-publikasi', [PublikasiController::class, 'updateAll'])->name('publikasi.update-all');
+    Route::get('admin-penelitian', [PenelitianController::class, 'index'])->name('penelitian.index');
+    Route::post('admin-penelitian', [PenelitianController::class, 'store'])->name('penelitian.store');
+    Route::put('admin-penelitian/{penelitian}', [PenelitianController::class, 'update'])->name('penelitian.update');
+    Route::delete('admin-penelitian/{penelitian}', [PenelitianController::class, 'destroy'])->name('penelitian.destroy');
     Route::get('admin-beasiswa', [BeasiswaController::class, 'index'])->name('beasiswa.index');
     Route::post('admin-beasiswa', [BeasiswaController::class, 'updateAll'])->name('beasiswa.update-all');
 

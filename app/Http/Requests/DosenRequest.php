@@ -20,7 +20,10 @@ class DosenRequest extends FormRequest
             'jabatan_fungsional' => ['nullable', 'string', 'max:100'],
             'nidn' => ['nullable', 'string', 'max:50'],
             'nuptk' => ['nullable', 'string', 'max:50'],
+            'bidang_keahlian' => ['nullable', 'string', 'max:255'],
             'link' => ['nullable', 'string', 'max:500'],
+            'link_sinta' => ['nullable', 'url', 'max:500'],
+            'link_scholar' => ['nullable', 'url', 'max:500'],
             'foto' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:15360'],
             'is_active' => ['nullable'],
         ];

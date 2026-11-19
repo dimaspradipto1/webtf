@@ -29,6 +29,7 @@ use App\Models\NilaiPerusahaan;
 use App\Models\OrganisasiMahasiswa;
 use App\Models\OrganisasiMahasiswaSetting;
 use App\Models\Partner;
+use App\Models\Penelitian;
 use App\Models\PendampinganAcaraSetting;
 use App\Models\PermintaanRilisSetting;
 use App\Models\Pimpinan;
@@ -1558,6 +1559,64 @@ class FrontendController extends Controller
         return view('layouts.frontend.syarat-ketentuan');
     }
 
+    public function penelitian(Request $request)
+    {
+        Penelitian::ensureTable();
+
+        $activeJenis = $request->query('jenis', 'all');
+        $activeTahun = $request->query('tahun');
+        $search = trim((string) ($request->query('q') ?? $request->query('search') ?? ''));
+
+        $query = Penelitian::where('is_active', true);
+
+        if (in_array($activeJenis, ['penelitian', 'pengabdian'], true)) {
+            $query->where('jenis', $activeJenis);
+        } else {
+            $activeJenis = 'all';
+        }
+
+        if (!empty($activeTahun)) {
+            $query->where('tahun', (int) $activeTahun);
+        }
+
+        if ($search !== '') {
+            $query->where(function ($q) use ($search) {
+                $q->where('judul', 'like', "%{$search}%")
+                    ->orWhere('ketua', 'like', "%{$search}%")
+                    ->orWhere('anggota', 'like', "%{$search}%")
+                    ->orWhere('sumber_dana', 'like', "%{$search}%")
+                    ->orWhere('bidang_riset', 'like', "%{$search}%");
+            });
+        }
+
+        $items = $query->orderByDesc('tahun')->orderByDesc('id')->paginate(12)->withQueryString();
+
+        $stats = [
+            'all' => Penelitian::where('is_active', true)->count(),
+            'penelitian' => Penelitian::where('is_active', true)->where('jenis', 'penelitian')->count(),
+            'pengabdian' => Penelitian::where('is_active', true)->where('jenis', 'pengabdian')->count(),
+        ];
+
+        $years = Penelitian::where('is_active', true)->select('tahun')->distinct()->orderByDesc('tahun')->pluck('tahun');
+
+        $bidangRiset = Dosen::where('is_active', true)
+            ->whereNotNull('bidang_keahlian')
+            ->where('bidang_keahlian', '!=', '')
+            ->pluck('bidang_keahlian')
+            ->unique()
+            ->values();
+
+        return view('layouts.frontend.penelitian', compact(
+            'items',
+            'stats',
+            'years',
+            'bidangRiset',
+            'activeJenis',
+            'activeTahun',
+            'search'
+        ));
+    }
+
     public function sitemap()
     {
         $staticUrls = [
@@ -1573,6 +1632,7 @@ class FrontendController extends Controller
             ['loc' => route('homepage.pedoman-akademik'), 'priority' => '0.8', 'changefreq' => 'monthly'],
             ['loc' => route('homepage.sistem-akademik'), 'priority' => '0.7', 'changefreq' => 'monthly'],
             ['loc' => route('homepage.dosen'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+            ['loc' => route('homepage.penelitian'), 'priority' => '0.8', 'changefreq' => 'weekly'],
             ['loc' => route('homepage.news'), 'priority' => '0.9', 'changefreq' => 'daily'],
             ['loc' => route('homepage.pengumuman'), 'priority' => '0.9', 'changefreq' => 'daily'],
             ['loc' => route('homepage.agenda'), 'priority' => '0.8', 'changefreq' => 'weekly'],

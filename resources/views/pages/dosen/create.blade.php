@@ -82,6 +82,45 @@
                     @enderror
                 </div>
 
+                {{-- Bidang Keahlian / Kelompok Riset --}}
+                <div class="col-md-12">
+                    <label for="bidang_keahlian" class="form-label fw-semibold text-dark">
+                        Bidang Keahlian / Kelompok Riset <span class="text-muted fw-normal">(Opsional)</span>
+                    </label>
+                    <input type="text" name="bidang_keahlian" id="bidang_keahlian" list="bidangKeahlianList" class="form-control @error('bidang_keahlian') is-invalid @enderror" placeholder="Contoh: Rekayasa Perangkat Lunak, AI & Data Science, Jaringan & Keamanan Siber" value="{{ old('bidang_keahlian') }}">
+                    <datalist id="bidangKeahlianList">
+                        <option value="Rekayasa Perangkat Lunak">
+                        <option value="AI & Data Science">
+                        <option value="Jaringan & Keamanan Siber">
+                        <option value="Sistem Informasi & Cloud Computing">
+                        <option value="Internet of Things (IoT)">
+                    </datalist>
+                    @error('bidang_keahlian')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                {{-- Link SINTA & Google Scholar --}}
+                <div class="col-md-6">
+                    <label for="link_sinta" class="form-label fw-semibold text-dark">
+                        Link Profil SINTA <span class="text-muted fw-normal">(Opsional)</span>
+                    </label>
+                    <input type="url" name="link_sinta" id="link_sinta" class="form-control @error('link_sinta') is-invalid @enderror" placeholder="https://sinta.kemdikbud.go.id/authors/profile/..." value="{{ old('link_sinta') }}">
+                    @error('link_sinta')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="link_scholar" class="form-label fw-semibold text-dark">
+                        Link Google Scholar <span class="text-muted fw-normal">(Opsional)</span>
+                    </label>
+                    <input type="url" name="link_scholar" id="link_scholar" class="form-control @error('link_scholar') is-invalid @enderror" placeholder="https://scholar.google.com/citations?user=..." value="{{ old('link_scholar') }}">
+                    @error('link_scholar')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 {{-- Link Profil Online (Opsional) --}}
                 <div class="col-md-7">
                     <label for="link" class="form-label fw-semibold text-dark">

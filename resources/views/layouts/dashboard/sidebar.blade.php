@@ -140,6 +140,13 @@
             </a>
           </li>
 
+          <!-- 5b. PENELITIAN & PENGABDIAN -->
+          <li class="nav-item">
+            <a class="nav-link {{ Route::is('penelitian.*') ? '' : 'collapsed' }}" href="{{ route('penelitian.index') }}">
+              <i class="bi bi-lightbulb"></i><span>Penelitian & Pengabdian</span>
+            </a>
+          </li>
+
           <!-- 6. PORTAL (Tracer Study, E-Dokumen, SOP, Akreditasi, Beasiswa, Informasi) -->
           @php
             $isPortalNavActive = Route::is('testimonial.*') || Route::is('unduhan.*') || Route::is('template-dokumen.*') || (Route::is('akademik.portal.*') && !in_array(request()->route('tipe'), ['pendaftaran-pmb', 'informasi-pmb', 'pengumuman-pmb'])) || Route::is('beasiswa.*');

@@ -159,10 +159,16 @@
 
         <!-- 6. PUBLIKASI -->
         <li class="nav-item dropdown">
-          <a class="nav-link nav-link-custom dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link nav-link-custom dropdown-toggle {{ request()->routeIs('homepage.penelitian*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Publikasi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.penelitian*') ? 'active' : '' }}" href="{{ route('homepage.penelitian') }}">
+                <i class="bi bi-flask"></i> <span>Penelitian &amp; Pengabdian</span>
+              </a>
+            </li>
+            <li><hr class="dropdown-divider my-1"></li>
             @if(isset($navPublikasis) && $navPublikasis->count() > 0)
               @foreach($navPublikasis as $navPub)
                 @php
