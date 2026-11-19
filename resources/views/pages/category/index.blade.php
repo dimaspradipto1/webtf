@@ -1,5 +1,43 @@
 @extends('layouts.dashboard.template')
 
+@push('styles')
+<style>
+    .category-table {
+        font-size: 11px !important;
+    }
+    .category-table th,
+    .category-table td {
+        font-size: 11px !important;
+        padding: 8px 10px !important;
+        vertical-align: middle;
+    }
+    .category-table .badge,
+    .category-table code,
+    .category-table .small {
+        font-size: 11px !important;
+    }
+    .category-action-wrap {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin: 2px 0;
+    }
+    .category-action-btn {
+        width: 28px !important;
+        height: 28px !important;
+        padding: 0 !important;
+        border-radius: 7px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 12px !important;
+        line-height: 1 !important;
+        transition: all 0.18s ease;
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="pagetitle">
     <h1>Kategori</h1>
@@ -90,16 +128,16 @@
 
     <div class="card-body pt-3">
         <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
+            <table class="table table-hover align-middle mb-0 category-table">
                 <thead class="table-light">
                     <tr>
-                        <th style="width: 50px;" class="text-center">No</th>
+                        <th style="width: 46px;" class="text-center">No</th>
                         <th>Nama Kategori</th>
-                        <th style="width: 170px;">Modul / Tipe</th>
+                        <th style="width: 150px;">Modul / Tipe</th>
                         <th>Slug</th>
-                        <th style="width: 120px;" class="text-center">Total Konten</th>
-                        <th style="width: 100px;" class="text-center">Status</th>
-                        <th style="width: 130px;" class="text-center">Aksi</th>
+                        <th style="width: 105px;" class="text-center">Total Konten</th>
+                        <th style="width: 95px;" class="text-center">Status</th>
+                        <th style="width: 110px;" class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -111,13 +149,13 @@
                             <td>
                                 <div class="d-flex align-items-center gap-2">
                                     @if(!empty($cat->icon))
-                                        <div class="rounded-circle d-flex align-items-center justify-content-center" 
-                                             style="width: 32px; height: 32px; background: {{ $cat->color ? $cat->color.'20' : '#e9ecef' }}; color: {{ $cat->color ?: '#495057' }};">
+                                        <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" 
+                                             style="width: 26px; height: 26px; font-size: 12px; background: {{ $cat->color ? $cat->color.'20' : '#e9ecef' }}; color: {{ $cat->color ?: '#495057' }};">
                                             <i class="bi {{ $cat->icon }}"></i>
                                         </div>
                                     @else
-                                        <div class="rounded-circle d-flex align-items-center justify-content-center" 
-                                             style="width: 32px; height: 32px; background: #e9ecef; color: #6c757d;">
+                                        <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" 
+                                             style="width: 26px; height: 26px; font-size: 12px; background: #e9ecef; color: #6c757d;">
                                             <i class="bi bi-tag-fill"></i>
                                         </div>
                                     @endif
@@ -135,7 +173,7 @@
                                 </span>
                             </td>
                             <td>
-                                <code class="text-muted small">{{ $cat->slug }}</code>
+                                <code class="text-muted">{{ $cat->slug }}</code>
                             </td>
                             <td class="text-center">
                                 <span class="badge bg-light text-dark border px-2 py-1">
@@ -159,9 +197,9 @@
                                 </form>
                             </td>
                             <td class="text-center">
-                                <div class="btn-group btn-group-sm">
+                                <div class="category-action-wrap">
                                     <button type="button" 
-                                            class="btn btn-outline-primary btn-edit-category" 
+                                            class="btn btn-outline-primary category-action-btn btn-edit-category" 
                                             data-id="{{ $cat->id }}"
                                             data-name="{{ $cat->name }}"
                                             data-slug="{{ $cat->slug }}"
@@ -174,10 +212,10 @@
                                             title="Edit Kategori">
                                         <i class="bi bi-pencil"></i>
                                     </button>
-                                    <form action="{{ route('category.destroy', $cat->id) }}" method="POST" class="d-inline form-delete-category">
+                                    <form action="{{ route('category.destroy', $cat->id) }}" method="POST" class="d-inline m-0 form-delete-category">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" class="btn btn-outline-danger btn-delete-trigger" 
+                                        <button type="button" class="btn btn-outline-danger category-action-btn btn-delete-trigger" 
                                                 data-name="{{ $cat->name }}" 
                                                 data-count="{{ $cat->items_count }}"
                                                 title="Hapus Kategori">
