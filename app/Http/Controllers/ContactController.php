@@ -24,9 +24,17 @@ class ContactController extends Controller
             'email' => 'informatika@uis.ac.id',
             'alamat' => 'Kampus Utama Universitas Ibnu Sina, Jl. Teuku Umar, Lubuk Baja Kota, Kec. Lubuk Baja, Kota Batam, Kepulauan Riau 29444',
             'jam_operasional' => 'Senin – Sabtu: 08.00 – 17.00 WIB',
-            'latitude' => '1.1444',
-            'longitude' => '104.0156',
+            'latitude' => '1.145696',
+            'longitude' => '104.0160104',
         ]);
+
+        // Otomatis sinkronkan koordinat jika masih default lama Jakarta (-6.200000, 106.816666) namun map sudah berisi koordinat kampus
+        if (Contact::isLegacyJakartaCoordinate($contact->latitude, $contact->longitude) || empty($contact->latitude) || empty($contact->longitude)) {
+            $extracted = Contact::extractCoordinatesFromMap($contact->map);
+            if ($extracted) {
+                $contact->update($extracted);
+            }
+        }
 
         return view('pages.contact.index', compact('contact'));
     }
@@ -76,9 +84,19 @@ class ContactController extends Controller
             }
         }
 
+        $latitude = $request->latitude;
+        $longitude = $request->longitude;
+        if ((empty($latitude) || empty($longitude) || Contact::isLegacyJakartaCoordinate($latitude, $longitude)) && !empty($map)) {
+            $extracted = Contact::extractCoordinatesFromMap($map);
+            if ($extracted) {
+                $latitude = $extracted['latitude'];
+                $longitude = $extracted['longitude'];
+            }
+        }
+
         $updateData = [
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
             'map' => $map,
             'no_wa' => $request->no_wa,
             'email' => $request->email,

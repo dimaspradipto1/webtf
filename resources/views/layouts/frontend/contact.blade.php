@@ -89,8 +89,8 @@
             <i class="bi bi-pin-map-fill text-danger me-2 fs-5"></i>
             <span>Lokasi Kampus UIS di Google Maps</span>
           </div>
-          @if(!empty($contact->latitude) && !empty($contact->longitude))
-            <a href="https://www.google.com/maps/search/?api=1&query={{ $contact->latitude }},{{ $contact->longitude }}" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-semibold" style="font-size: 12.5px;">
+          @if(!empty($contact->resolved_latitude) && !empty($contact->resolved_longitude))
+            <a href="https://www.google.com/maps/search/?api=1&query={{ $contact->resolved_latitude }},{{ $contact->resolved_longitude }}" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-semibold" style="font-size: 12.5px;">
               <i class="bi bi-box-arrow-up-right me-1"></i> Buka Peta Penuh
             </a>
           @endif

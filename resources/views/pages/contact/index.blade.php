@@ -190,7 +190,7 @@
                         <label class="form-label fw-semibold text-dark small mb-2 d-flex align-items-center gap-1">
                             <i class="bi bi-eye"></i> Pratinjau Peta Saat Ini:
                         </label>
-                        <div id="map-preview-container" class="ratio ratio-21x9 rounded overflow-hidden shadow-sm" style="max-height: 280px;">
+                        <div id="map-preview-container" class="rounded overflow-hidden shadow-sm border" style="height: 320px;">
                             {!! $previewIframe !!}
                         </div>
                     </div>
@@ -228,6 +228,33 @@ document.addEventListener('DOMContentLoaded', function () {
         return trimmed.replace(/^[<"']+|[>"']+$/g, '');
     }
 
+    function extractCoordsFromMap(raw) {
+        if (!raw) return null;
+        var m = raw.match(/!2d(-?\d+\.\d+)!3d(-?\d+\.\d+)/);
+        if (m) return { lat: m[2], lng: m[1] };
+        m = raw.match(/!3d(-?\d+\.\d+)!2d(-?\d+\.\d+)/);
+        if (m) return { lat: m[1], lng: m[2] };
+        var all = Array.from(raw.matchAll(/!1d(-?\d+\.\d+)!2d(-?\d+\.\d+)/g));
+        if (all.length > 0) {
+            var last = all[all.length - 1];
+            var la = parseFloat(last[1]), ln = parseFloat(last[2]);
+            if (la >= -90 && la <= 90 && ln >= -180 && ln <= 180) {
+                return { lat: last[1], lng: last[2] };
+            }
+        }
+        m = raw.match(/(?:@|[?&]q=)(-?\d+\.\d+),\s*(-?\d+\.\d+)/);
+        if (m) return { lat: m[1], lng: m[2] };
+        return null;
+    }
+
+    function syncCoordsFromMap(raw) {
+        var coords = extractCoordsFromMap(raw);
+        if (coords && latInput && lngInput) {
+            latInput.value = coords.lat;
+            lngInput.value = coords.lng;
+        }
+    }
+
     function updatePreview() {
         var url = cleanMapValue(mapInput ? mapInput.value : '');
         if (!url && latInput && lngInput && latInput.value && lngInput.value) {
@@ -235,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         if (url && previewContainer && previewWrapper) {
-            previewContainer.innerHTML = '<iframe src="' + url + '" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
+            previewContainer.innerHTML = '<iframe src="' + url + '" width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
             previewWrapper.classList.remove('d-none');
         }
     }
@@ -247,12 +274,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (cleaned !== mapInput.value) {
                     mapInput.value = cleaned;
                 }
+                syncCoordsFromMap(cleaned);
                 updatePreview();
             }, 50);
         });
 
         mapInput.addEventListener('change', function () {
             mapInput.value = cleanMapValue(mapInput.value);
+            syncCoordsFromMap(mapInput.value);
             updatePreview();
         });
     }

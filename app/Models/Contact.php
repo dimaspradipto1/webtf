@@ -59,6 +59,71 @@ class Contact extends Model
     }
 
     /**
+     * Ekstrak koordinat latitude & longitude dari URL embed / tautan Google Maps.
+     */
+    public static function extractCoordinatesFromMap(?string $map): ?array
+    {
+        if (empty($map)) {
+            return null;
+        }
+
+        // 1. Format embed Google Maps: !2d{lng}!3d{lat} atau !3d{lat}!2d{lng}
+        if (preg_match('/!2d(-?\d+\.\d+)!3d(-?\d+\.\d+)/', $map, $m)) {
+            return ['latitude' => $m[2], 'longitude' => $m[1]];
+        }
+        if (preg_match('/!3d(-?\d+\.\d+)!2d(-?\d+\.\d+)/', $map, $m)) {
+            return ['latitude' => $m[1], 'longitude' => $m[2]];
+        }
+
+        // 2. Format directions embed: !1d{lat}!2d{lng} (ambil yang terakhir sebagai tujuan)
+        if (preg_match_all('/!1d(-?\d+\.\d+)!2d(-?\d+\.\d+)/', $map, $matches, PREG_SET_ORDER)) {
+            $last = end($matches);
+            if ((float) $last[1] >= -90 && (float) $last[1] <= 90 && (float) $last[2] >= -180 && (float) $last[2] <= 180) {
+                return ['latitude' => $last[1], 'longitude' => $last[2]];
+            }
+        }
+
+        // 3. Format tautan Google Maps standar: @lat,lng atau q=lat,lng
+        if (preg_match('/(?:@|[?&]q=)(-?\d+\.\d+),\s*(-?\d+\.\d+)/', $map, $m)) {
+            return ['latitude' => $m[1], 'longitude' => $m[2]];
+        }
+
+        return null;
+    }
+
+    /**
+     * Cek apakah koordinat masih menggunakan default dummy Jakarta (-6.200000, 106.816666).
+     */
+    public static function isLegacyJakartaCoordinate(?string $lat, ?string $lng): bool
+    {
+        return trim((string) $lat) === '-6.200000' && trim((string) $lng) === '106.816666';
+    }
+
+    public function getResolvedLatitudeAttribute(): ?string
+    {
+        if (empty($this->latitude) || self::isLegacyJakartaCoordinate($this->latitude, $this->longitude)) {
+            $coords = self::extractCoordinatesFromMap($this->map);
+            if ($coords) {
+                return $coords['latitude'];
+            }
+        }
+
+        return $this->latitude;
+    }
+
+    public function getResolvedLongitudeAttribute(): ?string
+    {
+        if (empty($this->longitude) || self::isLegacyJakartaCoordinate($this->latitude, $this->longitude)) {
+            $coords = self::extractCoordinatesFromMap($this->map);
+            if ($coords) {
+                return $coords['longitude'];
+            }
+        }
+
+        return $this->longitude;
+    }
+
+    /**
      * Dapatkan URL embed Google Maps yang aman (bebas tag HTML iframe).
      */
     public function getMapEmbedUrlAttribute(): ?string
