@@ -3,9 +3,9 @@
      FAKULTAS SAINS DAN TEKNOLOGI
 ═══════════════════════════════════════════════ -->
 <nav class="navbar navbar-expand-xl navbar-main sticky-top">
-  <div class="container-fluid px-lg-4 px-xl-5">
+  <div class="container-fluid px-3 px-xl-3 px-xxl-4">
     <!-- Logo & Nama Prodi + Fakultas -->
-    <a class="navbar-brand navbar-brand-custom me-2 me-xl-3" href="{{ route('homepage') }}">
+    <a class="navbar-brand navbar-brand-custom me-2 flex-shrink-0" href="{{ route('homepage') }}">
       <img src="{{ $themeSetting?->logo_url ?? asset('assets/img/logouis.png') }}" alt="{{ $themeSetting?->header_title ?: 'Logo Teknik Informatika' }}" class="brand-logo-img">
       <div class="d-flex flex-column ms-2 justify-content-center">
         <span class="brand-title-main">{{ $themeSetting?->header_title ?: 'TEKNIK INFORMATIKA' }}</span>
@@ -18,7 +18,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navMain">
-      <ul class="navbar-nav mx-auto gap-1 align-items-center">
+      <ul class="navbar-nav mx-auto align-items-center uis-nav-list">
         <!-- 1. BERANDA -->
         <li class="nav-item">
           <a href="{{ route('homepage') }}" class="nav-link nav-link-custom {{ request()->routeIs('homepage') ? 'active' : '' }}">Beranda</a>
@@ -352,7 +352,7 @@
       </ul>
 
       <!-- CTA Buttons -->
-      <div class="d-flex align-items-center gap-2 mt-3 mt-xl-0">
+      <div class="d-flex align-items-center gap-2 mt-3 mt-xl-0 ms-xl-2 flex-shrink-0">
         <a href="{{ route('login') }}" class="btn-portal-nav" title="Login">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Login</span>
