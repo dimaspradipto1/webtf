@@ -87,7 +87,72 @@
           <a href="{{ route('homepage.dosen') }}" class="nav-link nav-link-custom {{ request()->routeIs('homepage.dosen*') ? 'active' : '' }}">Dosen</a>
         </li>
 
-        <!-- 5. PUBLIKASI -->
+        <!-- 5. KEMAHASISWAAN -->
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-link-custom dropdown-toggle {{ (request()->routeIs('homepage.prestasi*') || request()->routeIs('homepage.organisasi*') || request()->routeIs('homepage.testimoni*') || request()->routeIs('homepage.alumni*') || request()->routeIs('homepage.tracer-study*') || request()->routeIs('homepage.faq*')) ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            Kemahasiswaan <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-custom">
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.prestasi*') ? 'active' : '' }}" href="{{ route('homepage.prestasi') }}">
+                <i class="bi bi-trophy-fill"></i> Prestasi Mahasiswa
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.organisasi*') ? 'active' : '' }}" href="{{ route('homepage.organisasi') }}">
+                <i class="bi bi-people-fill"></i> Organisasi Mahasiswa
+              </a>
+            </li>
+            <!-- BEASISWA (Submenu) -->
+            <li class="dropdown-submenu">
+              <a class="dropdown-item dropdown-item-custom dropdown-submenu-toggle d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                <span class="d-flex align-items-center gap-2"><i class="bi bi-gift-fill"></i> Beasiswa</span>
+                <i class="bi bi-chevron-right submenu-arrow" style="font-size: 10px;"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-custom dropdown-submenu-list">
+                @if(isset($navBeasiswas) && $navBeasiswas->count() > 0)
+                  @foreach($navBeasiswas as $b)
+                    @php
+                      $rawLink = trim($b->link ?? '');
+                      if (!empty($rawLink) && !str_starts_with($rawLink, 'http://') && !str_starts_with($rawLink, 'https://') && !str_starts_with($rawLink, '/') && !str_starts_with($rawLink, '#')) {
+                          $rawLink = 'https://' . $rawLink;
+                      }
+                      $hasLink = !empty($rawLink);
+                      $bHref = $hasLink ? $rawLink : '#';
+                      $isExternal = $hasLink && (str_starts_with($rawLink, 'http://') || str_starts_with($rawLink, 'https://'));
+                    @endphp
+                    <li>
+                      <a class="dropdown-item dropdown-item-custom"
+                         href="{{ $bHref }}"
+                         @if($isExternal) target="_blank" rel="noopener noreferrer" @endif>
+                        <i class="bi {{ $b->icon ?: 'bi-award-fill' }}"></i> {{ $b->judul }}
+                      </a>
+                    </li>
+                  @endforeach
+                @else
+                  <li><span class="dropdown-item dropdown-item-custom text-muted small">Belum ada beasiswa</span></li>
+                @endif
+              </ul>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.tracer-study*') ? 'active' : '' }}" href="{{ route('homepage.tracer-study') }}">
+                <i class="bi bi-briefcase-fill"></i> Alumni &amp; Karir
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.testimoni*') || request()->routeIs('homepage.alumni*') ? 'active' : '' }}" href="{{ route('homepage.testimoni') }}">
+                <i class="bi bi-chat-quote-fill"></i> Testimoni Alumni
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom {{ request()->routeIs('homepage.faq*') ? 'active' : '' }}" href="{{ route('homepage.faq') }}">
+                <i class="bi bi-question-circle-fill"></i> FAQ &amp; Bantuan
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- 6. PUBLIKASI -->
         <li class="nav-item dropdown">
           <a class="nav-link nav-link-custom dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Publikasi <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
@@ -127,9 +192,9 @@
           </ul>
         </li>
 
-        <!-- 6. PORTAL -->
+        <!-- 7. PORTAL -->
         <li class="nav-item dropdown">
-          <a class="nav-link nav-link-custom dropdown-toggle {{ (request()->routeIs('homepage.testimoni*') || request()->routeIs('homepage.unduhan*') || request()->routeIs('homepage.template-dokumen*') || (request()->routeIs('homepage.portal.page*') && !in_array(request()->route('slug'), ['pendaftaran-pmb', 'informasi-pmb', 'pengumuman-pmb'])) || request()->routeIs('homepage.news*') || request()->routeIs('homepage.galeri*')) ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+          <a class="nav-link nav-link-custom dropdown-toggle {{ (request()->routeIs('homepage.unduhan*') || request()->routeIs('homepage.template-dokumen*') || (request()->routeIs('homepage.portal.page*') && !in_array(request()->route('slug'), ['pendaftaran-pmb', 'informasi-pmb', 'pengumuman-pmb'])) || request()->routeIs('homepage.news*') || request()->routeIs('homepage.pengumuman*') || request()->routeIs('homepage.agenda*') || request()->routeIs('homepage.galeri*')) ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
             Portal <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-custom">
@@ -192,39 +257,7 @@
               </ul>
             </li>
 
-            <!-- E. BEASISWA (Submenu) -->
-            <li class="dropdown-submenu">
-              <a class="dropdown-item dropdown-item-custom dropdown-submenu-toggle d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                <span class="d-flex align-items-center gap-2"><i class="bi bi-gift-fill"></i> Beasiswa</span>
-                <i class="bi bi-chevron-right submenu-arrow" style="font-size: 10px;"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-custom dropdown-submenu-list">
-                @if(isset($navBeasiswas) && $navBeasiswas->count() > 0)
-                  @foreach($navBeasiswas as $b)
-                    @php
-                      $rawLink = trim($b->link ?? '');
-                      if (!empty($rawLink) && !str_starts_with($rawLink, 'http://') && !str_starts_with($rawLink, 'https://') && !str_starts_with($rawLink, '/') && !str_starts_with($rawLink, '#')) {
-                          $rawLink = 'https://' . $rawLink;
-                      }
-                      $hasLink = !empty($rawLink);
-                      $bHref = $hasLink ? $rawLink : '#';
-                      $isExternal = $hasLink && (str_starts_with($rawLink, 'http://') || str_starts_with($rawLink, 'https://'));
-                    @endphp
-                    <li>
-                      <a class="dropdown-item dropdown-item-custom"
-                         href="{{ $bHref }}"
-                         @if($isExternal) target="_blank" rel="noopener noreferrer" @endif>
-                        <i class="bi {{ $b->icon ?: 'bi-award-fill' }}"></i> {{ $b->judul }}
-                      </a>
-                    </li>
-                  @endforeach
-                @else
-                  <li><span class="dropdown-item dropdown-item-custom text-muted small">Belum ada beasiswa</span></li>
-                @endif
-              </ul>
-            </li>
-
-            <!-- F. INFORMASI (Submenu) -->
+            <!-- E. INFORMASI (Submenu) -->
             <li class="dropdown-submenu">
               <a class="dropdown-item dropdown-item-custom dropdown-submenu-toggle d-flex align-items-center justify-content-between" href="javascript:void(0)">
                 <span class="d-flex align-items-center gap-2"><i class="bi bi-newspaper"></i> Informasi</span>
