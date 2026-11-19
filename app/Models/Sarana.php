@@ -4,12 +4,17 @@ namespace App\Models;
 
 use App\Providers\AppServiceProvider;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Sarana extends Model
 {
     protected $table = 'saranas';
+
+    protected static bool $columnsEnsured = false;
 
     protected $fillable = [
         'icon',
@@ -35,7 +40,9 @@ class Sarana extends Model
     protected static function booted(): void
     {
         static::saving(function (Sarana $sarana) {
-            if (empty($sarana->slug) || $sarana->isDirty('nama')) {
+            static::ensureColumns();
+
+            if (Schema::hasColumn('saranas', 'slug') && (empty($sarana->slug) || $sarana->isDirty('nama'))) {
                 $base = Str::slug($sarana->nama ?: 'fasilitas') ?: 'fasilitas';
                 $slug = $base;
                 $counter = 2;
@@ -53,6 +60,77 @@ class Sarana extends Model
 
         static::saved(fn () => AppServiceProvider::recordContentUpdate());
         static::deleted(fn () => AppServiceProvider::recordContentUpdate());
+    }
+
+    /**
+     * Self-healing: pastikan kolom detail laboratorium tersedia walau migrasi belum dijalankan di hosting.
+     */
+    public static function ensureColumns(): void
+    {
+        if (static::$columnsEnsured) {
+            return;
+        }
+        static::$columnsEnsured = true;
+
+        try {
+            if (!Schema::hasTable('saranas')) {
+                return;
+            }
+
+            $missing = !Schema::hasColumn('saranas', 'slug')
+                || !Schema::hasColumn('saranas', 'foto')
+                || !Schema::hasColumn('saranas', 'kepala_lab')
+                || !Schema::hasColumn('saranas', 'lokasi')
+                || !Schema::hasColumn('saranas', 'kapasitas')
+                || !Schema::hasColumn('saranas', 'daftar_perangkat')
+                || !Schema::hasColumn('saranas', 'mata_kuliah_praktikum')
+                || !Schema::hasColumn('saranas', 'jadwal_pemakaian');
+
+            if ($missing) {
+                Schema::table('saranas', function (Blueprint $table) {
+                    if (!Schema::hasColumn('saranas', 'slug')) {
+                        $table->string('slug', 220)->nullable()->unique()->after('nama');
+                    }
+                    if (!Schema::hasColumn('saranas', 'foto')) {
+                        $table->string('foto', 255)->nullable()->after('deskripsi');
+                    }
+                    if (!Schema::hasColumn('saranas', 'kepala_lab')) {
+                        $table->string('kepala_lab', 200)->nullable()->after('foto');
+                    }
+                    if (!Schema::hasColumn('saranas', 'lokasi')) {
+                        $table->string('lokasi', 200)->nullable()->after('kepala_lab');
+                    }
+                    if (!Schema::hasColumn('saranas', 'kapasitas')) {
+                        $table->string('kapasitas', 100)->nullable()->after('lokasi');
+                    }
+                    if (!Schema::hasColumn('saranas', 'daftar_perangkat')) {
+                        $table->text('daftar_perangkat')->nullable()->after('kapasitas');
+                    }
+                    if (!Schema::hasColumn('saranas', 'mata_kuliah_praktikum')) {
+                        $table->text('mata_kuliah_praktikum')->nullable()->after('daftar_perangkat');
+                    }
+                    if (!Schema::hasColumn('saranas', 'jadwal_pemakaian')) {
+                        $table->text('jadwal_pemakaian')->nullable()->after('mata_kuliah_praktikum');
+                    }
+                });
+
+                if (Schema::hasColumn('saranas', 'slug')) {
+                    $existing = DB::table('saranas')->whereNull('slug')->orWhere('slug', '')->select('id', 'nama')->get();
+                    foreach ($existing as $row) {
+                        $base = Str::slug($row->nama ?: 'fasilitas') ?: 'fasilitas';
+                        $slug = $base;
+                        $counter = 2;
+                        while (DB::table('saranas')->where('slug', $slug)->where('id', '!=', $row->id)->exists()) {
+                            $slug = $base . '-' . $counter;
+                            $counter++;
+                        }
+                        DB::table('saranas')->where('id', $row->id)->update(['slug' => $slug]);
+                    }
+                }
+            }
+        } catch (\Throwable $e) {
+            // Lanjutkan dengan fallback aman bila user DB hosting tidak memiliki izin DDL
+        }
     }
 
     /**

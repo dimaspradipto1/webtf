@@ -54,6 +54,7 @@ use App\Models\Unduhan;
 use App\Models\VisiMisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class FrontendController extends Controller
@@ -62,6 +63,7 @@ class FrontendController extends Controller
     {
         $banners = Banner::where('aktif', true)->orderBy('urutan')->get();
         $features = Feature::orderBy('urutan')->get();
+        Sarana::ensureColumns();
         $saranas = Sarana::where('is_active', true)->orderBy('urutan')->get();
         $triDharmas = TriDharma::where('is_active', true)->orderBy('urutan')->get();
         $tenagaPendidiks = TenagaPendidik::with('layanan')->where('is_active', true)->orderBy('urutan')->get();
@@ -116,7 +118,9 @@ class FrontendController extends Controller
         $pmbSetting = PmbSetting::first();
         $facultyStat = FacultyStat::where('is_active', true)->latest('id')->first();
         HomepageStat::ensureTable();
-        $homepageStats = HomepageStat::where('is_active', true)->orderBy('urutan')->orderBy('id')->get();
+        $homepageStats = Schema::hasTable('homepage_stats')
+            ? HomepageStat::where('is_active', true)->orderBy('urutan')->orderBy('id')->get()
+            : collect();
         $layananTerkaits = LayananTerkait::where('is_active', true)->orderBy('urutan')->get();
         $layananTerkaitSetting = LayananTerkaitSetting::first();
         $socialMedias = SocialMedia::where('is_active', true)
@@ -1560,11 +1564,19 @@ class FrontendController extends Controller
 
     public function fasilitasDetail(string $slug)
     {
+        Sarana::ensureColumns();
+
+        $hasSlugColumn = Schema::hasColumn('saranas', 'slug');
+
         $sarana = Sarana::where('is_active', true)
-            ->where(function ($q) use ($slug) {
-                $q->where('slug', $slug);
-                if (ctype_digit($slug)) {
-                    $q->orWhere('id', (int) $slug);
+            ->where(function ($q) use ($slug, $hasSlugColumn) {
+                if ($hasSlugColumn) {
+                    $q->where('slug', $slug);
+                    if (ctype_digit($slug)) {
+                        $q->orWhere('id', (int) $slug);
+                    }
+                } else {
+                    $q->where('id', ctype_digit($slug) ? (int) $slug : 0);
                 }
             })
             ->firstOrFail();
@@ -1622,12 +1634,16 @@ class FrontendController extends Controller
 
         $years = Penelitian::where('is_active', true)->select('tahun')->distinct()->orderByDesc('tahun')->pluck('tahun');
 
-        $bidangRiset = Dosen::where('is_active', true)
-            ->whereNotNull('bidang_keahlian')
-            ->where('bidang_keahlian', '!=', '')
-            ->pluck('bidang_keahlian')
-            ->unique()
-            ->values();
+        Dosen::ensureColumns();
+
+        $bidangRiset = Schema::hasColumn('dosens', 'bidang_keahlian')
+            ? Dosen::where('is_active', true)
+                ->whereNotNull('bidang_keahlian')
+                ->where('bidang_keahlian', '!=', '')
+                ->pluck('bidang_keahlian')
+                ->unique()
+                ->values()
+            : collect();
 
         return view('layouts.frontend.penelitian', compact(
             'items',

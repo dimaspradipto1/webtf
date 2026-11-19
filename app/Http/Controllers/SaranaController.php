@@ -32,6 +32,8 @@ class SaranaController extends Controller
      */
     public function store(SaranaRequest $request): RedirectResponse
     {
+        Sarana::ensureColumns();
+
         $data = [
             'icon' => $request->icon,
             'nama' => $request->nama,
@@ -70,6 +72,8 @@ class SaranaController extends Controller
      */
     public function update(SaranaRequest $request, Sarana $sarana): RedirectResponse
     {
+        Sarana::ensureColumns();
+
         $data = [
             'icon' => $request->icon,
             'nama' => $request->nama,
