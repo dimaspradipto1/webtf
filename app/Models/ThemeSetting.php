@@ -64,12 +64,20 @@ class ThemeSetting extends Model
                 'order' => 1,
             ],
             [
+                'key' => 'statistik',
+                'name' => 'Angka Statistik Beranda',
+                'desc' => 'Baris angka statistik mahasiswa aktif, lulusan, dosen, mitra, dan akreditasi',
+                'icon' => 'bi-bar-chart-line-fill',
+                'is_active' => true,
+                'order' => 2,
+            ],
+            [
                 'key' => 'sambutan',
                 'name' => 'Sambutan Ketua Program Studi',
                 'desc' => 'Pesan dan sambutan resmi Kaprodi S1 Teknik Informatika',
                 'icon' => 'bi-person-badge',
                 'is_active' => true,
-                'order' => 2,
+                'order' => 3,
             ],
             [
                 'key' => 'keunggulan',
@@ -334,10 +342,18 @@ class ThemeSetting extends Model
         }
 
         // Gabungkan dengan defaults agar info deskripsi/nama/icon selalu lengkap
+        $heroOrder = isset($savedMap['hero_banner']['order']) ? (float) $savedMap['hero_banner']['order'] : 1.0;
         $merged = [];
         foreach ($defaults as $idx => $def) {
             $k = $def['key'];
-            $order = isset($savedMap[$k]['order']) ? (int) $savedMap[$k]['order'] : ($idx + 1);
+            if (isset($savedMap[$k]['order'])) {
+                $order = (float) $savedMap[$k]['order'];
+            } elseif ($k === 'statistik') {
+                // Pastikan section statistik baru muncul tepat di bawah hero_banner
+                $order = $heroOrder + 0.5;
+            } else {
+                $order = (float) ($idx + 1);
+            }
             $isActive = isset($savedMap[$k]['is_active']) ? (bool) $savedMap[$k]['is_active'] : $def['is_active'];
 
             $merged[] = array_merge($def, [
@@ -348,6 +364,12 @@ class ThemeSetting extends Model
 
         // Urutkan berdasarkan 'order' asc
         usort($merged, fn($a, $b) => $a['order'] <=> $b['order']);
+
+        // Normalisasi nomor urutan menjadi bilangan bulat berurutan
+        foreach ($merged as $i => &$item) {
+            $item['order'] = $i + 1;
+        }
+        unset($item);
 
         return $merged;
     }

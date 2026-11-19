@@ -18,6 +18,7 @@ use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\Gallery;
 use App\Models\HeroHumas;
+use App\Models\HomepageStat;
 use App\Models\Kurikulum;
 use App\Models\Layanan;
 use App\Models\LayananHumasItem;
@@ -114,6 +115,8 @@ class FrontendController extends Controller
         $struktur = StrukturOrganisasi::first();
         $pmbSetting = PmbSetting::first();
         $facultyStat = FacultyStat::where('is_active', true)->latest('id')->first();
+        HomepageStat::ensureTable();
+        $homepageStats = HomepageStat::where('is_active', true)->orderBy('urutan')->orderBy('id')->get();
         $layananTerkaits = LayananTerkait::where('is_active', true)->orderBy('urutan')->get();
         $layananTerkaitSetting = LayananTerkaitSetting::first();
         $socialMedias = SocialMedia::where('is_active', true)
@@ -160,6 +163,7 @@ class FrontendController extends Controller
             'struktur',
             'pmbSetting',
             'facultyStat',
+            'homepageStats',
             'layananTerkaits',
             'layananTerkaitSetting',
             'socialMedias',

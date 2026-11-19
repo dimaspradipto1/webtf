@@ -21,6 +21,7 @@ use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HeroHumasController;
+use App\Http\Controllers\HomepageStatController;
 use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\LayananHumasController;
@@ -310,6 +311,12 @@ Route::middleware(['auth', 'checkrole'])->group(function () {
     Route::resource('visimisi', VisiMisiController::class);
     Route::resource('nilaiperusahaan', NilaiPerusahaanController::class);
     Route::resource('faculty-stat', FacultyStatController::class);
+
+    // Angka Statistik Beranda (A4)
+    Route::get('admin-statistik-beranda', [HomepageStatController::class, 'index'])->name('homepage-stat.index');
+    Route::post('admin-statistik-beranda', [HomepageStatController::class, 'store'])->name('homepage-stat.store');
+    Route::put('admin-statistik-beranda/bulk', [HomepageStatController::class, 'bulkUpdate'])->name('homepage-stat.bulk-update');
+    Route::delete('admin-statistik-beranda/{homepageStat}', [HomepageStatController::class, 'destroy'])->name('homepage-stat.destroy');
 
     // Pengaturan Header & Breadcrumb Halaman Frontend
     Route::get('admin-header-breadcrumb', [PageHeaderController::class, 'index'])->name('page-header.index');
