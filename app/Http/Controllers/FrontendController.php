@@ -1558,6 +1558,25 @@ class FrontendController extends Controller
         return view('layouts.frontend.kebijakan-privasi');
     }
 
+    public function fasilitasDetail(string $slug)
+    {
+        $sarana = Sarana::where('is_active', true)
+            ->where(function ($q) use ($slug) {
+                $q->where('slug', $slug);
+                if (ctype_digit($slug)) {
+                    $q->orWhere('id', (int) $slug);
+                }
+            })
+            ->firstOrFail();
+
+        $otherSaranas = Sarana::where('is_active', true)
+            ->where('id', '!=', $sarana->id)
+            ->orderBy('urutan')
+            ->get();
+
+        return view('layouts.frontend.fasilitas-detail', compact('sarana', 'otherSaranas'));
+    }
+
     public function syaratKetentuan()
     {
         return view('layouts.frontend.syarat-ketentuan');
@@ -1695,6 +1714,15 @@ class FrontendController extends Controller
                 'lastmod' => optional($item->updated_at ?? $item->created_at)->toAtomString() ?? now()->toAtomString(),
                 'changefreq' => 'monthly',
                 'priority' => '0.6',
+            ]);
+        });
+
+        Sarana::where('is_active', true)->orderBy('urutan')->get()->each(function ($item) use (&$urls) {
+            $urls->push([
+                'loc' => route('homepage.fasilitas.detail', $item->slug ?: $item->id),
+                'lastmod' => optional($item->updated_at ?? $item->created_at)->toAtomString() ?? now()->toAtomString(),
+                'changefreq' => 'monthly',
+                'priority' => '0.7',
             ]);
         });
 

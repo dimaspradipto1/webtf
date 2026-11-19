@@ -72,6 +72,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/sejarah', 'sejarah')->name('homepage.sejarah');
     Route::get('/organisasi', 'strukturOrganisasi')->name('homepage.struktur-organisasi');
     Route::get('/fasilitas-kampus', 'fasilitas')->name('homepage.fasilitas');
+    Route::get('/fasilitas-kampus/{slug}', 'fasilitasDetail')->name('homepage.fasilitas.detail');
     Route::get('/kurikulum/check-updated', 'kurikulumCheckUpdated')->name('homepage.kurikulum.check-updated');
     Route::get('/kurikulum', 'kurikulum')->name('homepage.kurikulum');
     Route::get('/kalender-akademik', 'kalenderAkademik')->name('homepage.kalender-akademik');

@@ -16,7 +16,14 @@ class SaranaRequest extends FormRequest
         return [
             'icon' => ['required', 'string', 'max:100'],
             'nama' => ['required', 'string', 'max:200'],
-            'deskripsi' => ['nullable', 'string', 'max:1000'],
+            'deskripsi' => ['nullable', 'string', 'max:2000'],
+            'foto' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'kepala_lab' => ['nullable', 'string', 'max:200'],
+            'lokasi' => ['nullable', 'string', 'max:200'],
+            'kapasitas' => ['nullable', 'string', 'max:100'],
+            'daftar_perangkat' => ['nullable', 'string', 'max:5000'],
+            'mata_kuliah_praktikum' => ['nullable', 'string', 'max:5000'],
+            'jadwal_pemakaian' => ['nullable', 'string', 'max:5000'],
             'urutan' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['nullable', 'boolean'],
         ];
@@ -26,7 +33,9 @@ class SaranaRequest extends FormRequest
     {
         return [
             'icon.required' => 'Icon Bootstrap wajib diisi.',
-            'nama.required' => 'Nama sarana wajib diisi.',
+            'nama.required' => 'Nama sarana / laboratorium wajib diisi.',
+            'foto.image' => 'Foto ruangan harus berupa file gambar.',
+            'foto.max' => 'Ukuran foto ruangan maksimal 2 MB.',
         ];
     }
 }

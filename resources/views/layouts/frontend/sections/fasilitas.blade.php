@@ -51,11 +51,23 @@
 
     <div class="row g-4">
       @foreach($displaySaranas as $index => $sarana)
+        @php
+          $detailUrl = isset($sarana->id)
+            ? route('homepage.fasilitas.detail', $sarana->slug ?: $sarana->id)
+            : route('homepage.fasilitas');
+          $isLab = str_contains(mb_strtolower((string) $sarana->nama), 'lab');
+        @endphp
         <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ 100 + ($index * 100) }}">
-          <div class="fasilitas-box">
+          <div class="fasilitas-box h-100 d-flex flex-column">
             <div class="fasilitas-icon"><i class="bi {{ $sarana->icon ?? 'bi-building' }}"></i></div>
             <h4 class="fasilitas-title">{{ $sarana->nama }}</h4>
-            <p class="fasilitas-desc">{{ $sarana->deskripsi ?: 'Fasilitas yang mendukung kegiatan akademik dan riset mahasiswa.' }}</p>
+            <p class="fasilitas-desc flex-grow-1">{{ $sarana->deskripsi ?: 'Fasilitas yang mendukung kegiatan akademik dan riset mahasiswa.' }}</p>
+            <div class="mt-3 pt-2">
+              <a href="{{ $detailUrl }}" class="btn btn-sm btn-outline-dark rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-1" style="font-size: 12.5px;">
+                <span>{{ $isLab ? 'Lihat Detail Lab' : 'Lihat Detail' }}</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
           </div>
         </div>
       @endforeach

@@ -31,11 +31,20 @@
     <div class="row g-4">
       @if(isset($saranas) && $saranas->count() > 0)
         @foreach($saranas as $index => $sarana)
+          @php
+            $isLab = str_contains(mb_strtolower((string) $sarana->nama), 'lab');
+          @endphp
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ 100 + ($index * 100) }}">
-            <div class="fasilitas-box h-100">
+            <div class="fasilitas-box h-100 d-flex flex-column">
               <div class="fasilitas-icon"><i class="bi {{ $sarana->icon ?? 'bi-pc-display-horizontal' }}"></i></div>
               <h4 class="fasilitas-title">{{ $sarana->nama }}</h4>
-              <p class="fasilitas-desc">{{ $sarana->deskripsi ?: 'Fasilitas laboratorium dan sarana penunjang akademik mahasiswa Program Studi Teknik Informatika.' }}</p>
+              <p class="fasilitas-desc flex-grow-1">{{ $sarana->deskripsi ?: 'Fasilitas laboratorium dan sarana penunjang akademik mahasiswa Program Studi Teknik Informatika.' }}</p>
+              <div class="mt-3 pt-2">
+                <a href="{{ route('homepage.fasilitas.detail', $sarana->slug ?: $sarana->id) }}" class="btn btn-sm btn-outline-dark rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-1" style="font-size: 12.5px;">
+                  <span>{{ $isLab ? 'Lihat Detail Lab' : 'Lihat Detail' }}</span>
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
             </div>
           </div>
         @endforeach

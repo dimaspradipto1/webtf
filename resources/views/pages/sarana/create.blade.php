@@ -35,7 +35,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('sarana.store') }}" method="POST">
+                <form action="{{ route('sarana.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     {{-- Icon --}}
@@ -74,7 +74,7 @@
                                name="nama"
                                class="form-control @error('nama') is-invalid @enderror"
                                value="{{ old('nama') }}"
-                               placeholder="Contoh: Lab K3 & Higiene Industri">
+                               placeholder="Contoh: Laboratorium Pemrograman & Rekayasa Perangkat Lunak">
                         @error('nama')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -82,15 +82,71 @@
 
                     {{-- Deskripsi --}}
                     <div class="mb-3">
-                        <label for="deskripsi" class="form-label fw-semibold">Deskripsi</label>
+                        <label for="deskripsi" class="form-label fw-semibold">Deskripsi Singkat</label>
                         <textarea id="deskripsi"
                                   name="deskripsi"
                                   class="form-control @error('deskripsi') is-invalid @enderror"
-                                  rows="4"
-                                  placeholder="Tuliskan keterangan detail sarana/fasilitas...">{{ old('deskripsi') }}</textarea>
+                                  rows="3"
+                                  placeholder="Tuliskan keterangan singkat sarana/laboratorium...">{{ old('deskripsi') }}</textarea>
                         @error('deskripsi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                    </div>
+
+                    <hr class="my-4">
+                    <h6 class="fw-bold text-dark mb-3"><i class="bi bi-pc-display-horizontal me-2 text-primary"></i>Informasi Detail Laboratorium / Fasilitas</h6>
+
+                    {{-- Foto Ruangan --}}
+                    <div class="mb-3">
+                        <label for="foto" class="form-label fw-semibold">Foto Ruangan (Opsional)</label>
+                        <input type="file"
+                               id="foto"
+                               name="foto"
+                               accept="image/jpeg,image/png,image/webp"
+                               class="form-control @error('foto') is-invalid @enderror">
+                        <div class="form-text">Format JPG/PNG/WEBP, maksimal 2 MB.</div>
+                        @error('foto')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="kepala_lab" class="form-label fw-semibold">Kepala Laboratorium / Penanggung Jawab</label>
+                            <input type="text" id="kepala_lab" name="kepala_lab" class="form-control @error('kepala_lab') is-invalid @enderror" value="{{ old('kepala_lab') }}" placeholder="Contoh: Dr. M. Ropianto, S.Kom., M.Kom">
+                            @error('kepala_lab')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="lokasi" class="form-label fw-semibold">Lokasi Ruangan</label>
+                            <input type="text" id="lokasi" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror" value="{{ old('lokasi') }}" placeholder="Contoh: Gedung FST Lt. 2">
+                            @error('lokasi')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="kapasitas" class="form-label fw-semibold">Kapasitas</label>
+                            <input type="text" id="kapasitas" name="kapasitas" class="form-control @error('kapasitas') is-invalid @enderror" value="{{ old('kapasitas') }}" placeholder="Contoh: 40 Mahasiswa">
+                            @error('kapasitas')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="daftar_perangkat" class="form-label fw-semibold">Daftar Perangkat & Spesifikasi</label>
+                        <textarea id="daftar_perangkat" name="daftar_perangkat" class="form-control @error('daftar_perangkat') is-invalid @enderror" rows="4" placeholder="Tulis satu perangkat per baris, contoh:&#10;40 Unit PC Intel Core i7, RAM 16 GB, SSD 512 GB&#10;1 Unit Smart TV & Proyektor Interaktif&#10;Koneksi Internet Fiber 1 Gbps">{{ old('daftar_perangkat') }}</textarea>
+                        <div class="form-text">Pisahkan setiap item perangkat dengan baris baru (Enter).</div>
+                        @error('daftar_perangkat')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="mata_kuliah_praktikum" class="form-label fw-semibold">Mata Kuliah Praktikum</label>
+                        <textarea id="mata_kuliah_praktikum" name="mata_kuliah_praktikum" class="form-control @error('mata_kuliah_praktikum') is-invalid @enderror" rows="3" placeholder="Tulis satu mata kuliah per baris, contoh:&#10;Pemrograman Web Lanjut&#10;Rekayasa Perangkat Lunak&#10;Pemrograman Mobile">{{ old('mata_kuliah_praktikum') }}</textarea>
+                        <div class="form-text">Pisahkan setiap mata kuliah dengan baris baru (Enter).</div>
+                        @error('mata_kuliah_praktikum')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="jadwal_pemakaian" class="form-label fw-semibold">Jadwal Pemakaian</label>
+                        <textarea id="jadwal_pemakaian" name="jadwal_pemakaian" class="form-control @error('jadwal_pemakaian') is-invalid @enderror" rows="3" placeholder="Tulis satu jadwal per baris, contoh:&#10;Senin - Jumat: 08.00 - 17.00 WIB (Praktikum Reguler)&#10;Senin - Jumat: 18.30 - 21.30 WIB (Kelas Karyawan)&#10;Sabtu: 09.00 - 15.00 WIB (Riset & Tugas Akhir)">{{ old('jadwal_pemakaian') }}</textarea>
+                        <div class="form-text">Pisahkan setiap slot jadwal dengan baris baru (Enter).</div>
+                        @error('jadwal_pemakaian')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
 
                     <div class="row">
